@@ -1,0 +1,66 @@
+.homepage {
+    width: 100%;
+    color: $clr1;
+
+    .hero {
+        justify-content: center;
+        padding: 112px 0 80px 280px;
+        align-items: center;
+        flex-direction: row;
+    }
+
+}
+
+.hero-content {
+
+    .hero-content-wrapper {
+        max-width: 540px;
+    }
+
+    h1 {
+        font-size: 48px;
+        text-align: left;
+        line-height: 60px;
+        font-weight: 550;
+        padding-right: 15px;
+        padding-left: 15px;
+        color: #091e42;
+        font-family: "Charlie Display", sans-serif;
+        letter-spacing: normal;
+    }
+
+    p {
+        font-family: 'Charlie Text", sans-serif';
+        font-size: 20px;
+        color: #091e42;
+        letter-spacing: 1.4px;
+        padding-right: 15px;
+        padding-left: 15px;
+        text-align: left;
+        margin-bottom: 24px;
+    }
+
+    a {
+        background-color: #0065ff;
+        font-size: 20px;
+        line-height: 30px;
+        font-family: 'Charlie Text", sans-serif';
+        border-radius: 6px;
+        letter-spacing: 1px;
+        color: #ffffff;
+        transition: background-color .15s ease-in;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
+            background-color: #0056d9;
+            cursor: pointer;
+        }
+    }
+
+}
+
+.hero-img {
+    max-height: 600px;
+}

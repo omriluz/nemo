@@ -8,7 +8,16 @@ $clr6: #fdfefe; //whites color
 $clr7: #717e92; // unbold font color
 
 
+// LAYOUT
+$layoutPadding: 20px;
+
+
 // Breakpoints
 $mobile-breakpoint: 460px;
 $narrow-breakpoint: 720px;
 $normal-breakpoint: 960px;
+
+
+$padded-break-narrow: $mobile-breakpoint + $layoutPadding * 2;
+$padded-break-normal: $narrow-breakpoint + $layoutPadding * 2;
+$padded-break-wide: $normal-breakpoint + $layoutPadding * 2;
