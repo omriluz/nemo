@@ -12,13 +12,10 @@
 @import "basics/forms";
 
 
-// PAGES
-// @import "views/about-us";
+// Pages
 @import 'pages/home-page';
-// @import "views/car-app";
-// @import "views/review-app";
 
-// // Components
-// @import "cmps/app-header";
-// @import "cmps/app-footer";
-// @import "cmps/user-msg";
+
+//  Components
+@import "pages/login-signup";
+@import "cmps/app-header";
