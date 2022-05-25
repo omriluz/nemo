@@ -13,8 +13,9 @@
 
 // Pages
 @import 'pages/home-page';
-
+@import 'pages/board-app';
+@import "pages/login-signup";
 
 //  Components
-@import "pages/login-signup";
 @import "cmps/app-header";
+@import "cmps/group-preview";

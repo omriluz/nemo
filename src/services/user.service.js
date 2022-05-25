@@ -133,6 +133,6 @@ const user = {
         "taskId": "t105"
     }]
 }
-storageService.post(STORAGE_KEY_LOGGEDIN_USER, user).then(x => console.log(x))
+// storageService.post(STORAGE_KEY_LOGGEDIN_USER, user).then(x => console.log(x))
 
 
