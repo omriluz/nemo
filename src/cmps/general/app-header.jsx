@@ -5,7 +5,7 @@ import { ReactComponent as YourSvg } from '../../assets/svg/Trello.svg';
 
 export const AppHeader = () => {
   const { pathname } = useLocation();
-  console.log("pathname", pathname);
+  // console.log("pathname", pathname);
   const style = {};
 
   switch (pathname) {
@@ -14,6 +14,9 @@ export const AppHeader = () => {
       style.backgroundColor = 'transparent'
       break;
     case "/login":
+      style.display = 'none'
+      break;
+    case "/signup":
       style.display = 'none'
       break;
     case "/workspace":
