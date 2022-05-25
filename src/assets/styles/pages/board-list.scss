@@ -1,0 +1,27 @@
+
+ .board-preview-container {
+  display: flex;
+  height: 80px;
+  flex-direction: row;
+  width: 193px;
+  margin-bottom: 9px;
+  padding: 8px;
+
+  h1 {
+    overflow: hidden;
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: bold;
+    line-height: 20px;
+    margin: 2px 0 0 0;
+  }
+}
+
+  .board-cards-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 9px;
+    justify-content: center;
+  }
+
