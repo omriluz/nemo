@@ -3,17 +3,15 @@ import ReactDOM from 'react-dom/client';
 import App from './root-cmp';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import { Provider } from 'react-redux';
-import {store} from './store/store'
+import { store } from './store/store'
 import './assets/styles/main.scss'
-import { boardService } from './services/board.service';
-// import { userService } from './services/user.service';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
-    <Provider store={store}>
+  <Provider store={store}>
     <App />
-    </Provider>
+  </Provider>
   // </React.StrictMode>
 );
 

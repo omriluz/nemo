@@ -1,10 +1,10 @@
 .login-page {
+    margin-top: -20px;
     align-items: center;
     background-color: #fbfbfb;
     flex-direction: column;
-    height: 100vh;
+    min-height: 105vh;
 
-    // padding: 0 15px;
     hr {
         border: 0;
         border-top: 1px solid #ccc;

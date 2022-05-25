@@ -30,7 +30,7 @@ export const AppHeader = () => {
 
   return (
     // <header style={style} className="app-header-workspace">
-    <header className="app-header">
+    <header className="app-header-login-signup ">
       <nav className="nav-bar flex justify-between">
         {/* <nav className="nav-bar"> */}
         {/* <div className="logo-container flex justify-center"> */}

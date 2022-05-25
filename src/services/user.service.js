@@ -1,8 +1,8 @@
 import { storageService } from './async-storage.service'
 // import { httpService } from './http.service'
 import { store } from '../store/store'
-import { socketService, SOCKET_EVENT_USER_UPDATED, SOCKET_EMIT_USER_WATCH } from './socket.service'
-import { showSuccessMsg } from '../services/event-bus.service'
+// import { socketService, SOCKET_EVENT_USER_UPDATED, SOCKET_EMIT_USER_WATCH } from './socket.service'
+// import { showSuccessMsg } from '../services/event-bus.service'
 import { utilService } from './util.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
@@ -21,7 +21,8 @@ export const userService = {
     changeScore
 }
 
-window.userService = userService
+
+// window.userService = userService
 
 
 function getUsers() {
@@ -30,7 +31,7 @@ function getUsers() {
 }
 
 function onUserUpdate(user) {
-    showSuccessMsg(`This user ${user.fullname} just got updated from socket, new score: ${user.score}`)
+    // showSuccessMsg(`This user ${user.fullname} just got updated from socket, new score: ${user.score}`)
     store.dispatch({ type: 'SET_WATCHED_USER', user })
 }
 
@@ -39,9 +40,9 @@ async function getById(userId) {
     // const user = await httpService.get(`user/${userId}`)
     // gWatchedUser = user;
 
-    socketService.emit(SOCKET_EMIT_USER_WATCH, userId)
-    socketService.off(SOCKET_EVENT_USER_UPDATED, onUserUpdate)
-    socketService.on(SOCKET_EVENT_USER_UPDATED, onUserUpdate)
+    // socketService.emit(SOCKET_EMIT_USER_WATCH, userId)
+    // socketService.off(SOCKET_EVENT_USER_UPDATED, onUserUpdate)
+    // socketService.on(SOCKET_EVENT_USER_UPDATED, onUserUpdate)
 
     return user
 }
@@ -60,23 +61,23 @@ async function update(user) {
 
 async function login(userCred) {
     const users = await storageService.query('user')
-    const user = users.find(user => user.username === userCred.username)
+    const user = users.find(user => user.username === userCred.username && user.password === userCred.password)
+    console.log('user', user)
     // const user = await httpService.post('auth/login', userCred)
     if (user) {
-        socketService.login(user._id)
+        // socketService.login(user._id)
         return saveLocalUser(user)
     }
 }
 async function signup(userCred) {
-    userCred.score = 10000;
     const user = await storageService.post('user', userCred)
     // const user = await httpService.post('auth/signup', userCred)
-    socketService.login(user._id)
+    // socketService.login(user._id)
     return saveLocalUser(user)
 }
 async function logout() {
     sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
-    socketService.logout()
+    // socketService.logout()
     // return await httpService.post('auth/logout')
 }
 
@@ -94,8 +95,12 @@ function saveLocalUser(user) {
     return user
 }
 
+
+
 function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
+
+
 }
 
 
@@ -115,24 +120,24 @@ const user = {
         "id": utilService.makeId(),
         "boardId": "m101",
         "taskId": "t101"
-    },{
+    }, {
         "id": utilService.makeId(),
         "boardId": "m102",
         "taskId": "t102"
-    },{
+    }, {
         "id": utilService.makeId(),
         "boardId": "m103",
         "taskId": "t103"
-    },{
+    }, {
         "id": utilService.makeId(),
         "boardId": "m104",
         "taskId": "t104"
-    },{
+    }, {
         "id": utilService.makeId(),
         "boardId": "m105",
         "taskId": "t105"
     }]
 }
-storageService.post(STORAGE_KEY_LOGGEDIN_USER, user).then(x => console.log(x))
+// storageService.post(STORAGE_KEY_LOGGEDIN_USER, user).then(x => console.log(x))
 
 
