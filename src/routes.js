@@ -1,6 +1,6 @@
 import { HomePage } from './pages/home-page.jsx'
 import { LoginSignup } from './pages/login-signup.jsx'
-// import { AboutUs } from './pages/about-us.jsx'
+import { WorkSpace } from './pages/work-space.jsx'
 // import { CarApp } from './pages/car-app.jsx'
 // import { ReviewApp } from './pages/review-app.jsx'
 // import { ChatApp } from './pages/chat-app.jsx'
@@ -12,10 +12,10 @@ const routes = [
         path: '/',
         component: <HomePage />,
     },
-    // {
-    //     path: '/workspace',
-    //     component: <WorkSpace />,
-    // },
+    {
+        path: '/workspace',
+        component: <WorkSpace />,
+    },
     // {
     //     path: '/board',
     //     component: <BoardApp />,
