@@ -152,30 +152,16 @@ export function onRemoveBoardOptimistic(boardId) {
 
 // TASK FUNCTIONS 
 
-export function removeBoard(boardId) {
-    return async (dispatch) => {
-        try {
-            await boardService.remove(boardId)
-            console.log('Deleted Succesfully!');
-            dispatch(getActionRemoveBoard(boardId))
-            showSuccessMsg('Board removed')
-        } catch (err) {
-            showErrorMsg('Cannot remove board')
-            console.log('Cannot remove board', err)
-        }
-    }
-}
 
-
-export function storeSaveTask(task, activity) {
+// export function storeSaveTask(task, activity) {
     
-    return async (dispatch) => {
-        try {
-            board = await boardService.saveTask(boardId, groupId, task, activity)
-            dispatch(getActionSetBoard(board))
-        } catch (err) {
-            console.log('err in saving task');
-        }
-    }
+//     return async (dispatch) => {
+//         try {
+//             board = await boardService.saveTask(boardId, groupId, task, activity)
+//             dispatch(getActionSetBoard(board))
+//         } catch (err) {
+//             console.log('err in saving task');
+//         }
+//     }
     // commit(board)
-}
+// }
