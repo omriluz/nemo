@@ -17,6 +17,7 @@ body {
     font-size: rem(18px);
     margin: 0;
     padding: 0;
+    background: linear-gradient(1deg, #ffffff 0%, #eae6ff 80%);
 }
 
 h1,
@@ -30,12 +31,6 @@ h6 {
     line-height: 1;
 }
 
-
-section,
-main,
-footer {
-    padding: 5px;
-}
 
 img {
     width: 100%;

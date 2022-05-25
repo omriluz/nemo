@@ -3,6 +3,7 @@ import { storageService } from './async-storage.service'
 import { store } from '../store/store'
 import { socketService, SOCKET_EVENT_USER_UPDATED, SOCKET_EMIT_USER_WATCH } from './socket.service'
 import { showSuccessMsg } from '../services/event-bus.service'
+import { utilService } from './util.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 // var gWatchedUser = null;
@@ -105,16 +106,33 @@ function getLoggedinUser() {
 // })()
 
 const user = {
-    "_id": "u101",
-    "fullname": "Abi Abambi",
-    "username": "abi@ababmi.com",
-    "password": "aBambi123",
+    "_id": utilService.makeId(),
+    "fullname": "yonatan ben zeev",
+    "username": "ybz6@gmail.com",
+    "password": "ybz123",
     "imgUrl": "https://unsplash.it/100/100",
     "mentions": [{
-        "id": "m101",
+        "id": utilService.makeId(),
         "boardId": "m101",
         "taskId": "t101"
+    },{
+        "id": utilService.makeId(),
+        "boardId": "m102",
+        "taskId": "t102"
+    },{
+        "id": utilService.makeId(),
+        "boardId": "m103",
+        "taskId": "t103"
+    },{
+        "id": utilService.makeId(),
+        "boardId": "m104",
+        "taskId": "t104"
+    },{
+        "id": utilService.makeId(),
+        "boardId": "m105",
+        "taskId": "t105"
     }]
 }
+storageService.post(STORAGE_KEY_LOGGEDIN_USER, user).then(x => console.log(x))
 
 

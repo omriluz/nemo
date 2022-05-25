@@ -24,15 +24,33 @@ function get(entityType, entityId) {
     return query(entityType)
         .then(entities => entities.find(entity => entity._id === entityId))
 }
-function post(entityType, newEntity) {
-    newEntity._id = _makeId()
-    return query(entityType)
-        .then(entities => {
+
+// function post(entityType, newEntity) {
+//     newEntity._id = _makeId()
+//     return query(entityType)
+//         .then(entities => {
+//             entities.push(newEntity)
+//             _save(entityType, entities)
+//             return newEntity
+//         })
+// }
+
+// async post func
+async function post(entityType, newEntity) {
+        try {
+            // id already generated for dummy data
+            // newEntity._id = _makeId()
+            const entities = await query(entityType)
             entities.push(newEntity)
             _save(entityType, entities)
             return newEntity
-        })
-}
+        } catch (err) {
+            console.log(err);
+        }
+            
+    }
+    
+
 
 function put(entityType, updatedEntity) {
     return query(entityType)
