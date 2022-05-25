@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
-import leftHero from '../assets/img/leftHero.svg'
-import rightHero from '../assets/img/rightHero.svg'
+import leftHero from '../assets/svg/leftHero.svg'
+import rightHero from '../assets/svg/rightHero.svg'
 
 export const LoginSignup = () => {
 
