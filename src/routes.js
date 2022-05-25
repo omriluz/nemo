@@ -1,4 +1,5 @@
 import { HomePage } from './pages/home-page.jsx'
+import { LoginSignup } from './pages/login-signup.jsx'
 // import { AboutUs } from './pages/about-us.jsx'
 // import { CarApp } from './pages/car-app.jsx'
 // import { ReviewApp } from './pages/review-app.jsx'
@@ -19,10 +20,15 @@ const routes = [
     //     path: '/board',
     //     component: <BoardApp />,
     // },
-    // {
-    //     path: '/login',
-    //     component: <LoginSignup />,
-    // },
+    {
+        path: '/:signup',
+        component: <LoginSignup />,
+    },
+    {
+        path: '/login',
+        component: <LoginSignup />,
+    }
+
     // {
     //     path: '/',
     //     component: <TaskDetails />,
