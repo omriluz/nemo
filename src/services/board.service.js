@@ -1,7 +1,8 @@
 
 import { storageService } from './async-storage.service.js'
 import { userService } from './user.service.js'
-import { getActionRemoveBoard, getActionAddBoard, getActionUpdateBoard } from '../store/board.actions.js'
+import { getActionRemoveBoard, getActionAddBoard, getActionUpdateBoard} from '../store/actions/board.action.js'
+import {utilService} from './util.service.js'
 
 const STORAGE_KEY = 'board'
 const boardChannel = new BroadcastChannel('boardChannel')
@@ -76,8 +77,582 @@ function saveTask(boardId, groupId, task, activity) {
     return board
 }
 
+const ourBoard = {
+    "_id": utilService.makeId(),//mongoID
+    "title": "Demo project",
+    "archivedAt": null, 
+    "createdAt": utilService.makeId(),
+    
+    "createdBy": {
+        "_id": utilService.makeId(),// mongoID
+        "fullname": "Yonatan ben zeev",
+        "imgUrl": "http://some-img"
+    },
+    "style": {
+        // if the user chose an image, takes color from the api and sets it as appheader bgc
+        // if only bgc picked sets it as the board bgc and darkens it for the appheader
+        // will use actual css selectors and will be placed in the css props
+        // backgroundImage:url('https://unsplash.it/100/100'),
+        backgroundColor: "#026aa7"
+    },
+
+    "labels": [
+        // first 6 labels will start without title
+        {
+            "id": utilService.makeId(),// localID
+            "color": "#61bd4f"
+        },
+        {
+            "id": utilService.makeId(), // localID
+            "color": "#f2d600"
+        },
+        {
+            "id": utilService.makeId(),// localID
+            "color": "#ff9f1a"
+        },
+        {
+            "id": utilService.makeId(),// localID
+            "color": "#eb5a46"
+        },        {
+            "id": utilService.makeId(),// localID
+            "color": "#eb5a46"
+        },        {
+            "id": utilService.makeId(),// localID
+            "color": "#0079bf"
+        }
+    ],
+    "members": [
+        {
+            "_id": utilService.makeId(), // mongoID
+            "username":'omritheking',// username needs to be added 
+            "fullname": "omri luz",
+            "imgUrl": "https://www.google.com"
+        },
+        {
+            "_id": utilService.makeId(), //mongoID
+            "username":'yonatanbz6',
+            "fullname": "yonatan ben zeev",
+            "imgUrl": "https://www.google.com"
+        },
+        {
+            "_id": utilService.makeId(), // mongoDB
+            "fullname": "shneor rabinovitz",
+            "username":'shnrab123',
+            "imgUrl": "https://www.google.com"
+        }
+    ],
+    "groups": [
+        {
+            "id": utilService.makeId(), // localID
+            "title": "Group 1",
+            "archivedAt": null,
+            "tasks": [
+                {
+                    "id": utilService.makeId(), // localID
+                    "title": "Replace logo"
+                },
+                {
+                    "id": utilService.makeId(), // localID
+                    "title": "Add Samples"
+                }
+            ],
+            "style": {} //could add a feature of group background color styling
+        },
+        {
+            "id": utilService.makeId(), // localID
+            "title": "Group 2",
+            "tasks": [
+                {
+                    "id": utilService.makeId(), // localID
+                    "title": "Do that",
+                    "archivedAt": null,
+                },
+                {
+                    "id": utilService.makeId(), // localID
+                    "title": "Help me",
+                    "status": "in-progress",// what is this necesarry for
+                    "description": "description",
+                    "comments": [
+                        {
+                            "id": utilService.makeId(), // localID
+                            "txt": "also @yaronb please CR this",
+                            "createdAt": utilService.makeId(),
+                            "byMember": {
+                                "_id": utilService.makeId(), // mongoID
+                                "fullname": "Tal Tarablus",
+                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            }
+                        }
+                    ],
+                    "checklists": [
+                        {
+                            "id": utilService.makeId(), // localID
+                            "title": "Checklist",
+                            "todos": [
+                                {
+                                    "id": utilService.makeId(), // localID
+                                    "title": "To Do 1",
+                                    "isDone": false
+                                }
+                            ]
+                        }
+                    ],
+                    // if member ids are extracted from stateStore
+                    "memberIds": ["u101"],
+                    "labelIds": ["l101", "l102"],
+                    "createdAt": Date.now(),
+                    "dueDate": null,
+                    "byMember": "u101",
+                    "style": {
+                        backgroundColor: "#26de81"// change to backgroundColor to apply inline style
+                    }
+                }
+            ],
+            "style": {} //could add a feature of group background color styling
+        },
+        {
+            "id": utilService.makeId(), // localID
+            "title": "Group 2",
+            "tasks": [
+                {
+                    "id": utilService.makeId(), // localID
+                    "title": "Do that",
+                    "archivedAt": null,
+                },
+                {
+                    "id": utilService.makeId(), // localID
+                    "title": "Help me",
+                    "status": "in-progress",// what is this necesarry for
+                    "description": "description",
+                    "comments": [
+                        {
+                            "id": utilService.makeId(), // localID
+                            "txt": "also @yaronb please CR this",
+                            "createdAt": utilService.makeId(),
+                            "byMember": {
+                                "_id": utilService.makeId(), // mongoID
+                                "fullname": "Tal Tarablus",
+                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            }
+                        }
+                    ],
+                    "checklists": [
+                        {
+                            "id": utilService.makeId(), // localID
+                            "title": "Checklist",
+                            "todos": [
+                                {
+                                    "id": utilService.makeId(), // localID
+                                    "title": "To Do 1",
+                                    "isDone": false
+                                }
+                            ]
+                        }
+                    ],
+                    // if member ids are extracted from stateStore
+                    "memberIds": ["u101"],
+                    "labelIds": ["l101", "l102"],
+                    "createdAt": Date.now(),
+                    "dueDate": null,
+                    "byMember": "u101",
+                    "style": {
+                        backgroundColor: "#26de81"// change to backgroundColor to apply inline style
+                    }
+                }
+            ],
+            "style": {} //could add a feature of group background color styling
+        },
+        {
+            "id": utilService.makeId(), // localID
+            "title": "Group 2",
+            "tasks": [
+                {
+                    "id": utilService.makeId(), // localID
+                    "title": "Do that",
+                    "archivedAt": null,
+                },
+                {
+                    "id": utilService.makeId(), // localID
+                    "title": "Help me",
+                    "status": "in-progress",// what is this necesarry for
+                    "description": "description",
+                    "comments": [
+                        {
+                            "id": utilService.makeId(), // localID
+                            "txt": "also @yaronb please CR this",
+                            "createdAt": utilService.makeId(),
+                            "byMember": {
+                                "_id": utilService.makeId(), // mongoID
+                                "fullname": "Tal Tarablus",
+                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            }
+                        }
+                    ],
+                    "checklists": [
+                        {
+                            "id": utilService.makeId(), // localID
+                            "title": "Checklist",
+                            "todos": [
+                                {
+                                    "id": utilService.makeId(), // localID
+                                    "title": "To Do 1",
+                                    "isDone": false
+                                }
+                            ]
+                        }
+                    ],
+                    // if member ids are extracted from stateStore
+                    "memberIds": ["u101"],
+                    "labelIds": ["l101", "l102"],
+                    "createdAt": Date.now(),
+                    "dueDate": null,
+                    "byMember": "u101",
+                    "style": {
+                        backgroundColor: "#26de81"// change to backgroundColor to apply inline style
+                    }
+                }
+            ],
+            "style": {} //could add a feature of group background color styling
+        },
+        {
+            "id": utilService.makeId(), // localID
+            "title": "Group 2",
+            "tasks": [
+                {
+                    "id": utilService.makeId(), // localID
+                    "title": "Do that",
+                    "archivedAt": null,
+                },
+                {
+                    "id": utilService.makeId(), // localID
+                    "title": "Help me",
+                    "status": "in-progress",// what is this necesarry for
+                    "description": "description",
+                    "comments": [
+                        {
+                            "id": utilService.makeId(), // localID
+                            "txt": "also @yaronb please CR this",
+                            "createdAt": utilService.makeId(),
+                            "byMember": {
+                                "_id": utilService.makeId(), // mongoID
+                                "fullname": "Tal Tarablus",
+                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            }
+                        }
+                    ],
+                    "checklists": [
+                        {
+                            "id": utilService.makeId(), // localID
+                            "title": "Checklist",
+                            "todos": [
+                                {
+                                    "id": utilService.makeId(), // localID
+                                    "title": "To Do 1",
+                                    "isDone": false
+                                }
+                            ]
+                        }
+                    ],
+                    // if member ids are extracted from stateStore
+                    "memberIds": ["u101"],
+                    "labelIds": ["l101", "l102"],
+                    "createdAt": Date.now(),
+                    "dueDate": null,
+                    "byMember": "u101",
+                    "style": {
+                        backgroundColor: "#26de81"// change to backgroundColor to apply inline style
+                    }
+                }
+            ],
+            "style": {} //could add a feature of group background color styling
+        },
+        {
+            "id": utilService.makeId(), // localID
+            "title": "Group 2",
+            "tasks": [
+                {
+                    "id": utilService.makeId(), // localID
+                    "title": "Do that",
+                    "archivedAt": null,
+                },
+                {
+                    "id": utilService.makeId(), // localID
+                    "title": "Help me",
+                    "status": "in-progress",// what is this necesarry for
+                    "description": "description",
+                    "comments": [
+                        {
+                            "id": utilService.makeId(), // localID
+                            "txt": "also @yaronb please CR this",
+                            "createdAt": utilService.makeId(),
+                            "byMember": {
+                                "_id": utilService.makeId(), // mongoID
+                                "fullname": "Tal Tarablus",
+                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            }
+                        }
+                    ],
+                    "checklists": [
+                        {
+                            "id": utilService.makeId(), // localID
+                            "title": "Checklist",
+                            "todos": [
+                                {
+                                    "id": utilService.makeId(), // localID
+                                    "title": "To Do 1",
+                                    "isDone": false
+                                }
+                            ]
+                        }
+                    ],
+                    // if member ids are extracted from stateStore
+                    "memberIds": ["u101"],
+                    "labelIds": ["l101", "l102"],
+                    "createdAt": Date.now(),
+                    "dueDate": null,
+                    "byMember": "u101",
+                    "style": {
+                        backgroundColor: "#26de81"// change to backgroundColor to apply inline style
+                    }
+                },
+                {
+                    "id": utilService.makeId(), // localID
+                    "title": "Help me",
+                    "status": "in-progress",// what is this necesarry for
+                    "description": "description",
+                    "comments": [
+                        {
+                            "id": utilService.makeId(), // localID
+                            "txt": "also @yaronb please CR this",
+                            "createdAt": utilService.makeId(),
+                            "byMember": {
+                                "_id": utilService.makeId(), // mongoID
+                                "fullname": "Tal Tarablus",
+                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            }
+                        }
+                    ],
+                    "checklists": [
+                        {
+                            "id": utilService.makeId(), // localID
+                            "title": "Checklist",
+                            "todos": [
+                                {
+                                    "id": utilService.makeId(), // localID
+                                    "title": "To Do 1",
+                                    "isDone": false
+                                }
+                            ]
+                        }
+                    ],
+                    // if member ids are extracted from stateStore
+                    "memberIds": ["u101"],
+                    "labelIds": ["l101", "l102"],
+                    "createdAt": Date.now(),
+                    "dueDate": null,
+                    "byMember": "u101",
+                    "style": {
+                        backgroundColor: "#26de81"// change to backgroundColor to apply inline style
+                    }
+                },
+                {
+                    "id": utilService.makeId(), // localID
+                    "title": "Help me",
+                    "status": "in-progress",// what is this necesarry for
+                    "description": "description",
+                    "comments": [
+                        {
+                            "id": utilService.makeId(), // localID
+                            "txt": "also @yaronb please CR this",
+                            "createdAt": utilService.makeId(),
+                            "byMember": {
+                                "_id": utilService.makeId(), // mongoID
+                                "fullname": "Tal Tarablus",
+                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            }
+                        }
+                    ],
+                    "checklists": [
+                        {
+                            "id": utilService.makeId(), // localID
+                            "title": "Checklist",
+                            "todos": [
+                                {
+                                    "id": utilService.makeId(), // localID
+                                    "title": "To Do 1",
+                                    "isDone": false
+                                }
+                            ]
+                        }
+                    ],
+                    // if member ids are extracted from stateStore
+                    "memberIds": ["u101"],
+                    "labelIds": ["l101", "l102"],
+                    "createdAt": Date.now(),
+                    "dueDate": null,
+                    "byMember": "u101",
+                    "style": {
+                        backgroundColor: "#26de81"// change to backgroundColor to apply inline style
+                    }
+                },
+                {
+                    "id": utilService.makeId(), // localID
+                    "title": "Help me",
+                    "status": "in-progress",// what is this necesarry for
+                    "description": "description",
+                    "comments": [
+                        {
+                            "id": utilService.makeId(), // localID
+                            "txt": "also @yaronb please CR this",
+                            "createdAt": utilService.makeId(),
+                            "byMember": {
+                                "_id": utilService.makeId(), // mongoID
+                                "fullname": "Tal Tarablus",
+                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            }
+                        }
+                    ],
+                    "checklists": [
+                        {
+                            "id": utilService.makeId(), // localID
+                            "title": "Checklist",
+                            "todos": [
+                                {
+                                    "id": utilService.makeId(), // localID
+                                    "title": "To Do 1",
+                                    "isDone": false
+                                }
+                            ]
+                        }
+                    ],
+                    // if member ids are extracted from stateStore
+                    "memberIds": ["u101"],
+                    "labelIds": ["l101", "l102"],
+                    "createdAt": Date.now(),
+                    "dueDate": null,
+                    "byMember": "u101",
+                    "style": {
+                        backgroundColor: "#26de81"// change to backgroundColor to apply inline style
+                    }
+                },
+                {
+                    "id": utilService.makeId(), // localID
+                    "title": "Help me",
+                    "status": "in-progress",// what is this necesarry for
+                    "description": "description",
+                    "comments": [
+                        {
+                            "id": utilService.makeId(), // localID
+                            "txt": "also @yaronb please CR this",
+                            "createdAt": utilService.makeId(),
+                            "byMember": {
+                                "_id": utilService.makeId(), // mongoID
+                                "fullname": "Tal Tarablus",
+                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            }
+                        }
+                    ],
+                    "checklists": [
+                        {
+                            "id": utilService.makeId(), // localID
+                            "title": "Checklist",
+                            "todos": [
+                                {
+                                    "id": utilService.makeId(), // localID
+                                    "title": "To Do 1",
+                                    "isDone": false
+                                }
+                            ]
+                        }
+                    ],
+                    // if member ids are extracted from stateStore
+                    "memberIds": ["u101"],
+                    "labelIds": ["l101", "l102"],
+                    "createdAt": Date.now(),
+                    "dueDate": null,
+                    "byMember": "u101",
+                    "style": {
+                        backgroundColor: "#26de81"// change to backgroundColor to apply inline style
+                    }
+                },
+                {
+                    "id": utilService.makeId(), // localID
+                    "title": "Help me",
+                    "status": "in-progress",// what is this necesarry for
+                    "description": "description",
+                    "comments": [
+                        {
+                            "id": utilService.makeId(), // localID
+                            "txt": "also @yaronb please CR this",
+                            "createdAt": utilService.makeId(),
+                            "byMember": {
+                                "_id": utilService.makeId(), // mongoID
+                                "fullname": "Tal Tarablus",
+                                "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            }
+                        }
+                    ],
+                    "checklists": [
+                        {
+                            "id": utilService.makeId(), // localID
+                            "title": "Checklist",
+                            "todos": [
+                                {
+                                    "id": utilService.makeId(), // localID
+                                    "title": "To Do 1",
+                                    "isDone": false
+                                }
+                            ]
+                        }
+                    ],
+                    // if member ids are extracted from stateStore
+                    "memberIds": ["u101"],
+                    "labelIds": ["l101", "l102"],
+                    "createdAt": Date.now(),
+                    "dueDate": null,
+                    "byMember": "u101",
+                    "style": {
+                        backgroundColor: "#26de81"// change to backgroundColor to apply inline style
+                    }
+                }
+            ],
+            "style": {} //could add a feature of group background color styling
+        }
+    ],
+    "activities": [
+        {
+            "id": utilService.makeId(), // localID
+            "txt": "Changed Color",
+            "createdAt": utilService.makeId(),
+            "byMember": {
+                "_id": utilService.makeId(), // mongoID
+                "fullname": "Abi Abambi",
+                "imgUrl": "http://some-img"
+            },
+            "task": {
+                "id": utilService.makeId(), // localID
+                "title": "Replace Logo"
+            },
+            "task": {
+                "id": utilService.makeId(), // localID
+                "title": "filter page"
+            },
+            "task": {
+                "id": utilService.makeId(), // localID
+                "title": "react delete component"
+            },
+            "task": {
+                "id": utilService.makeId(), // localID
+                "title": "reducer action"
+            },
+            "task": {
+                "id": utilService.makeId(), // localID
+                "title": "storeState update"
+            }
+        }
+    ],
+}
 
 // TEST DATA
-// storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
-
+// storageService.post(STORAGE_KEY, ourBoard).then(x => console.log(x))
 

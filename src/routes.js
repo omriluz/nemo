@@ -21,7 +21,7 @@ const routes = [
     //     component: <BoardApp />,
     // },
     {
-        path: '/:signup',
+        path: '/signup',
         component: <LoginSignup />,
     },
     {
