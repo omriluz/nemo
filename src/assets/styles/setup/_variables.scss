@@ -18,6 +18,6 @@ $narrow-breakpoint: 720px;
 $normal-breakpoint: 960px;
 
 
-$padded-break-narrow: $mobile-breakpoint + $layoutPadding * 2;
-$padded-break-normal: $narrow-breakpoint + $layoutPadding * 2;
-$padded-break-wide: $normal-breakpoint + $layoutPadding * 2;
+$padded-break-narrow: $mobile-breakpoint;
+$padded-break-normal: $narrow-breakpoint ;
+$padded-break-wide: $normal-breakpoint ;

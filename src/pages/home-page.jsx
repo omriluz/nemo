@@ -9,15 +9,15 @@ export function HomePage() {
 
                 <div className="hero-content flex column">
                     <div className="hero-content-wrapper">
-                        <h1>Skello helps teams move work forward.</h1>
+                        <h1>Memo helps teams move work forward.</h1>
                         <p>
                             Collaborate, manage projects, and reach new productivity peaks. From high rises to the home
-                            office, the way your team works is unique accomplish it all with Skello.
+                            office, the way your team works is unique accomplish it all with Memo.
                         </p>
                         <Link to="/workspace"> Start Demo </Link>
                     </div>
                 </div>
-                <div>
+                <div className="hero-img">
                     <img className="hero-img" src={imgHero} alt="" />
                 </div>
             </div>
