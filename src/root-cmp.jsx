@@ -1,11 +1,12 @@
 import React from 'react';
+import {AppHeader} from './cmps/general/app-header.jsx'
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import routes from './routes.js'
 
 function App() {
   return (
     <Router>
-    {/* <AppHeader/> */}
+    <AppHeader/>
       <div className="app">
         <main>
           <Routes>
