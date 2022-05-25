@@ -11,11 +11,11 @@ export const storageService = {
 function query(entityType, delay = 600) {
     var entities = JSON.parse(localStorage.getItem(entityType)) || []
 
-    return new Promise((resolve, reject)=>{
-        setTimeout(()=>{
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
             // reject('OOOOPs')
             resolve(entities)
-        }, delay)   
+        }, delay)
     })
     // return Promise.resolve(entities)
 }
@@ -37,19 +37,19 @@ function get(entityType, entityId) {
 
 // async post func
 async function post(entityType, newEntity) {
-        try {
-            // id already generated for dummy data
-            // newEntity._id = _makeId()
-            const entities = await query(entityType)
-            entities.push(newEntity)
-            _save(entityType, entities)
-            return newEntity
-        } catch (err) {
-            console.log(err);
-        }
-            
+    try {
+        // id already generated for dummy data
+        newEntity._id = _makeId()
+        const entities = await query(entityType)
+        entities.push(newEntity)
+        _save(entityType, entities)
+        return newEntity
+    } catch (err) {
+        console.log(err);
     }
-    
+
+}
+
 
 
 function put(entityType, updatedEntity) {
@@ -87,7 +87,7 @@ function _makeId(length = 5) {
 function postMany(entityType, newEntities) {
     return query(entityType)
         .then(entities => {
-            newEntities = newEntities.map(entity => ({...entity, _id: _makeId()}))
+            newEntities = newEntities.map(entity => ({ ...entity, _id: _makeId() }))
             entities.push(...newEntities)
             _save(entityType, entities)
             return entities

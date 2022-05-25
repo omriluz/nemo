@@ -1,8 +1,8 @@
 import { HomePage } from './pages/home-page.jsx'
 import { LoginSignup } from './pages/login-signup.jsx'
 import { WorkSpace } from './pages/work-space.jsx'
+import { BoardApp } from './pages/board-app.jsx'
 // import { CarApp } from './pages/car-app.jsx'
-// import { ReviewApp } from './pages/review-app.jsx'
 // import { ChatApp } from './pages/chat-app.jsx'
 // import { AdminApp } from './pages/admin-app.jsx'
 
@@ -16,10 +16,10 @@ const routes = [
         path: '/workspace',
         component: <WorkSpace />,
     },
-    // {
-    //     path: '/board',
-    //     component: <BoardApp />,
-    // },
+    {
+        path: '/board',
+        component: <BoardApp />,
+    },
     {
         path: '/signup',
         component: <LoginSignup />,
