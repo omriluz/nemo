@@ -14,14 +14,9 @@ export const boardService = {
     query,
     getById,
     remove,
-    saveGroup,
-    removeGroup,
     // getEmptyBoard,
-    removeTask,
-    getTaskById,
     subscribe,
     unsubscribe,
-    saveTask
 }
 window.cs = boardService;
 
@@ -54,40 +49,6 @@ async function save(board) {
         boardChannel.postMessage(getActionAddBoard(savedBoard))
     }
     return savedBoard
-}
-async function saveGroup(group, boardId, groupId) {
-    console.log('hi!');
-    // var savedBoard
-    if (groupId) {
-        let board = await getById(boardId)
-        const idx = board.groups.findIndex(group => groupId === group.id)
-        board.groups[idx].title = group.title
-        save(board)
-        //     boardChannel.postMessage(getActionUpdateBoard(savedBoard))
-        return board
-    } else {
-        // Later, owner is set by the backend
-        group.id = utilService.makeId()
-        group.tasks = []
-        const board = await getById(boardId)
-        board.groups.push(group)
-        save(board)
-        // boardChannel.postMessage(getActionAddBoard(savedBoard))
-        return board
-    }
-}
-
-async function removeGroup(groupId, boardId) {
-    // return new Promise((resolve, reject) => {
-    //     setTimeout(reject, 2000)
-    // })
-    // return Promise.reject('Not now!');
-    const board = await getById(boardId)
-    const idx = board.groups.findIndex(group => group.id === groupId)
-    board.groups.splice(idx, 1)
-    // boardChannel.postMessage(getActionRemoveBoard(boardId))
-    save(board)
-    return board
 }
 
 
@@ -138,10 +99,8 @@ async function getTaskById(boardId, groupId, taskId) {
     //TODO: try catch here 
     try {
         const board = await getById(boardId)
-        // console.log('board is ', board);
         const groupIdx = board.groups.findIndex(group => groupId === group.id)
         const taskIdx = board.groups[groupIdx].tasks.findIndex(task => taskId === task.id)
-        console.log('the task is', board.groups[groupIdx].tasks[taskIdx]);
         return board.groups[groupIdx].tasks[taskIdx]
     } catch (err) {
         console.log(err);

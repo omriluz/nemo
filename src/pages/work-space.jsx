@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { BoardList } from "../cmps/user-boards/board-list.jsx";
-import { CreateNewBoard } from "../cmps/user-boards/new-board"
+import { BoardList } from "../cmps/work-space/board-list.jsx";
+import { CreateNewBoard } from "../cmps/work-space/new-board"
 import { loadBoards, updateBoard } from '../store/actions/board.action'
 
 import { TiStarOutline } from "react-icons/ti";
