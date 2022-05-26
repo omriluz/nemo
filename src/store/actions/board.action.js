@@ -176,16 +176,16 @@ export function removeGroup(groupId, boardId) {
 
 // TASK FUNCTIONS 
 
-// export function removeTask(boardId, groupId, task, activity) {
-//     return async (dispatch) => {
-//         try {
-//             board = await boardService.removeTask(boardId, groupId, task, activity)
-
-//         } catch (err) {
-//             console.log('Err could not delete task', err);
-//         }
-//     }
-// }
+export function removeTask(boardId, groupId, taskId, activity) {
+    return async (dispatch) => {
+        try {
+            const board = await boardService.removeTask(boardId, groupId, taskId, activity)
+            dispatch(getActionSetBoard(board))
+        } catch (err) {
+            console.log('Err could not delete task', err);
+        }
+    }
+}
 
 
 export function saveTask(task, boardId, groupId, activity) {

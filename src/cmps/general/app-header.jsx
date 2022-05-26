@@ -1,12 +1,7 @@
-import { useLocation } from "react-router-dom";
-// import Logo from '../../assets/img/logoPngHomePNG.png'
+import { Link,useLocation } from "react-router-dom";
 import { ReactComponent as HomeLogo } from "../../assets/svg/homePageLogo.svg";
-// import { ReactComponent as Logo } from "../../assets/svg/trello-icon.svg";
-// import { ReactComponent as Logo } from "../../assets/svg/svgAttempt.svg";
-
 export const AppHeader = () => {
   const { pathname } = useLocation();
-  // console.log("pathname", pathname);
   let routeClass = "";
 
   switch (pathname) {
@@ -33,12 +28,12 @@ export const AppHeader = () => {
           {pathname === "/" && (
             <HomeLogo />
           )}
-          {/* {pathname === '/workspace' && } */}
         </div>
-        <div className="nav-menu">
-          <button>login</button>
-          <button>signup</button>
-        </div>
+        {pathname === '/' && <div className="nav-menu">
+            <a href="/login" className="login-btn">Log In</a>
+          {/* <button className="signup-btn">signup</button> */}
+          <a href="/signup" className="signup-btn">Sign Up</a>
+        </div>}
       </nav>
     </header>
   );
