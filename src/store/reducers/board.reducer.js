@@ -7,8 +7,13 @@ export function boardReducer(state = initialState, action) {
     var boards
     switch (action.type) {
         case 'SET_BOARD':
-            newState = { ...state, board: action.board }
-            // implement map over boards and replace new board
+            // implement map over boards and replace new board *** needs to test if this works
+            boards = boards.map(board => {
+                if (board._id === action.board._id) return action.board
+                return board
+            })
+            newState = { ...state, board: action.board, boards }
+            
             break
         case 'SET_BOARDS':
             newState = { ...state, boards: action.boards }
