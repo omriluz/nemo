@@ -9,14 +9,19 @@ const boardChannel = new BroadcastChannel('boardChannel')
 // const listeners = []
 
 export const boardService = {
+    // @@@@define board funcs (i.e saveBoard...)
+    save,
     query,
     getById,
-    save,
     remove,
+    saveGroup,
+    removeGroup,
     // getEmptyBoard,
+    removeTask,
+    getTaskById,
     subscribe,
     unsubscribe,
-    // saveTask
+    saveTask
 }
 window.cs = boardService;
 
@@ -50,12 +55,98 @@ async function save(board) {
     }
     return savedBoard
 }
+async function saveGroup(group, boardId, groupId) {
+    console.log('hi!');
+    // var savedBoard
+    if (groupId) {
+        let board = await getById(boardId)
+        const idx = board.groups.findIndex(group => groupId === group.id)
+        board.groups[idx].title = group.title
+        save(board)
+        //     boardChannel.postMessage(getActionUpdateBoard(savedBoard))
+        return board
+    } else {
+        // Later, owner is set by the backend
+        group.id = utilService.makeId()
+        group.tasks = []
+        const board = await getById(boardId)
+        board.groups.push(group)
+        save(board)
+        // boardChannel.postMessage(getActionAddBoard(savedBoard))
+        return board
+    }
+}
+
+async function removeGroup(groupId, boardId) {
+    // return new Promise((resolve, reject) => {
+    //     setTimeout(reject, 2000)
+    // })
+    // return Promise.reject('Not now!');
+    const board = await getById(boardId)
+    const idx = board.groups.findIndex(group => group.id === groupId)
+    board.groups.splice(idx, 1)
+    // boardChannel.postMessage(getActionRemoveBoard(boardId))
+    save(board)
+    return board
+}
+
 
 // function getEmptyBoard() {
 //     return {
 
 //     }
 // }
+
+
+
+
+async function saveTask(task, boardId, groupId, activity, taskId) {
+    if (taskId) {
+        let board = await getById(boardId)
+        const idx = board.groups.findIndex(group => groupId === group.id)
+        board.groups[idx].title = task.title
+        save(board)
+        //     boardChannel.postMessage(getActionUpdateBoard(savedBoard))
+        return board
+    } else {
+        // Later, owner is set by the backend
+        task.id = utilService.makeId()
+        const board = await getById(boardId)
+        const idx = board.groups.findIndex(group => groupId === group.id)
+        board.groups[idx].tasks.push(task)
+        save(board)
+        // boardChannel.postMessage(getActionAddBoard(savedBoard))
+        return board
+    }
+}
+
+
+async function removeTask(boardId, groupId, taskId, activity) {
+    //TODO: add try catch
+
+    const board = await getById(boardId)
+    const groupIdx = board.groups.findIndex(group => groupId === group.id)
+    const taskIdx = board.groups[groupIdx].tasks.findIndex(task => taskId === task.id)
+    board.groups[groupIdx].tasks.splice(taskIdx, 1)
+
+    // board.activities.unshift(activity)
+    save(board)
+    return board
+}
+
+async function getTaskById(boardId, groupId, taskId) {
+    //TODO: try catch here 
+    try {
+        const board = await getById(boardId)
+        // console.log('board is ', board);
+        const groupIdx = board.groups.findIndex(group => groupId === group.id)
+        const taskIdx = board.groups[groupIdx].tasks.findIndex(task => taskId === task.id)
+        console.log('the task is', board.groups[groupIdx].tasks[taskIdx]);
+        return board.groups[groupIdx].tasks[taskIdx]
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 function subscribe(listener) {
     boardChannel.addEventListener('message', listener)
@@ -65,17 +156,7 @@ function unsubscribe(listener) {
 }
 
 
-function saveTask(boardId, groupId, task, activity) {
-    //why 3 requests to DB
-    // why getById if the board exists in the reducer state
-    const board = getById(boardId)
-    // PUT /api/board/b123/task/t678
 
-    // TODO: find the task, and update
-    board.activities.unshift(activity)
-    save(board)
-    return board
-}
 
 const ourBoard = {
     "_id": utilService.makeId(),//mongoID

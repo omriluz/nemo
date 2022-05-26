@@ -32,6 +32,7 @@ var subscriber
 
 export function loadBoard(boardId) {
     return (dispatch) => {
+        console.log('boardId', boardId)
         boardService.getById(boardId)
             .then(board => {
                 console.log('Board chosen from  DB:', board)
@@ -148,20 +149,52 @@ export function onRemoveBoardOptimistic(boardId) {
             })
     }
 }
+// Group FUNCTIONS 
 
+export function saveGroup(group, boardId, groupId) {
+    return async (dispatch) => {
+        try {
+            const board = await boardService.saveGroup(group, boardId, groupId)
+            //  console.log('board', board)
+            dispatch(getActionSetBoard(board))
+        } catch (err) {
+            console.log('err in saving task')
+        }
+    }
+}
+
+export function removeGroup(groupId, boardId) {
+    return async (dispatch) => {
+        try {
+            const board = await boardService.removeGroup(groupId, boardId)
+            dispatch(getActionSetBoard(board))
+        } catch (err) {
+            console.log('Cannot remove board', err)
+        }
+    }
+}
 
 // TASK FUNCTIONS 
 
+export function removeTask(boardId, groupId, taskId, activity) {
+    return async (dispatch) => {
+        try {
+            const board = await boardService.removeTask(boardId, groupId, taskId, activity)
+            dispatch(getActionSetBoard(board))
+        } catch (err) {
+            console.log('Err could not delete task', err);
+        }
+    }
+}
 
-// export function storeSaveTask(task, activity) {
-    
-//     return async (dispatch) => {
-//         try {
-//             board = await boardService.saveTask(boardId, groupId, task, activity)
-//             dispatch(getActionSetBoard(board))
-//         } catch (err) {
-//             console.log('err in saving task');
-//         }
-//     }
-    // commit(board)
-// }
+
+export function saveTask(task, boardId, groupId, activity) {
+    return async (dispatch) => {
+        try {
+            const board = await boardService.saveTask(task, boardId, groupId, activity)
+            dispatch(getActionSetBoard(board))
+        } catch (err) {
+            console.log('err in saving task');
+        }
+    }
+}
