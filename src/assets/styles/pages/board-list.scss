@@ -1,27 +1,51 @@
+.board-list-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(193px, 1fr));
+  grid-auto-rows: 100px;
+  gap: 9px;
+  padding: 10px 0 0 10px;
 
- .board-preview-container {
-  display: flex;
-  height: 80px;
-  flex-direction: row;
-  width: 193px;
-  margin-bottom: 9px;
-  padding: 8px;
-
-  h1 {
-    overflow: hidden;
-    font-size: 14px;
-    color: #ffffff;
-    font-weight: bold;
+  .board-preview-container {
+    cursor: pointer;
+    height: 80%;
+    border-radius: 3px;
     line-height: 20px;
-    margin: 2px 0 0 0;
+    opacity: 69.0%;
+    font-family: '-apple-system, "system-ui", "Segoe UI", Roboto, "Noto Sans", Ubuntu, "Droid Sans", "Helvetica Neue", sans-serif';
+
+    @include for-narrow-layout {
+      width: 156px;
+    }
+
+    @include for-normal-layout {
+      width: 170px;
+    }
+
+    @include for-wide-layout {
+      width: 194px;
+    }
   }
 }
 
-  .board-cards-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-top: 9px;
-    justify-content: center;
+
+.star-icon {
+  height: 17px;
+  width: 17px;
+  position: relative;
+  background-color: #97a0af;
+  color: #f2d600;
+  top: 60px;
+  right: -100px;
+  line-height: 18px;
+  font-size: 14px;
+  text-align: center;
+
+  &.star {
+    color: #f2d600;
+    margin-right: 6px;
+    width: 18px;
+    opacity: 1;
+
   }
 
+}

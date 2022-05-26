@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import imgHero from "../assets/img/hero.png";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 
 export const HomePage = () => {
   return (
@@ -15,10 +15,9 @@ export const HomePage = () => {
               From high rises to the home office, the way your team works is
               unique accomplish it all with Nemo.
             </p>
-
-            <Button sx={{backgroundColor:"#0065ff"}} variant="contained">
-            <b>Sign up—it’s free!</b>
-            </Button>
+            {/* <Button sx={{ backgroundColor: "#0065ff" }} variant="contained">
+              <b>Sign up—it’s free!</b>
+            </Button> */}
             {/* <Link to="/workspace"> Start Demo </Link> */}
           </div>
         </div>

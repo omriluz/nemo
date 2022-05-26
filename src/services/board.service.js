@@ -1,8 +1,8 @@
 
 import { storageService } from './async-storage.service.js'
 import { userService } from './user.service.js'
-import { getActionRemoveBoard, getActionAddBoard, getActionUpdateBoard} from '../store/actions/board.action.js'
-import {utilService} from './util.service.js'
+import { getActionRemoveBoard, getActionAddBoard, getActionUpdateBoard } from '../store/actions/board.action.js'
+import { utilService } from './util.service.js'
 
 const STORAGE_KEY = 'board'
 const boardChannel = new BroadcastChannel('boardChannel')
@@ -41,7 +41,7 @@ async function save(board) {
     if (board._id) {
         savedBoard = await storageService.put(STORAGE_KEY, board)
         boardChannel.postMessage(getActionUpdateBoard(savedBoard))
-        
+
     } else {
         // Later, owner is set by the backend
         board.owner = userService.getLoggedinUser()
@@ -80,9 +80,10 @@ function saveTask(boardId, groupId, task, activity) {
 const ourBoard = {
     "_id": utilService.makeId(),//mongoID
     "title": "Demo project",
-    "archivedAt": null, 
+    "isStar": false,
+    "archivedAt": null,
     "createdAt": utilService.makeId(),
-    
+
     "createdBy": {
         "_id": utilService.makeId(),// mongoID
         "fullname": "Yonatan ben zeev",
@@ -113,10 +114,10 @@ const ourBoard = {
         {
             "id": utilService.makeId(),// localID
             "color": "#eb5a46"
-        },        {
+        }, {
             "id": utilService.makeId(),// localID
             "color": "#eb5a46"
-        },        {
+        }, {
             "id": utilService.makeId(),// localID
             "color": "#0079bf"
         }
@@ -124,20 +125,20 @@ const ourBoard = {
     "members": [
         {
             "_id": utilService.makeId(), // mongoID
-            "username":'omritheking',// username needs to be added 
+            "username": 'omritheking',// username needs to be added 
             "fullname": "omri luz",
             "imgUrl": "https://www.google.com"
         },
         {
             "_id": utilService.makeId(), //mongoID
-            "username":'yonatanbz6',
+            "username": 'yonatanbz6',
             "fullname": "yonatan ben zeev",
             "imgUrl": "https://www.google.com"
         },
         {
             "_id": utilService.makeId(), // mongoDB
             "fullname": "shneor rabinovitz",
-            "username":'shnrab123',
+            "username": 'shnrab123',
             "imgUrl": "https://www.google.com"
         }
     ],

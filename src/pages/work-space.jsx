@@ -1,54 +1,81 @@
-
-import { loadBoards } from '../store/actions/board.action'
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { BoardList } from "../cmps/user-boards/board-list.jsx";
+import { CreateNewBoard } from "../cmps/user-boards/new-board"
+import { loadBoards, updateBoard } from '../store/actions/board.action'
+
+import { TiStarOutline } from "react-icons/ti";
+import { AiOutlineClockCircle } from 'react-icons/ai';
+
+
+
 
 
 export const WorkSpace = () => {
-
+  const dispatch = useDispatch()
   const { boards } = useSelector((storeState) => storeState.boardModule)
 
-  const dispatch = useDispatch()
+
 
   useEffect(() => {
     onLoadBoards()
-    console.log(boards)
   }, [])
 
   const onLoadBoards = () => {
     dispatch(loadBoards())
   }
 
+  const getStarredBoards = () => {
+    return boards?.filter(board => board.isStar)
+  }
 
+  const onToggleStar = (ev, boardId) => {
+    ev.preventDefault()
+    console.log('hhhh')
+    const board = boards.find(board => board._id === boardId)
+    board.isStar = !board.isStar
+    dispatch(updateBoard(board))
+  }
 
   return (
+    <div className="workspace-page">
+      <section className="all-boards-list">
+        <div className="content-all-boards">
 
-    <div className="user-boards-container">
-      <section className="user-boards-list">
-
-        <div className="board-cards-container">
-          <section className="starred-boards-header">
-            <h3>Starred boards</h3>
-            <BoardList boards={boards} />
+          <section className="starred-boards-section">
+            <div className="title-header">
+              <div className="title-header-icon-container">
+                <TiStarOutline stroke="#42526e" className="header-icon star-icon" />
+              </div>
+              <h3>Starred boards</h3>
+            </div>
+            <div className="primary-boards-container-section">
+              <BoardList
+                boards={getStarredBoards()}
+                updateBoard={updateBoard}
+                onToggleStar={onToggleStar}
+              />
+            </div>
           </section>
-
-          <div className="boards-list">
-          </div>
-        </div>
-
-
-        <div className="board-cards-container">
-          <div className="my-boards-header">
-            <h3>Recently viewed</h3>
-            <BoardList boards={boards} />
-
-          </div>
-          <div className="boards-list">
-          </div>
+          <section className="recent-boards-section">
+            <div className="title-header">
+              <div className="title-header-icon-container">
+                <AiOutlineClockCircle className="header-icon star-icon" />
+              </div>
+              <h3>Recently viewed</h3>
+            </div>
+            <div className="primary-boards-container-section">
+              <BoardList
+                boards={boards}
+                updateBoard={updateBoard}
+                onToggleStar={onToggleStar}
+              />
+            </div>
+          </section>
         </div>
       </section>
-    </div>
+      <CreateNewBoard />
+    </div >
   )
 }

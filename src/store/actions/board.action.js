@@ -99,10 +99,10 @@ export function addBoard(board) {
             .then(savedBoard => {
                 console.log('Added Board', savedBoard);
                 dispatch(getActionAddBoard(savedBoard))
-                showSuccessMsg('Board added')
+                // showSuccessMsg('Board added')
             })
             .catch(err => {
-                showErrorMsg('Cannot add board')
+                // showErrorMsg('Cannot add board')
                 console.log('Cannot add board', err)
             })
     }
@@ -114,10 +114,10 @@ export function updateBoard(board) {
             .then(savedBoard => {
                 console.log('Updated Board:', savedBoard);
                 dispatch(getActionUpdateBoard(savedBoard))
-                showSuccessMsg('Board updated')
+                // showSuccessMsg('Board updated')
             })
             .catch(err => {
-                showErrorMsg('Cannot update board')
+                // showErrorMsg('Cannot update board')
                 console.log('Cannot save board', err)
             })
     }
