@@ -9,16 +9,20 @@ const boardChannel = new BroadcastChannel('boardChannel')
 // const listeners = []
 
 export const boardService = {
+    // @@@@define board funcs (i.e saveBoard...)
+    save,
     query,
     getById,
-    save,
-    saveGroup,
-    // removeGroup,
     remove,
     // getEmptyBoard,
+    saveGroup,
+    // removeGroup,
+    removeTask,
+    // saveTask
+    // addTask,
+    getTaskById,
     subscribe,
     unsubscribe,
-    // saveTask
 }
 window.cs = boardService;
 
@@ -87,14 +91,7 @@ async function saveGroup(group, boardId) {
 //     }
 // }
 
-function subscribe(listener) {
-    boardChannel.addEventListener('message', listener)
-}
-function unsubscribe(listener) {
-    boardChannel.removeEventListener('message', listener)
-}
-
-
+// copied from E2E starter needs to be worked on
 function saveTask(boardId, groupId, task, activity) {
     //why 3 requests to DB
     // why getById if the board exists in the reducer state
@@ -106,6 +103,44 @@ function saveTask(boardId, groupId, task, activity) {
     save(board)
     return board
 }
+
+
+async function removeTask(boardId, groupId, taskId, activity) {
+    //TODO: add try catch
+
+    const board = await getById(boardId)
+    const groupIdx = board.groups.findIndex(group => groupId === group.id)
+    const taskIdx = board.groups[groupIdx].tasks.findIndex(task => taskId === task.id)
+    board.groups[groupIdx].tasks.splice(taskIdx,1)
+
+    // board.activities.unshift(activity)
+    save(board)
+    return board
+}
+
+async function getTaskById(boardId,groupId,taskId) {
+    //TODO: try catch here 
+    try {
+        const board = await getById(boardId)
+        // console.log('board is ', board);
+        const groupIdx = board.groups.findIndex(group => groupId === group.id)
+        const taskIdx = board.groups[groupIdx].tasks.findIndex(task => taskId === task.id)
+        console.log('the task is',board.groups[groupIdx].tasks[taskIdx]);
+        return board.groups[groupIdx].tasks[taskIdx]
+    } catch (err) {
+        console.log(err);
+    }
+} 
+
+function subscribe(listener) {
+    boardChannel.addEventListener('message', listener)
+}
+function unsubscribe(listener) {
+    boardChannel.removeEventListener('message', listener)
+}
+
+
+
 
 const ourBoard = {
     "_id": utilService.makeId(),//mongoID

@@ -2,6 +2,7 @@ import { HomePage } from './pages/home-page.jsx'
 import { LoginSignup } from './pages/login-signup.jsx'
 import { WorkSpace } from './pages/work-space.jsx'
 import { BoardApp } from './pages/board-app.jsx'
+import { TaskDetails } from './pages/task-details.jsx'
 // import { CarApp } from './pages/car-app.jsx'
 // import { ChatApp } from './pages/chat-app.jsx'
 // import { AdminApp } from './pages/admin-app.jsx'
@@ -27,12 +28,11 @@ const routes = [
     {
         path: '/login',
         component: <LoginSignup />,
-    }
-
-    // {
-    //     path: '/',
-    //     component: <TaskDetails />,
-    // },
+    },
+    {
+        path: '/board/:boardId/:groupId/:taskId',
+        component: <TaskDetails />,
+    },
 ]
 
 export default routes

@@ -33,16 +33,8 @@ export const HomePage = () => {
         <section className="homepage">
           <div className="homepage-text">
             <h1 className="homepage-title">Nemo helps teams move work forward.</h1>
-            {/* @@@@@@@use pre for now for lack of time later do it with css */}
-            {/* <p className="homepage-paragraph" >
-              Collaborate, manage projects, and reach new productivity peaks. From high rises to the home office, the way your team works is unique—accomplish it all with Trello.
-            </p> */}
-            {/* <pre className="home-paragraph">{`
-            Collaborate, manage projects, and reach new productivity peaks.
-            From high rises to the home office, the way your team works is
-            unique—accomplish it all with Trello.
-            `}
-            </pre> */}
+            <p className="homepage-paragraph" >Collaborate, manage projects, and reach new productivity peaks. From high rises to the home office, the way your team works is unique—accomplish it all with Trello.</p>
+            <button className="demo-btn">Sign up—it’s free!</button>
           </div>
           <div className="homepage-hero">
             <img className="hero-img" src={imgHero} alt="" />

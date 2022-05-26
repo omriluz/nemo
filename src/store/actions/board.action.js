@@ -153,13 +153,13 @@ export function onRemoveBoardOptimistic(boardId) {
 
 export function saveGroup (group , boardId){
     return async (dispatch) => {
-        try{
+        try {
          const board= await boardService.saveGroup(group, boardId)
         //  console.log('board', board)
          dispatch(getActionSetBoard(board))
-        }catch (err) {
-                        console.log('err in saving task');
-                    }
+        } catch (err) {
+            console.log('err in saving task');
+        }
     }
 }
 
@@ -176,16 +176,16 @@ export function saveGroup (group , boardId){
 
 // TASK FUNCTIONS 
 
-// export function removeTask(boardId, groupId, task, activity) {
-//     return async (dispatch) => {
-//         try {
-//             board = await boardService.removeTask(boardId, groupId, task, activity)
-            
-//         } catch (err) {
-//             console.log('Err could not delete task', err);
-//         }
-//     }
-// }
+export function removeTask(boardId, groupId, taskId, activity) {
+    return async (dispatch) => {
+        try {
+            const board = await boardService.removeTask(boardId, groupId, taskId, activity)
+            dispatch(getActionSetBoard(board))
+        } catch (err) {
+            console.log('Err could not delete task', err);
+        }
+    }
+}
 
 
 // export function storeSaveTask(task, activity) {
