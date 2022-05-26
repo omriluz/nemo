@@ -1,16 +1,41 @@
 .group-preview-wrapper {
     height: 100%;
-    background-color: #717e92;
+    background-color: $clr8;
     margin: 10px;
+    width: rem(228px);
 
 }
 
 .group-preview {
-    max-height: 100%;
-    width: 200px;
+    max-height: rem(500px);
+    width: 90%;
     margin: 10px;
 
     .action-modal {
         position: absolute;
     }
+
+    input {
+
+        all: unset;
+
+        &.active {
+            all: revert;
+        }
+    }
+
+    // .add-task-container {
+    //     form {
+    //         textarea {
+    //             resize: none;
+    //             // #You can use resize: horizontal if you just want to disable vertical resize
+    //         }
+    //     }
+    // }
+
+
+}
+
+.task-txt {
+    resize: none;
 }

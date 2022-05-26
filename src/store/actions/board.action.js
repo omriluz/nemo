@@ -93,7 +93,7 @@ export function removeBoard(boardId) {
     }
 }
 
-export function addBoard(board ) {
+export function addBoard(board) {
     return (dispatch) => {
 
         boardService.save(board)
@@ -151,28 +151,28 @@ export function onRemoveBoardOptimistic(boardId) {
 }
 // Group FUNCTIONS 
 
-export function saveGroup (group , boardId){
+export function saveGroup(group, boardId, groupId) {
     return async (dispatch) => {
-        try{
-         const board= await boardService.saveGroup(group, boardId)
-        //  console.log('board', board)
-         dispatch(getActionSetBoard(board))
-        }catch (err) {
-                        console.log('err in saving task');
-                    }
+        try {
+            const board = await boardService.saveGroup(group, boardId, groupId)
+            //  console.log('board', board)
+            dispatch(getActionSetBoard(board))
+        } catch (err) {
+            console.log('err in saving task')
+        }
     }
 }
 
-// export function removeGroup(groupId) {
-//     return async (dispatch) => {
-//         try {
-//             const board= await boardService.removeGroup(group, boardId)
-//             dispatch(getActionSetBoard(board))
-//         } catch (err) {
-//             console.log('Cannot remove board', err)
-//         }
-//     }
-// }
+export function removeGroup(groupId, boardId) {
+    return async (dispatch) => {
+        try {
+            const board = await boardService.removeGroup(groupId, boardId)
+            dispatch(getActionSetBoard(board))
+        } catch (err) {
+            console.log('Cannot remove board', err)
+        }
+    }
+}
 
 // TASK FUNCTIONS 
 
@@ -180,7 +180,7 @@ export function saveGroup (group , boardId){
 //     return async (dispatch) => {
 //         try {
 //             board = await boardService.removeTask(boardId, groupId, task, activity)
-            
+
 //         } catch (err) {
 //             console.log('Err could not delete task', err);
 //         }
@@ -188,15 +188,13 @@ export function saveGroup (group , boardId){
 // }
 
 
-// export function storeSaveTask(task, activity) {
-    
-//     return async (dispatch) => {
-//         try {
-//             board = await boardService.saveTask(boardId, groupId, task, activity)
-//             dispatch(getActionSetBoard(board))
-//         } catch (err) {
-//             console.log('err in saving task');
-//         }
-//     }
-    // commit(board)
-// }
+export function saveTask(task, boardId, groupId, activity) {
+    return async (dispatch) => {
+        try {
+            const board = await boardService.saveTask(task, boardId, groupId, activity)
+            dispatch(getActionSetBoard(board))
+        } catch (err) {
+            console.log('err in saving task');
+        }
+    }
+}

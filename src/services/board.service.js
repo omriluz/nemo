@@ -13,12 +13,12 @@ export const boardService = {
     getById,
     save,
     saveGroup,
-    // removeGroup,
+    removeGroup,
     remove,
     // getEmptyBoard,
     subscribe,
     unsubscribe,
-    // saveTask
+    saveTask
 }
 window.cs = boardService;
 
@@ -52,33 +52,40 @@ async function save(board) {
     }
     return savedBoard
 }
-async function saveGroup(group, boardId) {
+async function saveGroup(group, boardId, groupId) {
     console.log('hi!');
     // var savedBoard
-    // if (group._id) {
-    //     savedBoard = await storageService.put(STORAGE_KEY, board)
-    //     boardChannel.postMessage(getActionUpdateBoard(savedBoard))
-
-    // } else {
-    // Later, owner is set by the backend
-    group.id = utilService.makeId()
-    group.tasks = []
-    const board = await getById(boardId)
-    board.groups.push(group)
-    save(board)
-    // boardChannel.postMessage(getActionAddBoard(savedBoard))
-    // }
-    return board
+    if (groupId) {
+        let board = await getById(boardId)
+        const idx = board.groups.findIndex(group => groupId === group.id)
+        board.groups[idx].title = group.title
+        save(board)
+        //     boardChannel.postMessage(getActionUpdateBoard(savedBoard))
+        return board
+    } else {
+        // Later, owner is set by the backend
+        group.id = utilService.makeId()
+        group.tasks = []
+        const board = await getById(boardId)
+        board.groups.push(group)
+        save(board)
+        // boardChannel.postMessage(getActionAddBoard(savedBoard))
+        return board
+    }
 }
 
-// async function removeGroup(groupId) {
-//     // return new Promise((resolve, reject) => {
-//     //     setTimeout(reject, 2000)
-//     // })
-//     // return Promise.reject('Not now!');
-//     const board = await getById(boardId)
-//     boardChannel.postMessage(getActionRemoveBoard(boardId))
-// }
+async function removeGroup(groupId, boardId) {
+    // return new Promise((resolve, reject) => {
+    //     setTimeout(reject, 2000)
+    // })
+    // return Promise.reject('Not now!');
+    const board = await getById(boardId)
+    const idx = board.groups.findIndex(group => group.id === groupId)
+    board.groups.splice(idx, 1)
+    // boardChannel.postMessage(getActionRemoveBoard(boardId))
+    save(board)
+    return board
+}
 
 
 // function getEmptyBoard() {
@@ -95,16 +102,24 @@ function unsubscribe(listener) {
 }
 
 
-function saveTask(boardId, groupId, task, activity) {
-    //why 3 requests to DB
-    // why getById if the board exists in the reducer state
-    const board = getById(boardId)
-    // PUT /api/board/b123/task/t678
-
-    // TODO: find the task, and update
-    board.activities.unshift(activity)
-    save(board)
-    return board
+async function saveTask(task, boardId, groupId, activity, taskId) {
+    if (taskId) {
+        let board = await getById(boardId)
+        const idx = board.groups.findIndex(group => groupId === group.id)
+        board.groups[idx].title = task.title
+        save(board)
+        //     boardChannel.postMessage(getActionUpdateBoard(savedBoard))
+        return board
+    } else {
+        // Later, owner is set by the backend
+        task.id = utilService.makeId()
+        const board = await getById(boardId)
+        const idx = board.groups.findIndex(group => groupId === group.id)
+        board.groups[idx].tasks.push(task)
+        save(board)
+        // boardChannel.postMessage(getActionAddBoard(savedBoard))
+        return board
+    }
 }
 
 const ourBoard = {
