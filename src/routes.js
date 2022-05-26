@@ -17,7 +17,7 @@ const routes = [
         component: <WorkSpace />,
     },
     {
-        path: '/board',
+        path: '/board/:boardId',
         component: <BoardApp />,
     },
     {

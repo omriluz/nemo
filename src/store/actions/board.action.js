@@ -32,6 +32,7 @@ var subscriber
 
 export function loadBoard(boardId) {
     return (dispatch) => {
+        console.log('boardId', boardId)
         boardService.getById(boardId)
             .then(board => {
                 console.log('Board chosen from  DB:', board)
@@ -92,7 +93,7 @@ export function removeBoard(boardId) {
     }
 }
 
-export function addBoard(board) {
+export function addBoard(board ) {
     return (dispatch) => {
 
         boardService.save(board)
@@ -148,7 +149,30 @@ export function onRemoveBoardOptimistic(boardId) {
             })
     }
 }
+// Group FUNCTIONS 
 
+export function saveGroup (group , boardId){
+    return async (dispatch) => {
+        try{
+         const board= await boardService.saveGroup(group, boardId)
+        //  console.log('board', board)
+         dispatch(getActionSetBoard(board))
+        }catch (err) {
+                        console.log('err in saving task');
+                    }
+    }
+}
+
+// export function removeGroup(groupId) {
+//     return async (dispatch) => {
+//         try {
+//             const board= await boardService.removeGroup(group, boardId)
+//             dispatch(getActionSetBoard(board))
+//         } catch (err) {
+//             console.log('Cannot remove board', err)
+//         }
+//     }
+// }
 
 // TASK FUNCTIONS 
 
