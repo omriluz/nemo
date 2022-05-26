@@ -3,7 +3,7 @@ import { MdMoreHoriz } from "react-icons/md";
 import { useState } from 'react'
 
 
-export const GroupPreview = ({ group }) => {
+export const GroupPreview = ({ group, boardId }) => {
     const [isAddAction, setIsAddAction] = useState(false)
 
     const onRemoveGroup = () => {
@@ -19,7 +19,7 @@ export const GroupPreview = ({ group }) => {
                 </span>
             </div>
             {/* <input type="text" className="group-preview-title" value={group.title} /> */}
-            <TaskList tasks={group.tasks} />
+            <TaskList tasks={group.tasks} groupId={group.id} boardId={boardId} />
         </div>
 
         {isAddAction && <section className="action-modal" >

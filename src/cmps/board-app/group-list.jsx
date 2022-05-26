@@ -25,7 +25,7 @@ export const GroupList = ({ groups, boardId }) => {
     return (
         <section className="board-list flex">
             {groups.map(group => {
-                return <GroupPreview key={group.id} group={group} />
+                return <GroupPreview key={group.id} group={group} boardId={boardId} />
             })}
             <div className="add-group">
                 {!isAddGroup && <button onClick={() => setIsAddGroup(true)}>Add another list</button>}

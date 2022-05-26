@@ -176,6 +176,17 @@ export function saveGroup (group , boardId){
 
 // TASK FUNCTIONS 
 
+// export function removeTask(boardId, groupId, task, activity) {
+//     return async (dispatch) => {
+//         try {
+//             board = await boardService.removeTask(boardId, groupId, task, activity)
+            
+//         } catch (err) {
+//             console.log('Err could not delete task', err);
+//         }
+//     }
+// }
+
 
 // export function storeSaveTask(task, activity) {
     
