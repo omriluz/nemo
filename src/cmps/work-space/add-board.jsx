@@ -19,6 +19,7 @@ export const AddBoard = ({ toggleModal }) => {
         } else return
     }
 
+      
     return (
         <div ref={inputModal} className="add-board-pop">
             <div className="add-board-header flex">
@@ -45,4 +46,3 @@ export const AddBoard = ({ toggleModal }) => {
         </div>
     )
 }
-

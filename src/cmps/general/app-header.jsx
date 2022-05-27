@@ -30,6 +30,7 @@ export const AppHeader = () => {
           )}
         </div>
         {pathname === '/' && <div className="nav-menu">
+          {/* change from Link to a */}
             <a href="/login" className="login-btn">Log In</a>
           {/* <button className="signup-btn">signup</button> */}
           <a href="/signup" className="signup-btn">Sign Up</a>

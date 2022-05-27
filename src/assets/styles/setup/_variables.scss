@@ -24,11 +24,14 @@ $layoutPadding: 20px;
 
 
 // Breakpoints
-$mobile-breakpoint: 460px;
-$narrow-breakpoint: 720px;
-$normal-breakpoint: 960px;
+$mobile-breakpoint: 550px;
+$narrow-breakpoint: 800px;
+$normal-breakpoint: 980px;
+$wide-breakpoint: 1200px;
 
 
-$padded-break-narrow: $mobile-breakpoint ;
+
+$padded-break-mobile: $mobile-breakpoint ;
 $padded-break-normal: $narrow-breakpoint ;
-$padded-break-wide: $normal-breakpoint ;
+$padded-break-narrow: $normal-breakpoint ;
+$padded-break-wide: $wide-breakpoint ;

@@ -4,7 +4,8 @@ import { utilService } from "./util.service"
 export const taskService = {
     removeTask,
     getTaskById,
-    saveTask
+    saveTask,
+  
 }
 window.ts = taskService;
 
@@ -55,3 +56,18 @@ async function getTaskById(boardId, groupId, taskId) {
         console.log(err);
     }
 }
+
+
+function getImgsFromTask(task) {
+    let imgs = []
+    if (task.attachments) {
+        task.attachments.forEach((attach) => {
+            if (attach.isImg) {
+                imgs.push(attach)
+            }
+        })
+    }
+    if (imgs.length <= 0) return null
+    return imgs
+}
+

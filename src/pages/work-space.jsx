@@ -45,7 +45,7 @@ export const WorkSpace = () => {
 
           <section className="starred-boards-section">
             <div className="title-header">
-              <div className="title-header-icon-container">
+              <div className="title-header-icon-container1">
                 <TiStarOutline stroke="#42526e" className="header-icon star-icon" />
               </div>
               <h3>Starred boards</h3>
@@ -60,7 +60,7 @@ export const WorkSpace = () => {
           </section>
           <section className="recent-boards-section">
             <div className="title-header">
-              <div className="title-header-icon-container">
+              <div className="title-header-icon-container2">
                 <AiOutlineClockCircle className="header-icon star-icon" />
               </div>
               <h3>Recently viewed</h3>
