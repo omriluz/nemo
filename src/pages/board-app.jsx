@@ -21,9 +21,11 @@ export const BoardApp = () => {
 
 
     return (
-        <section className="board-app">
+        <section className="board-app-wrapper">
             <h1>haha</h1>
-            {board && <GroupList groups={board.groups} boardId={boardId} />}
+            <div className='board-app'>
+                {board && <GroupList groups={board.groups} boardId={boardId} />}
+            </div>
         </section>
     )
 }

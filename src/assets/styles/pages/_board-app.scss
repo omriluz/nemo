@@ -1,3 +1,21 @@
-.board-app {
-    height: 90vh;
+.board-app-wrapper {
+    background-attachment: fixed !important;
+    background-position: 50% !important;
+    background-size: cover !important;
+    height: 100vh;
+    padding-bottom: 10px;
+    background-color: #838c91;
+    margin-right: 2px;
+    ; //need to remove just temporary
+
+
+
+    .board-app {
+        display: flex;
+        height: 100vh;
+        overflow-y: hidden;
+        padding: 0 13px 8px;
+        width: 100%;
+    }
+
 }
