@@ -6,14 +6,40 @@ export const taskService = {
     getTaskById,
     saveTask
 }
+window.ts = taskService;
 
-async function saveTask(task, boardId, groupId, activity, taskId) {
-    if (taskId) {
+// async function saveTask(task, boardId, groupId, activity, taskId) {
+//     if (taskId) {
+//         let board = await boardService.getById(boardId)
+//         const idx = board.groups.findIndex(group => groupId === group.id)
+//         board.groups[idx].title = task.title
+//         boardService.save(board)
+//         //     boardChannel.postMessage(getActionUpdateBoard(savedBoard))
+//         return board
+//     } else {
+//         // Later, owner is set by the backend
+//         task.id = utilService.makeId()
+//         const board = await boardService.getById(boardId)
+//         const idx = board.groups.findIndex(group => groupId === group.id)
+//         board.groups[idx].tasks.push(task)
+//         boardService.save(board)
+//         // boardChannel.postMessage(getActionAddBoard(savedBoard))
+//         return board
+//     }
+// }
+
+
+// NEW
+// saves whole task
+// delete taskId from arguments
+async function saveTask(task, boardId, groupId, activity) {
+    if (task.id) {
         let board = await boardService.getById(boardId)
-        const idx = board.groups.findIndex(group => groupId === group.id)
-        board.groups[idx].title = task.title
+        debugger
+        const groupIdx = board.groups.findIndex(group => groupId === group.id)
+        const taskIdx = board.groups[groupIdx].tasks.findIndex(currTask => currTask.id === task.id)
+        board.groups[groupIdx].tasks[taskIdx] = task
         boardService.save(board)
-        //     boardChannel.postMessage(getActionUpdateBoard(savedBoard))
         return board
     } else {
         // Later, owner is set by the backend
@@ -26,6 +52,7 @@ async function saveTask(task, boardId, groupId, activity, taskId) {
         return board
     }
 }
+
 
 
 async function removeTask(boardId, groupId, taskId, activity) {

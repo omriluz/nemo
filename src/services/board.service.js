@@ -9,7 +9,6 @@ const boardChannel = new BroadcastChannel('boardChannel')
 // const listeners = []
 
 export const boardService = {
-    // @@@@define board funcs (i.e saveBoard...)
     save,
     query,
     getById,
@@ -40,8 +39,8 @@ async function save(board) {
     var savedBoard
     if (board._id) {
         savedBoard = await storageService.put(STORAGE_KEY, board)
-        boardChannel.postMessage(getActionUpdateBoard(savedBoard))
-
+        // is this necessary? ask shneor if he needs it
+        // boardChannel.postMessage(getActionUpdateBoard(savedBoard))
     } else {
         // Later, owner is set by the backend
         board.owner = userService.getLoggedinUser()
@@ -58,64 +57,12 @@ async function save(board) {
 //     }
 // }
 
-
-
-
-async function saveTask(task, boardId, groupId, activity, taskId) {
-    if (taskId) {
-        let board = await getById(boardId)
-        const idx = board.groups.findIndex(group => groupId === group.id)
-        board.groups[idx].title = task.title
-        save(board)
-        //     boardChannel.postMessage(getActionUpdateBoard(savedBoard))
-        return board
-    } else {
-        // Later, owner is set by the backend
-        task.id = utilService.makeId()
-        const board = await getById(boardId)
-        const idx = board.groups.findIndex(group => groupId === group.id)
-        board.groups[idx].tasks.push(task)
-        save(board)
-        // boardChannel.postMessage(getActionAddBoard(savedBoard))
-        return board
-    }
-}
-
-
-async function removeTask(boardId, groupId, taskId, activity) {
-    //TODO: add try catch
-
-    const board = await getById(boardId)
-    const groupIdx = board.groups.findIndex(group => groupId === group.id)
-    const taskIdx = board.groups[groupIdx].tasks.findIndex(task => taskId === task.id)
-    board.groups[groupIdx].tasks.splice(taskIdx, 1)
-
-    // board.activities.unshift(activity)
-    save(board)
-    return board
-}
-
-async function getTaskById(boardId, groupId, taskId) {
-    //TODO: try catch here 
-    try {
-        const board = await getById(boardId)
-        const groupIdx = board.groups.findIndex(group => groupId === group.id)
-        const taskIdx = board.groups[groupIdx].tasks.findIndex(task => taskId === task.id)
-        return board.groups[groupIdx].tasks[taskIdx]
-    } catch (err) {
-        console.log(err);
-    }
-}
-
 function subscribe(listener) {
     boardChannel.addEventListener('message', listener)
 }
 function unsubscribe(listener) {
     boardChannel.removeEventListener('message', listener)
 }
-
-
-
 
 const ourBoard = {
     "_id": utilService.makeId(),//mongoID
@@ -156,7 +103,7 @@ const ourBoard = {
             "color": "#eb5a46"
         }, {
             "id": utilService.makeId(),// localID
-            "color": "#eb5a46"
+            "color": "#c377e0"
         }, {
             "id": utilService.makeId(),// localID
             "color": "#0079bf"
