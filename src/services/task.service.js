@@ -6,12 +6,12 @@ export const taskService = {
     getTaskById,
     saveTask
 }
+window.ts = taskService;
+
 
 async function saveTask(task, boardId, groupId, activity) {
     if (task.id) {
-        console.log('task', task)
         let board = await boardService.getById(boardId)
-        console.log('board', board)
         const groupIdx = board.groups.findIndex(group => groupId === group.id)
         const taskIdx = board.groups[groupIdx].tasks.findIndex(currTask => currTask.id === task.id)
         board.groups[groupIdx].tasks[taskIdx] = task
@@ -28,6 +28,7 @@ async function saveTask(task, boardId, groupId, activity) {
         return board
     }
 }
+
 
 
 async function removeTask(boardId, groupId, taskId, activity) {
