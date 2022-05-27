@@ -1,0 +1,95 @@
+// .group-preview-wrapper {
+//     height: 100%;
+//     background-color: $clr8;
+//     margin: 10px;
+//     width: rem(228px);
+
+// }
+
+.group-preview {
+    background-color: $clr8;
+    border-radius: 3px;
+    height: fit-content;
+    margin-inline-end: 8px;
+    max-height: 100%;
+    min-width: 17rem;
+    padding: 0 4px;
+    width: 272px;
+
+    form {
+        flex-grow: 1;
+        min-height: 40px;
+        padding-top: 6px;
+    }
+
+
+
+    .action-modal {
+        position: absolute;
+    }
+
+    .group-preview-title {
+        background: #0000;
+        border: 0;
+        border-radius: 3px;
+        color: $clr4;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+        font-weight: 600;
+        height: 28px;
+        outline: 0;
+        padding: 4px 8px 4px 12px;
+        width: 100%;
+
+        &:focus {
+            background-color: $clr6;
+            box-shadow: inset 0 0 0 2px $clr5;
+        }
+    }
+
+    .add-action {
+        border-radius: 2px;
+        color: #6b778c;
+        cursor: pointer;
+        height: rem(32px);
+        padding: 10px;
+        text-align: center;
+        width: 40px;
+        font-size: 17px;
+
+    }
+
+    .group-preview-main {
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding: 0 4px;
+    }
+
+    .add-task-container {
+        align-items: center;
+        border-radius: 3px;
+        color: #5e6c84;
+        cursor: pointer;
+        margin: 2px 0 8px 4px;
+        padding: 4px 8px;
+        position: relative;
+        white-space: nowrap;
+
+        p {
+            font-size: 14px;
+            margin: 0;
+            display: inline-block;
+        }
+
+        svg {
+            font-size: 18px;
+            color: #6b778c;
+            margin-right: 2px;
+        }
+    }
+}
+
+
+
+.task-txt {
+    resize: none;
+}

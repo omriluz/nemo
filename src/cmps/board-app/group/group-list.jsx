@@ -23,7 +23,7 @@ export const GroupList = ({ groups, boardId }) => {
     }
 
     return (
-        <section className="board-list flex">
+        <section className="group-list-container flex">
             {groups && groups.map(group => {
                 return <GroupPreview groupTitle={groupTitle} key={group.id} group={group} boardId={boardId} />
             })}

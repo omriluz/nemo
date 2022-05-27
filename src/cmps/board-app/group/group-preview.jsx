@@ -2,7 +2,7 @@ import { TaskList } from '../task/task-list.jsx'
 import { MdMoreHoriz } from "react-icons/md";
 import { useState } from 'react'
 import { removeGroup, saveGroup } from '../../../store/actions/group.action.js';
-import {saveTask} from '../../../store/actions/task.action.js'
+import { saveTask } from '../../../store/actions/task.action.js'
 import { useDispatch } from 'react-redux'
 import { IoAdd } from "react-icons/io5";
 
@@ -46,46 +46,44 @@ export const GroupPreview = ({ group, boardId }) => {
 
     }
 
-    return <section className="group-preview-wrapper">
-        <div className="group-preview">
+    return <section className="group-preview">
 
-            <div className='group-preview-header flex space-between '>
-                <div className='group-title-container'>
-                    <form onSubmit={onSaveGroup}>
-                        <input onClick={() => setIsEditTitle(true)}
-                            className={` ${isEditTitle ? 'active' : ''}`}
-                            type="text" name="title"
-                            onBlur={() => setIsEditTitle(false)}
-                            value={groupTitle.title}
-                            onChange={handleChange}
-                        />
-                    </form>
-                </div>
-                <span onClick={() => setIsAddAction(!isAddAction)}><MdMoreHoriz />
-                </span>
+        <div className='group-preview-header flex justify-space-between algin-center '>
+            <form onSubmit={onSaveGroup}>
+                <input onClick={() => setIsEditTitle(true)}
+                    className='group-preview-title'
+                    type="text" name="title"
+                    onBlur={() => setIsEditTitle(false)}
+                    value={groupTitle.title}
+                    onChange={handleChange}
+                />
+            </form>
+            <div className='add-action' onClick={() => setIsAddAction(!isAddAction)}><MdMoreHoriz />
             </div>
+        </div>
+        <div className='group-preview-main'>
             <TaskList tasks={group.tasks} groupId={group.id} boardId={boardId} />
         </div>
-
         {isAddAction && <section className="action-modal" >
 
             <button onClick={onRemoveGroup}>Delete</button>
         </section>}
 
-        <section className='add-task-container' >
-            {!isAddTask && <div className='add-task'><button onClick={() => setIsAddTask(true)} ><IoAdd /> Add a card</button></div>}
-            {isAddTask && <form onSubmit={onSaveTask}>
-                <textarea className='task-txt'
-                    name="title"
-                    placeholder="Enter a title for this card..."
-                    value={taskTitle.title}
-                    onChange={handleChangeTask}
-                >
 
-                </textarea>
-                <button>Add Card</button> <button onClick={() => setIsAddTask(false)}>X</button>
-            </form>}
-        </section>
+        {!isAddTask && <div className='add-task-container flex' onClick={() => setIsAddTask(true)} ><IoAdd /><p>Add a card</p> </div>}
+
+        {isAddTask && <div className="add-task-open"> <form onSubmit={onSaveTask}>
+            <textarea className='task-txt'
+                name="title"
+                placeholder="Enter a title for this card..."
+                value={taskTitle.title}
+                onChange={handleChangeTask}
+            >
+
+            </textarea>
+            <button>Add Card</button> <button onClick={() => setIsAddTask(false)}>X</button>
+        </form> </div>}
+
 
     </section>
 
