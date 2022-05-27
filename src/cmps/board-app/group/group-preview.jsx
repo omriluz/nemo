@@ -49,6 +49,7 @@ export const GroupPreview = ({ group, boardId }) => {
 
     return <section className="group-preview">
 
+
         <div className='group-preview-header flex justify-space-between algin-center '>
             <form onSubmit={onSaveGroup}>
                 <input onClick={() => setIsEditTitle(true)}
@@ -62,29 +63,30 @@ export const GroupPreview = ({ group, boardId }) => {
             <div className='add-action' onClick={() => setIsAddAction(!isAddAction)}><MdMoreHoriz />
             </div>
         </div>
-        <div className='group-preview-main'>
-            <TaskList tasks={group.tasks} groupId={group.id} boardId={boardId} />
+        <div className="group-wrapper">
+            <div className='group-preview-main'>
+                <TaskList tasks={group.tasks} groupId={group.id} boardId={boardId} />
+            </div>
+            {isAddAction && <section className="action-modal" >
+
+                <button onClick={onRemoveGroup}>Delete</button>
+            </section>}
+
+
+            {!isAddTask && <div className='add-task-container flex' onClick={() => setIsAddTask(true)} ><IoAdd /><p>Add a card</p> </div>}
+
+            {isAddTask && <div className="add-task-open"> <form onSubmit={onSaveTask}>
+                <textarea className='task-txt'
+                    name="title"
+                    placeholder="Enter a title for this card..."
+                    value={taskTitle.title}
+                    onChange={handleChangeTask}
+                >
+
+                </textarea>
+                <div className='btn-add-task '> <button >Add card</button> <span className='' onClick={() => setIsAddTask(false)}><IoMdClose /></span></div>
+            </form> </div>}
         </div>
-        {isAddAction && <section className="action-modal" >
-
-            <button onClick={onRemoveGroup}>Delete</button>
-        </section>}
-
-
-        {!isAddTask && <div className='add-task-container flex' onClick={() => setIsAddTask(true)} ><IoAdd /><p>Add a card</p> </div>}
-
-        {isAddTask && <div className="add-task-open"> <form onSubmit={onSaveTask}>
-            <textarea className='task-txt'
-                name="title"
-                placeholder="Enter a title for this card..."
-                value={taskTitle.title}
-                onChange={handleChangeTask}
-            >
-
-            </textarea>
-            <div className='btn-add-task '> <button >Add card</button> <span className='' onClick={() => setIsAddTask(false)}><IoMdClose /></span></div>
-        </form> </div>}
-
 
     </section>
 
