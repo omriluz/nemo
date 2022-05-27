@@ -1,10 +1,11 @@
 import { TaskList } from '../task/task-list.jsx'
-import { MdMoreHoriz } from "react-icons/md";
+import { MdMoreHoriz, } from "react-icons/md"
+import { IoAdd, } from "react-icons/io5"
+import { IoMdClose } from "react-icons/io"
 import { useState } from 'react'
-import { removeGroup, saveGroup } from '../../../store/actions/group.action.js';
+import { removeGroup, saveGroup } from '../../../store/actions/group.action.js'
 import { saveTask } from '../../../store/actions/task.action.js'
 import { useDispatch } from 'react-redux'
-import { IoAdd } from "react-icons/io5";
 
 
 export const GroupPreview = ({ group, boardId }) => {
@@ -81,7 +82,7 @@ export const GroupPreview = ({ group, boardId }) => {
             >
 
             </textarea>
-            <button>Add Card</button> <button onClick={() => setIsAddTask(false)}>X</button>
+            <div className='btn-add-task '> <button >Add card</button> <span className='' onClick={() => setIsAddTask(false)}><IoMdClose /></span></div>
         </form> </div>}
 
 

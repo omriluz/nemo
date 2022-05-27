@@ -1,4 +1,23 @@
 .group-list-container {
     margin-top: rem(89px);
     max-height: 100%;
+
+    .add-group {
+        align-items: center;
+        background-color: #ffffff3d;
+        border-radius: 3px;
+        color: #fff;
+        cursor: pointer;
+        height: fit-content;
+        min-width: 17rem;
+        overflow: hidden;
+        padding: 6px 8px;
+        transition: background-color .2s;
+        white-space: nowrap;
+
+        p {
+            font-size: 14px;
+            margin: 0;
+        }
+    }
 }
