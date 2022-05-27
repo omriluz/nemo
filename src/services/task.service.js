@@ -7,13 +7,15 @@ export const taskService = {
     saveTask
 }
 
-async function saveTask(task, boardId, groupId, activity, taskId) {
-    if (taskId) {
+async function saveTask(task, boardId, groupId, activity) {
+    if (task.id) {
+        console.log('task', task)
         let board = await boardService.getById(boardId)
-        const idx = board.groups.findIndex(group => groupId === group.id)
-        board.groups[idx].title = task.title
+        console.log('board', board)
+        const groupIdx = board.groups.findIndex(group => groupId === group.id)
+        const taskIdx = board.groups[groupIdx].tasks.findIndex(currTask => currTask.id === task.id)
+        board.groups[groupIdx].tasks[taskIdx] = task
         boardService.save(board)
-        //     boardChannel.postMessage(getActionUpdateBoard(savedBoard))
         return board
     } else {
         // Later, owner is set by the backend

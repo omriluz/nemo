@@ -21,7 +21,7 @@ export const TaskPreview = ({ task, groupId, boardId }) => {
   return (
     <div onClick={onOpenTaskDetails} className="task-preview">
       {task.title}
-      <button onClick={onRemoveTask}>delete task</button>
+      <button onClick={onRemoveTask}>Delete task</button>
     </div>
   );
 };

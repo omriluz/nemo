@@ -232,7 +232,23 @@ const ourBoard = {
                             "todos": [
                                 {
                                     "id": utilService.makeId(), // localID
+                                    "title": "To Do 2",
+                                    "isDone": false
+                                },
+                                {
+                                    "id": utilService.makeId(), // localID
                                     "title": "To Do 1",
+                                    "isDone": false
+                                }
+                            ]
+                        },
+                        {
+                            "id": utilService.makeId(), // localID
+                            "title": "Checklist",
+                            "todos": [
+                                {
+                                    "id": utilService.makeId(), // localID
+                                    "title": "To Do 4",
                                     "isDone": false
                                 }
                             ]
