@@ -51,7 +51,7 @@ export const TaskDetails = () => {
           return <p key={a}>{a}</p>
         })}
         <TaskSidebar onOpenLabels={onOpenLabels} />
-        <Checklists checklists={task.checklists} boardId={boardId} groupId={groupId} taskId={taskId} />
+        {/* <Checklists checklists={task.checklists} boardId={boardId} groupId={groupId} taskId={taskId} /> */}
         <Labels labels={labels} boardId={boardId} groupId={groupId} taskId={taskId} />
       </section>
     );
