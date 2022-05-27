@@ -1,7 +1,8 @@
-import { TaskList } from './task-list.jsx'
+import { TaskList } from '../task/task-list.jsx'
 import { MdMoreHoriz } from "react-icons/md";
 import { useState } from 'react'
-import { removeGroup, saveGroup, saveTask } from '../../store/actions/board.action.js';
+import { removeGroup, saveGroup } from '../../../store/actions/group.action.js';
+import {saveTask} from '../../../store/actions/task.action.js'
 import { useDispatch } from 'react-redux'
 import { IoAdd } from "react-icons/io5";
 

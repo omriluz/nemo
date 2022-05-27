@@ -1,7 +1,7 @@
 import { GroupPreview } from './group-preview.jsx'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { saveGroup } from '../../store/actions/board.action.js'
+import { saveGroup } from '../../../store/actions/group.action.js'
 
 
 export const GroupList = ({ groups, boardId }) => {

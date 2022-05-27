@@ -1,4 +1,4 @@
-import { GroupList } from '../cmps/board-app/group-list.jsx'
+import { GroupList } from '../cmps/board-app/group/group-list.jsx'
 import { useDispatch, useSelector } from "react-redux"
 
 import { useParams } from "react-router"

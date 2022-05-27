@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { BoardList } from "../cmps/user-boards/board-list.jsx";
-import { CreateNewBoard } from "../cmps/user-boards/new-board"
+import { BoardList } from "../cmps/work-space/board-list.jsx";
+import { CreateNewBoard } from "../cmps/work-space/new-board"
 import { loadBoards, updateBoard } from '../store/actions/board.action'
 
 import { TiStarOutline } from "react-icons/ti";
@@ -45,7 +45,7 @@ export const WorkSpace = () => {
 
           <section className="starred-boards-section">
             <div className="title-header">
-              <div className="title-header-icon-container">
+              <div className="title-header-icon-container1">
                 <TiStarOutline stroke="#42526e" className="header-icon star-icon" />
               </div>
               <h3>Starred boards</h3>
@@ -60,7 +60,7 @@ export const WorkSpace = () => {
           </section>
           <section className="recent-boards-section">
             <div className="title-header">
-              <div className="title-header-icon-container">
+              <div className="title-header-icon-container2">
                 <AiOutlineClockCircle className="header-icon star-icon" />
               </div>
               <h3>Recently viewed</h3>

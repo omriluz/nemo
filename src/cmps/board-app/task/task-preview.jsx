@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { removeTask } from "../../store/actions/board.action";
+import { removeTask } from "../../../store/actions/task.action";
 
 export const TaskPreview = ({ task, groupId, boardId }) => {
   // boardId comes from props, later can be refactored to storeState
   // const {_id:boardId} = useSelector((storeState) => storeState.boardModule.board)
+
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
