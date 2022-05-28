@@ -1,40 +1,46 @@
-import { Link,useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ReactComponent as HomeLogo } from "../../assets/svg/homePageLogo.svg";
+import Logole from "../../assets/img/ttttCapture.PNG";
+
 export const AppHeader = () => {
   const { pathname } = useLocation();
+  console.log("pathname", pathname);
   let routeClass = "";
 
-  switch (pathname) {
-    case "/":
-      // customized transparent
-      routeClass = "-home";
-      break;
-    case "/login":
-    case "/signup":
-      routeClass = "-login-signup";
-      break;
-    case "/workspace":
-      routeClass = "-workspace";
-      break;
-    case "/board":
-      // will come dynamically with api
-      break;
-  }
+  // customized transparent
+  if (pathname === "/") routeClass = "-home";
+  if (pathname === "/login" || pathname === "/signup")
+    routeClass = "-login-signup";
+  if (pathname === "/workspace") routeClass = "-workspace";
+  // later will come dynamically with api
+  if (pathname.includes("/board")) routeClass = "-workspace";
 
+  
   return (
     <header className={`app-header${routeClass}`}>
-      <nav className="nav-bar flex justify-between">
+      <nav className="nav-bar flex justify-between align-center">
         <div className="logo-container">
           {pathname === "/" && (
-            <HomeLogo />
+            // <HomeLogo />
+            <>
+              <img className="img-zain" src={Logole} alt="" />
+              <span className="please-work">Nemo</span>
+              {/* <span className="please-work">Nemo</span> */}
+            </>
           )}
         </div>
-        {pathname === '/' && <div className="nav-menu">
-          {/* change from Link to a */}
-            <a href="/login" className="login-btn">Log In</a>
-          {/* <button className="signup-btn">signup</button> */}
-          <a href="/signup" className="signup-btn">Sign Up</a>
-        </div>}
+        {pathname === "/" && (
+          <div className="nav-menu">
+            {/* change from Link to a */}
+            <a href="/login" className="login-btn">
+              Log In
+            </a>
+            {/* <button className="signup-btn">signup</button> */}
+            <a href="/signup" className="signup-btn">
+              Sign Up
+            </a>
+          </div>
+        )}
       </nav>
     </header>
   );

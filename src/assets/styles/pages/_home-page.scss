@@ -20,9 +20,8 @@
   .homepage-title {
     inline-size: 90%;
     margin-bottom: 0.5rem;
-    // font-size: 48px;
     line-height: 60px;
-    font-size: 3rem;
+    font-size: 48px;
     font-family: "Charlie-Display-Semibold";
     color: #091e42;
   }
@@ -35,6 +34,7 @@
     overflow-wrap: break-word;
     font-size: 20px;
     font-family: "Charlie-Text";
+    margin-bottom: 24px;
   }
 }
 
@@ -68,6 +68,8 @@
   -webkit-appearance: button;
   white-space: normal;
   cursor: pointer;
+  font-family: "Charlie-Text";
+  margin-top: 48px;
 }
 
 .demo-btn:hover {
@@ -78,4 +80,5 @@
   color: #fff;
   background-color: #0056d9;
   border-color: #0051cc;
+
 }

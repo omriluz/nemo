@@ -8,7 +8,6 @@ html {
     line-height: 1.6;
     color: $clr4;
     font-size: 14px;
-
 }
 
 body {
@@ -17,19 +16,23 @@ body {
     margin: 0;
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    // added from here
+    font-weight: 400;
+    line-height: 20px;
 }
+    
 
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: caveat;
-    line-height: 1;
-    margin: 0 0 0.4em;
-}
+//commented H elements
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6 {
+//     font-family: caveat;
+//     line-height: 1;
+//     margin: 0 0 0.4em;
+// }
 
 
 img {
