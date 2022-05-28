@@ -1,7 +1,7 @@
 import { GroupList } from '../cmps/board-app/group/group-list.jsx'
 import { useDispatch, useSelector } from "react-redux"
 
-import { useParams } from "react-router"
+import { Outlet, useParams } from "react-router"
 import { loadBoard } from "../store/actions/board.action"
 import { useEffect } from "react"
 
@@ -21,11 +21,11 @@ export const BoardApp = () => {
 
 
     return (
-        <section className="board-app-wrapper">
-            <h1>haha</h1>
+        <div className="board-app-wrapper">
+            <Outlet/>   
             <div className='board-app'>
                 {board && <GroupList groups={board.groups} boardId={boardId} />}
             </div>
-        </section>
+        </div>
     )
 }

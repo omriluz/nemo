@@ -2,6 +2,10 @@
     margin-top: rem(89px);
     max-height: 100%;
 
+    &:first-child {
+            margin-inline-start: 12px;
+    }
+
     .add-group {
         align-items: center;
         background-color: #ffffff3d;
@@ -14,6 +18,7 @@
         padding: 6px 8px;
         transition: background-color .2s;
         white-space: nowrap;
+        margin-inline-end: 12px;
 
         p {
             font-size: 14px;

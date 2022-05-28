@@ -1,0 +1,40 @@
+.task-details {
+  margin-top: 48px;
+  width: 768px;
+  background-color: #f4f5f7;
+  border-radius: 2px;
+
+  &-wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #000000a3;
+    z-index: 20;
+    overflow-x: hidden;
+  }
+
+  &-header {
+    margin: 12px 40px 8px 56px;
+    min-height: 32px;
+    position: relative;
+    z-index: 1;
+  }
+
+  &-sidebar {
+    float: right;
+    overflow: hidden;
+    padding: 0 16px 8px 8px;
+    width: calc(100% - 600px);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+
+  }
+}
+
+.task-title-group {
+  text-decoration: underline;
+}

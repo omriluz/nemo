@@ -15,6 +15,7 @@
     min-width: 17rem;
     width: 272px;
 
+
     form {
         flex-grow: 1;
         min-height: 40px;
@@ -39,11 +40,11 @@
         padding: 4px 8px 4px 12px;
         width: 100%;
         padding-bottom: 8px;
+        margin-left: 8px;
 
         &:focus {
             background-color: $clr6;
             box-shadow: inset 0 0 0 2px $clr5;
-            margin-left: 8px;
         }
     }
 
@@ -170,3 +171,4 @@
     margin: 0 4px;
     padding: 0 4px;
 }
+

@@ -22,9 +22,14 @@ export const TaskPreview = ({ task, groupId, boardId }) => {
   return (
     <div onClick={onOpenTaskDetails} className="task-preview-wrapper">
       <div className="task-preview-container">
-        {task.title}
+        <div className="label-container">
+          <span className="label-preview"></span>
+        </div>
+        <span className="task-preview-title">{task.title}</span>
+
         {/* remove for now for styling purposes also this should not be here anyway */}
         {/* <button onClick={onRemoveTask}>Delete task</button> */}
+
       </div>
     </div>
   );
