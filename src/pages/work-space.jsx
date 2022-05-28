@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { BoardList } from "../cmps/work-space/board-list.jsx";
-import { CreateNewBoard } from "../cmps/work-space/new-board"
 import { loadBoards, updateBoard } from '../store/actions/board.action'
 
 import { TiStarOutline } from "react-icons/ti";
@@ -39,33 +38,37 @@ export const WorkSpace = () => {
   }
 
   return (
-    <div className="workspace-page">
+    <div className="workspace-page ">
       <section className="all-boards-list">
         <div className="content-all-boards">
-
           <section className="starred-boards-section">
-            <div className="title-header">
-              <div className="title-header-icon-container1">
-                <TiStarOutline stroke="#42526e" className="header-icon star-icon" />
+            <div className="title-header flex">
+              <div className="title-header-icon-container">
+                <TiStarOutline className="header-icon star-icon" />
               </div>
               <h3>Starred boards</h3>
             </div>
             <div className="primary-boards-container-section">
+
               <BoardList
                 boards={getStarredBoards()}
                 updateBoard={updateBoard}
                 onToggleStar={onToggleStar}
+                isStarBoard={true}
               />
             </div>
           </section>
           <section className="recent-boards-section">
-            <div className="title-header">
-              <div className="title-header-icon-container2">
+
+            <div className="title-header flex">
+              <div className="title-header-icon-container">
                 <AiOutlineClockCircle className="header-icon star-icon" />
               </div>
               <h3>Recently viewed</h3>
             </div>
-            <div className="primary-boards-container-section">
+            <div className="primary-boards-container-section ">
+              <div className='board-list-container'>
+              </div>
               <BoardList
                 boards={boards}
                 updateBoard={updateBoard}
@@ -75,7 +78,7 @@ export const WorkSpace = () => {
           </section>
         </div>
       </section>
-      <CreateNewBoard />
+
     </div >
   )
 }

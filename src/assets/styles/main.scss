@@ -16,10 +16,11 @@
 @import 'pages/board-app';
 @import "pages/login-signup";
 @import "pages/work-space.scss";
+@import "pages/login-signup";
 
 //  Components
-@import "pages/login-signup";
-@import "pages/board-list";
+@import "cmps/user-board/board-list";
+@import "cmps/user-board/board-preview";
 @import "cmps/app-header";
 @import "cmps/task-preview";
 @import "cmps/task-list.scss";

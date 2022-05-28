@@ -1,6 +1,6 @@
 
-   
-import React, {  useState } from "react";
+
+import React, { useState } from "react";
 import { AddBoard } from "./add-board.jsx";
 
 export function CreateNewBoard() {
@@ -13,7 +13,7 @@ export function CreateNewBoard() {
   return (
     <div className="new-board-preview">
       <div className="board-details" onClick={toggleModal}>
-        <h2 className="board-title">Create new board</h2>
+        <span className="board-title">Create new board</span>
       </div>
       {isModalOpen && <AddBoard toggleModal={toggleModal} />}
     </div>
