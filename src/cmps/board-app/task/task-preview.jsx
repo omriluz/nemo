@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 export const TaskPreview = ({ task, groupId, boardId, index }) => {
   // boardId comes from props, later can be refactored to storeState
   // const {_id:boardId} = useSelector((storeState) => storeState.boardModule.board)
-  const {labels} = useSelector((storeState) => storeState.boardModule.board)
+  const { labels } = useSelector((storeState) => storeState.boardModule.board)
   const [taskLabels, setTaskLabels] = useState()
   // get label ids
 
@@ -18,8 +18,8 @@ export const TaskPreview = ({ task, groupId, boardId, index }) => {
     getLabels()
     // const labelsToRender = labels.filter((label,index) => label.id === task.labelIds[index])
     // console.log(labelsToRender);
-  },[]) 
-  
+  }, [])
+
   const getLabels = () => {
     // cannot work right now needs to generate labelids on add new task
     // which will come from addnewboard which also needs a data model 
@@ -27,7 +27,7 @@ export const TaskPreview = ({ task, groupId, boardId, index }) => {
 
     if (task.labelIds) {
       //for testing purposes
-      setTaskLabels([labels[0],labels[1]])
+      setTaskLabels([labels[0], labels[1]])
 
       // console.log('@@@@@@',labels, task.labelIds);
       // const labelsToRender = labels.filter((label,index) => label.id === task.labelIds[index])
@@ -45,7 +45,7 @@ export const TaskPreview = ({ task, groupId, boardId, index }) => {
   const onRemoveTask = (ev) => {
     ev.stopPropagation();
     dispatch(removeTask(boardId, groupId, task.id));
-  };
+  }
 
 
 
@@ -67,8 +67,8 @@ export const TaskPreview = ({ task, groupId, boardId, index }) => {
               {taskLabels && taskLabels.map(label => {
                 return <span key={label.color} style={{backgroundColor:label.color}} className="label-preview"></span> 
               })}
-               {/* <span className="label-preview"></span> */}
-               {/* <span className="label-preview"></span> */}
+              {/* <span className="label-preview"></span> */}
+              {/* <span className="label-preview"></span> */}
             </div>
             <span className="task-preview-title">{task.title}</span>
 

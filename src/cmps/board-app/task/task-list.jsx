@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 
 export const TaskList = ({ tasks, groupId, boardId }) => {
   const [dTasks, updateDTasks] = useState(tasks);
-  let arr = new Array(3).fill(null).map(()=> (Math.round(Math.random() * 4) > 3))
-  
+  let arr = new Array(3).fill(null).map(() => (Math.round(Math.random() * 4) > 3))
+
   useEffect(() => {
     updateDTasks(tasks)
   }, [tasks])
@@ -30,6 +30,7 @@ export const TaskList = ({ tasks, groupId, boardId }) => {
             className="task-list"
           >
             {dTasks.map((task, index) => {
+              const isImgRender = Math.round(Math.random * 3) > 2
               return (
                 <TaskPreview
                   key={task.id}

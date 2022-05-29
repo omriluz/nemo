@@ -5,7 +5,7 @@ export const taskService = {
     removeTask,
     getTaskById,
     saveTask,
-  
+
 }
 window.ts = taskService;
 
@@ -21,6 +21,7 @@ async function saveTask(task, boardId, groupId, activity) {
     } else {
         // Later, owner is set by the backend
         task.id = utilService.makeId()
+        task.attachments = []
         const board = await boardService.getById(boardId)
         const idx = board.groups.findIndex(group => groupId === group.id)
         board.groups[idx].tasks.push(task)

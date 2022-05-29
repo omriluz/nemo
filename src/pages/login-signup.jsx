@@ -7,7 +7,6 @@ import guest from '../assets/svg/guest.svg'
 import { useDispatch } from 'react-redux'
 import { login, signup } from '../store/actions/user.actions'
 import { useNavigate } from 'react-router'
-
 export const LoginSignup = () => {
     const dispatch = useDispatch()
     const { pathname } = useLocation()
@@ -50,6 +49,7 @@ export const LoginSignup = () => {
         if (!credentials.username) return
         dispatch(login(credentials))
         clearState()
+
     }
 
     return (

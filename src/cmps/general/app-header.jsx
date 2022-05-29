@@ -15,8 +15,8 @@ export const AppHeader = () => {
   if (pathname === "/workspace") routeClass = "-workspace";
   // later will come dynamically with api
   if (pathname.includes("/board")) routeClass = "-workspace";
-  if (pathname.includes("/board") && pathname.split("/").length >= 4) routeClass = "-task-details";
-  
+  // if (pathname.includes("/board") && pathname.split("/").length >= 4) routeClass = "-task-details";
+
   return (
     <header className={`app-header${routeClass}`}>
       <nav className="nav-bar flex justify-between align-center">
