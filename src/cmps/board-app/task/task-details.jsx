@@ -33,7 +33,7 @@ export const TaskDetails = () => {
     setLabels(boardFromService.labels);
   };
 
-  const onOpenLabels = () => {};
+  const onOpenLabels = () => { };
 
   const onCreateLabel = () => {
     console.log("fdasfds");
@@ -51,13 +51,13 @@ export const TaskDetails = () => {
               In list <span className="task-title-group">TODO</span>
             </p>
           </div>
-            <div className="task-details-sidebar">
-              <TaskSidebar onOpenLabels={onOpenLabels} />
-            </div>
+          <div className="task-details-sidebar">
+            <TaskSidebar onOpenLabels={onOpenLabels} />
+          </div>
           <h2>label ids:</h2>
-          {task.labelIds.map((a) => {
+          {/* {task.labelIds.map((a) => {
             return <p key={a}>{a}</p>;
-          })}
+          })} */}
           {/* <Checklists checklists={task.checklists} boardId={boardId} groupId={groupId} taskId={taskId} /> */}
           <Labels
             labels={labels}

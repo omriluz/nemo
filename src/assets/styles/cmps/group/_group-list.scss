@@ -2,8 +2,8 @@
     margin-top: rem(89px);
     max-height: 100%;
 
-    &:first-child {
-            margin-inline-start: 12px;
+    &>:first-child {
+        margin-left: 12px;
     }
 
     .add-group {
@@ -46,6 +46,7 @@
         max-width: 272px;
         min-width: 17rem;
         padding: 0 8px;
+        margin-inline-end: 12px;
 
         input {
             border: none;

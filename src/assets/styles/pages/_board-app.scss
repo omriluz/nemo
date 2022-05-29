@@ -16,4 +16,84 @@
     line-height: 20px;
     overflow-y: hidden;
   }
+
+
+}
+
+.board-header .add-member,
+.board-header .nav-btn.fav {
+  margin: 0 5px;
+}
+
+.board-header {
+  margin-bottom: 55px;
+  padding: 8px 4px 4px 0;
+  position: relative;
+  position: absolute;
+  left: 12px;
+  top: 40px;
+  width: 100%;
+
+  .header-title {
+    background-color: hsla(0, 0%, 100%, .239);
+    border-radius: 3px;
+    color: #fff;
+    cursor: text;
+    font-family: Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    height: 30px;
+    margin: 0;
+    min-width: 30px;
+    padding: 3px 5px;
+    text-overflow: ellipsis;
+  }
+
+  .nav-btn {
+    align-items: center;
+    background-color: hsla(0, 0%, 100%, .239);
+    border-radius: 3px;
+    color: #fff;
+    display: flex;
+    height: 30px;
+    justify-content: center;
+    padding: 5px;
+    text-decoration: none;
+    width: fit-content;
+    border: none;
+
+    &.fav {
+
+      cursor: pointer;
+      padding: 6px 5px 5px;
+
+    }
+  }
+
+  svg {
+    font-size: 18px;
+  }
+
+}
+
+.nav-right {
+  gap: 10px;
+  padding-right: 23px;
+
+  .nav-btn p {
+    height: 2.3px;
+    margin-left: 4px;
+  }
+}
+
+.member-avatar {
+  align-items: center;
+  border-radius: 25em;
+  cursor: pointer;
+  display: flex;
+  font-weight: 600;
+  height: 30px;
+  justify-content: center;
+  object-fit: cover;
+  width: 30px;
 }
