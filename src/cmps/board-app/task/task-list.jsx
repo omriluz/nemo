@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 
 export const TaskList = ({ tasks, groupId, boardId }) => {
   const [dTasks, updateDTasks] = useState(tasks);
-
+  let arr = new Array(3).fill(null).map(()=> (Math.round(Math.random() * 4) > 3))
+  
   useEffect(() => {
     updateDTasks(tasks)
   }, [tasks])
@@ -36,6 +37,7 @@ export const TaskList = ({ tasks, groupId, boardId }) => {
                   boardId={boardId}
                   index={index}
                   groupId={groupId}
+                  arr={arr}
                 />
               );
             })}
