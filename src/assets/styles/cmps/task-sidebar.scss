@@ -22,16 +22,23 @@
   white-space: nowrap;
   text-align: left;
 
-    &:hover {
-        background-color: #091e4214;
-        border: none;
-        box-shadow: none;
-        color: #091e42;
-        outline: 0;
-    }
-}
+  &-text {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+      Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+  }
 
-.task-details-sidebar-section-title {
-  font-size: 12px;
-  color: #5e6c84;
+  &-icon {
+    margin-top: 5px;
+  }
+
+  &:hover {
+    background-color: #091e4214;
+    border: none;
+    box-shadow: none;
+    color: #091e42;
+    outline: 0;
+  }
 }

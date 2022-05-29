@@ -22,6 +22,7 @@ export function getActionUpdateBoard(board) {
     }
 }
 export function getActionSetBoard(board) {
+    console.log(board);
     return {
         type: 'SET_BOARD',
         board

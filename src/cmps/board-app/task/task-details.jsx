@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { taskService } from "../../../services/task.service";
 import { TaskSidebar } from "./task-sidebar";
+import { TaskDetailsMain } from './task-details-main'
 import { Checklists } from "./check-list/checklist";
 import { useSelector } from "react-redux";
 import { Labels } from "./labels.jsx";
@@ -39,8 +40,6 @@ export const TaskDetails = () => {
     console.log("fdasfds");
   };
 
-  // console.log("task", task);
-  // console.log("task labels", task?.labelIds);
   if (task) {
     return (
       <section className="task-details-wrapper">
@@ -51,22 +50,34 @@ export const TaskDetails = () => {
               In list <span className="task-title-group">TODO</span>
             </p>
           </div>
-          <div className="task-details-sidebar">
+          <div className="helper-container">
+            <TaskDetailsMain />
             <TaskSidebar onOpenLabels={onOpenLabels} />
           </div>
-          <h2>label ids:</h2>
-          {/* {task.labelIds.map((a) => {
-            return <p key={a}>{a}</p>;
-          })} */}
-          {/* <Checklists checklists={task.checklists} boardId={boardId} groupId={groupId} taskId={taskId} /> */}
-          <Labels
-            labels={labels}
-            boardId={boardId}
-            groupId={groupId}
-            taskId={taskId}
-          />
         </div>
       </section>
     );
   }
 };
+
+
+
+
+
+
+
+
+
+
+{/* 
+          <h2>label ids:</h2>
+          {task.labelIds.map((a) => {
+            return <p key={a}>{a}</p>;
+          })} */}
+{/* <Checklists checklists={task.checklists} boardId={boardId} groupId={groupId} taskId={taskId} /> */ }
+{/* <Labels
+            labels={labels}
+            boardId={boardId}
+            groupId={groupId}
+            taskId={taskId}
+          /> */}

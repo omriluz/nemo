@@ -1,11 +1,12 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { ReactComponent as HomeLogo } from "../../assets/svg/homePageLogo.svg";
 import Logole from "../../assets/img/ttttCapture.PNG";
 
 export const AppHeader = () => {
   const { pathname } = useLocation();
-  console.log("pathname", pathname);
+
   let routeClass = "";
+
 
   // customized transparent
   if (pathname === "/") routeClass = "-home";
@@ -14,7 +15,7 @@ export const AppHeader = () => {
   if (pathname === "/workspace") routeClass = "-workspace";
   // later will come dynamically with api
   if (pathname.includes("/board")) routeClass = "-workspace";
-
+  if (pathname.includes("/board") && pathname.split("/").length >= 4) routeClass = "-task-details";
   
   return (
     <header className={`app-header${routeClass}`}>
