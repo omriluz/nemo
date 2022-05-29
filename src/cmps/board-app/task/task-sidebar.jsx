@@ -18,8 +18,9 @@ export const TaskSidebar = () => {
         {buttons.map((button) => {
           return (
             <button key={button.txt} className="task-details-sidebar-btn">
-              {/* {button.icon} */}
-              <span className="task-details-sidebar-btn-icon">{button.icon}</span>
+              {button.icon}
+              {/* {button.txt} */}
+              {/* <span className="task-details-sidebar-btn-icon">{button.icon}</span> */}
               <span className="task-details-sidebar-btn-text">{button.txt}</span>
             </button>
           );

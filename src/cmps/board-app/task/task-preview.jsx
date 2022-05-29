@@ -31,9 +31,12 @@ export const TaskPreview = ({ task, groupId, boardId, index,  }) => {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
+          {Math.round(Math.random() * 2) > 1 && <div className="task-preview-image"></div>}
           <div className="task-preview-container">
             <div className="label-container">
-              <span className="label-preview"></span>
+            {Math.round(Math.random() * 2) > 1 && <span className="label-preview"></span>}
+            {Math.round(Math.random() * 2) > 1 && <span className="label-preview"></span>}
+            {Math.round(Math.random() * 2) > 1 && <span className="label-preview"></span>}
             </div>
             <span className="task-preview-title">{task.title}</span>
 
