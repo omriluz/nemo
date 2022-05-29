@@ -1,8 +1,13 @@
 .board-app {
   display: flex;
 
+  // important do not remove
+  height: 87.8vh;
+  
+  
   //needs to be on first child
   // padding: 0 13px 8px;
+
   width: 100%;
 
   &-wrapper {

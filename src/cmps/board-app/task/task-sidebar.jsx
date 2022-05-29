@@ -6,28 +6,6 @@ import { useEffect, useRef, useState } from "react";
 import { DynamicModalCmp } from "../../general/dynamic-modal-cmp";
 
 export const TaskSidebar = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const modalDetails = useRef()
-
-  // useEffect(() => {
-
-  // },[isModalOpen])
-  
-  const onCloseModal = () => {
-    setIsModalOpen(false)
-  }
-  
-  const onOpenModal = (ev) => {
-    console.log('fdsafdas', isModalOpen);
-    ev.stopPropagation();
-    if (isModalOpen) {
-      setIsModalOpen(false)
-      console.log('fdsafdas', isModalOpen);
-    }
-    modalDetails.current = ev.target.getBoundingClientRect()
-    setIsModalOpen(true)
-  };
-
   //later will be object that will contain the function as well
   const buttons = [
     { txt: "Labels", icon: <TiTag /> },
@@ -37,29 +15,55 @@ export const TaskSidebar = () => {
     { txt: "Cover", icon: <MdOutlineScreenShare /> },
   ];
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const modalDetails = useRef();
+  const modalTitle = useRef();
+
+  // useEffect(() => {}, [isModalOpen]);
+
+  const onCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const onOpenModal = (ev, txt) => {
+    console.log("fdsafdas", isModalOpen);
+    // check if i need this
+    // ev.stopPropagation();
+    if (isModalOpen) {
+
+      setIsModalOpen(false);
+    }
+    modalTitle.current = txt
+    modalDetails.current = ev.target.getBoundingClientRect();
+    setIsModalOpen(true);
+  };
+
   return (
     <div className="task-details-sidebar-container">
-      {isModalOpen && <DynamicModalCmp modalDetails={modalDetails.current} onCloseModal={onCloseModal}/>}
+      {isModalOpen && (
+        <DynamicModalCmp
+          modalDetails={modalDetails.current}
+          modalTitle={modalTitle.current}
+          onCloseModal={onCloseModal}
+        />
+      )}
       <h3 className="task-details-sidebar-section-title">Add to card</h3>
       <div className="task-details-sidebar-button-container">
         {/* <div className="task-details-sidebar-section"> */}
         {buttons.map((button) => {
           return (
             <button
-              onClick={onOpenModal}
+              onClick={(ev) => onOpenModal(ev, button.txt)}
               key={button.txt}
               className="task-details-sidebar-btn"
             >
               {button.icon}
-              {/* {button.txt} */}
-              {/* <span className="task-details-sidebar-btn-icon">{button.icon}</span> */}
               <span className="task-details-sidebar-btn-text">
                 {button.txt}
               </span>
             </button>
           );
         })}
-      <button onClick={onCloseModal}>close modal</button>
       </div>
     </div>
   );

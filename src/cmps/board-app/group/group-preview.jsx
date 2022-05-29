@@ -40,12 +40,12 @@ export const GroupPreview = ({ group, boardId, index }) => {
   const onSaveTask = (ev = null) => {
     if (ev) ev.preventDefault();
     dispatch(saveTask(taskTitle, boardId, group.id));
-    setIsAddTask(false);
     setTaskTitle({ title: "" });
   };
+    // if droppableId doesnt work like classname use group.id
 
   return (
-    // if droppableId doesnt work like classname use group.id
+    // <div className="group-preview-wrapper">
     <Draggable draggableId={group.id} index={index}>
       {(provided) => (
         <section
@@ -93,13 +93,12 @@ export const GroupPreview = ({ group, boardId, index }) => {
                 onClick={() => setIsAddTask(true)}
               >
                 <IoAdd />
-                <p>Add a card</p>{" "}
+                <p>Add a card</p>
               </div>
             )}
 
             {isAddTask && (
               <div className="add-task-open">
-                {" "}
                 <form onSubmit={onSaveTask}>
                   <textarea
                     className="task-txt"
@@ -109,18 +108,18 @@ export const GroupPreview = ({ group, boardId, index }) => {
                     onChange={handleChangeTask}
                   ></textarea>
                   <div className="btn-add-task ">
-                    {" "}
-                    <button>Add card</button>{" "}
+                    <button>Add card</button>
                     <span className="" onClick={() => setIsAddTask(false)}>
                       <IoMdClose />
                     </span>
                   </div>
-                </form>{" "}
+                </form>
               </div>
             )}
           </div>
         </section>
       )}
     </Draggable>
+    // </div>
   );
 };

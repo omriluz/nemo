@@ -61,7 +61,7 @@ export const TaskPreview = ({ task, groupId, boardId, index }) => {
         >
           {/* <div style={{backgroundImage: `url(https://source.unsplash.com/random?sig=${(Math.random() + 1).toString(36).substring(7)})`}} className="task-preview-image"></div> */}
           {/* {randRender && <div className="task-preview-image"></div>} */}
-          {Math.round(Math.random() * 2) > 1 && <div className="task-preview-image"></div>}
+          {/* {Math.round(Math.random() * 2) > 1 && <div className="task-preview-image"></div>} */}
           <div className="task-preview-container">
             <div className="label-container">
               {taskLabels && taskLabels.map(label => {
