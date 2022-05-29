@@ -2,7 +2,7 @@ import { taskService } from "./task.service";
 
 export const labelService = {
     toggleLabel,
-    // getLabelsById,
+    getLabelsById,
     // getLabelById,
     // addNewLabel
 }
@@ -19,3 +19,8 @@ async function toggleLabel(boardId,groupId,taskId,labelId) {
     return task
 }
 
+
+
+function getLabelsById(boardId, groupId, task, ) {
+    // compare task label ids with board ids and get the relevant labels color and title 
+}

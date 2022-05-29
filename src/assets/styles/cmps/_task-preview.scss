@@ -81,9 +81,11 @@
   text-shadow: none;
   width: auto;
   border-radius: 4px;
-  background-color: #c377e0;
 
+  // background-color: #c377e0;
   &:hover {
-    background-color: darken($color: #c377e0, $amount: 20%);
+    // background-color: darken($color: #c377e0, $amount: 20%);
+    box-shadow: inset 0 0 0 500px rgba(0, 0, 0, 0.2);
+
   }
 }
