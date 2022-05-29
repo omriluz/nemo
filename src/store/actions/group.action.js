@@ -6,6 +6,7 @@ export function saveGroup(group, boardId, groupId) {
         try {
             const board = await groupService.saveGroup(group, boardId, groupId)
             //  console.log('board', board)
+             console.log('got here')
             dispatch(getActionSetBoard(board))
         } catch (err) {
             console.log('err in saving task')

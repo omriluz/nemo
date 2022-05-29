@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { removeTask } from "../../../store/actions/task.action";
+import { Draggable } from "react-beautiful-dnd";
+import { Link } from "react-router-dom";
 
-export const TaskPreview = ({ task, groupId, boardId }) => {
+export const TaskPreview = ({ task, groupId, boardId, index,  }) => {
   // boardId comes from props, later can be refactored to storeState
   // const {_id:boardId} = useSelector((storeState) => storeState.boardModule.board)
 
@@ -18,19 +20,28 @@ export const TaskPreview = ({ task, groupId, boardId }) => {
     ev.stopPropagation();
     dispatch(removeTask(boardId, groupId, task.id));
   };
-
+  
   return (
-    <div onClick={onOpenTaskDetails} className="task-preview-wrapper">
-      <div className="task-preview-container">
-        <div className="label-container">
-          <span className="label-preview"></span>
+    <Draggable draggableId={task.id} index={index}>
+      {(provided) => (
+        <div
+        onClick={onOpenTaskDetails}
+          className="task-preview-wrapper"
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          ref={provided.innerRef}
+        >
+          <div className="task-preview-container">
+            <div className="label-container">
+              <span className="label-preview"></span>
+            </div>
+            <span className="task-preview-title">{task.title}</span>
+
+            {/* remove for now for styling purposes also this should not be here anyway */}
+            {/* <button onClick={onRemoveTask}>Delete task</button> */}
+          </div>
         </div>
-        <span className="task-preview-title">{task.title}</span>
-
-        {/* remove for now for styling purposes also this should not be here anyway */}
-        {/* <button onClick={onRemoveTask}>Delete task</button> */}
-
-      </div>
-    </div>
+      )}
+    </Draggable>
   );
 };

@@ -1,45 +1,47 @@
-import { TaskPreview } from './task-preview'
-// import { useState } from 'react'
-// import { useDispatch } from 'react-redux'
-// import { saveTask } from '../../../store/actions/task.action.js'
-
-
+import { TaskPreview } from "./task-preview";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { useEffect, useState } from "react";
 
 export const TaskList = ({ tasks, groupId, boardId }) => {
-    // const [isAddTask, setIsAddTask] = useState(false)
-    // const dispatch = useDispatch()
+    const [dTasks, updateDTasks] = useState(tasks);
 
-    // const handleChangeTask = ev => {
-    //     const field = ev.target.name
-    //     const value = ev.target.value
-    //     setTaskTitle({ [field]: value })
-    // }
+    useEffect(() => {
+        updateDTasks(tasks)
+      }, [tasks])
 
-    // const onSaveTask = (ev = null) => {
-    //     if (ev) ev.preventDefault()
-    //     dispatch(saveTask(taskTitle, boardId, group.id))
-    //     setIsAddTask(false)
-    //     setTaskTitle({ title: '' })
+    const handleOnDragEnd = (result) => {
+        const items = Array.from(dTasks);
+        const [reorderedItem] = items.splice(result.source.index, 1);
+        items.splice(result.destination.index, 0, reorderedItem);
+        updateDTasks(items);
+        // Moving from one list to another
+      };
 
-    // }
+    
 
-    return <section className="task-list">
-        {tasks.map(task => {
-            return <TaskPreview key={task.id} task={task} groupId={groupId} boardId={boardId} />
-
-        })}
-        {/* {!isAddTask && <div className='add-task-container flex' onClick={() => setIsAddTask(true)} ><IoAdd /><p>Add a card</p> </div>}
-
-        {isAddTask && <div className="add-task-open"> <form onSubmit={onSaveTask}>
-            <textarea className='task-txt'
-                name="title"
-                placeholder="Enter a title for this card..."
-                value={taskTitle.title}
-                onChange={handleChangeTask}
-            >
-
-            </textarea>
-            <div className='btn-add-task '> <button >Add card</button> <span className='' onClick={() => setIsAddTask(false)}><IoMdClose /></span></div>
-        </form> </div>} */}
-    </section>
-}
+  return (
+    <DragDropContext onDragEnd={handleOnDragEnd}>
+      <Droppable droppableId="task-list">
+        {(provided) => (
+          <section
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            className="task-list"
+          >
+            {dTasks.map((task, index) => {
+              return (
+                <TaskPreview
+                  key={task.id}
+                  task={task}
+                  boardId={boardId}
+                  index={index}
+                  groupId={groupId}
+                />
+              );
+            })}
+          </section>
+        )}
+      </Droppable>
+    </DragDropContext>
+  );
+};

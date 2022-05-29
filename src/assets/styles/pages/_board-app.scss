@@ -7,7 +7,9 @@
 
   &-wrapper {
     padding-bottom: 10px;
-    background-color: #838c91; //for now .. need to change
+    // background-color: #838c91; //for now .. need to change
+    background-image: url(../../img/a.jpg);
+    background-size:100% 100%;
     color: $clr4;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
       Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
