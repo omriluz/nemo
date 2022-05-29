@@ -36,6 +36,16 @@
     overflow: hidden;
     text-decoration: none;
   }
+
+  &-image {
+    height: 163.33333333333334px;
+    background-color: #252e32;
+    // background-image: url(https://trello-backgrounds.s3.amazonaws.com/SharedBackground/960x640/e978304…/photo-1653496905343-b1fc1277e3fa.jpg);
+    background-image: url(https://unsplash.it/300/300);
+    // background-image: url(https://source.unsplash.com/random);
+    background-size: cover;
+    border-radius: 3px;
+  }
 }
 
 .label-container {
