@@ -34,7 +34,6 @@ export const TaskPreview = ({ task, groupId, boardId, index }) => {
     }
   }
 
-  console.log(taskLabels);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -47,6 +46,8 @@ export const TaskPreview = ({ task, groupId, boardId, index }) => {
     ev.stopPropagation();
     dispatch(removeTask(boardId, groupId, task.id));
   };
+
+
 
   return (
     <Draggable draggableId={task.id} index={index}>
@@ -64,7 +65,7 @@ export const TaskPreview = ({ task, groupId, boardId, index }) => {
           <div className="task-preview-container">
             <div className="label-container">
               {taskLabels && taskLabels.map(label => {
-                return <span style={{backgroundColor:label.color}} className="label-preview"></span> 
+                return <span key={label.color} style={{backgroundColor:label.color}} className="label-preview"></span> 
               })}
                {/* <span className="label-preview"></span> */}
                {/* <span className="label-preview"></span> */}

@@ -40,6 +40,7 @@ export const TaskDetails = () => {
     console.log("fdasfds");
   };
 
+
   if (task) {
     return (
       <section className="task-details-wrapper">
