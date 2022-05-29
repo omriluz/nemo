@@ -6,12 +6,13 @@ import google from '../assets/svg/google.svg'
 import guest from '../assets/svg/guest.svg'
 import { useDispatch } from 'react-redux'
 import { login, signup } from '../store/actions/user.actions'
-
+import { useNavigate } from 'react-router'
 export const LoginSignup = () => {
     const dispatch = useDispatch()
     const { pathname } = useLocation()
     const [credentials, setCredentials] = useState({ username: '', password: '', fullname: '' })
     const [isSignup, setIsSignup] = useState(false)
+    const navigate = useNavigate()
 
     useEffect(() => {
         onIsSignup()
@@ -48,6 +49,7 @@ export const LoginSignup = () => {
         if (!credentials.username) return
         dispatch(login(credentials))
         clearState()
+
     }
 
     return (
@@ -63,7 +65,7 @@ export const LoginSignup = () => {
                     />
                     <input type="password" id="password" name="password" placeholder="Enter password" value={credentials.password} onChange={handleChange}
                     />
-                    <button className={`logbtn ${isSignup ? 'signup' : 'login'}`} >{isSignup ? 'Sign up' : 'Log in'}</button>
+                    <button onClick={() => navigate('/workspace')} className={`logbtn ${isSignup ? 'signup' : 'login'}`} >{isSignup ? 'Sign up' : 'Log in'}</button>
                 </form>
                 <div className="more-opt flex column align-center ">
                     <span>OR</span>

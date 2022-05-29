@@ -4,7 +4,7 @@ import { removeTask } from "../../../store/actions/task.action";
 import { Draggable } from "react-beautiful-dnd";
 import { Link } from "react-router-dom";
 
-export const TaskPreview = ({ task, groupId, boardId, index,  }) => {
+export const TaskPreview = ({ task, groupId, boardId, index, isImgRender }) => {
   // boardId comes from props, later can be refactored to storeState
   // const {_id:boardId} = useSelector((storeState) => storeState.boardModule.board)
 
@@ -19,24 +19,26 @@ export const TaskPreview = ({ task, groupId, boardId, index,  }) => {
   const onRemoveTask = (ev) => {
     ev.stopPropagation();
     dispatch(removeTask(boardId, groupId, task.id));
-  };
-  
+  }
+
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided) => (
         <div
-        onClick={onOpenTaskDetails}
+          onClick={onOpenTaskDetails}
           className="task-preview-wrapper"
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          {Math.round(Math.random() * 2) > 1 && <div className="task-preview-image"></div>}
+          {/* {Math.round(Math.random() * 2) > 1 && <div className="task-preview-image"></div>} */}
+          {!!task.attachments.length && <div style={{ background: `url( ${task.attachments[0]?.url}) center center/cover ` }} className="task-preview-image"></div>}
+          {/* <div className="task-preview-image"></div> */}
           <div className="task-preview-container">
             <div className="label-container">
-            {Math.round(Math.random() * 2) > 1 && <span className="label-preview"></span>}
-            {Math.round(Math.random() * 2) > 1 && <span className="label-preview"></span>}
-            {Math.round(Math.random() * 2) > 1 && <span className="label-preview"></span>}
+              {/* {Math.round(Math.random() * 2) > 1 && <span className="label-preview"></span>}
+              {Math.round(Math.random() * 2) > 1 && <span className="label-preview"></span>}
+              {Math.round(Math.random() * 2) > 1 && <span className="label-preview"></span>} */}
             </div>
             <span className="task-preview-title">{task.title}</span>
 

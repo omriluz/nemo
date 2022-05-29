@@ -29,6 +29,7 @@ export const TaskList = ({ tasks, groupId, boardId }) => {
             className="task-list"
           >
             {dTasks.map((task, index) => {
+              const isImgRender = Math.round(Math.random * 3) > 2
               return (
                 <TaskPreview
                   key={task.id}
@@ -36,6 +37,7 @@ export const TaskList = ({ tasks, groupId, boardId }) => {
                   boardId={boardId}
                   index={index}
                   groupId={groupId}
+                  isImgRender={isImgRender}
                 />
               );
             })}
