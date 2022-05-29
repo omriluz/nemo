@@ -51,7 +51,7 @@ export const TaskDetails = () => {
             </p>
           </div>
           <div className="helper-container">
-            <TaskDetailsMain />
+            <TaskDetailsMain task={task} boardId={boardId} groupId={groupId} />
             <TaskSidebar onOpenLabels={onOpenLabels} />
           </div>
         </div>
