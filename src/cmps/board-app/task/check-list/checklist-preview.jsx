@@ -54,7 +54,18 @@ export const ChecklistPreview = ({ checklist, onRemoveChecklist, task, boardId, 
                 </div>
 
             </div>
-            <TodosList todos={checklist.todos} />
+            <div className="todo-progress">
+                <span className="todo-progress-present">0%</span>
+                <div className="todo-progress-bar"></div>
+
+            </div>
+            <TodosList
+                checklistId={checklist.id}
+                todos={checklist.todos}
+                taskId={task.id}
+                boardId={boardId}
+                groupId={groupId}
+            />
         </section>
     )
 
