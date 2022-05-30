@@ -30,14 +30,6 @@
 // Group
 @import "cmps/group/group-list";
 @import "cmps/group/group-preview";
-<<<<<<< HEAD
-@import "cmps/user-board/new-board";
-@import "cmps/task-details";
-@import "cmps/dynamic-modal-cmp";
-@import "cmps/task-sidebar";
-@import "cmps/task-description";
-@import "cmps/task-checklists";
-=======
 
 // Task
 @import "cmps/task/task-preview";
@@ -45,9 +37,9 @@
 @import "cmps/task/task-details";
 @import "cmps/task/task-sidebar";
 @import "cmps/task/task-description";
+@import "cmps/task/task-checklists";
 
 // Modals
 @import "cmps/modals/dynamic-modal-cmp.scss";
 @import "cmps/modals/label-modal";
 @import "cmps/modals/generic-modal-helpers.scss";
->>>>>>> db4f443e27179abea4a4b017a8d0641bad48edb1
