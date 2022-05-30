@@ -29,7 +29,7 @@ export const GroupPreview = ({ group, boardId, index }) => {
   const onSaveGroup = (ev = null) => {
     if (ev) ev.preventDefault();
     dispatch(saveGroup(groupTitle, boardId, group.id));
-  };
+  }
 
   const handleChangeTask = (ev) => {
     const field = ev.target.name;
@@ -41,8 +41,9 @@ export const GroupPreview = ({ group, boardId, index }) => {
     if (ev) ev.preventDefault();
     dispatch(saveTask(taskTitle, boardId, group.id));
     setTaskTitle({ title: "" });
-  };
-    // if droppableId doesnt work like classname use group.id
+  }
+
+  // if droppableId doesnt work like classname use group.id
 
   return (
     // <div className="group-preview-wrapper">
