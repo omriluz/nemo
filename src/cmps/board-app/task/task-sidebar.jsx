@@ -5,19 +5,20 @@ import { MdOutlineScreenShare } from "react-icons/md";
 import { useEffect, useRef, useState } from "react";
 import { DynamicModalCmp } from "../../general/dynamic-modal-cmp";
 
-export const TaskSidebar = () => {
+export const TaskSidebar = ({boardId, groupId, taskId, labels}) => {
   //later will be object that will contain the function as well
   const buttons = [
-    { txt: "Labels", icon: <TiTag /> },
-    { txt: "Checklist", icon: <BsCheck2Square /> },
-    { txt: "Dates", icon: <BsClock /> },
-    { txt: "Attachment", icon: <FiPaperclip /> },
-    { txt: "Cover", icon: <MdOutlineScreenShare /> },
+    { txt: "Labels", icon: <TiTag />, props: {boardId, groupId, taskId, labels} },
+    { txt: "Checklist", icon: <BsCheck2Square />, props:{} },
+    { txt: "Dates", icon: <BsClock />, props:{} },
+    { txt: "Attachment", icon: <FiPaperclip />, props:{} },
+    { txt: "Cover", icon: <MdOutlineScreenShare />, props:{} },
   ];
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalDetails = useRef();
   const modalTitle = useRef();
+  const modalProps = useRef()
 
   // useEffect(() => {}, [isModalOpen]);
 
@@ -25,7 +26,7 @@ export const TaskSidebar = () => {
     setIsModalOpen(false);
   };
 
-  const onOpenModal = (ev, txt) => {
+  const onOpenModal = (ev, txt, props) => {
     console.log("fdsafdas", isModalOpen);
     // check if i need this
     // ev.stopPropagation();
@@ -34,6 +35,7 @@ export const TaskSidebar = () => {
       setIsModalOpen(false);
     }
     modalTitle.current = txt
+    modalProps.current = props
     modalDetails.current = ev.target.getBoundingClientRect();
     setIsModalOpen(true);
   };
@@ -44,6 +46,7 @@ export const TaskSidebar = () => {
         <DynamicModalCmp
           modalDetails={modalDetails.current}
           modalTitle={modalTitle.current}
+          modalProps={modalProps.current}
           onCloseModal={onCloseModal}
         />
       )}
@@ -53,7 +56,7 @@ export const TaskSidebar = () => {
         {buttons.map((button) => {
           return (
             <button
-              onClick={(ev) => onOpenModal(ev, button.txt)}
+              onClick={(ev) => onOpenModal(ev, button.txt, button.props)}
               key={button.txt}
               className="task-details-sidebar-btn"
             >

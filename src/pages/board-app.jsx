@@ -15,9 +15,15 @@ export const BoardApp = () => {
 
     const dispatch = useDispatch()
 
+    // added board to the dependancy array
     useEffect(() => {
         onLoadBoard()
     }, [])
+
+    // useEffect(() => {
+    //     onLoadBoard()
+    // }, [board])
+
 
     const onLoadBoard = () => {
         dispatch(loadBoard(boardId))
