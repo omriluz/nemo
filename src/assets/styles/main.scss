@@ -19,16 +19,35 @@
 @import "pages/login-signup";
 
 //  Components
-@import "cmps/user-board/board-list";
-@import "cmps/user-board/board-preview";
-@import "cmps/app-header";
-@import "cmps/task-preview";
-@import "cmps/task-list.scss";
+
+// General
+@import "cmps/general/app-header";
+// Workspace
+@import "cmps/work-space/board-list";
+@import "cmps/work-space/board-preview";
+@import "cmps/work-space/new-board";
+
+// Group
 @import "cmps/group/group-list";
 @import "cmps/group/group-preview";
+<<<<<<< HEAD
 @import "cmps/user-board/new-board";
 @import "cmps/task-details";
 @import "cmps/dynamic-modal-cmp";
 @import "cmps/task-sidebar";
 @import "cmps/task-description";
 @import "cmps/task-checklists";
+=======
+
+// Task
+@import "cmps/task/task-preview";
+@import "cmps/task/task-list.scss";
+@import "cmps/task/task-details";
+@import "cmps/task/task-sidebar";
+@import "cmps/task/task-description";
+
+// Modals
+@import "cmps/modals/dynamic-modal-cmp.scss";
+@import "cmps/modals/label-modal";
+@import "cmps/modals/generic-modal-helpers.scss";
+>>>>>>> db4f443e27179abea4a4b017a8d0641bad48edb1

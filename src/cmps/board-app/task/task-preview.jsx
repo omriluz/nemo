@@ -64,11 +64,13 @@ export const TaskPreview = ({ task, groupId, boardId, index }) => {
           {/* {Math.round(Math.random() * 2) > 1 && <div className="task-preview-image"></div>} */}
           <div className="task-preview-container">
             <div className="label-container">
+              <div className="label-wrapper">
               {taskLabels && taskLabels.map(label => {
                 return <span key={label.color} style={{backgroundColor:label.color}} className="label-preview"></span> 
               })}
               {/* <span className="label-preview"></span> */}
               {/* <span className="label-preview"></span> */}
+              </div>
             </div>
             <span className="task-preview-title">{task.title}</span>
 

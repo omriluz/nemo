@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { taskService } from "../../../services/task.service";
 import { TaskSidebar } from "./task-sidebar";
 import { TaskDetailsMain } from './task-details-main'
 import { Checklists } from "./check-list/checklist";
 import { useSelector } from "react-redux";
-import { Labels } from "./labels.jsx";
 import { boardService } from "../../../services/board.service";
 import { labelService } from "../../../services/label.service";
 
 export const TaskDetails = () => {
+  const navigate = useNavigate()
   const { boardId, groupId, taskId } = useParams();
   const [task, setTask] = useState();
   const [labels, setLabels] = useState();
@@ -40,11 +40,19 @@ export const TaskDetails = () => {
     console.log("fdasfds");
   };
 
+  const handleKeyEvent = (e) => {
+    console.log(e);
+    if (e.key === "Escape") navigate(-1)
+  }
 
   if (task) {
     return (
-      <section className="task-details-wrapper">
+      // <section onClick={() => console.log('fdasiofjd')} className="task-details-wrapper">
+      <section 
+      tabIndex={'0'}
+      onKeyDown={handleKeyEvent} className="task-details-wrapper">
         <div className="task-details">
+        <button onClick={() => navigate(-1)}>go back</button>
           <div className="task-details-header">
             <h1>{task.title}</h1>
             <p>
