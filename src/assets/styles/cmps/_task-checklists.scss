@@ -1,0 +1,69 @@
+.checklist-container {
+    .checklist-preview {
+        .title-container {
+            margin: 30px 0 4px 40px;
+            min-height: 2rem;
+            padding: 8px;
+            position: relative;
+
+            .icon-check {
+                margin-inline-end: 0px;
+                margin-inline-start: -50px;
+                font-size: 20px;
+            }
+
+
+
+            .checklist-delete {
+                button {
+                    position: absolute;
+                    top: 10px;
+                    right: 0;
+                }
+            }
+
+            .check-title {
+                margin-top: -27px;
+                margin-inline-start: -16px;
+                border: none;
+                resize: none;
+                background-color: #091e4200;
+                font-size: 16px;
+                display: inline;
+                font-weight: 600;
+                font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+
+                &:focus {
+                    // border: none;
+                    // border: solid 1px;
+                    border-radius: 3px;
+                    box-shadow: none;
+                    color: #172b4d;
+                    cursor: auto;
+                    display: block;
+                    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+                    outline: none;
+                    overflow: hidden;
+                    overflow-wrap: break-word;
+                    padding: 8px 12px;
+                    resize: none;
+                    text-decoration: none;
+                    width: 496px;
+                    height: 56px;
+                    background: #091e420a;
+                    border-color: #091e4221;
+                    box-shadow: inset 0 0 0 1px #091e4221;
+                    margin-bottom: 4px;
+                    font-size: 16px;
+                    line-height: 19px;
+                    font-weight: 700;
+                    color: #172b4d;
+                }
+            }
+
+            .edit-checklist-title {}
+
+        }
+
+    }
+}
