@@ -22,6 +22,7 @@ async function saveTask(task, boardId, groupId, activity) {
         // Later, owner is set by the backend
         task.id = utilService.makeId()
         task.attachments = []
+        task.labelIds = []
         const board = await boardService.getById(boardId)
         const idx = board.groups.findIndex(group => groupId === group.id)
         board.groups[idx].tasks.push(task)
@@ -47,7 +48,6 @@ async function removeTask(boardId, groupId, taskId, activity) {
 }
 
 async function getTaskById(boardId, groupId, taskId) {
-    //TODO: try catch here 
     try {
         const board = await boardService.getById(boardId)
         const groupIdx = board.groups.findIndex(group => groupId === group.id)
