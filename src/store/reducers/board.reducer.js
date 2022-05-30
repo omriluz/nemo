@@ -11,7 +11,6 @@ export function boardReducer(state = initialState, action) {
             boards = state.boards.map(board => {
                 return (board._id === action.board._id) ? action.board : board
             })
-            console.log(boards,'@@@');
             newState = { ...state, board: action.board, boards }
             // newState = { ...state, board: action.board }
 

@@ -33,10 +33,8 @@ var subscriber
 
 export function loadBoard(boardId) {
     return (dispatch) => {
-        console.log('boardId', boardId)
         boardService.getById(boardId)
             .then(board => {
-                console.log('Board chosen from  DB:', board)
                 dispatch({
                     type: 'SET_BOARD',
                     board
