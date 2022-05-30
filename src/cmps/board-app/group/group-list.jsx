@@ -11,7 +11,6 @@ export const GroupList = ({ groups, boardId }) => {
   const [isAddGroup, setIsAddGroup] = useState(false);
   const [groupTitle, setGroupTitle] = useState({ title: "" });
   const [dGroups, updateDGroups] = useState(groups);
-  console.log(dGroups);
 
   useEffect(() => {
     updateDGroups(groups)

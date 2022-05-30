@@ -34,7 +34,6 @@ export const TaskPreview = ({ task, groupId, boardId, index }) => {
     }
   }
 
-  console.log(taskLabels);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -48,6 +47,8 @@ export const TaskPreview = ({ task, groupId, boardId, index }) => {
     dispatch(removeTask(boardId, groupId, task.id));
   }
 
+
+
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided) => (
@@ -60,11 +61,11 @@ export const TaskPreview = ({ task, groupId, boardId, index }) => {
         >
           {/* <div style={{backgroundImage: `url(https://source.unsplash.com/random?sig=${(Math.random() + 1).toString(36).substring(7)})`}} className="task-preview-image"></div> */}
           {/* {randRender && <div className="task-preview-image"></div>} */}
-          {Math.round(Math.random() * 2) > 1 && <div className="task-preview-image"></div>}
+          {/* {Math.round(Math.random() * 2) > 1 && <div className="task-preview-image"></div>} */}
           <div className="task-preview-container">
             <div className="label-container">
               {taskLabels && taskLabels.map(label => {
-                return <span style={{ backgroundColor: label.color }} className="label-preview"></span>
+                return <span key={label.color} style={{backgroundColor:label.color}} className="label-preview"></span> 
               })}
               {/* <span className="label-preview"></span> */}
               {/* <span className="label-preview"></span> */}

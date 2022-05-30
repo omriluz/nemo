@@ -11,6 +11,17 @@ export function removeChecklist(boardId, groupId, taskId, checklistId, activity)
         }
     }
 }
+export function saveChecklist(checklist, boardId, groupId, taskId) {
+    // console.log(checklist, boardId, groupId, taskId, '@@@@@@@');
+    return async (dispatch) => {
+        try {
+            const board = await checklistService.saveChecklist(checklist, boardId, groupId, taskId)
+            dispatch(getActionSetBoard(board))
+        } catch (err) {
+            console.log('Err could not delete task', err);
+        }
+    }
+}
 
 
 // export function saveTask(task, boardId, groupId, activity) {

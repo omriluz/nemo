@@ -43,8 +43,10 @@ export const GroupPreview = ({ group, boardId, index }) => {
     setTaskTitle({ title: "" });
   }
 
+  // if droppableId doesnt work like classname use group.id
+
   return (
-    // if droppableId doesnt work like classname use group.id
+    // <div className="group-preview-wrapper">
     <Draggable draggableId={group.id} index={index}>
       {(provided) => (
         <section
@@ -119,5 +121,6 @@ export const GroupPreview = ({ group, boardId, index }) => {
         </section>
       )}
     </Draggable>
+    // </div>
   );
 };

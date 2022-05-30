@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
 import { GrTextAlignLeft } from "react-icons/gr";
-import { IoMdClose } from "react-icons/io";
+
 import { useDispatch } from "react-redux";
 import { saveTask } from "../../../store/actions/task.action.js";
 
 
 
 export const Description = ({ task, boardId, groupId }) => {
-    console.log(task.description);
     const [isDescOpen, setIsDescOpen] = useState(false)
     const [descTitle, setDescTitle] = useState({ title: task.description ? task.description : "" });
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        console.log(isDescOpen);
-    }, [isDescOpen])
+    // useEffect(() => {
+    //     console.log(isDescOpen);
+    // }, [isDescOpen])
 
     const handleChange = (ev) => {
         const field = ev.target.name;
@@ -22,20 +21,14 @@ export const Description = ({ task, boardId, groupId }) => {
         setDescTitle({ [field]: value });
     };
 
-    const onSaveTask = (ev = null) => {
-        console.log('hhhh');
-        ev.stopPropagation()
-        if (ev) ev.preventDefault();
-
+    const onSaveTask = () => {
         task.description = descTitle.title
-        console.log(task);
         dispatch(saveTask(task, boardId, groupId));
-        setIsDescOpen(false);
+        setIsDescOpen(false)
         setDescTitle({ title: task.description ? task.description : "" });
-
     }
 
-    return <section className="task-description flex column ">
+    return <section className="task-description flex column " onBlur={() => setIsDescOpen(false)}>
         <div className="title-container flex row">
             <span className="svg-icon-desc">< GrTextAlignLeft /></span>   <h3 className="desc-title">Description</h3>
         </div>
@@ -46,11 +39,11 @@ export const Description = ({ task, boardId, groupId }) => {
                 placeholder="Add a more detailed description..."
                 value={descTitle.title}
                 onChange={handleChange}
-                onBlur={() => setIsDescOpen(false)}
+
             >
             </textarea>
             {isDescOpen && <div className="open-desc-btns">
-                <button>Save</button>
+                <button onMouseDown={onSaveTask}>Save</button>
                 <span className="cancel" onClick={() => setIsDescOpen(false)}>
                     Cancel
                 </span>
