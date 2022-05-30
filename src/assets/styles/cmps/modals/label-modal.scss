@@ -1,0 +1,12 @@
+.label-modal {
+  &-container {
+  }
+
+  &-main-input {
+    width: 100%;
+    padding: 8px 12px;
+    margin:4px 0 0px;
+    //pushes everything down for some reason need to understand
+    // margin:4px 0 12px;
+  }
+}
