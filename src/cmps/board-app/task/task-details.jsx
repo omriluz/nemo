@@ -49,37 +49,71 @@ export const TaskDetails = () => {
   };
 
 
-  if (!task) return <h1>loading...</h1>
-  return (
-    // <section onClick={() => console.log('fdasiofjd')} className="task-details-wrapper">
-    <section
-      tabIndex={"0"}
-      onKeyDown={handleKeyEvent}
-      className="task-details-wrapper"
-    >
-      <div className="task-details">
-        <button onClick={() => navigate(-1)}>go back</button>
-        <div className="task-details-header">
-          <h1>{task.title}</h1>
-          <p>
-            In list <span className="task-title-group">TODO</span>
-          </p>
+  if (task) {
+    return (
+      // <section onClick={() => console.log('fdasiofjd')} className="task-details-wrapper">
+      <section
+        tabIndex={"0"}
+        onKeyDown={handleKeyEvent}
+        className="task-details-wrapper"
+      >
+        <div className="task-details">
+          <div className="task-details-back-btn" onClick={() => navigate(-1)}><GrClose /> </div>
+          <div className="task-details-header">
+            <h1 className="task-details-title">{task.title}</h1>
+            {/* <textarea className="task-details-title">{task.title}</textarea> */}
+            <p>
+              In list <span className="task-title-group">TODO</span>
+            </p>
+          </div>
+          <div className="helper-container">
+            <TaskDetailsMain task={task} boardId={boardId} groupId={groupId} />
+            <TaskSidebar
+              boardId={boardId}
+              groupId={groupId}
+              taskId={taskId}
+              labels={labels}
+              onOpenLabels={onOpenLabels}
+              task={task}
+            />
+          </div>
         </div>
-        <div className="helper-container">
-          <TaskDetailsMain task={task} boardId={boardId} groupId={groupId} />
-          <TaskSidebar
-            boardId={boardId}
-            groupId={groupId}
-            taskId={taskId}
-            labels={labels}
-            task={task}
-            onOpenLabels={onOpenLabels}
-          />
-        </div>
-      </div>
-    </section>
-  )
-}
+      </section>
+    );
+  }
+};
+
+  // if (!task) return <h1>loading...</h1>
+//   return (
+//     // <section onClick={() => console.log('fdasiofjd')} className="task-details-wrapper">
+//     <section
+//       tabIndex={"0"}
+//       onKeyDown={handleKeyEvent}
+//       className="task-details-wrapper"
+//     >
+//       <div className="task-details">
+//         <button onClick={() => navigate(-1)}>go back</button>
+//         <div className="task-details-header">
+//           <h1>{task.title}</h1>
+//           <p>
+//             In list <span className="task-title-group">TODO</span>
+//           </p>
+//         </div>
+//         <div className="helper-container">
+//           <TaskDetailsMain task={task} boardId={boardId} groupId={groupId} />
+//           <TaskSidebar
+//             boardId={boardId}
+//             groupId={groupId}
+//             taskId={taskId}
+//             labels={labels}
+//             task={task}
+//             onOpenLabels={onOpenLabels}
+//           />
+//         </div>
+//       </div>
+//     </section>
+//   )
+// }
 
 
 // {

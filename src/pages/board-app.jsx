@@ -14,8 +14,6 @@ export const BoardApp = () => {
     const { board } = useSelector((storeState) => storeState.boardModule)
 
 
-    console.log('hi from baoardapp cmp')
-    console.log('board from boardapp', board);
     const dispatch = useDispatch()
 
     // added board to the dependancy array

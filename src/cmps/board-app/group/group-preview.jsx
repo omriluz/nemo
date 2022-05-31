@@ -28,6 +28,7 @@ export const GroupPreview = ({ group, boardId, index }) => {
 
   const onSaveGroup = (ev = null) => {
     if (ev) ev.preventDefault();
+    setIsEditTitle(false)
     dispatch(saveGroup(groupTitle, boardId, group.id));
   };
 
@@ -35,6 +36,14 @@ export const GroupPreview = ({ group, boardId, index }) => {
     const field = ev.target.name;
     const value = ev.target.value;
     setTaskTitle({ [field]: value });
+  };
+
+  const onHandleKeySubmit = (ev) => {
+    console.log(ev.key);
+    if (ev.key === "Enter") {
+      ev.preventDefault();
+      onSaveTask();
+    }
   };
 
   const onSaveTask = (ev = null) => {
@@ -61,18 +70,19 @@ export const GroupPreview = ({ group, boardId, index }) => {
             ref={provided.innerRef}
             // onMouseDown={handleMouse}
           >
-            <div className="group-preview-header flex justify-space-between algin-center ">
-              <form onSubmit={onSaveGroup}>
+            <div className="group-preview-header">
+              {/* <form onSubmit={onSaveGroup}> */}
                 <input
                   onClick={() => setIsEditTitle(true)}
                   className="group-preview-title"
                   type="text"
                   name="title"
-                  onBlur={() => setIsEditTitle(false)}
+                  // onBlur={() => setIsEditTitle(false)}
+                  onBlur={onSaveGroup}
                   value={groupTitle.title}
                   onChange={handleChange}
                 />
-              </form>
+              {/* </form> */}
               <div
                 className="add-action"
                 onClick={() => setIsAddAction(!isAddAction)}
@@ -87,26 +97,46 @@ export const GroupPreview = ({ group, boardId, index }) => {
                   groupId={group.id}
                   boardId={boardId}
                 />
+                {isAddTask && (
+                  <div className="add-task-open">
+                    <form onSubmit={onSaveTask}>
+                      <textarea
+                        className="task-txt"
+                        name="title"
+                        placeholder="Enter a title for this card..."
+                        value={taskTitle.title}
+                        onChange={handleChangeTask}
+                        onKeyDown={onHandleKeySubmit}
+                      ></textarea>
+                      <div className="btn-add-task ">
+                        <button>Add card</button>
+                        <span className="" onClick={() => setIsAddTask(false)}>
+                          <IoMdClose />
+                        </span>
+                      </div>
+                    </form>
+                  </div>
+                )}
               </div>
-            {/* </div> */}
+            </div>
 
             {isAddAction && (
               <section className="action-modal">
                 <button onClick={onRemoveGroup}>Delete</button>
               </section>
             )}
+            <div className="add-task-wrapper">
+              {!isAddTask && (
+                <div
+                  className="add-task-container flex"
+                  onClick={() => setIsAddTask(true)}
+                >
+                  <IoAdd />
+                  <p>Add a card</p>
+                </div>
+              )}
 
-            {!isAddTask && (
-              <div
-                className="add-task-container flex"
-                onClick={() => setIsAddTask(true)}
-              >
-                <IoAdd />
-                <p>Add a card</p>
-              </div>
-            )}
-
-            {isAddTask && (
+              {/* {isAddTask && (
               <div className="add-task-open">
                 <form onSubmit={onSaveTask}>
                   <textarea
@@ -115,6 +145,7 @@ export const GroupPreview = ({ group, boardId, index }) => {
                     placeholder="Enter a title for this card..."
                     value={taskTitle.title}
                     onChange={handleChangeTask}
+                    onKeyDown={onHandleKeySubmit}
                   ></textarea>
                   <div className="btn-add-task ">
                     <button>Add card</button>
@@ -124,7 +155,7 @@ export const GroupPreview = ({ group, boardId, index }) => {
                   </div>
                 </form>
               </div>
-            )}
+            )} */}
             </div>
           </section>
         )}

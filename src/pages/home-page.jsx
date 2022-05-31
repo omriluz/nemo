@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import imgHero from "../assets/img/hero.png";
-import { LabelModal } from "../cmps/modals/label-modal";
 
 export const HomePage = () => {
   return (

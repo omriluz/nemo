@@ -16,8 +16,6 @@ export const GroupList = ({ groups, boardId }) => {
     updateDGroups(groups)
   }, [groups])
 
-  console.log('groups', groups, 'dGroups', dGroups)
-
   const handleChange = (ev) => {
     const field = ev.target.name;
     const value = ev.target.value;
@@ -25,7 +23,6 @@ export const GroupList = ({ groups, boardId }) => {
   };
 
   const onAddGroup = (ev = null) => {
-    if (ev) ev.preventDefault();
     dispatch(saveGroup(groupTitle, boardId));
     setIsAddGroup(false);
     setGroupTitle({ title: "" });
