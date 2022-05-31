@@ -41,7 +41,8 @@ export const LoginSignup = () => {
         if (!credentials.username || !credentials.password || !credentials.fullname) return
         dispatch(signup(credentials))
         clearState()
-
+        // figure out flow,
+        // navigate('/workspace')
     }
 
     const onLogin = (ev = null) => {
@@ -49,6 +50,7 @@ export const LoginSignup = () => {
         if (!credentials.username) return
         dispatch(login(credentials))
         clearState()
+        navigate('/workspace')
 
     }
 
@@ -65,7 +67,7 @@ export const LoginSignup = () => {
                     />
                     <input type="password" id="password" name="password" placeholder="Enter password" value={credentials.password} onChange={handleChange}
                     />
-                    <button onClick={() => navigate('/workspace')} className={`logbtn ${isSignup ? 'signup' : 'login'}`} >{isSignup ? 'Sign up' : 'Log in'}</button>
+                    <button className={`logbtn ${isSignup ? 'signup' : 'login'}`} >{isSignup ? 'Sign up' : 'Log in'}</button>
                 </form>
                 <div className="more-opt flex column align-center ">
                     <span>OR</span>

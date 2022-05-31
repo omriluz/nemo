@@ -29,7 +29,7 @@ export const GroupPreview = ({ group, boardId, index }) => {
   const onSaveGroup = (ev = null) => {
     if (ev) ev.preventDefault();
     dispatch(saveGroup(groupTitle, boardId, group.id));
-  }
+  };
 
   const handleChangeTask = (ev) => {
     const field = ev.target.name;
@@ -41,47 +41,55 @@ export const GroupPreview = ({ group, boardId, index }) => {
     if (ev) ev.preventDefault();
     dispatch(saveTask(taskTitle, boardId, group.id));
     setTaskTitle({ title: "" });
-  }
+  };
 
-  // if droppableId doesnt work like classname use group.id
+  // const handleMouse = (ev) => {
+  // ev.preventDefault()
+  // console.log('ev',ev);
+  // console.log('ev',ev.target);
+  // ev.target.unbind()
+  // }
 
   return (
-    // <div className="group-preview-wrapper">
-    <Draggable draggableId={group.id} index={index}>
-      {(provided) => (
-        <section
-          className="group-preview"
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          ref={provided.innerRef}
-        >
-          <div className="group-preview-header flex justify-space-between algin-center ">
-            <form onSubmit={onSaveGroup}>
-              <input
-                onClick={() => setIsEditTitle(true)}
-                className="group-preview-title"
-                type="text"
-                name="title"
-                onBlur={() => setIsEditTitle(false)}
-                value={groupTitle.title}
-                onChange={handleChange}
-              />
-            </form>
-            <div
-              className="add-action"
-              onClick={() => setIsAddAction(!isAddAction)}
-            >
-              <MdMoreHoriz />
+    <div className="group-preview-wrapper">
+      <Draggable draggableId={group.id} index={index}>
+        {(provided) => (
+          <section
+            className="group-preview"
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            ref={provided.innerRef}
+            // onMouseDown={handleMouse}
+          >
+            <div className="group-preview-header flex justify-space-between algin-center ">
+              <form onSubmit={onSaveGroup}>
+                <input
+                  onClick={() => setIsEditTitle(true)}
+                  className="group-preview-title"
+                  type="text"
+                  name="title"
+                  onBlur={() => setIsEditTitle(false)}
+                  value={groupTitle.title}
+                  onChange={handleChange}
+                />
+              </form>
+              <div
+                className="add-action"
+                onClick={() => setIsAddAction(!isAddAction)}
+              >
+                <MdMoreHoriz />
+              </div>
             </div>
-          </div>
-          <div className="group-wrapper">
-            <div className="group-preview-main">
-              <TaskList
-                tasks={group.tasks}
-                groupId={group.id}
-                boardId={boardId}
-              />
-            </div>
+            <div className="task-wrapper">
+              <div className="group-preview-main">
+                <TaskList
+                  tasks={group.tasks}
+                  groupId={group.id}
+                  boardId={boardId}
+                />
+              </div>
+            {/* </div> */}
+
             {isAddAction && (
               <section className="action-modal">
                 <button onClick={onRemoveGroup}>Delete</button>
@@ -117,10 +125,10 @@ export const GroupPreview = ({ group, boardId, index }) => {
                 </form>
               </div>
             )}
-          </div>
-        </section>
-      )}
-    </Draggable>
-    // </div>
+            </div>
+          </section>
+        )}
+      </Draggable>
+    </div>
   );
 };

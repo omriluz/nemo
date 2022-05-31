@@ -25,6 +25,20 @@
     z-index: 1;
   }
 
+  &-title {
+    background: #0000;
+    border-radius: 3px;
+    box-shadow: none;
+    font-size: 20px;
+    font-weight: 600;
+    height: 32px;
+    line-height: 24px;
+    margin: -4px -8px;
+    min-height: 24px;
+    padding: 4px 8px;
+    resize: none;
+  }
+
   &-sidebar {
     &-section-title {
       margin: 0px;
@@ -64,8 +78,23 @@
   text-decoration: underline;
 }
 
-
+// change this name
 .helper-container {
   display: flex;
   justify-content: space-between;
+}
+
+.task-details-back-btn {
+  float: right;
+  padding: 4px;
+  margin: 4px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  height: 40px;
+  width: 40px;
+  &:hover {
+    background-color:#091e4214;
+    border-radius: 50%;
+  }
 }

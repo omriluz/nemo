@@ -24,7 +24,9 @@ import { BsPencil } from "react-icons/bs";
 //     }
 // }
 
-export const LabelModal = ({ modalProps: {boardId, groupId, taskId, labels } }) => {
+export const LabelModal = ({
+  modalProps: { boardId, groupId, taskId, labels },
+}) => {
   const dispatch = useDispatch();
 
   const onToggleLabel = (labelId) => {
@@ -34,6 +36,7 @@ export const LabelModal = ({ modalProps: {boardId, groupId, taskId, labels } }) 
     //3) label modal item will have a V
     dispatch(toggleLabel(boardId, groupId, taskId, labelId));
   };
+
 
   return (
     <div className="label-modal-container">

@@ -12,7 +12,6 @@ function App() {
   return (
     <Router>
       <AppHeader />
-      <div className="">
         <main>
           <Routes>
             <Route element={<HomePage />} path={"/"} />
@@ -24,7 +23,6 @@ function App() {
             <Route element={<LoginSignup />} path={"/login"} />
           </Routes>
         </main>
-      </div>
     </Router>
   );
 }

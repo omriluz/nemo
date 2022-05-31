@@ -9,6 +9,7 @@ import { boardService } from "../../../services/board.service";
 import { labelService } from "../../../services/label.service";
 import { useDispatch } from "react-redux";
 import { loadBoard } from "../../../store/actions/board.action";
+import {GrClose} from 'react-icons/gr'
 
 export const TaskDetails = () => {
   const navigate = useNavigate();
@@ -25,11 +26,11 @@ export const TaskDetails = () => {
   useEffect(() => {
     loadTask();
     loadBoardLabels();
-  }, []);
+  }, [board]);
 
-//   useEffect(() => {
-//     onLoadBoard()
-// }, [board])
+//    useEffect(() => {
+//      onLoadBoard()
+//  }, [board])
 
 const onLoadBoard = () => {
   dispatch(loadBoard(boardId))
@@ -69,9 +70,10 @@ const onLoadBoard = () => {
         className="task-details-wrapper"
       >
         <div className="task-details">
-          <button onClick={() => navigate(-1)}>go back</button>
+          <div className="task-details-back-btn" onClick={() => navigate(-1)}><GrClose/> </div>
           <div className="task-details-header">
-            <h1>{task.title}</h1>
+            <h1 className="task-details-title">{task.title}</h1>
+            {/* <textarea className="task-details-title">{task.title}</textarea> */}
             <p>
               In list <span className="task-title-group">TODO</span>
             </p>

@@ -13,6 +13,9 @@ export const BoardApp = () => {
     const { boardId } = useParams()
     const { board } = useSelector((storeState) => storeState.boardModule)
 
+
+    console.log('hi from baoardapp cmp')
+    console.log('board from boardapp', board);
     const dispatch = useDispatch()
 
     // added board to the dependancy array
@@ -34,7 +37,7 @@ export const BoardApp = () => {
         <div className="board-app-wrapper">
             <Outlet />
             <div className='board-app'>
-                <div className='board-header '>
+                {/* <div className='board-header '>
                     <nav className='main-nav flex align-center space-between'>
                         <div className='nav-left flex'>
                             <h1 className='header-title'>{board.title}</h1>
@@ -46,7 +49,7 @@ export const BoardApp = () => {
                         </div>
                         <div className='nav-right flex'><button className='nav-btn'> <MdMoreHoriz /><p>Show Menu</p></button></div>
                     </nav>
-                </div>
+                </div> */}
                 {board && <GroupList groups={board.groups} boardId={boardId} />}
             </div>
         </div>
