@@ -16,7 +16,6 @@ export const GroupList = ({ groups, boardId }) => {
     updateDGroups(groups)
   }, [groups])
 
-  console.log('groups', groups, 'dGroups', dGroups)
 
   const handleChange = (ev) => {
     const field = ev.target.name;

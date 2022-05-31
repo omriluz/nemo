@@ -59,7 +59,7 @@ export const GroupPreview = ({ group, boardId, index }) => {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
-            // onMouseDown={handleMouse}
+          // onMouseDown={handleMouse}
           >
             <div className="group-preview-header flex justify-space-between algin-center ">
               <form onSubmit={onSaveGroup}>
@@ -68,7 +68,7 @@ export const GroupPreview = ({ group, boardId, index }) => {
                   className="group-preview-title"
                   type="text"
                   name="title"
-                  onBlur={() => setIsEditTitle(false)}
+                  onBlur={onSaveGroup}
                   value={groupTitle.title}
                   onChange={handleChange}
                 />
@@ -88,43 +88,43 @@ export const GroupPreview = ({ group, boardId, index }) => {
                   boardId={boardId}
                 />
               </div>
-            {/* </div> */}
+              {/* </div> */}
 
-            {isAddAction && (
-              <section className="action-modal">
-                <button onClick={onRemoveGroup}>Delete</button>
-              </section>
-            )}
+              {isAddAction && (
+                <section className="action-modal">
+                  <button onClick={onRemoveGroup}>Delete</button>
+                </section>
+              )}
 
-            {!isAddTask && (
-              <div
-                className="add-task-container flex"
-                onClick={() => setIsAddTask(true)}
-              >
-                <IoAdd />
-                <p>Add a card</p>
-              </div>
-            )}
+              {!isAddTask && (
+                <div
+                  className="add-task-container flex"
+                  onClick={() => setIsAddTask(true)}
+                >
+                  <IoAdd />
+                  <p>Add a card</p>
+                </div>
+              )}
 
-            {isAddTask && (
-              <div className="add-task-open">
-                <form onSubmit={onSaveTask}>
-                  <textarea
-                    className="task-txt"
-                    name="title"
-                    placeholder="Enter a title for this card..."
-                    value={taskTitle.title}
-                    onChange={handleChangeTask}
-                  ></textarea>
-                  <div className="btn-add-task ">
-                    <button>Add card</button>
-                    <span className="" onClick={() => setIsAddTask(false)}>
-                      <IoMdClose />
-                    </span>
-                  </div>
-                </form>
-              </div>
-            )}
+              {isAddTask && (
+                <div className="add-task-open">
+                  <form onSubmit={onSaveTask}>
+                    <textarea
+                      className="task-txt"
+                      name="title"
+                      placeholder="Enter a title for this card..."
+                      value={taskTitle.title}
+                      onChange={handleChangeTask}
+                    ></textarea>
+                    <div className="btn-add-task ">
+                      <button>Add card</button>
+                      <span className="" onClick={() => setIsAddTask(false)}>
+                        <IoMdClose />
+                      </span>
+                    </div>
+                  </form>
+                </div>
+              )}
             </div>
           </section>
         )}

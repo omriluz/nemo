@@ -34,7 +34,6 @@ export const TaskPreview = ({ boardId, groupId, task, index }) => {
     const newLabels = await labelService.getLabelsById(boardId, task);
     setLabels(newLabels)
   }
-  console.log('task.labelIds', task.labelIds)
 
   const onOpenTaskDetails = () => {
     console.log(`/board/${boardId}/${groupId}/${task.id}`);
