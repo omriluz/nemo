@@ -7,10 +7,10 @@ import { saveChecklist } from '../../../../store/actions/checklist.action.js';
 
 
 
-
 export const ChecklistPreview = ({ checklist, onRemoveChecklist, task, boardId, groupId }) => {
     const [isEditOpen, setIsEditOpen] = useState(false)
     const [checklistTitle, setChecklistTitle] = useState({ title: checklist.title });
+
     const dispatch = useDispatch()
 
     const handleChange = (ev) => {
@@ -59,6 +59,7 @@ export const ChecklistPreview = ({ checklist, onRemoveChecklist, task, boardId, 
                 <div className="todo-progress-bar"></div>
 
             </div>
+
             <TodosList
                 checklistId={checklist.id}
                 todos={checklist.todos}

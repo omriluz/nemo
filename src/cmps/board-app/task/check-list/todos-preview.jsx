@@ -12,8 +12,6 @@ export const TodoPreview = ({ todo, checklistId, taskId, boardId, groupId }) => 
     const dispatch = useDispatch()
 
 
-    console.log(todo.isDone)
-    // const [isTodoChecked, setIsTodoChecked] = useState()    
 
     const handleChange = (ev) => {
         const field = ev.target.name;
@@ -62,5 +60,3 @@ export const TodoPreview = ({ todo, checklistId, taskId, boardId, groupId }) => 
 
 }
 
-
-{/* <span className="todo-title">{todo.title}</span> */ }

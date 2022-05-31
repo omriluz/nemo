@@ -104,7 +104,7 @@ const ourBoard = {
         {
             "id": utilService.makeId(),// localID
             "color": "#ff9f1a",
-            "title":'hello world'
+            "title": 'hello world'
         },
         {
             "id": utilService.makeId(),// localID
@@ -787,6 +787,7 @@ const ourBoard = {
         }
     ],
 }
+
 
 // storageService.post(STORAGE_KEY, ourBoard).then(x => console.log(x))
 

@@ -5,7 +5,6 @@ import { saveTodo } from '../../../../store/actions/checklist.action.js';
 import { useDispatch } from 'react-redux';
 
 export const TodosList = ({ todos, checklistId, taskId, boardId, groupId }) => {
-    console.log(todos);
     const [isAddOpen, setIsAddOpen] = useState()
     const [todoTitle, setTodoTitle] = useState({ title: '' });
     const dispatch = useDispatch()
@@ -20,17 +19,12 @@ export const TodosList = ({ todos, checklistId, taskId, boardId, groupId }) => {
 
 
     const onAddTodo = () => {
-        console.log(todoTitle);
-        const updateTodo = todoTitle
-        updateTodo.id = utilService.makeId()
-        updateTodo.isDone = false
-
+        const updateTodo = { ...todoTitle, id: utilService.makeId(), isDone: false }
+        // todos.push(updateTodo)
         dispatch(saveTodo(updateTodo, checklistId, boardId, groupId, taskId));
         setIsAddOpen(false)
         setTodoTitle({ title: "" });
     }
-
-
 
 
     return (

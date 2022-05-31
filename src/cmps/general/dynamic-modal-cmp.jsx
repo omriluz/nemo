@@ -1,5 +1,6 @@
 import { IoMdClose } from "react-icons/io";
 import { LabelModal } from "../modals/label-modal";
+import { ChecklistModal } from "../modals/checklist-modal";
 
 export const DynamicModalCmp = ({
   modalDetails: { height, top },
@@ -12,7 +13,9 @@ export const DynamicModalCmp = ({
   switch (modalTitle) {
     case "Labels":
       console.log('wiiiiiii');
-      modalTypeToOpen = <LabelModal modalProps={modalProps}/>
+      modalTypeToOpen = <LabelModal modalProps={modalProps} />
+    case "Checklist":
+      modalTypeToOpen = <ChecklistModal modalProps={modalProps} />
   }
 
   return (

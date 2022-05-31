@@ -12,10 +12,10 @@ export function removeChecklist(boardId, groupId, taskId, checklistId, activity)
     }
 }
 export function saveChecklist(checklist, boardId, groupId, taskId) {
-    // console.log(checklist, boardId, groupId, taskId, '@@@@@@@');
     return async (dispatch) => {
         try {
             const board = await checklistService.saveChecklist(checklist, boardId, groupId, taskId)
+            console.log('board', board)
             dispatch(getActionSetBoard(board))
         } catch (err) {
             console.log('Err could not delete task', err);
@@ -23,7 +23,7 @@ export function saveChecklist(checklist, boardId, groupId, taskId) {
     }
 }
 export function saveTodo(todo, checklistId, boardId, groupId, taskId) {
-    // console.log(checklist, boardId, groupId, taskId, '@@@@@@@');
+    // console.log(todo, checklistId, boardId, groupId, taskId, '@@@@@@@');
     return async (dispatch) => {
         try {
             const board = await checklistService.saveTodo(todo, checklistId, boardId, groupId, taskId)
@@ -33,15 +33,3 @@ export function saveTodo(todo, checklistId, boardId, groupId, taskId) {
         }
     }
 }
-
-
-// export function saveTask(task, boardId, groupId, activity) {
-//     return async (dispatch) => {
-//         try {
-//             const board = await taskService.saveTask(task, boardId, groupId, activity)
-//             dispatch(getActionSetBoard(board))
-//         } catch (err) {
-//             console.log('err in saving task');
-//         }
-//     }
-// }

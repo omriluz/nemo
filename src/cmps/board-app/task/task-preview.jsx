@@ -16,13 +16,12 @@ export const TaskPreview = ({ boardId, groupId, task, index }) => {
   // const { labels } = useSelector((storeState) => storeState.boardModule.board)
   // const [taskLabels, setTaskLabels] = useState()
   // get label ids
-  
+
 
   const labels = useRef();
   useEffect(() => {
     (async () => {
       labels.current = await labelService.getLabelsById(boardId, task);
-      console.log(labels.current);
     })();
   }, []);
 

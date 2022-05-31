@@ -4,24 +4,31 @@ import { removeChecklist } from '../../../../store/actions/checklist.action'
 import { useEffect, useState } from 'react';
 
 export const Checklists = ({ task, boardId, groupId }) => {
-    const [checklists, setChecklists] = useState(null)
+    // const [checklists, setChecklists] = useState(task.checklists)
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        loadChecklist()
-    }, [])
+    // useEffect(() => {
+    //     loadChecklist()
+    // }, [])
 
-    const loadChecklist = () => {
-        setChecklists(task.checklists)
-    }
+    // console.log(task.checklists[0])
+
+
+    // const loadChecklist = () => {
+    //     setChecklists(task.checklists)
+    // }
 
     const onRemoveChecklist = (checklistId) => {
+        console.log(checklistId, task.checklists);
         dispatch(removeChecklist(boardId, groupId, task.id, checklistId))
+        // const checklistsIdx = task.checklists.findIndex(checklist => checklist.id === checklistId)
+        // console.log(checklistsIdx);
+        // task.checklists.splice(checklistsIdx, 1)
     }
 
     return (
-        checklists && <section className="checklist-container">
-            {checklists.map(checklist =>
+        !!task.checklists && <section className="checklist-container">
+            {task.checklists.map(checklist =>
                 <ChecklistPreview
                     key={checklist.id}
                     checklist={checklist}
