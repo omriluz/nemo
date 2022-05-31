@@ -12,12 +12,18 @@ export const DynamicModalCmp = ({
   let modalTypeToOpen;
   switch (modalTitle) {
     case "Labels":
-      console.log('wiiiiiii');
-      modalTypeToOpen = <LabelModal modalProps={modalProps} />
-      break
+      console.log("wiiiiiii");
+      modalTypeToOpen = <LabelModal modalProps={modalProps} />;
+      break;
     case "Checklist":
-      modalTypeToOpen = <ChecklistModal modalProps={modalProps} />
-      break
+      modalTypeToOpen = <ChecklistModal modalProps={modalProps} />;
+      break;
+    case "Dates":
+      // modalTypeToOpen = <ChecklistModal modalProps={modalProps} />;
+      break;
+    case "Attachment":
+      // modalTypeToOpen = <ChecklistModal modalProps={modalProps} />;
+      break;
   }
 
   return (

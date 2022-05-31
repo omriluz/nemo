@@ -4,6 +4,7 @@ import { utilService } from "./util.service";
 export const groupService = {
     saveGroup,
     removeGroup,
+    setGroups
 }
 
 
@@ -40,4 +41,15 @@ async function removeGroup(groupId, boardId) {
     // boardChannel.postMessage(getActionRemoveBoard(boardId))
     boardService.save(board)
     return board
+}
+
+async function setGroups(boardId, groups) {
+    try {
+        const board = await boardService.getById(boardId)
+        board.groups = groups
+        boardService.save(board)
+        return board
+    } catch (err) {
+        console.log('err',err);
+    }
 }

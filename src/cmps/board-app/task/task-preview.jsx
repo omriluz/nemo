@@ -7,34 +7,19 @@ import { useEffect, useRef, useState } from "react";
 import { labelService } from "../../../services/label.service";
 import { BsPencil } from "react-icons/bs";
 
-// import { labelService } from "../../../services/label.service";
-
 export const TaskPreview = ({ boardId, groupId, task, index }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [labels, setLabels] = useState([]);
 
-  // boardId comes from props, later can be refactored to storeState
-  // const {_id:boardId} = useSelector((storeState) => storeState.boardModule.board)
-  // const { labels } = useSelector((storeState) => storeState.boardModule.board)
-  // const [taskLabels, setTaskLabels] = useState()
-  // get label ids
-  const [labels, setLabels] = useState([])
-
-
-  // const labels = useRef();
   useEffect(() => {
-    onSetLabels()
-    // (async () => {
-    //   labels.current = await labelService.getLabelsById(boardId, task);
-    //   console.log(labels.current);
-    // })();
+    onSetLabels();
   }, [task]);
 
   const onSetLabels = async () => {
     const newLabels = await labelService.getLabelsById(boardId, task);
-    setLabels(newLabels)
-  }
-  // console.log('task.labelIds', task.labelIds)
+    setLabels(newLabels);
+  };
 
   const onOpenTaskDetails = () => {
     console.log(`/board/${boardId}/${groupId}/${task.id}`);
@@ -49,7 +34,7 @@ export const TaskPreview = ({ boardId, groupId, task, index }) => {
   const onToggleLabelPreview = (ev) => {
     ev.stopPropagation();
     console.log(ev.target);
-  }
+  };
 
   return (
     <Draggable draggableId={task.id} index={index}>
@@ -63,7 +48,9 @@ export const TaskPreview = ({ boardId, groupId, task, index }) => {
         >
           {/* <div style={{backgroundImage: "url(https://i.picsum.photos/id/373/500/500.jpg?hmac=VqMSKR_Y5zUJm4IEBUjpK6NI7ZdiT7ePMwevp_MDgeQ)"}} className="task-preview-image"></div> */}
           <div className="task-preview-container">
-            <div className="task-preview-edit-icon"><BsPencil /></div>
+            <div className="task-preview-edit-icon">
+              <BsPencil />
+            </div>
             {!!labels?.length && (
               <div className="label-container">
                 {labels.map((label) => {
@@ -79,9 +66,6 @@ export const TaskPreview = ({ boardId, groupId, task, index }) => {
               </div>
             )}
             <span className="task-preview-title">{task.title}</span>
-
-            {/* remove for now for styling purposes also this should not be here anyway */}
-            {/* <button onClick={onRemoveTask}>Delete task</button> */}
           </div>
         </div>
       )}

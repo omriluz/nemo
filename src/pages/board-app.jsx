@@ -12,19 +12,11 @@ import { MdMoreHoriz } from "react-icons/md"
 export const BoardApp = () => {
     const { boardId } = useParams()
     const { board } = useSelector((storeState) => storeState.boardModule)
-
-
     const dispatch = useDispatch()
 
-    // added board to the dependancy array
     useEffect(() => {
         onLoadBoard()
     }, [])
-
-    // useEffect(() => {
-    //     onLoadBoard()
-    // }, [board])
-
 
     const onLoadBoard = () => {
         dispatch(loadBoard(boardId))

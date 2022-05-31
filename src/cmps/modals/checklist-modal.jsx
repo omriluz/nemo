@@ -32,6 +32,7 @@ export const ChecklistModal = ({ modalProps: { boardId, groupId, task } }) => {
             <input type="text"
                 name='title'
                 id='title'
+                className='add-checklist'
                 value={checklistTitle.title}
                 onChange={handleChange}
             />

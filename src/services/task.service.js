@@ -5,7 +5,7 @@ export const taskService = {
     removeTask,
     getTaskById,
     saveTask,
-
+    setTasks
 }
 window.ts = taskService;
 
@@ -58,6 +58,20 @@ async function getTaskById(boardId, groupId, taskId) {
         console.log(err);
     }
 }
+
+
+async function setTasks(boardId, groupId, tasks) {
+    try {
+        const board = await boardService.getById(boardId)
+        const groupIdx = board.groups.findIndex(group => groupId === group.id)
+        board.groups[groupIdx].tasks = tasks
+        boardService.save(board)
+        return board
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 
 
 function getImgsFromTask(task) {

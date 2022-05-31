@@ -10,36 +10,28 @@ import { Draggable } from "react-beautiful-dnd";
 
 export const GroupPreview = ({ group, boardId, index }) => {
   const dispatch = useDispatch();
-  const [isAddAction, setIsAddAction] = useState(false);
-  const [isEditTitle, setIsEditTitle] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddTask, setIsAddTask] = useState(false);
   const [groupTitle, setGroupTitle] = useState({ title: group.title });
-  const [taskTitle, setTaskTitle] = useState({ title: "" });
+  const [newTask, setNewTask] = useState({ title: "" });
 
   const onRemoveGroup = () => {
     dispatch(removeGroup(group.id, boardId));
   };
 
-  const handleChange = (ev) => {
+  const handleChange = (ev, setStateFunc) => {
     const field = ev.target.name;
     const value = ev.target.value;
-    setGroupTitle({ [field]: value });
-  };
+    setStateFunc({ [field]: value });
+  }
 
   const onSaveGroup = (ev = null) => {
     if (ev) ev.preventDefault();
-    setIsEditTitle(false)
     dispatch(saveGroup(groupTitle, boardId, group.id));
   };
 
-  const handleChangeTask = (ev) => {
-    const field = ev.target.name;
-    const value = ev.target.value;
-    setTaskTitle({ [field]: value });
-  };
 
   const onHandleKeySubmit = (ev) => {
-    console.log(ev.key);
     if (ev.key === "Enter") {
       ev.preventDefault();
       onSaveTask();
@@ -48,8 +40,10 @@ export const GroupPreview = ({ group, boardId, index }) => {
 
   const onSaveTask = (ev = null) => {
     if (ev) ev.preventDefault();
-    dispatch(saveTask(taskTitle, boardId, group.id));
-    setTaskTitle({ title: "" });
+    if (newTask.title) {
+       dispatch(saveTask(newTask, boardId, group.id));
+      setNewTask({ title: "" });
+    }
   };
 
   // const handleMouse = (ev) => {
@@ -71,21 +65,16 @@ export const GroupPreview = ({ group, boardId, index }) => {
             // onMouseDown={handleMouse}
           >
             <div className="group-preview-header">
-              {/* <form onSubmit={onSaveGroup}> */}
-                <input
-                  onClick={() => setIsEditTitle(true)}
-                  className="group-preview-title"
-                  type="text"
-                  name="title"
-                  // onBlur={() => setIsEditTitle(false)}
-                  onBlur={onSaveGroup}
-                  value={groupTitle.title}
-                  onChange={handleChange}
-                />
-              {/* </form> */}
+              <input
+                className="group-preview-title"
+                type="text"
+                name="title"
+                onBlur={onSaveGroup}
+                value={groupTitle.title}
+                onChange={(ev) => handleChange(ev, setGroupTitle)}
+              />
               <div
                 className="add-action"
-                onClick={() => setIsAddAction(!isAddAction)}
               >
                 <MdMoreHoriz />
               </div>
@@ -104,8 +93,8 @@ export const GroupPreview = ({ group, boardId, index }) => {
                         className="task-txt"
                         name="title"
                         placeholder="Enter a title for this card..."
-                        value={taskTitle.title}
-                        onChange={handleChangeTask}
+                        value={newTask.title}
+                        onChange={(ev) => handleChange(ev, setNewTask)}
                         onKeyDown={onHandleKeySubmit}
                       ></textarea>
                       <div className="btn-add-task ">
@@ -119,12 +108,6 @@ export const GroupPreview = ({ group, boardId, index }) => {
                 )}
               </div>
             </div>
-
-            {isAddAction && (
-              <section className="action-modal">
-                <button onClick={onRemoveGroup}>Delete</button>
-              </section>
-            )}
             <div className="add-task-wrapper">
               {!isAddTask && (
                 <div
@@ -135,27 +118,6 @@ export const GroupPreview = ({ group, boardId, index }) => {
                   <p>Add a card</p>
                 </div>
               )}
-
-              {/* {isAddTask && (
-              <div className="add-task-open">
-                <form onSubmit={onSaveTask}>
-                  <textarea
-                    className="task-txt"
-                    name="title"
-                    placeholder="Enter a title for this card..."
-                    value={taskTitle.title}
-                    onChange={handleChangeTask}
-                    onKeyDown={onHandleKeySubmit}
-                  ></textarea>
-                  <div className="btn-add-task ">
-                    <button>Add card</button>
-                    <span className="" onClick={() => setIsAddTask(false)}>
-                      <IoMdClose />
-                    </span>
-                  </div>
-                </form>
-              </div>
-            )} */}
             </div>
           </section>
         )}
