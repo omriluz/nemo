@@ -7,7 +7,6 @@ import { utilService } from '../../services/util.service';
 export const ChecklistModal = ({ modalProps: { boardId, groupId, task } }) => {
     const [checklistTitle, setChecklistTitle] = useState({ title: 'Checklist' });
     const dispatch = useDispatch()
-
     const handleChange = (ev) => {
         const field = ev.target.name;
         const value = ev.target.value;

@@ -27,6 +27,7 @@ import { BsPencil } from "react-icons/bs";
 export const LabelModal = ({
   modalProps: { boardId, groupId, taskId, labels },
 }) => {
+  console.log('fdjiafjdiosajfdioasojid');
   const dispatch = useDispatch();
 
   const onToggleLabel = (labelId) => {

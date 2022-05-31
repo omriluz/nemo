@@ -20,12 +20,11 @@ export const TaskDetails = () => {
   const [labels, setLabels] = useState();
   const { board } = useSelector((storeState) => storeState.boardModule)
 
-  //getting the board for the labels
-  // const { board } = useSelector((storeState) => storeState.boardModule);
 
 
 
   useEffect(() => {
+    console.log('$$$$');
     const currGroup = board?.groups.find(group => group.id === groupId);
     const currTask = currGroup?.tasks?.find(task => task.id === taskId);
     setTask(currTask)

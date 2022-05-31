@@ -9,13 +9,15 @@ export const DynamicModalCmp = ({
   modalTitle,
   modalProps,
 }) => {
-  let modalTypeToOpen
+  let modalTypeToOpen;
   switch (modalTitle) {
     case "Labels":
-      console.log('wiiiiiii');
-      modalTypeToOpen = <LabelModal modalProps={modalProps} />
+      console.log("wiiiiiii");
+      modalTypeToOpen = <LabelModal modalProps={modalProps} />;
+      break;
     case "Checklist":
-      modalTypeToOpen = <ChecklistModal modalProps={modalProps} />
+      modalTypeToOpen = <ChecklistModal modalProps={modalProps} />;
+      break;
   }
 
   return (
@@ -24,7 +26,7 @@ export const DynamicModalCmp = ({
       // onBlur={onCloseModal}
       className="modal-container"
       style={{
-        top: top+ height ,
+        top: top + height,
         // width : width || '304px',
         width: "304px",
       }}
@@ -37,9 +39,7 @@ export const DynamicModalCmp = ({
           </span>
         </div>
       </div>
-      <div className="modal-content-wrapper">
-        {modalTypeToOpen}
-      </div>
+      <div className="modal-content-wrapper">{modalTypeToOpen}</div>
     </div>
   );
 };
