@@ -24,7 +24,7 @@ export const DynamicModalCmp = ({
       // onBlur={onCloseModal}
       className="modal-container"
       style={{
-        top: top - height / 2,
+        top: top+ height ,
         // width : width || '304px',
         width: "304px",
       }}

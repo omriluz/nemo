@@ -42,8 +42,8 @@ export const LoginSignup = () => {
         console.log(credentials);
         dispatch(signup(credentials))
         clearState()
-        navigate('/workspace')
-
+        // figure out flow,
+        // navigate('/workspace')
     }
 
     const onLogin = (ev = null) => {

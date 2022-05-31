@@ -124,7 +124,8 @@ export function updateBoard(board) {
 }
 
 
-// Demo for Optimistic Mutation (IOW - Assuming the server call will work, so updating the UI first)
+// Demo for Optimistic Mutation (IOW - Assuming the server call will work,
+//  so updating the UI first)
 export function onRemoveBoardOptimistic(boardId) {
 
     return (dispatch, getState) => {

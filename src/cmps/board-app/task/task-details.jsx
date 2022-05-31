@@ -9,6 +9,7 @@ import { boardService } from "../../../services/board.service";
 import { labelService } from "../../../services/label.service";
 import { useDispatch } from "react-redux";
 import { loadBoard } from "../../../store/actions/board.action";
+import { GrClose } from 'react-icons/gr'
 
 export const TaskDetails = () => {
   const navigate = useNavigate();
@@ -22,29 +23,14 @@ export const TaskDetails = () => {
   //getting the board for the labels
   // const { board } = useSelector((storeState) => storeState.boardModule);
 
+
+
   useEffect(() => {
     const currGroup = board?.groups.find(group => group.id === groupId);
     const currTask = currGroup?.tasks?.find(task => task.id === taskId);
     setTask(currTask)
     loadBoardLabels();
-    // onLoadBoard()
   }, [board]);
-
-  //   useEffect(() => {
-  //     onLoadBoard()
-  // }, [board])
-
-  // const onLoadBoard = () => {
-  //   dispatch(loadBoard(boardId))
-  // }
-
-  // const loadTask = async () => {
-  //   const taskFromService = await taskService.getTaskById(
-  //     boardId,
-  //     groupId,
-  //     taskId
-  //   );
-  // setTask(taskFromService);
 
 
 

@@ -89,7 +89,7 @@ const ourBoard = {
         // will use actual css selectors and will be placed in the css props
         // "backgroundImage": url('https://unsplash.it/800/800'),
         "backgroundColor": "#026aa7",
-        "background": 'url(https://i.picsum.photos/id/668/800/800.jpg?hmac=Hnhgx4Y1l4U7DSt1hKxzermlLnvyLP1tHt25Tg0y3cQ)',
+        "background": 'url(https://images.unsplash.com/photo-1604147706283-d7119b5b822c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80)',
     },
     "labels": [
         // first 6 labels will start without title
