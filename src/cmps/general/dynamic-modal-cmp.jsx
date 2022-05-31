@@ -14,8 +14,10 @@ export const DynamicModalCmp = ({
     case "Labels":
       console.log('wiiiiiii');
       modalTypeToOpen = <LabelModal modalProps={modalProps} />
+      break
     case "Checklist":
       modalTypeToOpen = <ChecklistModal modalProps={modalProps} />
+      break
   }
 
   return (
@@ -24,7 +26,7 @@ export const DynamicModalCmp = ({
       // onBlur={onCloseModal}
       className="modal-container"
       style={{
-        top: top+ height ,
+        top: top + height,
         // width : width || '304px',
         width: "304px",
       }}

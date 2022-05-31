@@ -63,7 +63,7 @@ export const TaskPreview = ({ boardId, groupId, task, index }) => {
         >
           {/* <div style={{backgroundImage: "url(https://i.picsum.photos/id/373/500/500.jpg?hmac=VqMSKR_Y5zUJm4IEBUjpK6NI7ZdiT7ePMwevp_MDgeQ)"}} className="task-preview-image"></div> */}
           <div className="task-preview-container">
-            {/* <div className="task-preview-edit-icon"><BsPencil /></div> */}
+            <div className="task-preview-edit-icon"><BsPencil /></div>
             {!!labels?.length && (
               <div className="label-container">
                 {labels.map((label) => {
