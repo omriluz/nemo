@@ -49,7 +49,6 @@ export function signup(credentials) {
     return async (dispatch) => {
         try {
             const user = await userService.signup(credentials)
-            console.log('user', user)
             dispatch({
                 type: 'SET_USER',
                 user

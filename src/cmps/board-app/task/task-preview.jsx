@@ -66,6 +66,7 @@ export const TaskPreview = ({ boardId, groupId, task, index }) => {
               </div>
             )}
             <span className="task-preview-title">{task.title}</span>
+            {/* <div className="badges"></div> */}
           </div>
         </div>
       )}
