@@ -35,7 +35,7 @@ export const LabelModal = ({
     //2) data gutter
     //3) label modal item will have a V
     dispatch(toggleLabel(boardId, groupId, taskId, labelId));
-  };
+  }
 
 
   return (

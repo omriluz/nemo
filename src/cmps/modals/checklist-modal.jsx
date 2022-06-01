@@ -4,7 +4,8 @@ import { saveChecklist } from '../../store/actions/checklist.action';
 import { utilService } from '../../services/util.service';
 
 
-export const ChecklistModal = ({ modalProps: { boardId, groupId, task } }) => {
+export const ChecklistModal = ({ modalProps: { boardId, groupId, taskId } }) => {
+    console.log(taskId);
     const [checklistTitle, setChecklistTitle] = useState({ title: 'Checklist' });
     const dispatch = useDispatch()
 
@@ -16,11 +17,11 @@ export const ChecklistModal = ({ modalProps: { boardId, groupId, task } }) => {
 
     const onSaveTask = (ev) => {
         ev.preventDefault()
-        console.log(checklistTitle);
+        // console.log(checklistTitle);
         const checklist = checklistTitle
         checklist.id = utilService.makeId()
         checklist.todos = []
-        dispatch(saveChecklist(checklist, boardId, groupId, task.id));
+        dispatch(saveChecklist(checklist, boardId, groupId, taskId));
         setChecklistTitle({ title: 'Checklist' });
         // task.checklists.push(checklist)
     }
