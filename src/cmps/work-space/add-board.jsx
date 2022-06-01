@@ -11,7 +11,8 @@ export const AddBoard = ({ toggleModal }) => {
 
   const createNewBoard = () => {
     if (boardTitle) {
-      const board = { title: boardTitle };
+      //should get either background image or color on start
+      const board = { title: boardTitle, style:{backgroundColor:'blue'} };
       dispatch(addBoard(board));
       toggleModal();
     } else return;

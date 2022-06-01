@@ -13,9 +13,9 @@ export const AppHeader = () => {
   if (pathname === "/login" || pathname === "/signup")
     routeClass = "-login-signup";
   if (pathname === "/workspace") routeClass = "-workspace";
-  // later will come dynamically with api
   if (pathname.includes("/board")) routeClass = "-workspace";
-  // if (pathname.includes("/board") && pathname.split("/").length >= 4) routeClass = "-task-details";
+  // later will come dynamically with api
+  if (pathname.includes("/board") && pathname.split("/").length >= 4) routeClass = "-task-details";
 
   return (
     <header className={`app-header${routeClass}`}>
@@ -24,9 +24,8 @@ export const AppHeader = () => {
           {pathname === "/" && (
             // <HomeLogo />
             <>
-              <img className="img-zain" src={Logole} alt="" />
-              <span className="please-work">Nemo</span>
-              {/* <span className="please-work">Nemo</span> */}
+              <img className="logo-img" src={Logole} alt="" />
+              <span className="logo-title">Nemo</span>
             </>
           )}
         </div>

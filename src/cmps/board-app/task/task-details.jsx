@@ -28,7 +28,6 @@ export const TaskDetails = () => {
 
 
   useEffect(() => {
-    console.log('$$$$');
     const currGroup = board?.groups.find(group => group.id === groupId);
     const currTask = currGroup?.tasks?.find(task => task.id === taskId);
     setTask(currTask)
@@ -66,9 +65,8 @@ export const TaskDetails = () => {
   };
 
 
-  if (task, group) {
+  if (task) {
     return (
-      // <section onClick={() => console.log('fdasiofjd')} className="task-details-wrapper">
       <section
         tabIndex={"0"}
         onKeyDown={handleKeyEvent}
@@ -89,8 +87,6 @@ export const TaskDetails = () => {
                 onChange={handleChange}
               />
             </form>
-            {/* <h1 className="task-details-title">{task.title}</h1> */}
-            {/* <textarea className="task-details-title">{task.title}</textarea> */}
             <p>
               In list <span className="task-title-group">{group.title}</span>
             </p>

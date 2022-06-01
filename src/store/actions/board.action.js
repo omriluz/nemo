@@ -90,7 +90,6 @@ export function removeBoard(boardId) {
 
 export function addBoard(board) {
     return (dispatch) => {
-
         boardService.save(board)
             .then(savedBoard => {
                 dispatch(getActionAddBoard(savedBoard))

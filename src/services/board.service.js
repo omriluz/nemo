@@ -3,8 +3,7 @@ import { storageService } from './async-storage.service.js'
 import { userService } from './user.service.js'
 import { getActionRemoveBoard, getActionAddBoard, getActionUpdateBoard } from '../store/actions/board.action.js'
 import { utilService } from './util.service.js'
-
-const STORAGE_KEY = 'board'
+import {httpService} from './http.service.js'
 const boardChannel = new BroadcastChannel('boardChannel')
 // const listeners = []
 
@@ -19,19 +18,22 @@ export const boardService = {
 }
 window.cs = boardService;
 
+const STORAGE_KEY = 'board'
+const BOARD_BASE_ENDPOINT = 'board'
 
-function query() {
-    return storageService.query(STORAGE_KEY)
+
+async function query() {
+    // return storageService.query(STORAGE_KEY)
+    const boardsFromDB = await httpService.get(BOARD_BASE_ENDPOINT)
+    return boardsFromDB
 }
-// function getById(boardId) {
-//     return storageService.get(STORAGE_KEY, boardId)
-//     // return axios.get(`/api/board/${boardId}`)
-// }
 
-// @@@ CHANGING GET BY ID TO WORK ASYCHRONISLY
 async function getById(boardId) {
-    return await storageService.get(STORAGE_KEY, boardId)
+    // return await storageService.get(STORAGE_KEY, boardId)
     // return axios.get(`/api/board/${boardId}`)
+    const boardFromDB = await httpService.get(`${BOARD_BASE_ENDPOINT}/${boardId}`)
+    return boardFromDB
+
 }
 
 async function remove(boardId) {
@@ -45,14 +47,22 @@ async function remove(boardId) {
 async function save(board) {
     var savedBoard
     if (board._id) {
-        savedBoard = await storageService.put(STORAGE_KEY, board)
+        // savedBoard = await storageService.put(STORAGE_KEY, board)
+        savedBoard = await httpService.put(BOARD_BASE_ENDPOINT, board)
         // is this necessary? ask shneor if he needs it
-        // boardChannel.postMessage(getActionUpdateBoard(savedBoard))
+        boardChannel.postMessage(getActionUpdateBoard(savedBoard))
     } else {
-        // Later, owner is set by the backend
-        board.owner = userService.getLoggedinUser()
-        savedBoard = await storageService.post(STORAGE_KEY, board)
-        boardChannel.postMessage(getActionAddBoard(savedBoard))
+        try {
+            // Later, owner is set by the backend
+            // board.owner = userService.getLoggedinUser()
+            // savedBoard = await storageService.post(STORAGE_KEY, board)
+            const savedBoard = await httpService.post(BOARD_BASE_ENDPOINT, board)
+            // console.log('board',savedBoard);
+            boardChannel.postMessage(getActionAddBoard(savedBoard))
+            return savedBoard
+        } catch (err) {
+            console.log(err)
+        }
     }
     return savedBoard
 }

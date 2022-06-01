@@ -4,9 +4,12 @@ import { store } from '../store/store'
 // import { socketService, SOCKET_EVENT_USER_UPDATED, SOCKET_EMIT_USER_WATCH } from './socket.service'
 // import { showSuccessMsg } from '../services/event-bus.service'
 import { utilService } from './util.service'
+import { httpService } from './http.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 // var gWatchedUser = null;
+const USER_ENDPOINT = 'user'
+const AUTH_ENDPOINT = 'auth'
 
 export const userService = {
     login,
@@ -26,8 +29,8 @@ export const userService = {
 
 
 function getUsers() {
-    return storageService.query('user')
-    // return httpService.get(`user`)
+    // return storageService.query('user')
+    return httpService.get(`user`)
 }
 
 function onUserUpdate(user) {
@@ -60,9 +63,10 @@ async function update(user) {
 }
 
 async function login(userCred) {
-    const users = await storageService.query('user')
-    const user = users.find(user => user.username === userCred.username && user.password === userCred.password)
-    console.log('user', user)
+    // const users = await storageService.query('user')
+    const user = await httpService.post(`${AUTH_ENDPOINT}/login`, userCred)
+    // const user = users.find(user => user.username === userCred.username && user.password === userCred.password)
+    // console.log('user', user)
     // const user = await httpService.post('auth/login', userCred)
     if (user) {
         // socketService.login(user._id)
@@ -70,15 +74,16 @@ async function login(userCred) {
     }
 }
 async function signup(userCred) {
-    const user = await storageService.post('user', userCred)
-    // const user = await httpService.post('auth/signup', userCred)
+    // const user = await storageService.post('user', userCred)
+    const user = await httpService.post(`${AUTH_ENDPOINT}/signup`, userCred)
     // socketService.login(user._id)
-    return saveLocalUser(user)
+    saveLocalUser(user)
+    return user
 }
 async function logout() {
-    sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
+    // sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
     // socketService.logout()
-    // return await httpService.post('auth/logout')
+    return await httpService.post(`${AUTH_ENDPOINT}/signup`)
 }
 
 async function changeScore(by) {

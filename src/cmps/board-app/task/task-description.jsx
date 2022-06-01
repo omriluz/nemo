@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GrTextAlignLeft } from "react-icons/gr";
+import { GrTextAlignFull } from "react-icons/gr";
 
 import { useDispatch } from "react-redux";
 import { saveTask } from "../../../store/actions/task.action.js";
@@ -30,7 +30,7 @@ export const Description = ({ task, boardId, groupId }) => {
 
     return <section className="task-description flex column " onBlur={() => setIsDescOpen(false)}>
         <div className="title-container flex row">
-            <span className="svg-icon-desc">< GrTextAlignLeft /></span>   <h3 className="desc-title">Description</h3>
+            <span className="svg-icon-desc">< GrTextAlignFull /></span>   <h3 className="desc-title">Description</h3>
         </div>
         <form onSubmit={onSaveTask}>
             <textarea onClick={() => setIsDescOpen(true)}
