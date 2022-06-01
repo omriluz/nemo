@@ -103,7 +103,6 @@ export const TaskDetails = () => {
               taskId={taskId}
               labels={labels}
               onOpenLabels={onOpenLabels}
-              task={task}
             />
           </div>
         </div>

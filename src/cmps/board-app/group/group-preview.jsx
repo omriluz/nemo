@@ -2,13 +2,14 @@ import { TaskList } from "../task/task-list.jsx";
 import { MdMoreHoriz } from "react-icons/md";
 import { IoAdd } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
-import { useState } from "react";
+import { useState, memo } from "react";
 import { removeGroup, saveGroup } from "../../../store/actions/group.action.js";
 import { saveTask } from "../../../store/actions/task.action.js";
 import { useDispatch } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
 
 export const GroupPreview = ({ group, boardId, index }) => {
+  // console.log('rendered group');
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddTask, setIsAddTask] = useState(false);
@@ -45,6 +46,7 @@ export const GroupPreview = ({ group, boardId, index }) => {
       setNewTask({ title: "" });
     }
   };
+
 
   // const handleMouse = (ev) => {
   // ev.preventDefault()
@@ -124,4 +126,4 @@ export const GroupPreview = ({ group, boardId, index }) => {
       </Draggable>
     </div>
   );
-};
+}

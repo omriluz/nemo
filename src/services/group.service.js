@@ -9,7 +9,6 @@ export const groupService = {
 
 
 async function saveGroup(group, boardId, groupId) {
-    console.log('hi!');
     // var savedBoard
     if (groupId) {
         let board = await boardService.getById(boardId)

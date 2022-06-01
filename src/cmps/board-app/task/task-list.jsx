@@ -1,22 +1,22 @@
 import { TaskPreview } from "./task-preview";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { setTasks } from "../../../store/actions/task.action";
 import { useDispatch } from "react-redux";
-
+import { utilService } from "../../../services/util.service";
 export const TaskList = ({ tasks, groupId, boardId }) => {
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleOnDragEnd = (result) => {
+    console.log(result);
     const [reorderedItem] = tasks.splice(result.source.index, 1);
     tasks.splice(result.destination.index, 0, reorderedItem);
-    dispatch(setTasks(boardId,groupId, tasks))
+    dispatch(setTasks(boardId, groupId, tasks));
   };
 
   return (
-    <DragDropContext onDragEnd={handleOnDragEnd} >
-      <Droppable droppableId="task-list">
+    <DragDropContext onDragEnd={handleOnDragEnd}>
+      <Droppable droppableId={groupId}  >
         {(provided) => (
           <section
             ref={provided.innerRef}
@@ -39,4 +39,4 @@ export const TaskList = ({ tasks, groupId, boardId }) => {
       </Droppable>
     </DragDropContext>
   );
-};
+}

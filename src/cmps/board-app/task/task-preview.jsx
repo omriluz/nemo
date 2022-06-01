@@ -3,11 +3,13 @@ import { useNavigate } from "react-router";
 import { removeTask } from "../../../store/actions/task.action";
 import { Draggable } from "react-beautiful-dnd";
 import { Link } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, memo } from "react";
 import { labelService } from "../../../services/label.service";
 import { BsPencil } from "react-icons/bs";
 
 export const TaskPreview = ({ boardId, groupId, task, index }) => {
+  // console.log("task rendered");
+  // console.log("task props are", boardId, groupId, task, index);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [labels, setLabels] = useState([]);
