@@ -24,7 +24,11 @@ export const TaskDetails = () => {
   const [labels, setLabels] = useState();
   const { board } = useSelector((storeState) => storeState.boardModule)
 
+
+
+
   useEffect(() => {
+    console.log('$$$$');
     const currGroup = board?.groups.find(group => group.id === groupId);
     const currTask = currGroup?.tasks?.find(task => task.id === taskId);
     setTask(currTask)
@@ -70,7 +74,11 @@ export const TaskDetails = () => {
         onKeyDown={handleKeyEvent}
         className="task-details-wrapper"
       >
+
         <div className="task-details">
+          {task?.style?.backgroundColor &&
+            <div className="cover-color" style={{ backgroundColor: task.style.backgroundColor }}>
+            </div>}
           <div className="task-details-back-btn" onClick={() => navigate(-1)}><GrClose /> </div>
           <div className="task-details-header">
             <span className="header-icon"> <AiOutlineCreditCard /></span>
@@ -98,8 +106,8 @@ export const TaskDetails = () => {
               groupId={groupId}
               taskId={taskId}
               labels={labels}
-              onOpenLabels={onOpenLabels}
               task={task}
+              onOpenLabels={onOpenLabels}
             />
           </div>
         </div>

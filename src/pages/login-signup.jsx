@@ -39,7 +39,6 @@ export const LoginSignup = () => {
     const onSignUp = (ev = null) => {
         if (ev) ev.preventDefault()
         if (!credentials.username || !credentials.password || !credentials.fullname) return
-        console.log(credentials);
         dispatch(signup(credentials))
         clearState()
         // figure out flow,

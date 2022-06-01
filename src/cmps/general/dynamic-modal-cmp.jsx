@@ -1,6 +1,7 @@
 import { IoMdClose } from "react-icons/io";
 import { LabelModal } from "../modals/label-modal";
 import { ChecklistModal } from "../modals/checklist-modal";
+import { CoverModal } from "../modals/cover-modal.jsx";
 
 export const DynamicModalCmp = ({
   modalDetails: { height, top },
@@ -9,15 +10,24 @@ export const DynamicModalCmp = ({
   modalTitle,
   modalProps,
 }) => {
-  let modalTypeToOpen
+  let modalTypeToOpen;
   switch (modalTitle) {
     case "Labels":
-      console.log('wiiiiiii');
-      modalTypeToOpen = <LabelModal modalProps={modalProps} />
-      break
+      console.log("wiiiiiii");
+      modalTypeToOpen = <LabelModal modalProps={modalProps} />;
+      break;
     case "Checklist":
-      modalTypeToOpen = <ChecklistModal modalProps={modalProps} />
-      break
+      modalTypeToOpen = <ChecklistModal modalProps={modalProps} />;
+      break;
+    case "Dates":
+      // modalTypeToOpen = <ChecklistModal modalProps={modalProps} />;
+      break;
+    case "Attachment":
+      // modalTypeToOpen = <ChecklistModal modalProps={modalProps} />;
+      break;
+    case "Cover":
+      modalTypeToOpen = <CoverModal modalProps={modalProps} />;
+      break;
   }
 
   return (
@@ -39,9 +49,7 @@ export const DynamicModalCmp = ({
           </span>
         </div>
       </div>
-      <div className="modal-content-wrapper">
-        {modalTypeToOpen}
-      </div>
+      <div className="modal-content-wrapper">{modalTypeToOpen}</div>
     </div>
   );
 };

@@ -5,14 +5,16 @@ import { MdOutlineScreenShare } from "react-icons/md";
 import { useEffect, useRef, useState } from "react";
 import { DynamicModalCmp } from "../../general/dynamic-modal-cmp";
 
-export const TaskSidebar = ({ boardId, groupId, taskId, labels, }) => {
+export const TaskSidebar = ({ boardId, groupId, task, labels }) => {
+  const { id } = task
+  const taskId = id
   //later will be object that will contain the function as well
   const buttons = [
     { txt: "Labels", icon: <TiTag />, props: { boardId, groupId, taskId, labels } },
     { txt: "Checklist", icon: <BsCheck2Square />, props: { boardId, groupId, taskId } },
     { txt: "Dates", icon: <BsClock />, props: {} },
     { txt: "Attachment", icon: <FiPaperclip />, props: {} },
-    { txt: "Cover", icon: <MdOutlineScreenShare />, props: { boardId, groupId, taskId } },
+    { txt: "Cover", icon: <MdOutlineScreenShare />, props: { boardId, groupId, task } },
   ]
 
   const [isModalOpen, setIsModalOpen] = useState(false);

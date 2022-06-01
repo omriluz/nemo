@@ -22,3 +22,14 @@ export function saveTask(task, boardId, groupId, activity) {
         }
     }
 }
+
+export function setTasks(boardId, groupId, tasks) {
+    return async (dispatch) => {
+        try {
+            const board = await taskService.setTasks(boardId, groupId, [...tasks])
+            dispatch(getActionSetBoard(board))
+        } catch (err) {
+            console.log('err in saving task')
+        }
+    }
+}

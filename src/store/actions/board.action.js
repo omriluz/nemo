@@ -22,7 +22,6 @@ export function getActionUpdateBoard(board) {
     }
 }
 export function getActionSetBoard(board) {
-    console.log(board);
     return {
         type: 'SET_BOARD',
         board
@@ -58,7 +57,6 @@ export function loadBoards() {
     return (dispatch) => {
         boardService.query()
             .then(boards => {
-                console.log('Boards from DB:', boards)
                 dispatch({
                     type: 'SET_BOARDS',
                     boards
@@ -71,7 +69,6 @@ export function loadBoards() {
 
         if (subscriber) boardService.unsubscribe(subscriber)
         subscriber = (ev) => {
-            console.log('Got notified', ev.data)
             dispatch(ev.data)
         }
         boardService.subscribe(subscriber)
@@ -82,7 +79,6 @@ export function removeBoard(boardId) {
     return async (dispatch) => {
         try {
             await boardService.remove(boardId)
-            console.log('Deleted Succesfully!');
             dispatch(getActionRemoveBoard(boardId))
             showSuccessMsg('Board removed')
         } catch (err) {
@@ -97,12 +93,9 @@ export function addBoard(board) {
 
         boardService.save(board)
             .then(savedBoard => {
-                console.log('Added Board', savedBoard);
                 dispatch(getActionAddBoard(savedBoard))
-                // showSuccessMsg('Board added')
             })
             .catch(err => {
-                // showErrorMsg('Cannot add board')
                 console.log('Cannot add board', err)
             })
     }
@@ -114,10 +107,8 @@ export function updateBoard(board) {
             .then(savedBoard => {
                 console.log('Updated Board:', savedBoard);
                 dispatch(getActionUpdateBoard(savedBoard))
-                // showSuccessMsg('Board updated')
             })
             .catch(err => {
-                // showErrorMsg('Cannot update board')
                 console.log('Cannot save board', err)
             })
     }

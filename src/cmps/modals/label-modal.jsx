@@ -29,6 +29,7 @@ export const LabelModal = ({
 }) => {
   const dispatch = useDispatch();
 
+  console.log(labels);
   const onToggleLabel = (labelId) => {
     // on toggling, should add label to task, present it in:
     //1) the task preview,

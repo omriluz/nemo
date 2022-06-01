@@ -6,13 +6,24 @@ export function saveGroup(group, boardId, groupId) {
         try {
             const board = await groupService.saveGroup(group, boardId, groupId)
             //  console.log('board', board)
-             console.log('got here')
             dispatch(getActionSetBoard(board))
         } catch (err) {
             console.log('err in saving task')
         }
     }
 }
+
+export function setGroups(boardId, groups) {
+    return async (dispatch) => {
+        try {
+            const board = await groupService.setGroups(boardId, groups)
+            dispatch(getActionSetBoard(board))
+        } catch (err) {
+            console.log('err in saving task')
+        }
+    }
+}
+
 
 export function removeGroup(groupId, boardId) {
     // console.log(groupId, boardId)

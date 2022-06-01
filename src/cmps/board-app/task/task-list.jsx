@@ -1,36 +1,29 @@
 import { TaskPreview } from "./task-preview";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { useEffect, useState } from "react";
-
+import { memo, useEffect, useState } from "react";
+import { setTasks } from "../../../store/actions/task.action";
+import { useDispatch } from "react-redux";
+import { utilService } from "../../../services/util.service";
 export const TaskList = ({ tasks, groupId, boardId }) => {
-  const [dTasks, updateDTasks] = useState(tasks);
-  let arr = new Array(3).fill(null).map(() => (Math.round(Math.random() * 4) > 3))
-
-  useEffect(() => {
-    updateDTasks(tasks)
-  }, [tasks])
+  const dispatch = useDispatch();
 
   const handleOnDragEnd = (result) => {
-    const items = Array.from(dTasks);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    updateDTasks(items);
-    // Moving from one list to another
+    console.log(result);
+    const [reorderedItem] = tasks.splice(result.source.index, 1);
+    tasks.splice(result.destination.index, 0, reorderedItem);
+    dispatch(setTasks(boardId, groupId, tasks));
   };
-
-
 
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
-      <Droppable droppableId="task-list">
+      <Droppable droppableId={groupId}  >
         {(provided) => (
           <section
             ref={provided.innerRef}
             {...provided.droppableProps}
             className="task-list"
           >
-            {dTasks.map((task, index) => {
-              const isImgRender = Math.round(Math.random * 3) > 2
+            {tasks.map((task, index) => {
               return (
                 <TaskPreview
                   key={task.id}
@@ -38,7 +31,6 @@ export const TaskList = ({ tasks, groupId, boardId }) => {
                   boardId={boardId}
                   index={index}
                   groupId={groupId}
-                  arr={arr}
                 />
               );
             })}
@@ -47,4 +39,4 @@ export const TaskList = ({ tasks, groupId, boardId }) => {
       </Droppable>
     </DragDropContext>
   );
-};
+}

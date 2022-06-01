@@ -15,12 +15,12 @@ function App() {
         <main>
           <Routes>
             <Route element={<HomePage />} path={"/"} />
+            <Route element={<LoginSignup />} path={"/signup"} />
+            <Route element={<LoginSignup />} path={"/login"} />
             <Route element={<WorkSpace />} path={"/workspace"} />
             <Route element={<BoardApp />} path={"/board/:boardId"}>
               <Route element={<TaskDetails />} path={":groupId/:taskId"} />
             </Route>
-            <Route element={<LoginSignup />} path={"/signup"} />
-            <Route element={<LoginSignup />} path={"/login"} />
           </Routes>
         </main>
     </Router>

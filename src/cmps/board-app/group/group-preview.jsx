@@ -2,46 +2,51 @@ import { TaskList } from "../task/task-list.jsx";
 import { MdMoreHoriz } from "react-icons/md";
 import { IoAdd } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
-import { useState } from "react";
+import { useState, memo } from "react";
 import { removeGroup, saveGroup } from "../../../store/actions/group.action.js";
 import { saveTask } from "../../../store/actions/task.action.js";
 import { useDispatch } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
 
 export const GroupPreview = ({ group, boardId, index }) => {
+  // console.log('rendered group');
   const dispatch = useDispatch();
-  const [isAddAction, setIsAddAction] = useState(false);
-  const [isEditTitle, setIsEditTitle] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddTask, setIsAddTask] = useState(false);
   const [groupTitle, setGroupTitle] = useState({ title: group.title });
-  const [taskTitle, setTaskTitle] = useState({ title: "" });
+  const [newTask, setNewTask] = useState({ title: "" });
 
   const onRemoveGroup = () => {
     dispatch(removeGroup(group.id, boardId));
   };
 
-  const handleChange = (ev) => {
+  const handleChange = (ev, setStateFunc) => {
     const field = ev.target.name;
     const value = ev.target.value;
-    setGroupTitle({ [field]: value });
-  };
+    setStateFunc({ [field]: value });
+  }
 
   const onSaveGroup = (ev = null) => {
     if (ev) ev.preventDefault();
     dispatch(saveGroup(groupTitle, boardId, group.id));
   };
 
-  const handleChangeTask = (ev) => {
-    const field = ev.target.name;
-    const value = ev.target.value;
-    setTaskTitle({ [field]: value });
+
+  const onHandleKeySubmit = (ev) => {
+    if (ev.key === "Enter") {
+      ev.preventDefault();
+      onSaveTask();
+    }
   };
 
   const onSaveTask = (ev = null) => {
     if (ev) ev.preventDefault();
-    dispatch(saveTask(taskTitle, boardId, group.id));
-    setTaskTitle({ title: "" });
+    if (newTask.title) {
+       dispatch(saveTask(newTask, boardId, group.id));
+      setNewTask({ title: "" });
+    }
   };
+
 
   // const handleMouse = (ev) => {
   // ev.preventDefault()
@@ -59,23 +64,19 @@ export const GroupPreview = ({ group, boardId, index }) => {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
-          // onMouseDown={handleMouse}
+            // onMouseDown={handleMouse}
           >
-            <div className="group-preview-header flex justify-space-between algin-center ">
-              <form onSubmit={onSaveGroup}>
-                <input
-                  onClick={() => setIsEditTitle(true)}
-                  className="group-preview-title"
-                  type="text"
-                  name="title"
-                  onBlur={onSaveGroup}
-                  value={groupTitle.title}
-                  onChange={handleChange}
-                />
-              </form>
+            <div className="group-preview-header">
+              <input
+                className="group-preview-title"
+                type="text"
+                name="title"
+                onBlur={onSaveGroup}
+                value={groupTitle.title}
+                onChange={(ev) => handleChange(ev, setGroupTitle)}
+              />
               <div
                 className="add-action"
-                onClick={() => setIsAddAction(!isAddAction)}
               >
                 <MdMoreHoriz />
               </div>
@@ -87,15 +88,29 @@ export const GroupPreview = ({ group, boardId, index }) => {
                   groupId={group.id}
                   boardId={boardId}
                 />
+                {isAddTask && (
+                  <div className="add-task-open">
+                    <form onSubmit={onSaveTask}>
+                      <textarea
+                        className="task-txt"
+                        name="title"
+                        placeholder="Enter a title for this card..."
+                        value={newTask.title}
+                        onChange={(ev) => handleChange(ev, setNewTask)}
+                        onKeyDown={onHandleKeySubmit}
+                      ></textarea>
+                      <div className="btn-add-task ">
+                        <button>Add card</button>
+                        <span className="" onClick={() => setIsAddTask(false)}>
+                          <IoMdClose />
+                        </span>
+                      </div>
+                    </form>
+                  </div>
+                )}
               </div>
-              {/* </div> */}
-
-              {isAddAction && (
-                <section className="action-modal">
-                  <button onClick={onRemoveGroup}>Delete</button>
-                </section>
-              )}
-
+            </div>
+            <div className="add-task-wrapper">
               {!isAddTask && (
                 <div
                   className="add-task-container flex"
@@ -105,30 +120,10 @@ export const GroupPreview = ({ group, boardId, index }) => {
                   <p>Add a card</p>
                 </div>
               )}
-
-              {isAddTask && (
-                <div className="add-task-open">
-                  <form onSubmit={onSaveTask}>
-                    <textarea
-                      className="task-txt"
-                      name="title"
-                      placeholder="Enter a title for this card..."
-                      value={taskTitle.title}
-                      onChange={handleChangeTask}
-                    ></textarea>
-                    <div className="btn-add-task ">
-                      <button>Add card</button>
-                      <span className="" onClick={() => setIsAddTask(false)}>
-                        <IoMdClose />
-                      </span>
-                    </div>
-                  </form>
-                </div>
-              )}
             </div>
           </section>
         )}
       </Draggable>
     </div>
   );
-};
+}
