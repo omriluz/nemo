@@ -6,6 +6,7 @@ export const labelService = {
     getLabelsById,
     // getLabelById,
     // addNewLabel
+    // editLabel
 }
 
 
@@ -13,7 +14,6 @@ async function toggleLabel(boardId, groupId, taskId, labelId) {
     try {
         let task = await taskService.getTaskById(boardId, groupId, taskId)
         const isInLabels = task?.labelIds.filter(currLabelId => currLabelId === labelId).length
-        // const isInLabels = task.labelIds.filter(currLabelId => currLabelId === labelId).length
         if (isInLabels) {
             task.labelIds = task.labelIds.filter(currLabelId => currLabelId !== labelId)
         } else {

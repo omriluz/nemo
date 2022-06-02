@@ -1,7 +1,6 @@
 .data-gutter {
-    // margin-left: 40px;
-    // margin-top: 8px;
-    width: 100%;
+    margin-left: 40px;
+    margin-top: 8px;
     height: 72px;
     // background-color: red;
 }
@@ -12,6 +11,55 @@
     float: left;
     margin: 0 8px 8px 0;
     max-width: 100%;
-    background-color: blue;
-    height: 50px;
+
+    &-title {
+        color: #5e6c84;
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 16px;
+        line-height: 20px;
+        margin: 0 8px 4px 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 }
+
+
+
+.label-data-item {
+    border-radius: 3px;
+    box-sizing: border-box;
+    display: block;
+    float: left;
+    font-weight: 600;
+    height: 32px;
+    line-height: 32px;
+    margin: 0 4px 4px 0;
+    min-width: 40px;
+    padding: 0 12px;
+    width: auto;
+    cursor: pointer;
+}
+
+.add-label-data-gutter-btn {
+    font-size: 16px;
+    line-height: 16px;
+    padding: 8px;
+    width: 16px;
+    border-radius: 3px;
+    float: left;
+    font-weight: 600;
+    height: 32px;
+    line-height: 32px;
+    margin: 0 4px 4px 0;
+    min-width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    background-color: #e1e4e8;
+    cursor: pointer;
+}
+

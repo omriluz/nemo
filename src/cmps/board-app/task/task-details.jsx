@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { taskService } from "../../../services/task.service";
 import { TaskSidebar } from "./task-sidebar";
@@ -21,7 +21,6 @@ export const TaskDetails = () => {
   const [group, setGroup] = useState(null);
   const [isEditTitle, setIsEditTitle] = useState(false);
   const [taskTitle, setTaskTitle] = useState(null);
-  const [labels, setLabels] = useState();
   const { board } = useSelector((storeState) => storeState.boardModule)
 
   useEffect(() => {
@@ -30,13 +29,12 @@ export const TaskDetails = () => {
     setTask(currTask)
     setGroup(currGroup)
     setTaskTitle({ title: currTask.title })
-    loadBoardLabels();
   }, [board]);
 
-  const loadBoardLabels = async () => {
-    const boardFromService = await boardService.getById(boardId);
-    setLabels(boardFromService.labels);
-  };
+  // needs refactoring
+  useEffect(() => {
+    document.querySelector('html').style.overflowY = 'hidden'
+  },[])
 
 
   const handleKeyEvent = (e) => {
@@ -88,12 +86,12 @@ export const TaskDetails = () => {
             </p>
           </div>
           <div className="helper-container">
-            <TaskDetailsMain task={task} boardId={boardId} groupId={groupId} />
+            <TaskDetailsMain task={task} boardId={boardId} groupId={groupId} labels={board.labels}/>
             <TaskSidebar
               boardId={boardId}
               groupId={groupId}
               taskId={taskId}
-              labels={labels}
+              labels={board.labels}
               task={task}
             />
           </div>

@@ -2,7 +2,7 @@ import { TaskList } from "../task/task-list.jsx";
 import { MdMoreHoriz } from "react-icons/md";
 import { IoAdd } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
-import { useState, memo } from "react";
+import { useState, memo, useRef } from "react";
 import { removeGroup, saveGroup } from "../../../store/actions/group.action.js";
 import { saveTask } from "../../../store/actions/task.action.js";
 import { useDispatch } from "react-redux";
@@ -15,6 +15,7 @@ export const GroupPreview = ({ group, boardId, index }) => {
   const [isAddTask, setIsAddTask] = useState(false);
   const [groupTitle, setGroupTitle] = useState({ title: group.title });
   const [newTask, setNewTask] = useState({ title: "" });
+  const addTaskRef = useRef(null)
 
   const onRemoveGroup = () => {
     dispatch(removeGroup(group.id, boardId));
@@ -92,6 +93,7 @@ export const GroupPreview = ({ group, boardId, index }) => {
                   <div className="add-task-open">
                     <form onSubmit={onSaveTask}>
                       <textarea
+                        red={addTaskRef}
                         className="task-txt"
                         name="title"
                         placeholder="Enter a title for this card..."

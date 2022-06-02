@@ -28,11 +28,11 @@
         .complete {
             color: #ffffff;
             background-color: #61bd4f;
-            font-size: 12px;
+            font-size: 12px !important;
             line-height: 16px;
             padding: 0 4px;
             border-radius: 2px;
-            margin: auto 0 auto 8px;
+            // margin: auto 0 auto 8px;
         }
 
         .over-due {
@@ -51,7 +51,7 @@
         cursor: pointer;
         height: 19px;
         width: 19px;
-        margin-inline-start: 2em;
+        // margin-inline-start: 2em;
         color: #dfe1e6;
     }
 
@@ -67,20 +67,3 @@
 
 
 
-.type-container {
-    margin: 0 8px 14px 0;
-    
-    .title-due-date {
-        margin-bottom: -12px;
-        margin-inline-start: 2.5em;
-        color: #5e6c84;
-        display: block;
-        font-size: 12px;
-        font-weight: 600;
-        line-height: 16px;
-        line-height: 20px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap
-    }
-}

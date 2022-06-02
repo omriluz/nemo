@@ -4,7 +4,7 @@ import { utilService } from "../../services/util.service"
 import { saveTask } from "../../store/actions/label.action"
 
 
-export const CoverModal = ({ modalProps: { boardId, groupId, task } }) => {
+export const CoverModal = ({ boardId, groupId, task  }) => {
     const [selectedColor, setSelectedColor] = useState(null)
     const [selectedSize, setSelectedSize] = useState(null)
     const dispatch = useDispatch()
@@ -33,7 +33,7 @@ export const CoverModal = ({ modalProps: { boardId, groupId, task } }) => {
         console.log(task);
         // need to deep copy to assign backgroundColor
         // might need to change, may cause problems later
-        // let taskAfterCopy = JSON.parse(JSON.stringify(task));
+        let taskAfterCopy = JSON.parse(JSON.stringify(task));
         taskAfterCopy.style.backgroundColor = color
         dispatch(saveTask(taskAfterCopy, boardId, groupId))
     }

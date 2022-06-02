@@ -20,19 +20,19 @@ export function DatePreview({ task, boardId, groupId }) {
     }
 
     const getDueStatus = () => {
-        if (task.isDone) return { txt: 'COMPLETE', className: 'complete' };
+        if (task.isDone) return { txt: 'complete', className: 'complete' };
         if (Date.now() > task.dueDate) {
-            return { txt: 'OVERDUE', className: 'over-due' };
+            return { txt: 'overdue', className: 'over-due' };
         }
     }
 
     return (
         <div className='date-preview-container'>
-            <span>{(task.isDone) ?
+            {(task.isDone) ?
                 <IoCheckbox className='checkbox-checked' onClick={toggleIsDone} />
                 : <MdCheckBoxOutlineBlank className='checkbox-blank' onClick={toggleIsDone} />
             }
-            </span>
+            
 
             <button type='button'>
                 <span> {utilService.getDateByTimestamp(task.dueDate)}</span>
