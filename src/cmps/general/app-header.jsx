@@ -1,6 +1,8 @@
 import { Link, useLocation, useParams } from "react-router-dom";
 import { ReactComponent as HomeLogo } from "../../assets/svg/homePageLogo.svg";
+import { ImTrello } from "react-icons/im";
 import Logole from "../../assets/img/ttttCapture.PNG";
+import avatar from "../../assets/svg/avatar.svg"
 
 export const AppHeader = () => {
   const { pathname } = useLocation();
@@ -41,6 +43,23 @@ export const AppHeader = () => {
             </a>
           </div>
         )}
+        {(pathname === "/workspace" || pathname.includes("/board")) && (
+          // <HomeLogo />
+
+          <div className="app-warper flex ">
+            <Link to={"/workspace"}><div className="logo-container flex">
+              <span className="logo-trello"><ImTrello /></span>
+              <span className="logo-title">Nemo</span> </div>
+            </Link>
+            <div className="user-container">
+              <div className="avatar-img" background={avatar}>
+
+              </div>
+            </div>
+          </div>
+
+        )}
+
       </nav>
     </header>
   );
