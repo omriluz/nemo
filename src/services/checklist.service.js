@@ -6,7 +6,8 @@ import { utilService } from "./util.service"
 export const checklistService = {
     removeChecklist,
     saveChecklist,
-    saveTodo
+    saveTodo,
+    removeTodo
 }
 
 async function removeChecklist(boardId, groupId, taskId, checklistId, activity) {
@@ -30,6 +31,14 @@ async function saveTodo(todo, checklistId, boardId, groupId, taskId) {
     const todoIdx = taskToUpdate.checklists[checklistIdx].todos.findIndex(todo => todoId === todo.id)
     if (todoIdx < 0 || !todoIdx && todoIdx !== 0) taskToUpdate.checklists[checklistIdx].todos.push(todo)
     else taskToUpdate.checklists[checklistIdx].todos[todoIdx] = todo
+    return taskService.saveTask(taskToUpdate, boardId, groupId)
+}
+async function removeTodo(todo, checklistId, boardId, groupId, taskId) {
+    const todoId = todo.id
+    const taskToUpdate = await taskService.getTaskById(boardId, groupId, taskId)
+    const checklistIdx = taskToUpdate.checklists.findIndex(checklist => checklistId === checklist.id)
+    const todoIdx = taskToUpdate.checklists[checklistIdx].todos.findIndex(todo => todoId === todo.id)
+    taskToUpdate.checklists[checklistIdx].todos.splice(todoIdx, 1)
     return taskService.saveTask(taskToUpdate, boardId, groupId)
 }
 

@@ -4,6 +4,7 @@ import { IoMdClose } from "react-icons/io";
 import { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { saveChecklist } from '../../../../store/actions/checklist.action.js';
+import { ChecklistProgressBar } from './checklist-progress.jsx'
 
 
 
@@ -54,11 +55,9 @@ export const ChecklistPreview = ({ checklist, onRemoveChecklist, task, boardId, 
                 </div>
 
             </div>
-            <div className="todo-progress">
-                <span className="todo-progress-present">0%</span>
-                <div className="todo-progress-bar"></div>
 
-            </div>
+            <ChecklistProgressBar checklist={checklist} />
+
 
             <TodosList
                 checklistId={checklist.id}

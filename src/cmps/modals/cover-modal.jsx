@@ -6,7 +6,7 @@ import { saveTask } from "../../store/actions/label.action"
 
 export const CoverModal = ({ modalProps: { boardId, groupId, task } }) => {
     const [selectedColor, setSelectedColor] = useState(null)
-    const [selectedSize, setSelectedSize] = useState(null)
+    const [selectedSize, setSelectedSize] = useState('uncover')
     const dispatch = useDispatch()
 
     const coverColors = [
@@ -29,12 +29,15 @@ export const CoverModal = ({ modalProps: { boardId, groupId, task } }) => {
         saveColor(color.color)
     }
 
+    const chooseSize = (size) => {
+        setSelectedSize(size)
+        saveColor()
+    }
+
     const saveColor = (color) => {
-        console.log(task);
-        // need to deep copy to assign backgroundColor
-        // might need to change, may cause problems later
         let taskAfterCopy = JSON.parse(JSON.stringify(task));
         taskAfterCopy.style.backgroundColor = color
+        taskAfterCopy.coverSize = selectedSize
         dispatch(saveTask(taskAfterCopy, boardId, groupId))
     }
 
@@ -46,7 +49,7 @@ export const CoverModal = ({ modalProps: { boardId, groupId, task } }) => {
             <h4>Size</h4>
             <div className="size-choice-container">
                 <div className={`uncover-choice choice ${(selectedSize !== 'uncover') ? '' : 'selected'}`}
-                    onClick={() => setSelectedSize('uncover')}>
+                    onClick={() => chooseSize('uncover')}>
                     <div className="upper-background" style={{ backgroundColor: selectedColor?.color }}>
                     </div>
                     <div className="lower-background">
@@ -64,7 +67,7 @@ export const CoverModal = ({ modalProps: { boardId, groupId, task } }) => {
                     </div>
                 </div>
                 <div className={`cover-choice choice ${selectedSize === 'cover' ? 'selected' : ''}`}
-                    onClick={() => setSelectedSize('cover')}
+                    onClick={() => chooseSize('cover')}
                     style={{ backgroundColor: selectedColor?.color }} >
                     <div className="two-text-stripes-module">
                         <div className="upper-stripe"></div>

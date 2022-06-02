@@ -2,6 +2,9 @@ import { IoMdClose } from "react-icons/io";
 import { LabelModal } from "../modals/label-modal";
 import { ChecklistModal } from "../modals/checklist-modal";
 import { CoverModal } from "../modals/cover-modal.jsx";
+import { ActionModal } from "../modals/action-modal.jsx";
+import { TaskDateModal } from "../board-app/task/dates/task-date-modal";
+import { AttachmentModal } from "../board-app/task/attachment/attachment-modal"
 
 export const DynamicModalCmp = ({
   modalDetails: { height, top },
@@ -9,6 +12,7 @@ export const DynamicModalCmp = ({
   onCloseModal,
   modalTitle,
   modalProps,
+  onRemoveTodo
 }) => {
   let modalTypeToOpen;
   switch (modalTitle) {
@@ -16,16 +20,19 @@ export const DynamicModalCmp = ({
       modalTypeToOpen = <LabelModal modalProps={modalProps} />;
       break;
     case "Checklist":
-      modalTypeToOpen = <ChecklistModal modalProps={modalProps} onCloseModal={onCloseModal}/>;
+      modalTypeToOpen = <ChecklistModal modalProps={modalProps} onCloseModal={onCloseModal} />;
       break;
     case "Dates":
-      // modalTypeToOpen = <ChecklistModal modalProps={modalProps} />;
+      modalTypeToOpen = <TaskDateModal modalProps={modalProps} />;
       break;
     case "Attachment":
-      // modalTypeToOpen = <ChecklistModal modalProps={modalProps} />;
+      modalTypeToOpen = <AttachmentModal modalProps={modalProps} />;
       break;
     case "Cover":
       modalTypeToOpen = <CoverModal modalProps={modalProps} />;
+      break;
+    case "Actions":
+      modalTypeToOpen = <ActionModal onRemoveTodo={onRemoveTodo} />;
       break;
   }
 
@@ -36,8 +43,7 @@ export const DynamicModalCmp = ({
       className="modal-container"
       style={{
         top: top + height,
-        // width : width || '304px',
-        width: "304px",
+        width: width || '304px'
       }}
     >
       <div className="modal-header-wrapper">
