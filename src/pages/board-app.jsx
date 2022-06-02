@@ -25,7 +25,7 @@ export const BoardApp = () => {
   if (!board) return <h1>Loading...</h1>;
   return (
     // <div style={board.style} className="board-app-wrapper">
-    <div style={{backgroundColor:'#0079bf'}} className="board-app-wrapper">
+    <div style={{ background: `url(https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2048x1152/6820193445dcff991b2b12f41916deea/photo-1537486336219-a3dd8e2dc6b5.jpg) center center / cover` }} className="board-app-wrapper">
       <Outlet />
       <div className="board-app">
         <div className="board-header">

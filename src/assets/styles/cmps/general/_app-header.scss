@@ -165,6 +165,7 @@
   // workspace and board header height
   // max-height: 44px;
   // padding: 6px 4px;
+
   // &-workspace {
   //   & nav {
   //     padding: 16px;
@@ -183,18 +184,10 @@
   //     }
   //   }
 
-  // }
-
-  .logo-title {
-    font-size: 37px;
-    font-family: "Charlie-Text-Semibold";
-    font-weight: 700;
-  }
-
-  .logo-img {
-    width: 30px;
-  }
 }
+
+
+
 
 
 .avatar-img {
@@ -202,4 +195,14 @@
   cursor: pointer;
   height: 35px;
   width: 35px;
+}
+
+.logo-title {
+  font-size: 37px;
+  font-family: "Charlie-Text-Semibold";
+  font-weight: 700;
+}
+
+.logo-img {
+  width: 30px;
 }
