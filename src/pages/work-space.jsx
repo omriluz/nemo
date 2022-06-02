@@ -31,7 +31,6 @@ export const WorkSpace = () => {
 
   const onToggleStar = (ev, boardId) => {
     ev.preventDefault()
-    console.log('hhhh')
     const board = boards.find(board => board._id === boardId)
     board.isStar = !board.isStar
     dispatch(updateBoard(board))
@@ -43,10 +42,10 @@ export const WorkSpace = () => {
         <div className="content-all-boards">
           <section className="starred-boards-section">
             <div className="title-header flex">
-              <div className="title-header-icon-container">
+              {/* <div className="title-header-icon-container">
                 <TiStarOutline className="header-icon star-icon" />
-              </div>
-              <h3>Starred boards</h3>
+              </div> */}
+              {/* <h3>Starred boards</h3> */}
             </div>
             <div className="primary-boards-container-section">
 

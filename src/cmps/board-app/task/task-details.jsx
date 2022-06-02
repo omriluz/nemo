@@ -24,9 +24,6 @@ export const TaskDetails = () => {
   const [labels, setLabels] = useState();
   const { board } = useSelector((storeState) => storeState.boardModule)
 
-
-
-
   useEffect(() => {
     const currGroup = board?.groups.find(group => group.id === groupId);
     const currTask = currGroup?.tasks?.find(task => task.id === taskId);
@@ -41,11 +38,6 @@ export const TaskDetails = () => {
     setLabels(boardFromService.labels);
   };
 
-  const onOpenLabels = () => { };
-
-  const onCreateLabel = () => {
-    console.log("fdasfds");
-  };
 
   const handleKeyEvent = (e) => {
     if (e.key === "Escape") navigate(-1);
@@ -103,7 +95,6 @@ export const TaskDetails = () => {
               taskId={taskId}
               labels={labels}
               task={task}
-              onOpenLabels={onOpenLabels}
             />
           </div>
         </div>
