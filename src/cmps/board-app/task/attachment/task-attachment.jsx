@@ -16,7 +16,8 @@ export const TaskAttachment = ({ task, boardId, groupId }) => {
         />)
 
     return (
-        <div className='task-attachments-container'>
+
+        attachments.length > 0 && <div className='task-attachments-container'>
             <div className='title-container'>
                 <ImAttachment className='attach-icon' />
                 <h3>Attachments</h3>

@@ -12,6 +12,8 @@ import { loadBoard } from "../../../store/actions/board.action";
 import { GrClose } from 'react-icons/gr'
 import { saveTask } from "../../../store/actions/task.action";
 import { AiOutlineCreditCard } from "react-icons/ai";
+import { CoverModal } from "../../modals/cover-modal";
+
 export const TaskDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
@@ -34,7 +36,7 @@ export const TaskDetails = () => {
   // needs refactoring
   useEffect(() => {
     document.querySelector('html').style.overflowY = 'hidden'
-  },[])
+  }, [])
 
 
   const handleKeyEvent = (e) => {
@@ -62,7 +64,7 @@ export const TaskDetails = () => {
         onKeyDown={handleKeyEvent}
         className="task-details-wrapper"
       >
-
+        {/* <CoverModal task={task} boardId={boardId} groupId={groupId} /> */}
         <div className="task-details">
           {task?.style?.backgroundColor &&
             <div className="cover-color" style={{ backgroundColor: task.style.backgroundColor }}>
@@ -86,7 +88,7 @@ export const TaskDetails = () => {
             </p>
           </div>
           <div className="helper-container">
-            <TaskDetailsMain task={task} boardId={boardId} groupId={groupId} labels={board.labels}/>
+            <TaskDetailsMain task={task} boardId={boardId} groupId={groupId} labels={board.labels} />
             <TaskSidebar
               boardId={boardId}
               groupId={groupId}

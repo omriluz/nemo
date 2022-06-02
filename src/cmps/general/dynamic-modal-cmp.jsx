@@ -5,6 +5,7 @@ import { CoverModal } from "../modals/cover-modal.jsx";
 import { ActionModal } from "../modals/action-modal.jsx";
 import { TaskDateModal } from "../board-app/task/dates/task-date-modal";
 import { AttachmentModal } from "../board-app/task/attachment/attachment-modal";
+import { AddBoard } from "../work-space/add-board";
 
 export const DynamicModalCmp = ({
   modalDetails: { height, top },
@@ -16,7 +17,8 @@ export const DynamicModalCmp = ({
   groupId,
   task,
   labels,
-  attachments,
+  toggleModal
+
 }) => {
   let modalTypeToOpen;
   switch (modalTitle) {
@@ -32,14 +34,17 @@ export const DynamicModalCmp = ({
     case "Dates":
       modalTypeToOpen = <TaskDateModal boardId={boardId} groupId={groupId} task={task} />;
       break;
-    // case "Attachment":
-    //   modalTypeToOpen = <AttachmentModal modalProps={modalProps} />;
-    //   break;
+    case "Attachment":
+      modalTypeToOpen = <AttachmentModal boardId={boardId} groupId={groupId} task={task} attachments={task.attachments} />;
+      break;
     case "Cover":
       modalTypeToOpen = <CoverModal boardId={boardId} groupId={groupId} task={task} />;
       break;
     case "Actions":
       modalTypeToOpen = <ActionModal onRemoveTodo={onRemoveTodo} />;
+      break;
+    case "Create Board":
+      modalTypeToOpen = < AddBoard toggleModal={toggleModal} />;
       break;
   }
 

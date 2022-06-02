@@ -1,13 +1,13 @@
 .data-gutter {
     margin-left: 40px;
     margin-top: 8px;
-    height: 72px;
+    height: fit-content;
     // background-color: red;
 }
 
 
 .data-gutter-card {
-   display: block;
+    display: block;
     float: left;
     margin: 0 8px 8px 0;
     max-width: 100%;
@@ -62,4 +62,3 @@
     background-color: #e1e4e8;
     cursor: pointer;
 }
-

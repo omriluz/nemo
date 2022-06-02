@@ -5,7 +5,8 @@ export const ChecklistProgressBar = ({ checklist }) => {
     const getCurrPresent = () => {
         const checkedTodos = checklist.todos.filter(todo => todo.isDone)
         const curPresent = (checkedTodos.length / checklist.todos.length) * 100
-        return curPresent + '%'
+
+        return Math.floor(curPresent) + '%'
     }
 
     return <section className="checklist-progress">
