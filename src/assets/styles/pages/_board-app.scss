@@ -26,6 +26,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    padding-right: 8px;
     // background-color: #0079bf;
     &::-webkit-scrollbar {
       height: 12px;
@@ -67,19 +68,25 @@
 }
 
 .board-header {
-  margin-bottom: 55px;
-  padding: 10px 4px 4px 0;
-  position: relative;
-  position: absolute;
-  left: 12px;
-  top: 40px;
+  // margin-bottom: 55px;
+  // padding: 10px 4px 4px 0;
+  // position: relative;
+  // position: absolute;
+  // left: 12px;
+  // top: 40px;
+  
+  height: auto;
+  padding: 8px 4px 4px 12px;
+  position: fixed;
+  margin-bottom: 10px;
   width: 100%;
+
 
   .header-title {
     background-color: hsla(0, 0%, 100%, 0.239);
     border-radius: 3px;
     color: #fff;
-    cursor: text;
+    cursor: pointer;
     font-family: Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
       sans-serif;
     font-size: 18px;
@@ -89,6 +96,10 @@
     min-width: 30px;
     padding: 3px 5px;
     text-overflow: ellipsis;
+  }
+
+  .show-menu {
+    // padding-right: 4px;
   }
 
   .nav-btn {
@@ -117,7 +128,7 @@
 
 .nav-right {
   gap: 10px;
-  padding-right: 23px;
+  padding-right: 4px;
 
   .nav-btn p {
     height: 2.3px;

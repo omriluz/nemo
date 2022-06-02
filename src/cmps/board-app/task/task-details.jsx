@@ -38,6 +38,7 @@ export const TaskDetails = () => {
     setLabels(boardFromService.labels);
   };
 
+
   const handleKeyEvent = (e) => {
     if (e.key === "Escape") navigate(-1);
   };
