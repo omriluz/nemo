@@ -16,9 +16,10 @@ export const WorkSpace = () => {
   const { boards } = useSelector((storeState) => storeState.boardModule)
 
 
-
   useEffect(() => {
     onLoadBoards()
+    //needs to refactor
+    document.querySelector('html').style.overflowY = 'auto'
   }, [])
 
   const onLoadBoards = () => {

@@ -54,7 +54,7 @@ export const LoginSignup = () => {
     // navigate('/workspace')
   };
 
-  const onLogin = (ev = null) => {
+  const onLogin = (ev) => {
     if (ev) ev.preventDefault();
     if (!credentials.username) return;
     dispatch(login(credentials));

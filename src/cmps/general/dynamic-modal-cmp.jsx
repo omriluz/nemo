@@ -6,6 +6,7 @@ import { ActionModal } from "../modals/action-modal.jsx";
 import { TaskDateModal } from "../board-app/task/dates/task-date-modal";
 import { AttachmentModal } from "../board-app/task/attachment/attachment-modal";
 import { AddBoard } from "../work-space/add-board";
+import { MemberModal } from "../modals/member-modal.jsx";
 
 export const DynamicModalCmp = ({
   modalDetails: { height, top },
@@ -17,28 +18,56 @@ export const DynamicModalCmp = ({
   groupId,
   task,
   labels,
-  toggleModal
-
+  toggleModal,
+  type,
+  attachments,
 }) => {
   let modalTypeToOpen;
   switch (modalTitle) {
+    case "Members":
+      console.log('fjidoajfiso');
+      modalTypeToOpen = (
+        <MemberModal
+          boardId={boardId}
+          groupId={groupId}
+          task={task}
+          onCloseModal={onCloseModal}
+        />
+      );
+      break;
     case "Labels":
-      modalTypeToOpen = <LabelModal boardId={boardId} groupId={groupId} task={task} labels={labels} onCloseModal={onCloseModal} />;
+      modalTypeToOpen = (
+        <LabelModal
+          boardId={boardId}
+          groupId={groupId}
+          task={task}
+          labels={labels}
+          onCloseModal={onCloseModal}
+        />
+      );
       break;
     case "Checklist":
-      modalTypeToOpen = <ChecklistModal
-        onCloseModal={onCloseModal}
-        boardId={boardId} groupId={groupId}
-        taskId={task.id} />
+      modalTypeToOpen = (
+        <ChecklistModal
+          onCloseModal={onCloseModal}
+          boardId={boardId}
+          groupId={groupId}
+          taskId={task.id}
+        />
+      );
       break;
     case "Dates":
-      modalTypeToOpen = <TaskDateModal boardId={boardId} groupId={groupId} task={task} />;
+      modalTypeToOpen = (
+        <TaskDateModal boardId={boardId} groupId={groupId} task={task} />
+      );
       break;
     case "Attachment":
       modalTypeToOpen = <AttachmentModal boardId={boardId} groupId={groupId} task={task} attachments={task.attachments} />;
       break;
     case "Cover":
-      modalTypeToOpen = <CoverModal boardId={boardId} groupId={groupId} task={task} />;
+      modalTypeToOpen = (
+        <CoverModal boardId={boardId} groupId={groupId} task={task} />
+      );
       break;
     case "Actions":
       modalTypeToOpen = <ActionModal onRemoveTodo={onRemoveTodo} />;
@@ -55,7 +84,7 @@ export const DynamicModalCmp = ({
       className="modal-container"
       style={{
         top: top + height,
-        width: width || '304px'
+        width: width || "304px",
       }}
     >
       <div className="modal-header-wrapper">
