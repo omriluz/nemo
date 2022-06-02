@@ -70,7 +70,9 @@ async function login(userCred) {
     // const user = await httpService.post('auth/login', userCred)
     if (user) {
         // socketService.login(user._id)
-        return saveLocalUser(user)
+        saveLocalUser(user)
+        return user
+
     }
 }
 async function signup(userCred) {
@@ -104,8 +106,6 @@ function saveLocalUser(user) {
 
 function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
-
-
 }
 
 

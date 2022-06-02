@@ -12,6 +12,7 @@ import { MdMoreHoriz } from "react-icons/md";
 export const BoardApp = () => {
   const { boardId } = useParams();
   const { board } = useSelector((storeState) => storeState.boardModule);
+  // const { users } = useSelector((storeState) => storeState.userModule);
   const dispatch = useDispatch();
 
   useEffect(() => {

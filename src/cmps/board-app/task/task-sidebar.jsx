@@ -2,23 +2,23 @@ import { TiTag } from "react-icons/ti";
 import { BsCheck2Square, BsClock } from "react-icons/bs";
 import { FiPaperclip } from "react-icons/fi";
 import { MdOutlineScreenShare } from "react-icons/md";
+import { BsPerson } from "react-icons/bs";
 import { useEffect, useRef, useState } from "react";
 import { DynamicModalCmp } from "../../general/dynamic-modal-cmp";
 
 export const TaskSidebar = ({ boardId, groupId, task, labels }) => {
   const buttons = [
-    { txt: "Labels", icon: <TiTag />, props: { boardId, groupId, task, labels } },
-    { txt: "Checklist", icon: <BsCheck2Square />, props: { boardId, groupId, taskId:task.id } },
-    { txt: "Dates", icon: <BsClock />, props: { boardId, groupId, task } },
-    { txt: "Attachment", icon: <FiPaperclip />, props: { boardId, groupId, task, attachments:task.attachments } },
-    { txt: "Cover", icon: <MdOutlineScreenShare />, props: { boardId, groupId, task } },
-  ]
+    { txt: "Members", icon: <BsPerson /> },
+    { txt: "Labels", icon: <TiTag /> },
+    { txt: "Checklist", icon: <BsCheck2Square /> },
+    { txt: "Dates", icon: <BsClock /> },
+    { txt: "Attachment", icon: <FiPaperclip /> },
+    { txt: "Cover", icon: <MdOutlineScreenShare /> },
+  ];
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalDetails = useRef();
   const modalTitle = useRef();
-
-
 
   // useEffect(() => {}, [isModalOpen]);
 
@@ -30,7 +30,7 @@ export const TaskSidebar = ({ boardId, groupId, task, labels }) => {
     if (isModalOpen) {
       setIsModalOpen(false);
     }
-    modalTitle.current = txt
+    modalTitle.current = txt;
     modalDetails.current = ev.target.getBoundingClientRect();
     setIsModalOpen(true);
   };
@@ -38,14 +38,14 @@ export const TaskSidebar = ({ boardId, groupId, task, labels }) => {
   return (
     <div className="task-details-sidebar-container">
       {isModalOpen && (
-
         <DynamicModalCmp
           modalDetails={modalDetails.current}
           modalTitle={modalTitle.current}
-          boardId={boardId} 
-          groupId={groupId} 
+          boardId={boardId}
+          groupId={groupId}
           task={task}
-          labels={labels} 
+          type={modalTitle.current}
+          labels={labels}
           attachments={task.attachments}
           onCloseModal={onCloseModal}
         />
@@ -57,10 +57,8 @@ export const TaskSidebar = ({ boardId, groupId, task, labels }) => {
           return (
             <button
               onClick={(ev) => {
-                onOpenModal(ev, button.txt)
-
-              }
-              }
+                onOpenModal(ev, button.txt);
+              }}
               key={button.txt}
               className="task-details-sidebar-btn"
             >

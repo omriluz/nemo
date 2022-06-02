@@ -60,10 +60,11 @@ export const TaskDetails = () => {
       <section
         tabIndex={"0"}
         onKeyDown={handleKeyEvent}
+        onClick={() => navigate(-1)}
         className="task-details-wrapper"
       >
 
-        <div className="task-details">
+        <div className="task-details" onClick={(ev) => ev.stopPropagation()}>
           {task?.style?.backgroundColor &&
             <div className="cover-color" style={{ backgroundColor: task.style.backgroundColor }}>
             </div>}
