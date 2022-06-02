@@ -24,6 +24,7 @@ async function saveTask(task, boardId, groupId, activity) {
         task.attachments = []
         task.labelIds = []
         task.checklists = []
+        task.style = {}
         const board = await boardService.getById(boardId)
         const idx = board.groups.findIndex(group => groupId === group.id)
         board.groups[idx].tasks.push(task)

@@ -9,7 +9,8 @@ export function BoardPreview({ board, onToggleStar }) {
     <div>
       <Link to={`/board/${board._id}`}>
         <div className="board-preview-container"
-          style={board.style}>
+          // style={board.style}>
+          style={{backgroundColor:'#0079bf'}}>
           <h3> {board.title}</h3>
           <span className="starred-container">
             {(board.isStar) ?

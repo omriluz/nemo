@@ -1,0 +1,32 @@
+.toolbar {
+    height: auto;
+    padding: 8px 4px 4px 12px;
+    position: relative;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+
+    &-left {
+        float: left;
+    }
+
+
+    &-right {
+        float: right;
+    }
+}
+
+.toolbar-btn {
+    background-color: hsla(0, 0%, 41%, 0.651);
+    border-radius: 3px;
+    cursor: default;
+    float: left;
+    font-size: 14px;
+    height: 32px;
+    margin: 0 4px 4px 0;
+    position: relative;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

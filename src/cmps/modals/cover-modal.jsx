@@ -25,15 +25,17 @@ export const CoverModal = ({ modalProps: { boardId, groupId, task } }) => {
 
 
     const chooseColor = (color) => {
-        console.log(color);
         setSelectedColor(color)
         saveColor(color.color)
     }
 
     const saveColor = (color) => {
-        if (!task.style) task.style = {}
-        task.style.backgroundColor = color
-        dispatch(saveTask(task, boardId, groupId))
+        console.log(task);
+        // need to deep copy to assign backgroundColor
+        // might need to change, may cause problems later
+        let taskAfterCopy = JSON.parse(JSON.stringify(task));
+        taskAfterCopy.style.backgroundColor = color
+        dispatch(saveTask(taskAfterCopy, boardId, groupId))
     }
 
     // very important todo: to send size! need to check where for the task preview

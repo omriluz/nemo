@@ -41,11 +41,6 @@ export const TaskDetails = () => {
     setLabels(boardFromService.labels);
   };
 
-  const onOpenLabels = () => { };
-
-  const onCreateLabel = () => {
-    console.log("fdasfds");
-  };
 
   const handleKeyEvent = (e) => {
     if (e.key === "Escape") navigate(-1);
@@ -103,7 +98,6 @@ export const TaskDetails = () => {
               taskId={taskId}
               labels={labels}
               task={task}
-              onOpenLabels={onOpenLabels}
             />
           </div>
         </div>

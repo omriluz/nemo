@@ -7,12 +7,15 @@ import guest from "../assets/svg/guest.svg";
 import { useDispatch } from "react-redux";
 import { login, signup } from "../store/actions/user.actions";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
 
 
 export const LoginSignup = () => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-    
+  const {user} = useSelector((storeState) => storeState.userModule)
+
+
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
