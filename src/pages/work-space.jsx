@@ -25,9 +25,9 @@ export const WorkSpace = () => {
     dispatch(loadBoards())
   }
 
-  // const getStarredBoards = () => {
-  //   return boards?.filter(board => board.isStar)
-  // }
+  const getStarredBoards = () => {
+    return boards?.filter(board => board.isStar)
+  }
 
   const onToggleStar = (ev, boardId) => {
     ev.preventDefault()
@@ -50,12 +50,12 @@ export const WorkSpace = () => {
             </div>
             <div className="primary-boards-container-section">
 
-              {/* <BoardList
-                // boards={getStarredBoards()}
+              <BoardList
+                boards={getStarredBoards()}
                 updateBoard={updateBoard}
                 onToggleStar={onToggleStar}
                 isStarBoard={true}
-              /> */}
+              />
             </div>
           </section>
           <section className="recent-boards-section">
