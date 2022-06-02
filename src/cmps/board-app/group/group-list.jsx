@@ -18,6 +18,8 @@ export const GroupList = ({ groups, boardId }) => {
   };
 
   const onAddGroup = (ev = null) => {
+    ev.preventDefault()
+    if (!groupTitle.title) return;
     dispatch(saveGroup(groupTitle, boardId));
     setIsAddGroup(false);
     setGroupTitle({ title: "" });
@@ -26,7 +28,7 @@ export const GroupList = ({ groups, boardId }) => {
   const handleOnDragEnd = (result) => {
     const [reorderedItem] = groups.splice(result.source.index, 1);
     groups.splice(result.destination.index, 0, reorderedItem);
-    dispatch(setGroups(boardId, groups))
+    dispatch(setGroups(boardId, groups));
   };
 
   return (
@@ -62,7 +64,7 @@ export const GroupList = ({ groups, boardId }) => {
               )}
               {isAddGroup && (
                 <div className="add-group-open">
-                  <form onSubmit={onAddGroup}>
+                  <form onSubmit={(ev) => onAddGroup(ev)}>
                     <input
                       type="text"
                       name="title"

@@ -1,9 +1,9 @@
 import { TaskDetailsMainCmps } from './task-details-main-cmps.jsx'
 import {DataGutter} from './data-gutter.jsx'
 
-export const TaskDetailsMain = ({ task, boardId, groupId }) => {
+export const TaskDetailsMain = ({ task, boardId, groupId, labels }) => {
     return <div className="task-details-main">
-        {/* <DataGutter/> */}
+        <DataGutter boardId={boardId} groupId={groupId} task={task} labels={labels}/>
         <TaskDetailsMainCmps task={task} boardId={boardId} groupId={groupId} />
     </div>
 }

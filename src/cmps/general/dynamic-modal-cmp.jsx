@@ -4,32 +4,39 @@ import { ChecklistModal } from "../modals/checklist-modal";
 import { CoverModal } from "../modals/cover-modal.jsx";
 import { ActionModal } from "../modals/action-modal.jsx";
 import { TaskDateModal } from "../board-app/task/dates/task-date-modal";
-import { AttachmentModal } from "../board-app/task/attachment/attachment-modal"
+import { AttachmentModal } from "../board-app/task/attachment/attachment-modal";
 
 export const DynamicModalCmp = ({
   modalDetails: { height, top },
   width,
   onCloseModal,
   modalTitle,
-  modalProps,
-  onRemoveTodo
+  onRemoveTodo,
+  boardId,
+  groupId,
+  task,
+  labels,
+  attachments,
 }) => {
   let modalTypeToOpen;
   switch (modalTitle) {
     case "Labels":
-      modalTypeToOpen = <LabelModal modalProps={modalProps} />;
+      modalTypeToOpen = <LabelModal boardId={boardId} groupId={groupId} task={task} labels={labels} onCloseModal={onCloseModal} />;
       break;
     case "Checklist":
-      modalTypeToOpen = <ChecklistModal modalProps={modalProps} onCloseModal={onCloseModal} />;
+      modalTypeToOpen = <ChecklistModal
+        onCloseModal={onCloseModal}
+        boardId={boardId} groupId={groupId}
+        taskId={task.id} />
       break;
     case "Dates":
-      modalTypeToOpen = <TaskDateModal modalProps={modalProps} />;
+      modalTypeToOpen = <TaskDateModal boardId={boardId} groupId={groupId} task={task} />;
       break;
-    case "Attachment":
-      modalTypeToOpen = <AttachmentModal modalProps={modalProps} />;
-      break;
+    // case "Attachment":
+    //   modalTypeToOpen = <AttachmentModal modalProps={modalProps} />;
+    //   break;
     case "Cover":
-      modalTypeToOpen = <CoverModal modalProps={modalProps} />;
+      modalTypeToOpen = <CoverModal boardId={boardId} groupId={groupId} task={task} />;
       break;
     case "Actions":
       modalTypeToOpen = <ActionModal onRemoveTodo={onRemoveTodo} />;

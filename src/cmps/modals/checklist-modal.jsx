@@ -4,7 +4,7 @@ import { saveChecklist } from '../../store/actions/checklist.action';
 import { utilService } from '../../services/util.service';
 
 
-export const ChecklistModal = ({ modalProps: { boardId, groupId, taskId }, onCloseModal }) => {
+export const ChecklistModal = ({ boardId, groupId, taskId, onCloseModal }) => {
     const [checklistTitle, setChecklistTitle] = useState({ title: 'Checklist' });
     const dispatch = useDispatch()
     const handleChange = (ev) => {

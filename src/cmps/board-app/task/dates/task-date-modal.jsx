@@ -6,7 +6,7 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker, } from '@material-ui/picke
 
 import { saveTask } from '../../../../store/actions/task.action'
 
-export function TaskDateModal({ modalProps: { boardId, groupId, task } }) {
+export function TaskDateModal({ boardId, groupId, task  }) {
 
     const [selectedDate, setSelectedDate] = useState(new Date())
     const dispatch = useDispatch()

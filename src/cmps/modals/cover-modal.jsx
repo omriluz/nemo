@@ -4,7 +4,7 @@ import { utilService } from "../../services/util.service"
 import { saveTask } from "../../store/actions/label.action"
 
 
-export const CoverModal = ({ modalProps: { boardId, groupId, task } }) => {
+export const CoverModal = ({ boardId, groupId, task }) => {
     const [selectedColor, setSelectedColor] = useState(null)
     const [selectedSize, setSelectedSize] = useState('uncover')
     const dispatch = useDispatch()

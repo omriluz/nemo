@@ -5,22 +5,20 @@ import { MdOutlineScreenShare } from "react-icons/md";
 import { useEffect, useRef, useState } from "react";
 import { DynamicModalCmp } from "../../general/dynamic-modal-cmp";
 
-export const TaskSidebar = ({ boardId, groupId, task, labels, task: { attachments } }) => {
-  const { id } = task
-  const taskId = id
-  //later will be object that will contain the function as well
+export const TaskSidebar = ({ boardId, groupId, task, labels }) => {
   const buttons = [
-    { txt: "Labels", icon: <TiTag />, props: { boardId, groupId, taskId, labels } },
-    { txt: "Checklist", icon: <BsCheck2Square />, props: { boardId, groupId, taskId } },
+    { txt: "Labels", icon: <TiTag />, props: { boardId, groupId, task, labels } },
+    { txt: "Checklist", icon: <BsCheck2Square />, props: { boardId, groupId, taskId:task.id } },
     { txt: "Dates", icon: <BsClock />, props: { boardId, groupId, task } },
-    { txt: "Attachment", icon: <FiPaperclip />, props: { boardId, groupId, task, attachments } },
+    { txt: "Attachment", icon: <FiPaperclip />, props: { boardId, groupId, task, attachments:task.attachments } },
     { txt: "Cover", icon: <MdOutlineScreenShare />, props: { boardId, groupId, task } },
   ]
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalDetails = useRef();
   const modalTitle = useRef();
-  const modalProps = useRef()
+
+
 
   // useEffect(() => {}, [isModalOpen]);
 
@@ -28,16 +26,11 @@ export const TaskSidebar = ({ boardId, groupId, task, labels, task: { attachment
     setIsModalOpen(false);
   };
 
-  const onOpenModal = (ev, txt, props) => {
-    console.log("fdsafdas", isModalOpen);
-    // check if i need this
-    // ev.stopPropagation();
+  const onOpenModal = (ev, txt) => {
     if (isModalOpen) {
-
       setIsModalOpen(false);
     }
     modalTitle.current = txt
-    modalProps.current = props
     modalDetails.current = ev.target.getBoundingClientRect();
     setIsModalOpen(true);
   };
@@ -49,7 +42,11 @@ export const TaskSidebar = ({ boardId, groupId, task, labels, task: { attachment
         <DynamicModalCmp
           modalDetails={modalDetails.current}
           modalTitle={modalTitle.current}
-          modalProps={modalProps.current}
+          boardId={boardId} 
+          groupId={groupId} 
+          task={task}
+          labels={labels} 
+          attachments={task.attachments}
           onCloseModal={onCloseModal}
         />
       )}
@@ -59,7 +56,11 @@ export const TaskSidebar = ({ boardId, groupId, task, labels, task: { attachment
         {buttons.map((button) => {
           return (
             <button
-              onClick={(ev) => onOpenModal(ev, button.txt, button.props)}
+              onClick={(ev) => {
+                onOpenModal(ev, button.txt)
+
+              }
+              }
               key={button.txt}
               className="task-details-sidebar-btn"
             >

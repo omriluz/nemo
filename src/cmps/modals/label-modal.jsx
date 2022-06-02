@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { toggleLabel } from "../../store/actions/label.action";
 import { BsPencil } from "react-icons/bs";
+import {FiCheck} from 'react-icons/fi'
 
 // export const LabelModal = ({labels, boardId, groupId, taskId}) => {
 
@@ -24,18 +25,15 @@ import { BsPencil } from "react-icons/bs";
 //     }
 // }
 
-export const LabelModal = ({
-  modalProps: { boardId, groupId, taskId, labels },
-}) => {
+// export const LabelModal = ({modalProps: { boardId, groupId, task, labels }}) => {
+  export const LabelModal = ({ boardId, groupId, task, labels }) => {
   const dispatch = useDispatch();
 
-  console.log(labels);
+  console.log(task)
   const onToggleLabel = (labelId) => {
     // on toggling, should add label to task, present it in:
-    //1) the task preview,
-    //2) data gutter
     //3) label modal item will have a V
-    dispatch(toggleLabel(boardId, groupId, taskId, labelId));
+    dispatch(toggleLabel(boardId, groupId, task.id, labelId));
   }
 
 
@@ -61,8 +59,9 @@ export const LabelModal = ({
                   onClick={() => onToggleLabel(label.id)}
                 >
                   {label.title && (
-                    <div className="edit-label-title">{label.title}</div>
+                    <span className="edit-label-title">{label.title}</span>
                   )}
+                {task.labelIds.includes(label.id) && <span className="label-check-icon"><FiCheck/></span>}
                 </div>
               </div>
             );
