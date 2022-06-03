@@ -43,10 +43,10 @@ export const WorkSpace = () => {
         <div className="content-all-boards">
           <section className="starred-boards-section">
             <div className="title-header flex">
-              {/* <div className="title-header-icon-container">
+              <div className="title-header-icon-container">
                 <TiStarOutline className="header-icon star-icon" />
-              </div> */}
-              {/* <h3>Starred boards</h3> */}
+              </div>
+              <h3>Starred boards</h3>
             </div>
             <div className="primary-boards-container-section">
 

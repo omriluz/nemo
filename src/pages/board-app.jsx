@@ -1,12 +1,12 @@
 import { GroupList } from "../cmps/board-app/group/group-list.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useParams } from "react-router";
-import { loadBoard } from "../store/actions/board.action";
+import { loadBoard, updateBoard } from "../store/actions/board.action";
 import { useEffect } from "react";
 import { ToolBar } from "../cmps/general/toolbar.jsx";
-import { TiStarOutline } from "react-icons/ti";
+import { TiStarFullOutline, TiStarOutline } from "react-icons/ti";
 import avatar from "../assets/svg/avatar.svg";
-import { IoPersonAddOutline } from "react-icons/io5";
+import { IoPersonAddOutline, IoFilter } from "react-icons/io5";
 import { MdMoreHoriz } from "react-icons/md";
 
 export const BoardApp = () => {
@@ -23,10 +23,15 @@ export const BoardApp = () => {
     dispatch(loadBoard(boardId));
   };
 
+  const onToggleStar = () => {
+    board.isStar = !board.isStar
+    dispatch(updateBoard(board))
+  }
+
   if (!board) return <h1>Loading...</h1>;
   return (
     // <div style={board.style} className="board-app-wrapper">
-    <div style={{ background: `url(https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2048x1152/6820193445dcff991b2b12f41916deea/photo-1537486336219-a3dd8e2dc6b5.jpg) center center / cover` }} className="board-app-wrapper">
+    <div style={board.style} className="board-app-wrapper">
       <Outlet />
       <div className="board-app">
         <div className="board-header">
@@ -35,7 +40,10 @@ export const BoardApp = () => {
               <h1 className="header-title">{board.title}</h1>
               <div className="nav-left-action flex">
                 <div className="nav-btn fav">
-                  <TiStarOutline />
+                  <span className="star-icon">
+                    {board.isStar ? <TiStarFullOutline className="star-icon star" onClick={onToggleStar} /> :
+                      <TiStarOutline className="star-icon" onClick={onToggleStar} />}
+                  </span>
                 </div>
                 <div className="nav-member">
                   <img className="member-avatar" src={avatar} />
@@ -46,6 +54,7 @@ export const BoardApp = () => {
               </div>
             </div>
             <div className="nav-right flex">
+              <span className="nav-btn filter"> <IoFilter /><p>Filter</p></span>
               <button className="nav-btn show-menu">
                 <MdMoreHoriz />
                 <p>Show Menu</p>
@@ -53,7 +62,7 @@ export const BoardApp = () => {
             </div>
           </div>
         </div>
-        {/* <ToolBar/> */}
+        {/* <ToolBar /> */}
         {board && <GroupList groups={board.groups} boardId={boardId} />}
       </div>
     </div>

@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { utilService } from "../../services/util.service"
 import { saveTask } from "../../store/actions/label.action"
 
 
@@ -31,18 +30,17 @@ export const CoverModal = ({ boardId, groupId, task }) => {
 
     const chooseSize = (size) => {
         setSelectedSize(size)
-        saveColor(selectedColor)
+        saveColor(selectedColor.color, size)
     }
 
-    const saveColor = (color) => {
+    const saveColor = (color, size) => {
         let taskAfterCopy = JSON.parse(JSON.stringify(task));
         taskAfterCopy.style.backgroundColor = color
-        taskAfterCopy.coverSize = selectedSize
+        if (!size) taskAfterCopy.coverSize = selectedSize
+        else taskAfterCopy.coverSize = size
+        console.log(taskAfterCopy);
         dispatch(saveTask(taskAfterCopy, boardId, groupId))
     }
-
-    // very important todo: to send size! need to check where for the task preview
-    // console.log(selectedSize);
 
     return <section className="cover-modal-container">
         <div className="cover-size">

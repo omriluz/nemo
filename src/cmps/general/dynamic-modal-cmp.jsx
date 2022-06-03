@@ -73,8 +73,9 @@ export const DynamicModalCmp = ({
       modalTypeToOpen = <ActionModal onRemoveTodo={onRemoveTodo} />;
       break;
     case "Create Board":
-      modalTypeToOpen = < AddBoard toggleModal={toggleModal} />;
+      modalTypeToOpen = < AddBoard onCloseModal={onCloseModal} />;
       break;
+
   }
 
   return (

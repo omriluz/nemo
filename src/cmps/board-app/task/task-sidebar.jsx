@@ -20,7 +20,7 @@ export const TaskSidebar = ({ boardId, groupId, task, labels }) => {
   const modalDetails = useRef();
   const modalTitle = useRef();
 
-  // useEffect(() => {}, [isModalOpen]);
+  // useEffect(() => { }, [isModalOpen]);
 
   const onCloseModal = () => {
     setIsModalOpen(false);
