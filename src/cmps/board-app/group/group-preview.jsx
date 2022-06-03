@@ -7,6 +7,7 @@ import { removeGroup, saveGroup } from "../../../store/actions/group.action.js";
 import { saveTask } from "../../../store/actions/task.action.js";
 import { useDispatch } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
+import { userService } from "../../../services/user.service.js";
 
 export const GroupPreview = ({ group, boardId, index }) => {
   // console.log('rendered group');
@@ -43,7 +44,9 @@ export const GroupPreview = ({ group, boardId, index }) => {
   const onSaveTask = (ev = null) => {
     if (ev) ev.preventDefault();
     if (newTask.title) {
-       dispatch(saveTask(newTask, boardId, group.id));
+      const activity = { txt: 'added this card to ' + group.title, byMember: userService.getLoggedinUser() }
+      console.log(activity);
+      dispatch(saveTask(newTask, boardId, group.id, activity));
       setNewTask({ title: "" });
     }
   };
@@ -65,7 +68,7 @@ export const GroupPreview = ({ group, boardId, index }) => {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
-            // onMouseDown={handleMouse}
+          // onMouseDown={handleMouse}
           >
             <div className="group-preview-header">
               <input

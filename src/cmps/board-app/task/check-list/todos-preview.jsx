@@ -5,6 +5,7 @@ import { saveTodo, removeTodo } from '../../../../store/actions/checklist.action
 import { useDispatch } from "react-redux";
 import { MdMoreHoriz } from "react-icons/md";
 import { DynamicModalCmp } from "../../../general/dynamic-modal-cmp";
+import { userService } from "../../../../services/user.service.js";
 
 
 export const TodoPreview = ({ todo, checklistId, taskId, boardId, groupId }) => {
@@ -50,7 +51,8 @@ export const TodoPreview = ({ todo, checklistId, taskId, boardId, groupId }) => 
 
     const onIsDone = () => {
         todo.isDone = !todo.isDone
-        dispatch(saveTodo(todo, checklistId, boardId, groupId, taskId))
+        const activity = { txt: `${todo.isDone ? 'completed' : 'marked'}  ` + todo.title + `${todo.isDone ? '' : ' incomplete'}` + ' on this card', byMember: userService.getLoggedinUser() }
+        dispatch(saveTodo(todo, checklistId, boardId, groupId, taskId, activity))
     }
 
     const onRemoveTodo = () => {

@@ -36,6 +36,7 @@ export const TaskDetails = () => {
   }, [board]);
 
 
+
   // needs refactoring
   useEffect(() => {
     document.querySelector('html').style.overflowY = 'hidden'
@@ -91,7 +92,7 @@ export const TaskDetails = () => {
             </p>
           </div>
           <div className="helper-container">
-            <TaskDetailsMain task={task} boardId={boardId} groupId={groupId} labels={board.labels} />
+            <TaskDetailsMain task={task} boardId={boardId} groupId={groupId} labels={board.labels} activities={board.activities} />
             <TaskSidebar
               boardId={boardId}
               groupId={groupId}

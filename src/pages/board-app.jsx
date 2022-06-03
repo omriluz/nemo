@@ -30,6 +30,8 @@ export const BoardApp = () => {
     dispatch(loadBoard(boardId));
   };
 
+  // console.log(board.activities);
+
   const onToggleStar = () => {
     board.isStar = !board.isStar
     dispatch(updateBoard(board))
@@ -70,7 +72,7 @@ export const BoardApp = () => {
           </div>
         </div>
         {/* <ToolBar /> */}
-        {board && <GroupList groups={board.groups} boardId={boardId} />}
+        {board && <GroupList groups={board.groups} boardId={boardId} activities={board.activities} />}
       </div>
     </div>
   );

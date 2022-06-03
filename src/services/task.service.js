@@ -16,17 +16,22 @@ async function saveTask(task, boardId, groupId, activity) {
         const groupIdx = board.groups.findIndex(group => groupId === group.id)
         const taskIdx = board.groups[groupIdx].tasks.findIndex(currTask => currTask.id === task.id)
         board.groups[groupIdx].tasks[taskIdx] = task
-        boardService.save(board)
+        if (activity) board.activities.unshift(activity)
+        console.log('board', board)
+        board = await boardService.save(board)
         return board
     } else {
-        // Later, owner is set by the backend
         task.id = utilService.makeId()
         task.attachments = []
         task.labelIds = []
         task.checklists = []
         task.style = {}
         task.coverSize = 'uncover'
+        activity.id = utilService.makeId()
+        activity.createdAt = Date.now()
+        activity.task = { id: task.id, title: task.title }
         const board = await boardService.getById(boardId)
+        board.activities.unshift(activity)
         const idx = board.groups.findIndex(group => groupId === group.id)
         board.groups[idx].tasks.push(task)
         boardService.save(board)
