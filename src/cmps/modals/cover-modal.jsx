@@ -29,6 +29,7 @@ export const CoverModal = ({ boardId, groupId, task }) => {
     }
 
     const chooseSize = (size) => {
+
         setSelectedSize(size)
         saveColor(selectedColor.color, size)
     }

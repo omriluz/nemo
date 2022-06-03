@@ -50,9 +50,11 @@
 
 
 // Modals
-@import "cmps/modals/dynamic-modal-cmp.scss";
+@import "cmps/modals/dynamic-modal-cmp";
+@import "cmps/modals/member-modal";
 @import "cmps/modals/label-modal";
-@import "cmps/modals/checklist-modal.scss";
-@import "cmps/modals/cover-modal.scss";
-@import "cmps/modals/action-modal.scss";
-@import "cmps/modals/generic-modal-helpers.scss";
+@import "cmps/modals/checklist-modal";
+@import "cmps/modals/cover-modal";
+@import "cmps/modals/action-modal";
+
+@import "cmps/modals/generic-modal-helpers";

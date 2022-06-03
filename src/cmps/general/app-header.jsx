@@ -75,7 +75,6 @@ export const AppHeader = () => {
   const { pathname } = useLocation();
   const user = userService.getLoggedinUser()
 
-  console.log('user', user);
   let routeClass = "";
 
   // customized transparent

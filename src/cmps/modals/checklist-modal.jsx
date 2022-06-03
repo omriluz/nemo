@@ -26,7 +26,8 @@ export const ChecklistModal = ({ boardId, groupId, taskId, onCloseModal }) => {
     return <div className="checklist-modal-container">
 
         <form onSubmit={onSaveTask} className=" flex column">
-            <label htmlFor='title'>Title</label>
+            {/* make a label modal helper class and change classname */}
+            <label className='modal-small-title' htmlFor='title'>Title</label>
 
             <input type="text"
                 name='title'

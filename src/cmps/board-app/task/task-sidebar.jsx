@@ -6,7 +6,7 @@ import { BsPerson } from "react-icons/bs";
 import { useEffect, useRef, useState } from "react";
 import { DynamicModalCmp } from "../../general/dynamic-modal-cmp";
 
-export const TaskSidebar = ({ boardId, groupId, task, labels }) => {
+export const TaskSidebar = ({ boardId, groupId, task, labels, users }) => {
   const buttons = [
     { txt: "Members", icon: <BsPerson /> },
     { txt: "Labels", icon: <TiTag /> },
@@ -34,7 +34,6 @@ export const TaskSidebar = ({ boardId, groupId, task, labels }) => {
     modalDetails.current = ev.target.getBoundingClientRect();
     setIsModalOpen(true);
   };
-
   return (
     <div className="task-details-sidebar-container">
       {isModalOpen && (
@@ -44,8 +43,9 @@ export const TaskSidebar = ({ boardId, groupId, task, labels }) => {
           boardId={boardId}
           groupId={groupId}
           task={task}
-          type={modalTitle.current}
+          type={modalTitle}
           labels={labels}
+          users={users}
           attachments={task.attachments}
           onCloseModal={onCloseModal}
         />
