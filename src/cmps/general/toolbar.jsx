@@ -1,25 +1,56 @@
-export const ToolBar = ({board}) => {
-    return <div className="toolbar">
-        <div className="toolbar-left">
+import { useRef, useState } from "react";
+import { DynamicModalCmp } from "./dynamic-modal-cmp";
+
+export const ToolBar = ({ board }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuDetails = useRef();
+
+  const onOpenMenu = (ev) => {
+    if (isMenuOpen) {
+      setIsMenuOpen(false);
+    }
+    console.log(ev.target.getBoundingClientRect());
+    menuDetails.current = ev.target.getBoundingClientRect();
+    setIsMenuOpen(true);
+  };
+
+  const onCloseMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  return (
+    <div className="toolbar">
+              {isMenuOpen && (
+        <DynamicModalCmp
+          modalDetails={menuDetails.current}
+          modalTitle={'Menu'}
+          onCloseModal={onCloseMenu}
+          width={340}
+        />
+      )}
+      <div className="toolbar-left">
         {/* <input type="text"  /> */}
         <h1 className="board-toolbar-title">{board.title}</h1>
         <button className="toolbar-btn">star</button>
         <span className="toolbar-divider"></span>
         <div className="toolbar-members">
-            <div style={{backgroundColor:'red'}} className="user-avatar"></div>
-            <button>share</button>
+          <div style={{ backgroundColor: "red" }} className="user-avatar"></div>
+          <button>share</button>
         </div>
-        </div>
-        {/* <button className="toolbar-btn">ws-name</button> */}
-        {/* <button className="toolbar-btn">avatar</button> */}
-        {/* <button className="toolbar-btn">share-btn</button> */}
-        {/* </div> */}
-        <div className="toolbar-right">
+      </div>
+      {/* <button className="toolbar-btn">ws-name</button> */}
+      {/* <button className="toolbar-btn">avatar</button> */}
+      {/* <button className="toolbar-btn">share-btn</button> */}
+      {/* </div> */}
+      <div className="toolbar-right">
         {/* <button className="toolbar-btn">filter</button> */}
-        <button className="toolbar-btn toolbar-menu-btn">showmenu</button>
-        </div>
+        <button onClick={(ev) => onOpenMenu(ev)} className="toolbar-btn toolbar-menu-btn">
+          showmenu
+        </button>
+      </div>
     </div>
-}
+  );
+};
 // import { TiStarFullOutline, TiStarOutline } from "react-icons/ti";
 // import avatar from "../../assets/svg/avatar.svg";
 // import { IoPersonAddOutline, IoFilter } from "react-icons/io5";
