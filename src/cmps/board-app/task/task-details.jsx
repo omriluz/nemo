@@ -24,6 +24,8 @@ export const TaskDetails = () => {
   const [isEditTitle, setIsEditTitle] = useState(false);
   const [taskTitle, setTaskTitle] = useState(null);
   const { board } = useSelector((storeState) => storeState.boardModule)
+  // might need use effect for users as well
+  const { users } = useSelector((storeState) => storeState.userModule)
 
   useEffect(() => {
     const currGroup = board?.groups.find(group => group.id === groupId);
@@ -32,6 +34,7 @@ export const TaskDetails = () => {
     setGroup(currGroup)
     setTaskTitle({ title: currTask.title })
   }, [board]);
+
 
   // needs refactoring
   useEffect(() => {
@@ -55,7 +58,6 @@ export const TaskDetails = () => {
     dispatch(saveTask(task, boardId, groupId));
     setTaskTitle({ title: taskTitle.title });
   };
-
 
   if (task) {
     return (
@@ -96,6 +98,7 @@ export const TaskDetails = () => {
               taskId={taskId}
               labels={board.labels}
               task={task}
+              users={users}
             />
           </div>
         </div>

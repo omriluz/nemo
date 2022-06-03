@@ -30,14 +30,18 @@ export const CoverModal = ({ boardId, groupId, task }) => {
     }
 
     const chooseSize = (size) => {
+
         setSelectedSize(size)
-        saveColor(selectedColor)
+        saveColor(selectedColor.color, size)
     }
 
-    const saveColor = (color) => {
+    const saveColor = (color, size) => {
+        // console.log(size);
         let taskAfterCopy = JSON.parse(JSON.stringify(task));
         taskAfterCopy.style.backgroundColor = color
-        taskAfterCopy.coverSize = selectedSize
+        if (!size) taskAfterCopy.coverSize = selectedSize
+        else taskAfterCopy.coverSize = size
+        console.log(taskAfterCopy);
         dispatch(saveTask(taskAfterCopy, boardId, groupId))
     }
 

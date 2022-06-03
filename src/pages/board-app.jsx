@@ -8,21 +8,29 @@ import { TiStarOutline } from "react-icons/ti";
 import avatar from "../assets/svg/avatar.svg";
 import { IoPersonAddOutline } from "react-icons/io5";
 import { MdMoreHoriz } from "react-icons/md";
+import { loadUsers } from "../store/actions/user.actions.js";
 
 export const BoardApp = () => {
   const { boardId } = useParams();
   const { board } = useSelector((storeState) => storeState.boardModule);
+  const { users } = useSelector((storeState) => storeState.userModule)
   // const { users } = useSelector((storeState) => storeState.userModule);
   const dispatch = useDispatch();
 
   useEffect(() => {
     onLoadBoard();
+    onLoadUsers();
   }, []);
+
+const onLoadUsers = () => {
+  dispatch(loadUsers())
+}
 
   const onLoadBoard = () => {
     dispatch(loadBoard(boardId));
   };
 
+  console.log('users',users);
   if (!board) return <h1>Loading...</h1>;
   return (
     // <div style={board.style} className="board-app-wrapper">

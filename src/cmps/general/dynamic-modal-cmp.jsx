@@ -18,6 +18,7 @@ export const DynamicModalCmp = ({
   groupId,
   task,
   labels,
+  users,
   toggleModal,
   type,
   attachments,
@@ -32,6 +33,7 @@ export const DynamicModalCmp = ({
           groupId={groupId}
           task={task}
           onCloseModal={onCloseModal}
+          users={users}
         />
       );
       break;
@@ -73,7 +75,7 @@ export const DynamicModalCmp = ({
       modalTypeToOpen = <ActionModal onRemoveTodo={onRemoveTodo} />;
       break;
     case "Create Board":
-      modalTypeToOpen = < AddBoard toggleModal={toggleModal} />;
+      modalTypeToOpen = < AddBoard />;
       break;
   }
 
