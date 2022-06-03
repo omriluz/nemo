@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { saveTask } from "../../store/actions/label.action"
+import { saveTask } from "../../store/actions/task.action"
 
 
 export const CoverModal = ({ boardId, groupId, task }) => {

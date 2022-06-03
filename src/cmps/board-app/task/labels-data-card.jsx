@@ -17,7 +17,7 @@ export const LabelsDataCard = ({ task, labels }) => {
           );
         }
       })}
-      <div className="add-label-data-gutter-btn">
+      <div className="add-data-gutter-btn">
         <FiPlus />
       </div>
     </div>

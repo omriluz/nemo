@@ -29,7 +29,6 @@ import {FiCheck} from 'react-icons/fi'
   export const LabelModal = ({ boardId, groupId, task, labels }) => {
   const dispatch = useDispatch();
 
-  console.log(task)
   const onToggleLabel = (labelId) => {
     // on toggling, should add label to task, present it in:
     //3) label modal item will have a V

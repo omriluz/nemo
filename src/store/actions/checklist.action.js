@@ -15,7 +15,6 @@ export function saveChecklist(checklist, boardId, groupId, taskId, activity) {
     return async (dispatch) => {
         try {
             const board = await checklistService.saveChecklist(checklist, boardId, groupId, taskId, activity)
-            console.log('board', board)
             dispatch(getActionSetBoard(board))
         } catch (err) {
             console.log('Err could not delete task', err);

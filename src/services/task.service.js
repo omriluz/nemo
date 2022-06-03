@@ -26,6 +26,7 @@ async function saveTask(task, boardId, groupId, activity) {
         task.labelIds = []
         task.checklists = []
         task.style = {}
+        task.members = []
         task.coverSize = 'uncover'
         activity.id = utilService.makeId()
         activity.createdAt = Date.now()

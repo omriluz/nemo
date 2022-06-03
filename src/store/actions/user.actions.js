@@ -1,6 +1,6 @@
-import { userService } from "../../services/user.service.js";
+import { userService } from '../../services/user.service.js';
 import { showErrorMsg } from '../../services/event-bus.service.js'
-
+import {taskService} from '../../services/task.service'
 
 export function loadUsers() {
     return async dispatch => {

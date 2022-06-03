@@ -105,6 +105,9 @@
     min-width: 30px;
     padding: 3px 5px;
     text-overflow: ellipsis;
+    :hover {
+      background-color: #ffffff52;
+    }
   }
 
   .show-menu {

@@ -9,7 +9,6 @@ export const AddBoard = ({ onCloseModal }) => {
   const [boardTitle, setBoardTitle] = useState("");
   const [selectedColor, setSelectedColor] = useState('#b04632')
 
-  console.log(onCloseModal);
   const coverColors = [
     { id: 'c1', color: '#0079bf' },
     { id: 'c2', color: '#d29034' },

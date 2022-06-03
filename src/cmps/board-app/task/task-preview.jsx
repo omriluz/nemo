@@ -46,7 +46,6 @@ export const TaskPreview = ({ boardId, groupId, task, index }) => {
   };
 
   const onOpenTaskDetails = () => {
-    console.log(`/board/${boardId}/${groupId}/${task.id}`);
     navigate(`/board/${boardId}/${groupId}/${task.id}`);
   };
 
