@@ -1,4 +1,3 @@
-
 .search-member-input {
   margin: 4px 0 12px;
   width: 100%;
@@ -17,17 +16,41 @@
   transition-timing-function: ease;
 }
 
-
+// if active should have padding-right:32px
 .modal-member-item {
   border-radius: 3px;
   display: block;
-  height: 32px;
+  height: fit-content;
   line-height: 32px;
   margin-bottom: 2px;
   overflow: hidden;
-  padding: 4px;
+  padding: 5px;
   position: relative;
   text-decoration: none;
   text-overflow: ellipsis;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  &-container {
+    :hover {
+      // box-shadow: inset 0 0 0 500px rgba(0, 0, 0, 0.2);
+      background-color: rgb(240, 240, 240);
+      // background-color: #091e420a;
+    }
+  }
+}
+
+
+.modal-member-check-icon {
+  height:32px;
+  aspect-ratio: 1;
+  // display: none;
+  padding: 11px;
+  position: absolute;
+  right: 0;
+  top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -5,7 +5,6 @@ import { CreateNewBoard } from "./new-board"
 
 
 export function BoardList({ boards, updateBoard, onToggleStar, isStarBoard }) {
-    console.log('board',boards);
     return (
         <section className='board-list-container'>
 

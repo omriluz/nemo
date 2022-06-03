@@ -43,22 +43,30 @@
     cursor: pointer;
 }
 
-.add-label-data-gutter-btn {
+.add-data-gutter-btn {
     font-size: 16px;
     line-height: 16px;
     padding: 8px;
-    width: 16px;
     border-radius: 3px;
     float: left;
     font-weight: 600;
     height: 32px;
     line-height: 32px;
     margin: 0 4px 4px 0;
-    min-width: 40px;
+    width: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
     width: auto;
     background-color: #e1e4e8;
     cursor: pointer;
+}
+
+.round-data-btn {
+    border-radius: 50%;
+}
+
+
+.member-data-item {
+    display: inline-block;
 }

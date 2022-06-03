@@ -768,7 +768,7 @@ const ourBoard = {
         {
             "id": utilService.makeId(), // localID
             "txt": "Changed Color",
-            "createdAt": utilService.makeId(),
+            "createdAt": Date.now(),
             "byMember": {
                 "_id": utilService.makeId(), // mongoID
                 "fullname": "Abi Abambi",
@@ -777,22 +777,6 @@ const ourBoard = {
             "task": {
                 "id": utilService.makeId(), // localID
                 "title": "Replace Logo"
-            },
-            "task": {
-                "id": utilService.makeId(), // localID
-                "title": "filter page"
-            },
-            "task": {
-                "id": utilService.makeId(), // localID
-                "title": "react delete component"
-            },
-            "task": {
-                "id": utilService.makeId(), // localID
-                "title": "reducer action"
-            },
-            "task": {
-                "id": utilService.makeId(), // localID
-                "title": "storeState update"
             }
         }
     ],

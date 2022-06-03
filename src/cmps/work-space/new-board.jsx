@@ -12,12 +12,11 @@ export function CreateNewBoard() {
 
 
   const onCloseModal = () => {
-    console.log(isModalOpen);
     setIsModalOpen(false);
-    console.log(isModalOpen)
   };
 
   const onOpenModal = (ev, txt) => {
+    console.log(ev.target.getBoundingClientRect().bottom)
 
     if (isModalOpen) {
       setIsModalOpen(false);
@@ -30,7 +29,6 @@ export function CreateNewBoard() {
   //   setIsModalOpen(!isModalOpen);
   // }
 
-  console.log(isModalOpen);
   return (
     <div className="new-board-container">
       {isModalOpen && (<DynamicModalCmp

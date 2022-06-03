@@ -73,7 +73,10 @@ import { userService } from "../../services/user.service";
 
 export const AppHeader = () => {
   const { pathname } = useLocation();
+  // might need to come from store
   const user = userService.getLoggedinUser()
+  const {board} = useSelector((storeState) => storeState.boardModule)
+
 
   let routeClass = "";
 
@@ -84,10 +87,13 @@ export const AppHeader = () => {
   if (pathname === "/workspace") routeClass = "-workspace";
   // later will come dynamically with api
   if (pathname.includes("/board")) routeClass = "-workspace";
+  
   // if (pathname.includes("/board") && pathname.split("/").length >= 4)
   // routeClass = "-task-details";
 
-  return (<header className={`app-header${routeClass}`}>
+
+  return (
+    <header style={{...board?.style, filter:'brightness(0.9)'}} className={`app-header${routeClass}`}>
     {pathname === "/" && (
       <nav className="nav-bar flex justify-between align-center">
         <div className="logo-container">
