@@ -7,9 +7,10 @@ import { TaskDateModal } from "../board-app/task/dates/task-date-modal";
 import { AttachmentModal } from "../board-app/task/attachment/attachment-modal";
 import { AddBoard } from "../work-space/add-board";
 import { MemberModal } from "../modals/member-modal.jsx";
+import { Menu } from "./menu";
 
 export const DynamicModalCmp = ({
-  modalDetails: { bottom },
+  modalDetails: { bottom, right, left },
   width,
   onCloseModal,
   modalTitle,
@@ -19,13 +20,13 @@ export const DynamicModalCmp = ({
   task,
   labels,
   users,
+  modalClasses,
 }) => {
-
   let modalTypeToOpen;
   switch (modalTitle) {
     case "Members":
-      if (bottom >= 200) bottom -= 70
-      if (bottom >= 240) bottom -= 150
+      if (bottom >= 200) bottom -= 70;
+      if (bottom >= 240) bottom -= 150;
       modalTypeToOpen = (
         <MemberModal
           boardId={boardId}
@@ -37,8 +38,8 @@ export const DynamicModalCmp = ({
       );
       break;
     case "Labels":
-      if (bottom >= 200 && bottom < 240) bottom -= 70
-      if (bottom >= 240) bottom -= 150
+      if (bottom >= 200 && bottom < 240) bottom -= 70;
+      if (bottom >= 240) bottom -= 150;
       modalTypeToOpen = (
         <LabelModal
           boardId={boardId}
@@ -50,7 +51,7 @@ export const DynamicModalCmp = ({
       );
       break;
     case "Checklist":
-      if (bottom >= 390) bottom -= 70
+      if (bottom >= 390) bottom -= 70;
       modalTypeToOpen = (
         <ChecklistModal
           onCloseModal={onCloseModal}
@@ -61,17 +62,17 @@ export const DynamicModalCmp = ({
       );
       break;
     case "Dates":
-      if (bottom >= 170 && bottom < 200) bottom -= 50
-      if (bottom >= 200 && bottom < 270) bottom -= 100
-      if (bottom >= 270 && bottom < 330) bottom -= 160
-      if (bottom >= 330) bottom -= 200
-      
+      if (bottom >= 170 && bottom < 200) bottom -= 50;
+      if (bottom >= 200 && bottom < 270) bottom -= 100;
+      if (bottom >= 270 && bottom < 330) bottom -= 160;
+      if (bottom >= 330) bottom -= 200;
+
       modalTypeToOpen = (
         <TaskDateModal boardId={boardId} groupId={groupId} task={task} />
       );
       break;
     case "Attachment":
-      if (bottom >= 330) bottom -= 50
+      if (bottom >= 330) bottom -= 50;
       modalTypeToOpen = (
         <AttachmentModal
           boardId={boardId}
@@ -82,11 +83,11 @@ export const DynamicModalCmp = ({
       );
       break;
     case "Cover":
-      bottom -= 100
-      if (bottom >= 210 && bottom < 250) bottom -= 50
-      if (bottom >= 300 && bottom < 330) bottom -= 100
-      if (bottom >= 330 && bottom < 380) bottom -= 160
-      if (bottom >= 380) bottom -= 200
+      bottom -= 100;
+      if (bottom >= 210 && bottom < 250) bottom -= 50;
+      if (bottom >= 300 && bottom < 330) bottom -= 100;
+      if (bottom >= 330 && bottom < 380) bottom -= 160;
+      if (bottom >= 380) bottom -= 200;
       modalTypeToOpen = (
         <CoverModal boardId={boardId} groupId={groupId} task={task} />
       );
@@ -95,22 +96,34 @@ export const DynamicModalCmp = ({
       modalTypeToOpen = <ActionModal onRemoveTodo={onRemoveTodo} />;
       break;
     case "Create Board":
-      if (bottom >= 170 && bottom < 230) bottom -= 60
-      if (bottom >= 230 && bottom < 260) bottom -= 100
-      if (bottom >= 260) bottom -= 140
+      if (bottom >= 170 && bottom < 230) bottom -= 60;
+      if (bottom >= 230 && bottom < 260) bottom -= 100;
+      if (bottom >= 260) bottom -= 140;
       modalTypeToOpen = <AddBoard onCloseModal={onCloseModal} />;
       break;
+    case "Menu":
+    modalTypeToOpen = <Menu/>
   }
 
   return (
     <div
       // tabIndex={"0"}
       // onBlur={onCloseModal}
-      className="modal-container"
-      style={{
-        top: bottom ,
-        width: width || "304px",
-      }}
+      className={`modal-container ${modalClasses}`}
+      style={
+        modalTitle === "Menu"
+          ? {
+              top: bottom,
+              right:0, // when menu open
+              // right: -340, //when closed
+              width: width || "304px",
+            }
+          : {
+              top: bottom,
+              left,
+              width: width || "304px",
+            }
+      }
     >
       <div className="modal-header-wrapper">
         <div className="modal-header">
@@ -120,7 +133,7 @@ export const DynamicModalCmp = ({
           </span>
         </div>
       </div>
-      <div className="modal-content-wrapper">{modalTypeToOpen}</div>
+      <div style={modalTitle === 'Menu' ? {maxHeight:'448px'} : {}} className="modal-content-wrapper">{modalTypeToOpen}</div>
     </div>
   );
 };
