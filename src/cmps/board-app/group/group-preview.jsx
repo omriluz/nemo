@@ -2,21 +2,27 @@ import { TaskList } from "../task/task-list.jsx";
 import { MdMoreHoriz } from "react-icons/md";
 import { IoAdd } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
-import { useState, memo, useRef } from "react";
+import { useState, memo, useRef, useEffect } from "react";
 import { removeGroup, saveGroup } from "../../../store/actions/group.action.js";
 import { saveTask } from "../../../store/actions/task.action.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
 import { userService } from "../../../services/user.service.js";
 
 export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
   // console.log('rendered group');
+  let { filterBy } = useSelector((storeState) => storeState.boardModule)
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddTask, setIsAddTask] = useState(false);
   const [groupTitle, setGroupTitle] = useState({ title: group.title });
   const [newTask, setNewTask] = useState({ title: "" });
+
   const addTaskRef = useRef(null)
+
+  useEffect(() => {
+    // tasksToShow()
+  }, [filterBy])
 
   const onRemoveGroup = () => {
     dispatch(removeGroup(group.id, boardId));
@@ -51,6 +57,14 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
     }
   };
 
+
+
+  const tasksToShow = () => {
+
+    const taskToShow = group.tasks.filter(task => task.title.toLowerCase().includes(filterBy.txt.toLowerCase()))
+    return taskToShow
+
+  }
 
   // const handleMouse = (ev) => {
   // ev.preventDefault()
@@ -88,7 +102,7 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
             <div className="task-wrapper">
               <div className="group-preview-main">
                 <TaskList
-                  tasks={group.tasks}
+                  tasks={tasksToShow()}
                   groupId={group.id}
                   boardId={boardId}
                   labelOpenState={labelOpenState}

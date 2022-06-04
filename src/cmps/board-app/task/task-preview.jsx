@@ -7,10 +7,10 @@ import { useEffect, useRef, useState, memo } from "react";
 import { labelService } from "../../../services/label.service";
 import { BsPencil } from "react-icons/bs";
 import { FiCheckSquare, FiPaperclip } from "react-icons/fi";
-import {GrTextAlignFull} from "react-icons/gr"
-import {toggleLabelPreview} from '../../../store/actions/label.action'
+import { GrTextAlignFull } from "react-icons/gr"
+import { toggleLabelPreview } from '../../../store/actions/label.action'
 
-export const TaskPreview = ({ boardId, groupId, task, index,labelOpenState }) => {
+export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [labels, setLabels] = useState([]);
@@ -40,7 +40,7 @@ export const TaskPreview = ({ boardId, groupId, task, index,labelOpenState }) =>
     onSetBadges();
   }, [task]);
 
-  const onSetBadges = () => {};
+  const onSetBadges = () => { };
 
   const onSetLabels = async () => {
     const newLabels = await labelService.getLabelsById(boardId, task);
@@ -58,10 +58,8 @@ export const TaskPreview = ({ boardId, groupId, task, index,labelOpenState }) =>
 
   const onToggleLabelPreview = (ev) => {
     ev.stopPropagation();
-    console.log(ev.target);
     dispatch(toggleLabelPreview(boardId))
   };
-  console.log(task);
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided) => (
@@ -94,7 +92,7 @@ export const TaskPreview = ({ boardId, groupId, task, index,labelOpenState }) =>
                       key={label.id}
                       style={{ backgroundColor: label.color }}
                       className={`label-preview ${labelOpenState ? 'label-open' : ''}`}
-                    >{ labelOpenState && label.title}</span>
+                    >{labelOpenState && label.title}</span>
                   );
                 })}
               </div>
@@ -102,15 +100,16 @@ export const TaskPreview = ({ boardId, groupId, task, index,labelOpenState }) =>
             <span className="task-preview-title">{task.title}</span>
             <div className="badges">
               {/* todo: add date badge here  */}
-              {!!task.description && <span className="badge"><GrTextAlignFull/></span>}
-            {!!task.attachments?.length &&<span className="badge"> <FiPaperclip/></span>}
+              {!!task.description && <span className="badge"><GrTextAlignFull /></span>}
+              {!!task.attachments?.length && <span className="badge"> <FiPaperclip /></span>}
               {!!sumTodos && (
                 <div style={
                   sumTodos === sumTodosDone ? {
-                    backgroundColor:'#61bd4f',
-                   color:'white', borderRadius:'3px'} : {}} className="badge checklist-badge">
-                    <FiCheckSquare />
-                    {sumTodosDone}/{sumTodos}
+                    backgroundColor: '#61bd4f',
+                    color: 'white', borderRadius: '3px'
+                  } : {}} className="badge checklist-badge">
+                  <FiCheckSquare />
+                  {sumTodosDone}/{sumTodos}
                 </div>
               )}
               <div className="task-members-preview">

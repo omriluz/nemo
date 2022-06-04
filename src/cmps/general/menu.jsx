@@ -17,12 +17,21 @@ export const Menu = ({ isMenuOpen, onCloseMenu, activities, board }) => {
 
   const onOpenColors = () => {
     setIsMainMenuOpen('none')
+    setIsFilterModalOpen('none')
     setIsColorModalOpen('block')
 
   }
+  const onOpenFilter = () => {
+    setIsMainMenuOpen('none')
+    setIsFilterModalOpen('block')
+    setIsColorModalOpen('none')
+
+  }
+
   const onOpenMenu = () => {
     setIsMainMenuOpen('block')
     setIsColorModalOpen('none')
+    setIsFilterModalOpen('none')
 
   }
 
@@ -32,6 +41,7 @@ export const Menu = ({ isMenuOpen, onCloseMenu, activities, board }) => {
         <div className="modal-header">
           {isMainMenuOpen === 'block' && 'Menu'}
           {isColorModalOpen === 'block' && 'Colors'}
+          {isFilterModalOpen === 'block' && 'Filter'}
           <span
             onClick={onOpenMenu}
             style={{ display: isMainMenuOpen === 'none' ? 'inline-block' : 'none' }}
@@ -44,11 +54,14 @@ export const Menu = ({ isMenuOpen, onCloseMenu, activities, board }) => {
       </div>
       <div className="menu-content-wrapper">
         <ColorMenuModal board={board} isColorModalOpen={isColorModalOpen} />
-        <MainMenu isMainMenuOpen={isMainMenuOpen}
-          onOpenColors={onOpenColors}
-          activities={activities}
-          boardId={board.id} />
         <FilterMenu isFilterModalOpen={isFilterModalOpen} />
+        <MainMenu
+          onOpenColors={onOpenColors}
+          onOpenFilter={onOpenFilter}
+          isMainMenuOpen={isMainMenuOpen}
+          activities={activities}
+          boardId={board.id}
+        />
       </div>
     </div>
   );

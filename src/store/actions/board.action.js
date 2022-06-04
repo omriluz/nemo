@@ -129,6 +129,15 @@ export function saveBg(boardId, color) {
 }
 
 
+export function setFilter(filterBy) {
+    return (dispatch) => {
+        return dispatch({
+            type: 'SET_FILTERBY',
+            filterBy,
+        })
+    }
+}
+
 
 
 // Demo for Optimistic Mutation (IOW - Assuming the server call will work,

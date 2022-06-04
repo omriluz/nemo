@@ -1,6 +1,9 @@
 const initialState = {
     board: null,
     boards: [],
+    filterBy: {
+        txt: ''
+    }
 }
 export function boardReducer(state = initialState, action) {
     var newState = state
@@ -35,6 +38,8 @@ export function boardReducer(state = initialState, action) {
                 newState = { ...state, boards: [...state.boards, state.lastRemovedBoard], lastRemovedBoard: null }
             }
             break
+        case 'SET_FILTERBY':
+            return { ...state, filterBy: action.filterBy }
         default:
     }
 
