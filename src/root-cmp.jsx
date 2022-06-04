@@ -12,7 +12,6 @@ function App() {
   return (
     <Router>
       <AppHeader />
-        <main>
           <Routes>
             <Route element={<HomePage />} path={"/"} />
             <Route element={<LoginSignup />} path={"/signup"} />
@@ -22,7 +21,6 @@ function App() {
               <Route element={<TaskDetails />} path={":groupId/:taskId"} />
             </Route>
           </Routes>
-        </main>
     </Router>
   );
 }
