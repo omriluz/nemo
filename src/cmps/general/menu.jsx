@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { MainMenu } from "../menu/main-menu"
-import { ColorMenuModal } from "../menu/color-menu.jsx"
+import { ColorMenuModal } from "../menu/color-menu"
+import { FilterMenu } from "../menu/filter-menu.jsx"
 import { IoMdClose } from "react-icons/io";
 import { FiChevronLeft } from "react-icons/fi";
 
 export const Menu = ({ isMenuOpen, onCloseMenu, activities, board }) => {
   const [isColorModalOpen, setIsColorModalOpen] = useState('none');
   // const [isArchiveModalOpen, setIsArchiveModalOpen] = useState('none');
-  // const [isFilterModalOpen, setIsFilterModalOpen] = useState('none');
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState('none');
   // const [isUniqeModalOpen, setIsUniqeModalOpen] = useState('block');
   const [isMainMenuOpen, setIsMainMenuOpen] = useState('block');
   // const menuStyle = { display: "none" };
@@ -44,7 +45,7 @@ export const Menu = ({ isMenuOpen, onCloseMenu, activities, board }) => {
       <div className="menu-content-wrapper">
         <ColorMenuModal board={board} isColorModalOpen={isColorModalOpen} />
         <MainMenu isMainMenuOpen={isMainMenuOpen} onOpenColors={onOpenColors} activities={activities} boardId={board.id} />
-
+        <FilterMenu isFilterModalOpen={isFilterModalOpen} />
       </div>
     </div>
   );
