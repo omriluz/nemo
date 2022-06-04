@@ -120,6 +120,7 @@ export function saveBg(boardId, color) {
         try {
             const savedBoard = await boardService.getById(boardId)
             savedBoard.style.backgroundColor = color
+            boardService.save(savedBoard)
             dispatch(getActionSetBoard(savedBoard))
         } catch (err) {
             console.log('err in saving task');

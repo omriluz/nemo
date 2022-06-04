@@ -17,6 +17,8 @@ export const BoardApp = () => {
   useEffect(() => {
     onLoadBoard();
     onLoadUsers();
+    document.querySelector('html').style.overflowY = 'hidden'
+
   }, []);
 
   const onLoadUsers = () => {
@@ -34,7 +36,7 @@ export const BoardApp = () => {
     <div style={board.style} className="board-app-wrapper">
       <Outlet />
       <div className="board-app">
-        <ToolBar board={board}/>
+        <ToolBar board={board} />
         {board && <GroupList labelOpenState={board.labelOpenState} groups={board.groups} boardId={boardId} />}
       </div>
     </div>
