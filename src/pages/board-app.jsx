@@ -27,7 +27,6 @@ export const BoardApp = () => {
   };
 
 
-
   if (!board) return <h1>Loading...</h1>;
   return (
     // <div style={board.style} className="board-app-wrapper">
@@ -35,7 +34,7 @@ export const BoardApp = () => {
       <Outlet />
       <div className="board-app">
         <ToolBar board={board}/>
-        {board && <GroupList groups={board.groups} boardId={boardId} />}
+        {board && <GroupList labelOpenState={board.labelOpenState} groups={board.groups} boardId={boardId} />}
       </div>
     </div>
   );

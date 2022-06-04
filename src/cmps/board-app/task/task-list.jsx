@@ -4,7 +4,7 @@ import { memo, useEffect, useState } from "react";
 import { setTasks } from "../../../store/actions/task.action";
 import { useDispatch } from "react-redux";
 import { utilService } from "../../../services/util.service";
-export const TaskList = ({ tasks, groupId, boardId }) => {
+export const TaskList = ({ tasks, groupId, boardId,labelOpenState }) => {
   const dispatch = useDispatch();
 
   const handleOnDragEnd = (result) => {
@@ -31,6 +31,7 @@ export const TaskList = ({ tasks, groupId, boardId }) => {
                   boardId={boardId}
                   index={index}
                   groupId={groupId}
+                  labelOpenState={labelOpenState}
                 />
               );
             })}

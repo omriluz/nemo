@@ -27,6 +27,7 @@ async function saveTask(task, boardId, groupId, activity) {
         task.style = {}
         task.members = []
         task.coverSize = 'uncover'
+        task.description = ''
         const board = await boardService.getById(boardId)
         const idx = board.groups.findIndex(group => groupId === group.id)
         board.groups[idx].tasks.push(task)

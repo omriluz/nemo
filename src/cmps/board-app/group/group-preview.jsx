@@ -8,7 +8,7 @@ import { saveTask } from "../../../store/actions/task.action.js";
 import { useDispatch } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
 
-export const GroupPreview = ({ group, boardId, index }) => {
+export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
   // console.log('rendered group');
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -88,6 +88,7 @@ export const GroupPreview = ({ group, boardId, index }) => {
                   tasks={group.tasks}
                   groupId={group.id}
                   boardId={boardId}
+                  labelOpenState={labelOpenState}
                 />
                 {isAddTask && (
                   <div className="add-task-open">

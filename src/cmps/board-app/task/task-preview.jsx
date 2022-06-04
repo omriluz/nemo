@@ -6,13 +6,14 @@ import { Link } from "react-router-dom";
 import { useEffect, useRef, useState, memo } from "react";
 import { labelService } from "../../../services/label.service";
 import { BsPencil } from "react-icons/bs";
-import { FiCheckSquare } from "react-icons/fi";
+import { FiCheckSquare, FiPaperclip } from "react-icons/fi";
+import {GrTextAlignFull} from "react-icons/gr"
+import {toggleLabelPreview} from '../../../store/actions/label.action'
 
-export const TaskPreview = ({ boardId, groupId, task, index }) => {
+export const TaskPreview = ({ boardId, groupId, task, index,labelOpenState }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [labels, setLabels] = useState([]);
-  const [labelOpenClass, setLabelOpenClass] = useState('');
 
   let sumTodos;
   let sumTodosDone;
@@ -58,9 +59,9 @@ export const TaskPreview = ({ boardId, groupId, task, index }) => {
   const onToggleLabelPreview = (ev) => {
     ev.stopPropagation();
     console.log(ev.target);
-    setLabelOpenClass(labelOpenClass ? '' : 'label-open')
+    dispatch(toggleLabelPreview(boardId))
   };
-
+  console.log(task);
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided) => (
@@ -88,32 +89,36 @@ export const TaskPreview = ({ boardId, groupId, task, index }) => {
               <div className="label-container">
                 {labels.map((label) => {
                   return (
-                    <div
+                    <span
                       onClick={onToggleLabelPreview}
                       key={label.id}
                       style={{ backgroundColor: label.color }}
-                      className={`label-preview ${labelOpenClass}`}
-                    ><span>fdsfds</span></div>
+                      className={`label-preview ${labelOpenState ? 'label-open' : ''}`}
+                    >{ labelOpenState && label.title}</span>
                   );
                 })}
               </div>
             )}
             <span className="task-preview-title">{task.title}</span>
             <div className="badges">
+              {/* todo: add date badge here  */}
+              {!!task.description && <span className="badge"><GrTextAlignFull/></span>}
+            {!!task.attachments?.length &&<span className="badge"> <FiPaperclip/></span>}
               {!!sumTodos && (
-                <div className="badge">
-                  <div>
+                <span style={
+                  sumTodos === sumTodosDone ? {
+                    backgroundColor:'#61bd4f',
+                   color:'white'} : {}} className="badge">
                     <FiCheckSquare />
-                  </div>
-                  <div>
                     {sumTodosDone}/{sumTodos}
-                  </div>
-                </div>
+                </span>
               )}
+              <div className="task-members-preview">
+                
+              </div>
             </div>
           </div>
         </div>
-        // { </div>
       )}
     </Draggable>
   );
