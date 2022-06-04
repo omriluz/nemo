@@ -19,7 +19,6 @@ export const WorkSpace = () => {
   useEffect(() => {
     onLoadBoards()
     //needs to refactor
-    document.querySelector('html').style.overflowY = 'auto'
   }, [])
 
   const onLoadBoards = () => {

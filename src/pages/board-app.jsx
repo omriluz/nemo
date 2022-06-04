@@ -17,7 +17,6 @@ export const BoardApp = () => {
   useEffect(() => {
     onLoadBoard();
     onLoadUsers();
-    document.querySelector('html').style.overflowY = 'hidden'
 
   }, []);
 

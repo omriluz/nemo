@@ -487,9 +487,10 @@
     background-color: $clr2;
     min-height: 42px;
     max-height: 42px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
 
     & nav {
       width: 95%;
