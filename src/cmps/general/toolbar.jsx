@@ -3,35 +3,27 @@ import { Menu } from "./menu";
 
 export const ToolBar = ({ board }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const menuDetails = useRef();
   const onOpenMenu = () => {
     setIsMenuOpen(true)
   }
-  // const onOpenMenu = (ev) => {
-  //   if (isMenuOpen) {
-  //     setIsMenuOpen(false);
-  //   }
-  //   console.log(ev.target.getBoundingClientRect());
-  //   menuDetails.current = ev.target.getBoundingClientRect();
-  //   setIsMenuOpen(true);
-  // };
-
   const onCloseMenu = () => {
     setIsMenuOpen(false);
   };
 
   return (
     <div className="toolbar">
-              {/* {isMenuOpen && (
+      {/* {isMenuOpen && (
         <DynamicModalCmp
           modalDetails={menuDetails.current}
           modalTitle={'Menu'}
           onCloseModal={onCloseMenu}
           width={340}
+          activities={board.activities}
+          boardId={board.id}
         />
       )} */}
 
-      <Menu isMenuOpen={isMenuOpen} onCloseMenu={onCloseMenu} boardId={board._id} activities={board.activities}/>
+      <Menu isMenuOpen={isMenuOpen} onCloseMenu={onCloseMenu} board={board} activities={board.activities} />
 
       <div className="toolbar-left">
         {/* <input type="text"  /> */}

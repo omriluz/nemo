@@ -1,51 +1,67 @@
-// import { useState } from "react";
-
-// export const Menu = () => {
-//   const [isColorModalOpen, setIsColorModalOpen] = useState('none');
-//   const [isArchiveModalOpen, setIsArchiveModalOpen] = useState('none');
-//   const [isFilterModalOpen, setIsFilterModalOpen] = useState('none');
-//   const [isUniqeModalOpen, setIsUniqeModalOpen] = useState('block');
-//   const menuStyle = { display: "none" };
-//   const onOpenColors = () => {
-//     setIsUniqeModalOpen('none');
-//     setIsColorModalOpen('block')
-//   };
-
-//   return (
-
-// <ColorMenuModal/>
-// <Activity/>
-// );
-// };
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { MainMenu } from "../menu/main-menu"
+import { ColorMenuModal } from "../menu/color-menu.jsx"
 import { IoMdClose } from "react-icons/io";
+import { FiChevronLeft } from "react-icons/fi";
 
-export const Menu = ({ isMenuOpen, onCloseMenu }) => {
-  const [isColorModalOpen, setIsColorModalOpen] = useState("none");
-  const [isArchiveModalOpen, setIsArchiveModalOpen] = useState("none");
-  const [isFilterModalOpen, setIsFilterModalOpen] = useState("none");
-  const [isUniqeModalOpen, setIsUniqeModalOpen] = useState("block");
-  const menuStyle = { display: "none" };
+export const Menu = ({ isMenuOpen, onCloseMenu, activities, board }) => {
+  const [isColorModalOpen, setIsColorModalOpen] = useState('none');
+  // const [isArchiveModalOpen, setIsArchiveModalOpen] = useState('none');
+  // const [isFilterModalOpen, setIsFilterModalOpen] = useState('none');
+  // const [isUniqeModalOpen, setIsUniqeModalOpen] = useState('block');
+  const [isMainMenuOpen, setIsMainMenuOpen] = useState('block');
+  // const menuStyle = { display: "none" };
+
+
+
   const onOpenColors = () => {
-    setIsUniqeModalOpen("none");
-    setIsColorModalOpen("block");
-  };
+    setIsMainMenuOpen('none')
+    setIsColorModalOpen('block')
 
+  }
+  const onOpenMenu = () => {
+    setIsMainMenuOpen('block')
+    setIsColorModalOpen('none')
+
+  }
 
   return (
     <div className={`pop-up-menu ${isMenuOpen ? "menu-open" : ""}`}>
       <div className="modal-header-wrapper">
         <div className="modal-header">
-          Menu
+          {isMainMenuOpen === 'block' && 'Menu'}
+          {isColorModalOpen === 'block' && 'Colors'}
+          <span
+            onClick={onOpenMenu}
+            style={{ display: isMainMenuOpen === 'none' ? 'inline-block' : 'none' }}
+            className="back-menu">
+            <FiChevronLeft /></span>
           <span onClick={onCloseMenu} className="modal-close-btn">
             <IoMdClose />
           </span>
         </div>
       </div>
-      <div className="menu-content-wrapper"><h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellendus ullam doloremque quidem esse vitae voluptatum assumenda ad, rem quisquam eligendi nobis voluptatem, perspiciatis animi maxime temporibus sed ab repudiandae recusandae.
-      Soluta dolorem doloremque minus molestiae rem impedit repellat ipsam tempora. Ducimus pariatur dolor beatae, amet dignissimos deserunt quibusdam molestiae laborum ex vel perferendis reprehenderit quas! Maxime alias totam perspiciatis fugiat.
-      Perspiciatis natus excepturi enim minus laboriosam libero vero aperiam rerum fuga veniam velit corrupti cupiditate repellendus soluta magni laborum, omnis culpa itaque at accusamus tenetur est, amet consequatur? Suscipit, iure!</h1></div>
+      <div className="menu-content-wrapper">
+        <ColorMenuModal board={board} isColorModalOpen={isColorModalOpen} />
+        <MainMenu isMainMenuOpen={isMainMenuOpen} onOpenColors={onOpenColors} activities={activities} boardId={board.id} />
+
+      </div>
     </div>
   );
 };
+
+
+
+
+
+
+{/* <h1 style={{display:isUniqeModalOpen}}>filter</h1>
+      <h1 style={{display:isUniqeModalOpen}}>archive</h1>
+      <h1 style={{display:isUniqeModalOpen}} onClick={onOpenColors}>colors</h1>
+      <h1 style={{display:isUniqeModalOpen}}>activity</h1>
+      <h1 style={{ display:isColorModalOpen }}>color open</h1>
+      <h1 style={{ display:isFilterModalOpen }}>filter open</h1>
+      <h1 style={{ display:isArchiveModalOpen }}>archive open</h1> */}
+    // </>
+    // <ColorMenuModal/>
+    // <Activity/>

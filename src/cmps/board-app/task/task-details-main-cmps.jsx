@@ -1,9 +1,10 @@
-import { Description } from "./task-description.jsx"
-import { Checklists } from "./check-list/checklist.jsx"
+import { Description } from "./task-description"
+import { Checklists } from "./check-list/checklist"
 import { TaskAttachment } from './attachment/task-attachment'
+import { Activity } from '../../general/activity'
 
 
-export const TaskDetailsMainCmps = ({ task, boardId, groupId }) => {
+export const TaskDetailsMainCmps = ({ task, boardId, groupId, activities }) => {
     return <>
         {/* will only have one description and one activity */}
         {/* checklist and attachment need to render the amount that exists from model */}
@@ -11,6 +12,6 @@ export const TaskDetailsMainCmps = ({ task, boardId, groupId }) => {
         {<TaskAttachment task={task} boardId={boardId} groupId={groupId} />}
         <Checklists task={task} boardId={boardId} groupId={groupId} />
         {/* <Attachment/> */}
-        {/* <Activity/> */}
+        <Activity activities={activities} taskId={task.id} boardId={boardId} />
     </>
 }

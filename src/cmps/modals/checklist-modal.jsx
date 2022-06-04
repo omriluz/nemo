@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { useState } from "react";
 import { saveChecklist } from '../../store/actions/checklist.action';
 import { utilService } from '../../services/util.service';
+import { userService } from '../../services/user.service';
 
 
 export const ChecklistModal = ({ boardId, groupId, taskId, onCloseModal }) => {
@@ -18,7 +19,8 @@ export const ChecklistModal = ({ boardId, groupId, taskId, onCloseModal }) => {
         const checklist = checklistTitle
         checklist.id = utilService.makeId()
         checklist.todos = []
-        dispatch(saveChecklist(checklist, boardId, groupId, taskId));
+        const activity = { txt: 'added Checklist to this card', byMember: userService.getLoggedinUser() }
+        dispatch(saveChecklist(checklist, boardId, groupId, taskId, activity));
         setChecklistTitle({ title: 'Checklist' });
         onCloseModal()
     }

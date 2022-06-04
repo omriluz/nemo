@@ -105,16 +105,16 @@ export const TaskPreview = ({ boardId, groupId, task, index,labelOpenState }) =>
               {!!task.description && <span className="badge"><GrTextAlignFull/></span>}
             {!!task.attachments?.length &&<span className="badge"> <FiPaperclip/></span>}
               {!!sumTodos && (
-                <span style={
+                <div style={
                   sumTodos === sumTodosDone ? {
                     backgroundColor:'#61bd4f',
-                   color:'white'} : {}} className="badge">
+                   color:'white', borderRadius:'3px'} : {}} className="badge checklist-badge">
                     <FiCheckSquare />
                     {sumTodosDone}/{sumTodos}
-                </span>
+                </div>
               )}
               <div className="task-members-preview">
-                
+
               </div>
             </div>
           </div>

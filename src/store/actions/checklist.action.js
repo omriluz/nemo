@@ -11,21 +11,20 @@ export function removeChecklist(boardId, groupId, taskId, checklistId, activity)
         }
     }
 }
-export function saveChecklist(checklist, boardId, groupId, taskId) {
+export function saveChecklist(checklist, boardId, groupId, taskId, activity) {
     return async (dispatch) => {
         try {
-            const board = await checklistService.saveChecklist(checklist, boardId, groupId, taskId)
+            const board = await checklistService.saveChecklist(checklist, boardId, groupId, taskId, activity)
             dispatch(getActionSetBoard(board))
         } catch (err) {
             console.log('Err could not delete task', err);
         }
     }
 }
-export function saveTodo(todo, checklistId, boardId, groupId, taskId) {
-    // console.log(todo, checklistId, boardId, groupId, taskId, '@@@@@@@');
+export function saveTodo(todo, checklistId, boardId, groupId, taskId, activity) {
     return async (dispatch) => {
         try {
-            const board = await checklistService.saveTodo(todo, checklistId, boardId, groupId, taskId)
+            const board = await checklistService.saveTodo(todo, checklistId, boardId, groupId, taskId, activity)
             dispatch(getActionSetBoard(board))
         } catch (err) {
             console.log('Err could not delete task', err);
@@ -33,7 +32,6 @@ export function saveTodo(todo, checklistId, boardId, groupId, taskId) {
     }
 }
 export function removeTodo(todo, checklistId, boardId, groupId, taskId) {
-    // console.log(todo, checklistId, boardId, groupId, taskId, '@@@@@@@');
     return async (dispatch) => {
         try {
             const board = await checklistService.removeTodo(todo, checklistId, boardId, groupId, taskId)

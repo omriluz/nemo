@@ -6,7 +6,7 @@ import { saveGroup, setGroups } from "../../../store/actions/group.action.js";
 import { IoMdClose } from "react-icons/io";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
-export const GroupList = ({ groups, boardId, labelOpenState }) => {
+export const GroupList = ({ groups, boardId, activities,labelOpenState }) => {
   const dispatch = useDispatch();
   const [isAddGroup, setIsAddGroup] = useState(false);
   const [groupTitle, setGroupTitle] = useState({ title: "" });
@@ -51,6 +51,7 @@ export const GroupList = ({ groups, boardId, labelOpenState }) => {
                       boardId={boardId}
                       index={index}
                       labelOpenState={labelOpenState}
+                      activities={activities}
                     />
                   );
                 })}
