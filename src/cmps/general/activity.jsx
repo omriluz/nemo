@@ -2,8 +2,10 @@ import { useEffect, useState } from "react"
 import { IoListOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { utilService } from "../../services/util.service";
+import { saveActivity } from "../../store/actions/activity.action";
 
-export const Activity = ({ activities, taskId }) => {
+
+export const Activity = ({ activities, taskId, boardId }) => {
     // debugger
     const [taskActivities, setTaskActivities] = useState(null)
     const [toggleShow, setToggleShow] = useState(true)
@@ -33,8 +35,12 @@ export const Activity = ({ activities, taskId }) => {
 
     const onSaveActivity = () => {
 
-        console.log('hhh');
-
+        const activity = activityComment
+        activity.task = {}
+        activity.task.id = taskId
+        console.log(activity);
+        dispatch(saveActivity(activity, boardId))
+        setActivityComment({ comment: '' })
     }
 
 
@@ -69,26 +75,44 @@ export const Activity = ({ activities, taskId }) => {
         {taskActivities && activities && toggleShow && < div className="activity-preview-container">
             {taskId ? taskActivities.map((activity) => {
                 return (
-                    <div key={activity.id} className="activity-preview">
+                    activity.txt ? <div key={activity.id} className='activity-preview'>
                         <div className="avatar-member"
                             style={{ background: `url(${activity.byMember.imgUrl}) center center / cover ` }}>
                         </div>
-                        <div className="activity-info">
-                            <h2> <span>{activity.byMember.fullname}</span> {activity.txt} </h2>
+                        <div className='activity-info'>
+                            <h2 > <span>{activity.byMember.fullname}</span> {activity.txt} </h2>
                             <p>{utilService.timeSince(activity.createdAt)}</p>
                         </div>
+                    </div> : <div key={activity.id} className='activity-preview'>
+                        <div className="avatar-member"
+                            style={{ background: `url(${activity.byMember.imgUrl}) center center / cover ` }}>
+                        </div>
+                        <div className="comment-info">
+                            <h2> <span>{activity.byMember.fullname}</span> <span className="time">{utilService.timeSince(activity.createdAt)}</span></h2>
+                            <div className="comment-preview">{activity.comment}</div>
+                        </div>
+
                     </div>
                 );
             }) : activities.map((activity) => {
                 return (
-                    <div key={activity.id} className="activity-preview">
+                    activity.txt ? <div key={activity.id} className='activity-preview'>
                         <div className="avatar-member"
                             style={{ background: `url(${activity.byMember.imgUrl}) center center / cover ` }}>
                         </div>
-                        <div className="activity-info">
-                            <h2> <span>{activity.byMember.fullname}</span> {activity.txt} </h2>
+                        <div className='activity-info'>
+                            <h2 > <span>{activity.byMember.fullname}</span> {activity.txt} </h2>
                             <p>{utilService.timeSince(activity.createdAt)}</p>
                         </div>
+                    </div> : <div key={activity.id} className='activity-preview'>
+                        <div className="avatar-member"
+                            style={{ background: `url(${activity.byMember.imgUrl}) center center / cover ` }}>
+                        </div>
+                        <div className="comment-info">
+                            <h2> <span>{activity.byMember.fullname}</span> <span className="time">{utilService.timeSince(activity.createdAt)}</span></h2>
+                            <div className="comment-preview">{activity.comment}</div>
+                        </div>
+
                     </div>
                 );
             })}

@@ -20,12 +20,14 @@ export const ToolBar = ({ board }) => {
 
   return (
     <div className="toolbar">
-              {isMenuOpen && (
+      {isMenuOpen && (
         <DynamicModalCmp
           modalDetails={menuDetails.current}
           modalTitle={'Menu'}
           onCloseModal={onCloseMenu}
           width={340}
+          activities={board.activities}
+          boardId={board.id}
         />
       )}
       <div className="toolbar-left">

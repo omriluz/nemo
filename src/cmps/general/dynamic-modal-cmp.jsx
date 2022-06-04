@@ -21,6 +21,7 @@ export const DynamicModalCmp = ({
   labels,
   users,
   modalClasses,
+  activities
 }) => {
   let modalTypeToOpen;
   switch (modalTitle) {
@@ -102,7 +103,7 @@ export const DynamicModalCmp = ({
       modalTypeToOpen = <AddBoard onCloseModal={onCloseModal} />;
       break;
     case "Menu":
-    modalTypeToOpen = <Menu/>
+      modalTypeToOpen = <Menu activities={activities} boardId={boardId} />
   }
 
   return (
@@ -113,16 +114,18 @@ export const DynamicModalCmp = ({
       style={
         modalTitle === "Menu"
           ? {
-              top: bottom,
-              right:0, // when menu open
-              // right: -340, //when closed
-              width: width || "304px",
-            }
+            top: bottom,
+            right: 0, // when menu open
+            // right: -340, //when closed
+            height: `calc(100vh - 50px)`,
+
+            width: width || "304px",
+          }
           : {
-              top: bottom,
-              left,
-              width: width || "304px",
-            }
+            top: bottom,
+            left,
+            width: width || "304px",
+          }
       }
     >
       <div className="modal-header-wrapper">
@@ -133,7 +136,7 @@ export const DynamicModalCmp = ({
           </span>
         </div>
       </div>
-      <div style={modalTitle === 'Menu' ? {maxHeight:'448px'} : {}} className="modal-content-wrapper">{modalTypeToOpen}</div>
+      <div style={modalTitle === 'Menu' ? { maxHeight: '448px' } : {}} className="modal-content-wrapper">{modalTypeToOpen}</div>
     </div>
   );
 };
