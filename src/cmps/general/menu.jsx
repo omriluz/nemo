@@ -1,20 +1,24 @@
 import { useState } from "react";
 import { MainMenu } from "../menu/main-menu"
+import { ColorMenuModal } from "../menu/color-menu.jsx"
 
 export const Menu = ({ activities, boardId }) => {
   const [isColorModalOpen, setIsColorModalOpen] = useState('none');
-  const [isArchiveModalOpen, setIsArchiveModalOpen] = useState('none');
-  const [isFilterModalOpen, setIsFilterModalOpen] = useState('none');
-  const [isUniqeModalOpen, setIsUniqeModalOpen] = useState('block');
-  const menuStyle = { display: "none" };
-  // const onOpenColors = () => {
-  //   setIsUniqeModalOpen('none');
-  //   setIsColorModalOpen('block')
-  // };
+  // const [isArchiveModalOpen, setIsArchiveModalOpen] = useState('none');
+  // const [isFilterModalOpen, setIsFilterModalOpen] = useState('none');
+  // const [isUniqeModalOpen, setIsUniqeModalOpen] = useState('block');
+  const [isMainMenuOpen, setIsMainMenuOpen] = useState('block');
+  // const menuStyle = { display: "none" };
+
+  const onOpenColors = () => {
+    setIsMainMenuOpen('none')
+    setIsColorModalOpen('block')
+  };
 
   return (
     <>
-      <MainMenu activities={activities} boardId={boardId} />
+      <ColorMenuModal isColorModalOpen={isColorModalOpen} />
+      <MainMenu isMainMenuOpen={isMainMenuOpen} onOpenColors={onOpenColors} activities={activities} boardId={boardId} />
     </>
 
   );

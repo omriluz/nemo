@@ -46,7 +46,7 @@ export const Activity = ({ activities, taskId, boardId }) => {
 
     return <section className="activity-container">
 
-        <div className="title-container">
+        <div className={`title-container ${taskId ? '' : 'menu'}`}>
             <IoListOutline className="activity-icon" /> <h3>Activity</h3>
             {taskId && <button className="details-btn"
                 onClick={() => setToggleShow(!toggleShow)} >
