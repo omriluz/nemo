@@ -101,6 +101,7 @@ export function addBoard(board) {
 }
 
 export function updateBoard(board) {
+    console.log('board')
     return (dispatch) => {
         boardService.save(board)
             .then(savedBoard => {
@@ -112,6 +113,21 @@ export function updateBoard(board) {
             })
     }
 }
+
+
+export function saveBg(boardId, color) {
+    return async (dispatch) => {
+        try {
+            const savedBoard = await boardService.getById(boardId)
+            savedBoard.style.backgroundColor = color
+            dispatch(getActionSetBoard(savedBoard))
+        } catch (err) {
+            console.log('err in saving task');
+        }
+    }
+}
+
+
 
 
 // Demo for Optimistic Mutation (IOW - Assuming the server call will work,

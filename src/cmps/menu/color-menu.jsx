@@ -1,8 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { saveBg } from "../../store/actions/board.action";
 
-export const ColorMenuModal = ({ isColorModalOpen }) => {
+export const ColorMenuModal = ({ board, isColorModalOpen }) => {
+    // const [selectedColor, setSelectedColor] = useState(board.style.backgroundColor)
+    const dispatch = useDispatch();
 
-    const [selectedColor, setSelectedColor] = useState('#b04632')
+    useEffect(() => {
+        // changeBg()
+    }, [board]);
+
+
 
     const bgColors = [
         { id: 'c1', color: '#d29034' },
@@ -16,10 +24,23 @@ export const ColorMenuModal = ({ isColorModalOpen }) => {
         { id: 'c9', color: '#838c91' }
     ]
 
-    const chooseColor = (color) => {
-        setSelectedColor(color.color)
+    const chooseBg = (color) => {
+        console.log(color, '$$$$$$');
+        // setSelectedColor(color)
+        changeBg(color)
     }
 
+
+    const changeBg = (color) => {
+        // console.log(color);
+        // console.log(board.style);
+        // console.log(selectedColor);
+
+        // let boardAfterCopy = JSON.parse(JSON.stringify(board));
+
+        // boardAfterCopy.style.backgroundColor = color
+        dispatch(saveBg(board._id, color));
+    }
 
 
     return <section style={{ display: isColorModalOpen }} >
@@ -32,7 +53,7 @@ export const ColorMenuModal = ({ isColorModalOpen }) => {
                             <div
                                 style={{ backgroundColor: color.color }}
                                 className="color-selected"
-                                onClick={() => chooseColor(color)}
+                                onClick={() => chooseBg(color.color)}
                             >
                             </div>
                         </div>

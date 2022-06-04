@@ -5,7 +5,7 @@ import boardPreview from "../../assets/svg/board-preview.svg"
 
 
 export const AddBoard = ({ onCloseModal }) => {
-  const dispatch = useDispatch({ addBoard });
+  const dispatch = useDispatch();
   const [boardTitle, setBoardTitle] = useState("");
   const [selectedColor, setSelectedColor] = useState('#b04632')
 

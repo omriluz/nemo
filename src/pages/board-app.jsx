@@ -12,6 +12,7 @@ export const BoardApp = () => {
   const { users } = useSelector((storeState) => storeState.userModule)
   // const { users } = useSelector((storeState) => storeState.userModule);
   const dispatch = useDispatch();
+  console.log(board);
 
   useEffect(() => {
     onLoadBoard();

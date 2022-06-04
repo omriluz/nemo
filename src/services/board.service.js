@@ -3,7 +3,7 @@ import { storageService } from './async-storage.service.js'
 import { userService } from './user.service.js'
 import { getActionRemoveBoard, getActionAddBoard, getActionUpdateBoard } from '../store/actions/board.action.js'
 import { utilService } from './util.service.js'
-import {httpService} from './http.service.js'
+import { httpService } from './http.service.js'
 const boardChannel = new BroadcastChannel('boardChannel')
 // const listeners = []
 
@@ -45,12 +45,13 @@ async function remove(boardId) {
     boardChannel.postMessage(getActionRemoveBoard(boardId))
 }
 async function save(board) {
-    var savedBoard
+    // var savedBoard
     if (board._id) {
         // savedBoard = await storageService.put(STORAGE_KEY, board)
-        savedBoard = await httpService.put(BOARD_BASE_ENDPOINT, board)
+        const savedBoard = await httpService.put(BOARD_BASE_ENDPOINT, board)
         // is this necessary? ask shneor if he needs it
         boardChannel.postMessage(getActionUpdateBoard(savedBoard))
+        return savedBoard
     } else {
         try {
             // Later, owner is set by the backend
@@ -64,7 +65,7 @@ async function save(board) {
             console.log(err)
         }
     }
-    return savedBoard
+    // return savedBoard
 }
 
 

@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MainMenu } from "../menu/main-menu"
 import { ColorMenuModal } from "../menu/color-menu.jsx"
+import { IoMdClose } from "react-icons/io";
+import { FiChevronLeft } from "react-icons/fi";
 
-export const Menu = ({ activities, boardId }) => {
+export const Menu = ({ isMenuOpen, onCloseMenu, activities, board }) => {
   const [isColorModalOpen, setIsColorModalOpen] = useState('none');
   // const [isArchiveModalOpen, setIsArchiveModalOpen] = useState('none');
   // const [isFilterModalOpen, setIsFilterModalOpen] = useState('none');
@@ -10,17 +12,41 @@ export const Menu = ({ activities, boardId }) => {
   const [isMainMenuOpen, setIsMainMenuOpen] = useState('block');
   // const menuStyle = { display: "none" };
 
+
+
   const onOpenColors = () => {
     setIsMainMenuOpen('none')
     setIsColorModalOpen('block')
-  };
+
+  }
+  const onOpenMenu = () => {
+    setIsMainMenuOpen('block')
+    setIsColorModalOpen('none')
+
+  }
 
   return (
-    <>
-      <ColorMenuModal isColorModalOpen={isColorModalOpen} />
-      <MainMenu isMainMenuOpen={isMainMenuOpen} onOpenColors={onOpenColors} activities={activities} boardId={boardId} />
-    </>
+    <div className={`pop-up-menu ${isMenuOpen ? "menu-open" : ""}`}>
+      <div className="modal-header-wrapper">
+        <div className="modal-header">
+          {isMainMenuOpen === 'block' && 'Menu'}
+          {isColorModalOpen === 'block' && 'Colors'}
+          <span
+            onClick={onOpenMenu}
+            style={{ display: isMainMenuOpen === 'none' ? 'inline-block' : 'none' }}
+            className="back-menu">
+            <FiChevronLeft /></span>
+          <span onClick={onCloseMenu} className="modal-close-btn">
+            <IoMdClose />
+          </span>
+        </div>
+      </div>
+      <div className="menu-content-wrapper">
+        <ColorMenuModal board={board} isColorModalOpen={isColorModalOpen} />
+        <MainMenu isMainMenuOpen={isMainMenuOpen} onOpenColors={onOpenColors} activities={activities} boardId={board.id} />
 
+      </div>
+    </div>
   );
 };
 

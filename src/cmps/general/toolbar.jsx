@@ -1,26 +1,18 @@
 import { useRef, useState } from "react";
-import { DynamicModalCmp } from "./dynamic-modal-cmp";
+import { Menu } from "./menu";
 
 export const ToolBar = ({ board }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuDetails = useRef();
-
-  const onOpenMenu = (ev) => {
-    if (isMenuOpen) {
-      setIsMenuOpen(false);
-    }
-    console.log(ev.target.getBoundingClientRect());
-    menuDetails.current = ev.target.getBoundingClientRect();
-    setIsMenuOpen(true);
-  };
-
+  const onOpenMenu = () => {
+    setIsMenuOpen(true)
+  }
   const onCloseMenu = () => {
     setIsMenuOpen(false);
   };
 
   return (
     <div className="toolbar">
-      {isMenuOpen && (
+      {/* {isMenuOpen && (
         <DynamicModalCmp
           modalDetails={menuDetails.current}
           modalTitle={'Menu'}
@@ -29,7 +21,10 @@ export const ToolBar = ({ board }) => {
           activities={board.activities}
           boardId={board.id}
         />
-      )}
+      )} */}
+
+      <Menu isMenuOpen={isMenuOpen} onCloseMenu={onCloseMenu} board={board} activities={board.activities} />
+
       <div className="toolbar-left">
         {/* <input type="text"  /> */}
         <h1 className="board-toolbar-title">{board.title}</h1>
@@ -46,7 +41,7 @@ export const ToolBar = ({ board }) => {
       {/* </div> */}
       <div className="toolbar-right">
         {/* <button className="toolbar-btn">filter</button> */}
-        <button onClick={(ev) => onOpenMenu(ev)} className="toolbar-btn toolbar-menu-btn">
+        <button onClick={onOpenMenu} className="toolbar-btn toolbar-menu-btn">
           showmenu
         </button>
       </div>
