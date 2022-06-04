@@ -1,7 +1,9 @@
 .board-app {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  // flex: 1;
+  // flex-grow: 1;
+  // flex-grow: 1;
   overflow-x: auto;
 
   &::-webkit-scrollbar {

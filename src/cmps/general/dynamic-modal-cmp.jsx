@@ -116,6 +116,7 @@ export const DynamicModalCmp = ({
               top: bottom,
               right:0, // when menu open
               // right: -340, //when closed
+              // height:`calc(100vh - 80px)`,
               width: width || "304px",
             }
           : {
@@ -133,7 +134,8 @@ export const DynamicModalCmp = ({
           </span>
         </div>
       </div>
-      <div style={modalTitle === 'Menu' ? {maxHeight:'448px'} : {}} className="modal-content-wrapper">{modalTypeToOpen}</div>
+      {/* <div style={modalTitle === 'Menu' ? {maxHeight:'448px'} : {}} className="modal-content-wrapper">{modalTypeToOpen}</div> */}
+      <div className="modal-content-wrapper">{modalTypeToOpen}</div>
     </div>
   );
 };
