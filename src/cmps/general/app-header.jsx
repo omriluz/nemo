@@ -97,8 +97,8 @@ export const AppHeader = () => {
     {pathname === "/" && (
       <nav className="nav-bar flex justify-between align-center">
         <div className="logo-container">
-          <img className="img-zain" src={Logole} alt="" />
-          <span className="please-work">Nemo</span>
+          <img className="logo-img-home" src={Logole} alt="" />
+          <span className="logo-title-home">Nemo</span>
         </div>
         <div className="nav-menu">
           <a href="/login" className="login-btn">

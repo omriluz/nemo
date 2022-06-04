@@ -485,8 +485,8 @@
 
   &-workspace {
     background-color: $clr2;
-    min-height: 40px;
-    max-height: 40px;
+    min-height: 42px;
+    max-height: 42px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -531,13 +531,13 @@
   // padding: 6px 4px;
 }
 
-.please-work {
+.logo-title-home {
   font-size: 37px;
   font-family: "Charlie-Text-Semibold";
   font-weight: 700;
 }
 
-.img-zain {
+.logo-img-home {
   width: 30px;
 }
 

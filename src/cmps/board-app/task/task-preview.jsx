@@ -12,6 +12,8 @@ export const TaskPreview = ({ boardId, groupId, task, index }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [labels, setLabels] = useState([]);
+  const [labelOpenClass, setLabelOpenClass] = useState('');
+
   let sumTodos;
   let sumTodosDone;
   if (task.checklists.length) {
@@ -19,7 +21,6 @@ export const TaskPreview = ({ boardId, groupId, task, index }) => {
       (accumulator, checklist) => accumulator + checklist.todos.length,
       0
     );
-    // sumTodosDone = task.checklists.reduce((accumulator, checklist) => accumulator + checklist.todos.length, 0)
     sumTodosDone = task.checklists.map((checklist) => {
       return checklist.todos.reduce(
         (accumulator, todo) => accumulator + todo.isDone,
@@ -57,12 +58,9 @@ export const TaskPreview = ({ boardId, groupId, task, index }) => {
   const onToggleLabelPreview = (ev) => {
     ev.stopPropagation();
     console.log(ev.target);
+    setLabelOpenClass(labelOpenClass ? '' : 'label-open')
   };
 
-  if (task.id === "TlqoQb") {
-    console.log(task.coverSize);
-    console.log(typeof task.style);
-  }
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided) => (
@@ -79,39 +77,42 @@ export const TaskPreview = ({ boardId, groupId, task, index }) => {
           )}
 
           {/* {task?.style?.backgroundColor && task.coverSize === "cover" && <div style={task.style} className="task-preview-cover-container">} */}
-            <div style={task.coverSize === "cover" ? task.style : {}} className="task-preview-container">
-              <div className="task-preview-edit-icon">
-                <BsPencil />
+          <div
+            style={task.coverSize === "cover" ? task.style : {}}
+            className="task-preview-container"
+          >
+            <div className="task-preview-edit-icon">
+              <BsPencil />
+            </div>
+            {!!labels?.length && (
+              <div className="label-container">
+                {labels.map((label) => {
+                  return (
+                    <div
+                      onClick={onToggleLabelPreview}
+                      key={label.id}
+                      style={{ backgroundColor: label.color }}
+                      className={`label-preview ${labelOpenClass}`}
+                    ><span>fdsfds</span></div>
+                  );
+                })}
               </div>
-              {!!labels?.length && (
-                <div className="label-container">
-                  {labels.map((label) => {
-                    return (
-                      <span
-                        onClick={onToggleLabelPreview}
-                        key={label.id}
-                        style={{ backgroundColor: label.color }}
-                        className="label-preview"
-                      ></span>
-                    );
-                  })}
+            )}
+            <span className="task-preview-title">{task.title}</span>
+            <div className="badges">
+              {!!sumTodos && (
+                <div className="badge">
+                  <div>
+                    <FiCheckSquare />
+                  </div>
+                  <div>
+                    {sumTodosDone}/{sumTodos}
+                  </div>
                 </div>
               )}
-              <span className="task-preview-title">{task.title}</span>
-              <div className="badges">
-                {!!sumTodos && (
-                  <div className="badge">
-                    <div>
-                      <FiCheckSquare />
-                    </div>
-                    <div>
-                      {sumTodosDone}/{sumTodos}
-                    </div>
-                  </div>
-                )}
-              </div>
             </div>
           </div>
+        </div>
         // { </div>
       )}
     </Draggable>
