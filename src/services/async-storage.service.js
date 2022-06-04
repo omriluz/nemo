@@ -8,14 +8,11 @@ export const storageService = {
     postMany
 }
 
-function query(entityType, delay = 600) {
+function query(entityType) {
     var entities = JSON.parse(localStorage.getItem(entityType)) || []
 
     return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            // reject('OOOOPs')
             resolve(entities)
-        }, delay)
     })
     // return Promise.resolve(entities)
 }
