@@ -44,7 +44,10 @@ export const Menu = ({ isMenuOpen, onCloseMenu, activities, board }) => {
       </div>
       <div className="menu-content-wrapper">
         <ColorMenuModal board={board} isColorModalOpen={isColorModalOpen} />
-        <MainMenu isMainMenuOpen={isMainMenuOpen} onOpenColors={onOpenColors} activities={activities} boardId={board.id} />
+        <MainMenu isMainMenuOpen={isMainMenuOpen}
+          onOpenColors={onOpenColors}
+          activities={activities}
+          boardId={board.id} />
         <FilterMenu isFilterModalOpen={isFilterModalOpen} />
       </div>
     </div>

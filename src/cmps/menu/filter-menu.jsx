@@ -4,7 +4,7 @@
 export const FilterMenu = ({ isFilterModalOpen }) => {
 
 
-    return <section>
+    return <section style={{ display: isFilterModalOpen }}>
         dsvssdf
     </section>
 }
