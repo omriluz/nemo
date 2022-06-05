@@ -64,12 +64,17 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
   };
 
   const tasksToShow = () => {
+    // console.log(filterBy);
     var taskToShow = group.tasks
     if (filterBy.txt) {
       taskToShow = group.tasks.filter(task => task.title.toLowerCase().includes(filterBy.txt.toLowerCase()))
     }
     if (filterBy.labelIds.length > 0) {
       filterBy.labelIds.forEach(id => taskToShow = taskToShow.filter(task => task.labelIds.includes(id)))
+    }
+
+    if (filterBy.memberIds.length > 0) {
+      filterBy.memberIds.forEach(id => taskToShow = taskToShow.filter(task => task.members = task.members.filter(member => member._id.includes(id))))
     }
     return taskToShow
   }

@@ -4,7 +4,7 @@ const initialState = {
     filterBy: {
         txt: '',
         labelIds: [],
-        userIds: []
+        memberIds: []
     }
 }
 export function boardReducer(state = initialState, action) {

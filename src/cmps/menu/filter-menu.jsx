@@ -8,8 +8,8 @@ import { saveLabel } from "../../store/actions/label.action";
 
 export const FilterMenu = ({ isFilterModalOpen, board }) => {
     const dispatch = useDispatch()
-    const [currFilter, setCurrFilter] = useState({ txt: '', labelIds: [], userIds: [] })
-    const { users } = useSelector((storeState) => storeState.userModule)
+    const [currFilter, setCurrFilter] = useState({ txt: '', labelIds: [], memberIds: [] })
+    // const { users } = useSelector((storeState) => storeState.userModule)
 
     // const [filterLabels, setFilterLabels] = useState(null)
 
@@ -43,15 +43,15 @@ export const FilterMenu = ({ isFilterModalOpen, board }) => {
         dispatch(setFilter(currFilter))
     }
 
-    const setMemberChecked = (userId) => {
-        const [currUser] = users.filter(user => user._id === userId)
-        if (!currUser.checked) currUser.checked = true
-        else currUser.checked = false
-        const userIdx = users.findIndex((user => userId === user._id))
-        users[userIdx] = currUser
-        const usersToShow = users.filter(user => user.checked)
-        const userIds = usersToShow.map(user => user._id)
-        setCurrFilter(() => ({ ...currFilter, userIds }))
+    const setMemberChecked = (memberId) => {
+        const [currMember] = board.members.filter(member => member._id === memberId)
+        if (!currMember.checked) currMember.checked = true
+        else currMember.checked = false
+        const memberIdx = board.members.findIndex((member => memberId === member._id))
+        board.members[memberIdx] = currMember
+        const membersToShow = board.members.filter(member => member.checked)
+        const memberIds = membersToShow.map(member => member._id)
+        setCurrFilter(() => ({ ...currFilter, memberIds: memberIds }))
         dispatch(setFilter(currFilter))
     }
 
@@ -72,7 +72,7 @@ export const FilterMenu = ({ isFilterModalOpen, board }) => {
             <p className="sub-title">Members</p>
         </div>
         <ul className="clean-list">
-            {users && users.map((member) => {
+            {board.members && board.members.map((member) => {
                 return (
                     <li key={member._id}>
                         <div className="user-preview-conainer">

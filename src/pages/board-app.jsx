@@ -5,6 +5,8 @@ import { loadBoard } from "../store/actions/board.action";
 import { useEffect } from "react";
 import { ToolBar } from "../cmps/general/toolbar.jsx";
 import { loadUsers } from "../store/actions/user.actions.js";
+import { socketService } from "../services/socket.service.js";
+import { getActionSetBoard } from "../store/actions/board.action";
 
 export const BoardApp = () => {
   const { boardId } = useParams();
@@ -14,10 +16,30 @@ export const BoardApp = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    setSocket()
+    socketService.emit('join board', boardId)
+
     onLoadBoard();
     onLoadUsers();
 
   }, []);
+
+  const setSocket = () => {
+    try {
+      // socketService.setup();
+      // add to all sockets board id
+      socketService.emit('join-board', boardId);
+      // get updated board from backend
+      socketService.off('updated-board');
+      socketService.on('updated-board', async updatedBoard => {
+        await dispatch(getActionSetBoard(updatedBoard));
+      });
+      onLoadBoard();
+    } catch (err) {
+      console.log('Cannot load board', err)
+    }
+
+  }
 
 
 
@@ -29,14 +51,13 @@ export const BoardApp = () => {
     dispatch(loadBoard(boardId));
   };
 
-  console.log('board app', boardId);
   if (!board) return <h1>Loading...</h1>;
   return (
     // <div style={board.style} className="board-app-wrapper">
     <div style={board.style} className="board-app-wrapper">
       <Outlet />
       <div className="board-app">
-        <ToolBar  boardId={boardId} board={board} users={users}/>
+        <ToolBar boardId={boardId} board={board} users={users} />
         {board && <GroupList labelOpenState={board.labelOpenState} groups={board.groups} boardId={boardId} />}
       </div>
     </div>

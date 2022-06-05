@@ -4,6 +4,7 @@ import { userService } from './user.service.js'
 import { getActionRemoveBoard, getActionAddBoard, getActionUpdateBoard } from '../store/actions/board.action.js'
 import { utilService } from './util.service.js'
 import { httpService } from './http.service.js'
+import { socketService } from './socket.service.js'
 const boardChannel = new BroadcastChannel('boardChannel')
 // const listeners = []
 
@@ -49,6 +50,7 @@ async function save(board) {
         console.log(board);
         const savedBoard = await httpService.put(BOARD_BASE_ENDPOINT, board)
         boardChannel.postMessage(getActionUpdateBoard(savedBoard))
+        socketService.emit('board-change', savedBoard);
         return savedBoard
     } else {
         try {
