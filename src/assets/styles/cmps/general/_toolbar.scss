@@ -48,6 +48,9 @@
   border-radius: 3px;
   margin-right: 4px;
   height: 32px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
   &:hover {
     background-color: #ffffff52;
     cursor: pointer;

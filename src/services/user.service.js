@@ -21,7 +21,6 @@ export const userService = {
     getById,
     remove,
     update,
-    changeScore
 }
 
 
@@ -62,9 +61,9 @@ async function update(user) {
     return user;
 }
 
-async function login(userCred) {
+async function login(credentials) {
     // const users = await storageService.query('user')
-    const user = await httpService.post(`${AUTH_ENDPOINT}/login`, userCred)
+    const user = await httpService.post(`${AUTH_ENDPOINT}/login`, credentials)
     // const user = users.find(user => user.username === userCred.username && user.password === userCred.password)
     // console.log('user', user)
     // const user = await httpService.post('auth/login', userCred)
@@ -75,25 +74,17 @@ async function login(userCred) {
 
     }
 }
-async function signup(userCred) {
-    // const user = await storageService.post('user', userCred)
-    const user = await httpService.post(`${AUTH_ENDPOINT}/signup`, userCred)
+async function signup(credentials) {
+    // const user = await storageService.post('user', credentials)
+    const user = await httpService.post(`${AUTH_ENDPOINT}/signup`, credentials)
     // socketService.login(user._id)
     saveLocalUser(user)
     return user
 }
 async function logout() {
-    // sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
+    sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
     // socketService.logout()
-    return await httpService.post(`${AUTH_ENDPOINT}/signup`)
-}
-
-async function changeScore(by) {
-    const user = getLoggedinUser()
-    if (!user) throw new Error('Not loggedin')
-    user.score = user.score + by || by
-    await update(user)
-    return user.score
+    return await httpService.post(`${AUTH_ENDPOINT}/logout`)
 }
 
 

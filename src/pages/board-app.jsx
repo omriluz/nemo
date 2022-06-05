@@ -29,14 +29,14 @@ export const BoardApp = () => {
     dispatch(loadBoard(boardId));
   };
 
-
+  console.log('board app', boardId);
   if (!board) return <h1>Loading...</h1>;
   return (
     // <div style={board.style} className="board-app-wrapper">
     <div style={board.style} className="board-app-wrapper">
       <Outlet />
       <div className="board-app">
-        <ToolBar board={board} />
+        <ToolBar  boardId={boardId} board={board} users={users}/>
         {board && <GroupList labelOpenState={board.labelOpenState} groups={board.groups} boardId={boardId} />}
       </div>
     </div>

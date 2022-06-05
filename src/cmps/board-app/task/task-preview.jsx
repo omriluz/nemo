@@ -9,11 +9,14 @@ import { BsPencil } from "react-icons/bs";
 import { FiCheckSquare, FiPaperclip } from "react-icons/fi";
 import { GrTextAlignFull } from "react-icons/gr"
 import { toggleLabelPreview } from '../../../store/actions/label.action'
+import { userService } from "../../../services/user.service";
+import { HiOutlineEye } from "react-icons/hi"
 
 export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [labels, setLabels] = useState([]);
+  const user = userService.getLoggedinUser()
 
   let sumTodos;
   let sumTodosDone;
@@ -63,7 +66,7 @@ export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState }) =
 
 
   return (
-    <Draggable draggableId={task.id} index={index}>
+    <Draggable key={index} draggableId={task.id} index={index}>
       {(provided) => (
         <div
           onClick={onOpenTaskDetails}
@@ -101,6 +104,7 @@ export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState }) =
             )}
             <span className="task-preview-title">{task.title}</span>
             <div className="badges">
+              {user && !!task.members.filter(member => member._id === user._id).length && <span className="badge"><HiOutlineEye /></span>}
               {/* todo: add date badge here  */}
               {!!task.description && <span className="badge"><GrTextAlignFull /></span>}
               {!!task.attachments?.length && <span className="badge"> <FiPaperclip /></span>}

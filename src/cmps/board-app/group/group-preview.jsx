@@ -51,7 +51,6 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
 
   const onSaveTask = (ev = null) => {
     if (ev) ev.preventDefault();
-    handleBackClick()
     if (newTask.title) {
       const activity = {
         txt: "added this card to " + group.title,
@@ -61,6 +60,7 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
       dispatch(saveTask(newTask, boardId, group.id, activity));
       setNewTask({ title: "" });
     }
+    handleBackClick()
   };
 
   const tasksToShow = () => {
@@ -82,7 +82,7 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
 
   return (
     <div className="group-preview-wrapper">
-      <Draggable draggableId={group.id} index={index}>
+      <Draggable key={index} draggableId={group.id} index={index}>
         {(provided) => (
           <section
             className="group-preview"

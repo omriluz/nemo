@@ -139,6 +139,23 @@ export function setFilter(filterBy) {
 }
 
 
+export function addUserToBoard(boardId, user) {
+    console.log('boardId',boardId);
+    return async (dispatch) => {
+        try {
+            const board = await boardService.getById(boardId)
+            console.log(board);
+            board.members.push(user)
+            const savedBoard = await boardService.save(board)
+            dispatch(getActionSetBoard(savedBoard))
+        } catch(err) {
+            console.log('err adding user to board members: ', err);
+        }
+
+    }
+}
+
+
 
 // Demo for Optimistic Mutation (IOW - Assuming the server call will work,
 //  so updating the UI first)
