@@ -28,3 +28,15 @@ export function toggleLabelPreview(boardId) {
         }
     }
 }
+export function saveLabel(boardId, labels) {
+    return async (dispatch) => {
+        try {
+            const board = await boardService.getById(boardId)
+            board.labels = labels
+            boardService.save(board)
+            dispatch(getActionSetBoard(board))
+        } catch (err) {
+            console.log('Err could not toggle label preview', err);
+        }
+    }
+}

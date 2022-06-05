@@ -61,7 +61,8 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
 
   const tasksToShow = () => {
 
-    const taskToShow = group.tasks.filter(task => task.title.toLowerCase().includes(filterBy.txt.toLowerCase()))
+    let taskToShow = group.tasks.filter(task => task.title.toLowerCase().includes(filterBy.txt.toLowerCase()))
+    // taskToShow = group.task.labels.filter(label => label.id === filterBy.labels.forEach(element => element.id))
     return taskToShow
 
   }
