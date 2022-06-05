@@ -8,6 +8,7 @@ import { DynamicModalCmp } from "../../general/dynamic-modal-cmp";
 import { userService } from "../../../services/user.service";
 import { useDispatch } from "react-redux";
 import { joinTask } from "../../../store/actions/member.action";
+import {GiRobotAntennas} from 'react-icons/gi'
 
 export const TaskSidebar = ({ boardMembers, boardId, groupId, task, labels, groupTitle }) => {
   const buttons = [
@@ -17,6 +18,7 @@ export const TaskSidebar = ({ boardMembers, boardId, groupId, task, labels, grou
     { txt: "Dates", icon: <BsClock /> },
     { txt: "Attachment", icon: <FiPaperclip /> },
     { txt: "Cover", icon: <MdOutlineScreenShare /> },
+    { txt: "AI Assistant", icon: <GiRobotAntennas /> },
   ];
 
   const user = userService.getLoggedinUser()

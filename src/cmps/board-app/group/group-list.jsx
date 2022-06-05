@@ -33,6 +33,7 @@ export const GroupList = ({ groups, boardId, activities, labelOpenState }) => {
 
   const handleOnDragEnd = (result) => {
     if (!result.destination) return
+    // console.log(result);
 
     const [reorderedItem] = groups.splice(result.source.index, 1);
     groups.splice(result.destination.index, 0, reorderedItem);
@@ -41,8 +42,7 @@ export const GroupList = ({ groups, boardId, activities, labelOpenState }) => {
 
   return (
     <>
-      <DragDropContext onDragEnd={handleOnDragEnd}>
-        <Droppable droppableId="group-list-container" direction="horizontal">
+        <Droppable droppableId="all-groups" type="group" direction="horizontal">
           {(provided) => (
             <div
               ref={provided.innerRef}
@@ -101,7 +101,6 @@ export const GroupList = ({ groups, boardId, activities, labelOpenState }) => {
             </div>
           )}
         </Droppable>
-      </DragDropContext>
     </>
   );
 };

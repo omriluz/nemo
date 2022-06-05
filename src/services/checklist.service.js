@@ -27,7 +27,7 @@ async function saveChecklist(checklist, boardId, groupId, taskId, activity) {
     const checklistIdx = taskToUpdate.checklists.findIndex(checklist => checklistId === checklist.id)
     if (checklistIdx === -1) taskToUpdate.checklists.push(checklist)
     else taskToUpdate.checklists[checklistIdx] = checklist
-    return taskService.saveTask(taskToUpdate, boardId, groupId, activity)
+    return await taskService.saveTask(taskToUpdate, boardId, groupId, activity)
 }
 async function saveTodo(todo, checklistId, boardId, groupId, taskId, activity) {
     if (activity) {

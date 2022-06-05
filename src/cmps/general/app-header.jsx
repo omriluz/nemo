@@ -9,7 +9,8 @@ import { useNavigate } from "react-router";
 export const AppHeader = () => {
   const { pathname } = useLocation();
   // might need to come from store
-  const user = userService.getLoggedinUser()
+  const {user} = useSelector((storeState) => storeState.userModule)
+  // const user = userService.getLoggedinUser()
   const {board} = useSelector((storeState) => storeState.boardModule)
   const navigate = useNavigate()
   const dispatch = useDispatch()

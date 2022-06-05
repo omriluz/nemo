@@ -83,6 +83,7 @@ export const TodoPreview = ({ todo, checklistId, taskId, boardId, groupId, taskT
                 <form >
 
                     <textarea onClick={() => setIsEditOpen(true)}
+                    spellCheck={false}
                         name="title"
                         className={`todo-title ${todo.isDone ? 'checked' : ''}`}
                         value={todoTitle.title}
