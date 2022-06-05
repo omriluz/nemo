@@ -60,6 +60,8 @@ export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState }) =
     ev.stopPropagation();
     dispatch(toggleLabelPreview(boardId))
   };
+
+
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided) => (
@@ -112,10 +114,12 @@ export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState }) =
                   {sumTodosDone}/{sumTodos}
                 </div>
               )}
-              <div className="task-members-preview">
-
-              </div>
             </div>
+              <div className="task-members-preview">
+                  {task?.members.map(member => {
+                    return <div style={{background: `url(${member.imgUrl}) center center / cover ` }} className="user-avatar"></div>  
+                  })}
+              </div>
           </div>
         </div>
       )}

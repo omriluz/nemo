@@ -171,6 +171,8 @@
 
 .task-members-preview {
   float: right;
+  max-width: 100%;
+  display: flex;
 }
 
 .checklist-badge {
