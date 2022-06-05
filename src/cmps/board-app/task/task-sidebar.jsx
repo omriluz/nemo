@@ -1,5 +1,5 @@
 import { TiTag } from "react-icons/ti";
-import { BsCheck2Square, BsClock } from "react-icons/bs";
+import { BsCheck2Square, BsClock,BsPersonPlus } from "react-icons/bs";
 import { FiPaperclip } from "react-icons/fi";
 import { MdOutlineScreenShare } from "react-icons/md";
 import { BsPerson } from "react-icons/bs";
@@ -20,7 +20,6 @@ export const TaskSidebar = ({ boardId, groupId, task, labels, users }) => {
   const modalDetails = useRef();
   const modalTitle = useRef();
 
-  // useEffect(() => { }, [isModalOpen]);
 
   const onCloseModal = () => {
     setIsModalOpen(false);
@@ -50,9 +49,13 @@ export const TaskSidebar = ({ boardId, groupId, task, labels, users }) => {
           onCloseModal={onCloseModal}
         />
       )}
-      <h3 className="task-details-sidebar-section-title">Add to card</h3>
       <div className="task-details-sidebar-button-container">
-        {/* <div className="task-details-sidebar-section"> */}
+      <h3 className="task-details-sidebar-section-title">Suggested</h3>
+        <button className="task-details-sidebar-btn">
+        <BsPersonPlus/>
+        <span className="task-details-sidebar-btn-text">Join</span>
+        </button>
+      <h3 className="task-details-sidebar-section-title">Add to card</h3>
         {buttons.map((button) => {
           return (
             <button

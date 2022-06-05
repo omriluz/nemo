@@ -6,7 +6,6 @@ import { saveActivity } from "../../store/actions/activity.action";
 
 
 export const Activity = ({ activities, taskId, boardId }) => {
-    // debugger
     const [taskActivities, setTaskActivities] = useState(null)
     const [toggleShow, setToggleShow] = useState(true)
     const [activityComment, setActivityComment] = useState({ comment: '' })
@@ -19,7 +18,6 @@ export const Activity = ({ activities, taskId, boardId }) => {
 
 
     const loadActivities = () => {
-        console.log(activities);
         if (!activities) return
         const currActivities = activities.filter(activity => activity.task.id === taskId)
         setTaskActivities(currActivities)

@@ -18,7 +18,6 @@ export const WorkSpace = () => {
 
   useEffect(() => {
     onLoadBoards()
-    //needs to refactor
   }, [])
 
   const onLoadBoards = () => {

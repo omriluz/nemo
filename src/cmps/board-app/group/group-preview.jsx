@@ -11,18 +11,21 @@ import { userService } from "../../../services/user.service.js";
 
 export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
   // console.log('rendered group');
-  let { filterBy } = useSelector((storeState) => storeState.boardModule)
+  let { filterBy } = useSelector((storeState) => storeState.boardModule);
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddTask, setIsAddTask] = useState(false);
   const [groupTitle, setGroupTitle] = useState({ title: group.title });
   const [newTask, setNewTask] = useState({ title: "" });
 
-  const addTaskRef = useRef(null)
+  const addTaskRef = useRef();
+  function handleBackClick() {
+    addTaskRef.current.scrollIntoView()
+}
 
   useEffect(() => {
     // tasksToShow()
-  }, [filterBy])
+  }, [filterBy]);
 
   const onRemoveGroup = () => {
     dispatch(removeGroup(group.id, boardId));
@@ -32,13 +35,12 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
     const field = ev.target.name;
     const value = ev.target.value;
     setStateFunc({ [field]: value });
-  }
+  };
 
   const onSaveGroup = (ev = null) => {
     if (ev) ev.preventDefault();
     dispatch(saveGroup(groupTitle, boardId, group.id));
   };
-
 
   const onHandleKeySubmit = (ev) => {
     if (ev.key === "Enter") {
@@ -49,22 +51,23 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
 
   const onSaveTask = (ev = null) => {
     if (ev) ev.preventDefault();
+    handleBackClick()
     if (newTask.title) {
-      const activity = { txt: 'added this card to ' + group.title, byMember: userService.getLoggedinUser() }
+      const activity = {
+        txt: "added this card to " + group.title,
+        byMember: userService.getLoggedinUser(),
+      };
       console.log(activity);
       dispatch(saveTask(newTask, boardId, group.id, activity));
       setNewTask({ title: "" });
     }
   };
 
-
-
   const tasksToShow = () => {
-
-    const taskToShow = group.tasks.filter(task => task.title.toLowerCase().includes(filterBy.txt.toLowerCase()))
-    return taskToShow
-
-  }
+    const taskToShow = group.tasks.filter((task) => task.title.toLowerCase().includes(filterBy.txt.toLowerCase())
+    );
+    return taskToShow;
+  };
 
   // const handleMouse = (ev) => {
   // ev.preventDefault()
@@ -82,7 +85,7 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
-          // onMouseDown={handleMouse}
+            // onMouseDown={handleMouse}
           >
             <div className="group-preview-header">
               <input
@@ -93,9 +96,7 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
                 value={groupTitle.title}
                 onChange={(ev) => handleChange(ev, setGroupTitle)}
               />
-              <div
-                className="add-action"
-              >
+              <div className="add-action">
                 <MdMoreHoriz />
               </div>
             </div>
@@ -111,7 +112,6 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
                   <div className="add-task-open">
                     <form onSubmit={onSaveTask}>
                       <textarea
-                        red={addTaskRef}
                         className="task-txt"
                         name="title"
                         placeholder="Enter a title for this card..."
@@ -119,9 +119,9 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
                         onChange={(ev) => handleChange(ev, setNewTask)}
                         onKeyDown={onHandleKeySubmit}
                       ></textarea>
-                      <div className="btn-add-task ">
+                      <div ref={addTaskRef} className="btn-add-task ">
                         <button>Add card</button>
-                        <span className="" onClick={() => setIsAddTask(false)}>
+                        <span  onClick={() => setIsAddTask(false)}>
                           <IoMdClose />
                         </span>
                       </div>
@@ -132,9 +132,9 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
             </div>
             <div className="add-task-wrapper">
               {!isAddTask && (
-                <div
+                <div 
                   className="add-task-container flex"
-                  onClick={() => setIsAddTask(true)}
+                  onClick={() => {setIsAddTask(true);handleBackClick()}}
                 >
                   <IoAdd />
                   <p>Add a card</p>
@@ -146,4 +146,4 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
       </Draggable>
     </div>
   );
-}
+};

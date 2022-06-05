@@ -1,18 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { taskService } from "../../../services/task.service";
 import { TaskSidebar } from "./task-sidebar";
 import { TaskDetailsMain } from "./task-details-main";
-import { Checklists } from "./check-list/checklist";
 import { useSelector } from "react-redux";
-import { boardService } from "../../../services/board.service";
-import { labelService } from "../../../services/label.service";
-import { useDispatch } from "react-redux";
-import { loadBoard } from "../../../store/actions/board.action";
 import { GrClose } from 'react-icons/gr'
 import { saveTask } from "../../../store/actions/task.action";
 import { AiOutlineCreditCard } from "react-icons/ai";
-import { CoverModal } from "../../modals/cover-modal";
+import { useDispatch } from "react-redux";
 
 export const TaskDetails = () => {
   const navigate = useNavigate();
@@ -37,10 +31,6 @@ export const TaskDetails = () => {
 
 
 
-  // needs refactoring
-  useEffect(() => {
-    document.querySelector('html').style.overflowY = 'hidden'
-  }, [])
 
 
   const handleKeyEvent = (e) => {
@@ -72,8 +62,10 @@ export const TaskDetails = () => {
         <div className="task-details" onClick={(ev) => ev.stopPropagation()}>
           {task?.style?.backgroundColor &&
             <div className="cover-color" style={{ backgroundColor: task.style.backgroundColor }}>
-            </div>}
           <div className="task-details-back-btn" onClick={() => navigate(-1)}><GrClose /> </div>
+            </div>}
+          {!!task?.style?.backgroundColor ||<div className="task-details-back-btn" onClick={() => navigate(-1)}><GrClose /> </div>}
+
           <div className="task-details-header">
             <span className="header-icon"> <AiOutlineCreditCard /></span>
             <form onSubmit={onSaveTask}>

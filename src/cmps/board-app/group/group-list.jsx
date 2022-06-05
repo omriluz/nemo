@@ -26,6 +26,8 @@ export const GroupList = ({ groups, boardId, activities, labelOpenState }) => {
   };
 
   const handleOnDragEnd = (result) => {
+    if (!result.destination) return 
+    
     const [reorderedItem] = groups.splice(result.source.index, 1);
     groups.splice(result.destination.index, 0, reorderedItem);
     dispatch(setGroups(boardId, groups));
