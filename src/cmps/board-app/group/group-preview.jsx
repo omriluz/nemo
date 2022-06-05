@@ -20,12 +20,10 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
 
   const addTaskRef = useRef();
   function handleBackClick() {
-    if (addTaskRef.current) addTaskRef.current.scrollIntoView()
+    if (addTaskRef.current) addTaskRef.current.scrollIntoView();
   }
 
-  useEffect(() => {
-
-  }, [filterBy]);
+  useEffect(() => {}, [filterBy]);
 
   const onRemoveGroup = () => {
     dispatch(removeGroup(group.id, boardId));
@@ -55,24 +53,33 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
       const activity = {
         txt: "added this card to " + group.title,
         boardTxt: "added " + newTask.title + " to " + group.title,
-        byMember: userService.getLoggedinUser(),
+        byMember: userService.getLoggedinUser() || {
+          username: "guest",
+          fullname: "guest",
+          imgUrl: "https://www.computerhope.com/jargon/g/guest-user.jpg",
+        },
       };
       dispatch(saveTask(newTask, boardId, group.id, activity));
       setNewTask({ title: "" });
     }
-    handleBackClick()
+    handleBackClick();
   };
 
   const tasksToShow = () => {
-    var taskToShow = group.tasks
+    var taskToShow = group.tasks;
     if (filterBy.txt) {
-      taskToShow = group.tasks.filter(task => task.title.toLowerCase().includes(filterBy.txt.toLowerCase()))
+      taskToShow = group.tasks.filter((task) =>
+        task.title.toLowerCase().includes(filterBy.txt.toLowerCase())
+      );
     }
     if (filterBy.labelIds.length > 0) {
-      filterBy.labelIds.forEach(id => taskToShow = taskToShow.filter(task => task.labelIds.includes(id)))
+      filterBy.labelIds.forEach(
+        (id) =>
+          (taskToShow = taskToShow.filter((task) => task.labelIds.includes(id)))
+      );
     }
-    return taskToShow
-  }
+    return taskToShow;
+  };
   // const handleMouse = (ev) => {
   // ev.preventDefault()
   // console.log('ev',ev);
@@ -81,73 +88,77 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
   // }
 
   return (
-    <div className="group-preview-wrapper">
-      <Draggable key={index} draggableId={group.id} index={index}>
+    <>
+      <Draggable draggableId={group.id} index={index}>
         {(provided) => (
-          <section
-            className="group-preview"
+          <div
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
-          // onMouseDown={handleMouse}
+            className="group-preview-wrapper"
           >
-            <div className="group-preview-header">
-              <input
-                className="group-preview-title"
-                type="text"
-                name="title"
-                onBlur={onSaveGroup}
-                value={groupTitle.title}
-                onChange={(ev) => handleChange(ev, setGroupTitle)}
-              />
-              <div className="add-action">
-                <MdMoreHoriz />
-              </div>
-            </div>
-            <div className="task-wrapper">
-              <div className="group-preview-main">
-                <TaskList
-                  tasks={tasksToShow()}
-                  groupId={group.id}
-                  boardId={boardId}
-                  labelOpenState={labelOpenState}
+            <section className="group-preview">
+              <div className="group-preview-header">
+                <input
+                  className="group-preview-title"
+                  type="text"
+                  name="title"
+                  onBlur={onSaveGroup}
+                  value={groupTitle.title}
+                  onChange={(ev) => handleChange(ev, setGroupTitle)}
                 />
-                {isAddTask && (
-                  <div className="add-task-open">
-                    <form onSubmit={onSaveTask}>
-                      <textarea
-                        className="task-txt"
-                        name="title"
-                        placeholder="Enter a title for this card..."
-                        value={newTask.title}
-                        onChange={(ev) => handleChange(ev, setNewTask)}
-                        onKeyDown={onHandleKeySubmit}
-                      ></textarea>
-                      <div ref={addTaskRef} className="btn-add-task ">
-                        <button>Add card</button>
-                        <span onClick={() => setIsAddTask(false)}>
-                          <IoMdClose />
-                        </span>
-                      </div>
-                    </form>
+                <div className="add-action">
+                  <MdMoreHoriz />
+                </div>
+              </div>
+              <div className="task-wrapper">
+                <div className="group-preview-main">
+                  <TaskList
+                    tasks={tasksToShow()}
+                    groupId={group.id}
+                    boardId={boardId}
+                    labelOpenState={labelOpenState}
+                  />
+                  {isAddTask && (
+                    <div className="add-task-open">
+                      <form onSubmit={onSaveTask}>
+                        <textarea
+                          className="task-txt"
+                          name="title"
+                          placeholder="Enter a title for this card..."
+                          value={newTask.title}
+                          onChange={(ev) => handleChange(ev, setNewTask)}
+                          onKeyDown={onHandleKeySubmit}
+                        ></textarea>
+                        <div ref={addTaskRef} className="btn-add-task ">
+                          <button>Add card</button>
+                          <span onClick={() => setIsAddTask(false)}>
+                            <IoMdClose />
+                          </span>
+                        </div>
+                      </form>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="add-task-wrapper">
+                {!isAddTask && (
+                  <div
+                    className="add-task-container flex"
+                    onClick={() => {
+                      setIsAddTask(true);
+                      handleBackClick();
+                    }}
+                  >
+                    <IoAdd />
+                    <p>Add a card</p>
                   </div>
                 )}
               </div>
-            </div>
-            <div className="add-task-wrapper">
-              {!isAddTask && (
-                <div
-                  className="add-task-container flex"
-                  onClick={() => { setIsAddTask(true); handleBackClick() }}
-                >
-                  <IoAdd />
-                  <p>Add a card</p>
-                </div>
-              )}
-            </div>
-          </section>
+            </section>
+          </div>
         )}
       </Draggable>
-    </div>
+    </>
   );
 };

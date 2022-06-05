@@ -66,7 +66,7 @@ export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState }) =
 
 
   return (
-    <Draggable key={index} draggableId={task.id} index={index}>
+    <Draggable draggableId={task.id} index={index}>
       {(provided) => (
         <div
           onClick={onOpenTaskDetails}

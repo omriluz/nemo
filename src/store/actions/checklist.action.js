@@ -17,7 +17,7 @@ export function saveChecklist(checklist, boardId, groupId, taskId, activity) {
             const board = await checklistService.saveChecklist(checklist, boardId, groupId, taskId, activity)
             dispatch(getActionSetBoard(board))
         } catch (err) {
-            console.log('Err could not delete task', err);
+            console.log('Err could not save checklist', err);
         }
     }
 }
@@ -27,7 +27,7 @@ export function saveTodo(todo, checklistId, boardId, groupId, taskId, activity) 
             const board = await checklistService.saveTodo(todo, checklistId, boardId, groupId, taskId, activity)
             dispatch(getActionSetBoard(board))
         } catch (err) {
-            console.log('Err could not delete task', err);
+            console.log('Err could not save todo', err);
         }
     }
 }

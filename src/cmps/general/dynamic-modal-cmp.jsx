@@ -8,7 +8,8 @@ import { AttachmentModal } from "../board-app/task/attachment/attachment-modal";
 import { AddBoard } from "../work-space/add-board";
 import { MemberModal } from "../modals/member-modal.jsx";
 import { Menu } from "./menu";
-import { InviteModal } from "../modals/invite-modal.jsx"
+import { InviteModal } from "../modals/invite-modal.jsx";
+import { Test } from "./test";
 
 export const DynamicModalCmp = ({
   modalDetails: { bottom, right, left },
@@ -24,7 +25,7 @@ export const DynamicModalCmp = ({
   boardMembers,
   modalClasses,
   activities,
-  groupTitle
+  groupTitle,
 }) => {
   let modalTypeToOpen;
   switch (modalTitle) {
@@ -78,7 +79,8 @@ export const DynamicModalCmp = ({
       );
       break;
     case "Attachment":
-      if (bottom >= 330) bottom -= 50;
+      if (bottom >= 330 && bottom < 360) bottom -= 50;
+      if (bottom >= 360) bottom -= 100;
       modalTypeToOpen = (
         <AttachmentModal
           boardId={boardId}
@@ -104,15 +106,34 @@ export const DynamicModalCmp = ({
     case "Create Board":
       if (bottom >= 170 && bottom < 230) bottom -= 60;
       if (bottom >= 230 && bottom < 260) bottom -= 100;
-      if (bottom >= 260) bottom -= 140;
+      if (bottom >= 260 && bottom < 300) bottom -= 140;
+      if (bottom >= 300) bottom -= 200;
       modalTypeToOpen = <AddBoard onCloseModal={onCloseModal} />;
       break;
     case "Menu":
-      modalTypeToOpen = <Menu activities={activities} boardId={boardId} />
+      modalTypeToOpen = <Menu activities={activities} boardId={boardId} />;
       break;
     case "Invite to board":
       console.log(boardId);
-      modalTypeToOpen = <InviteModal boardId={boardId} boardMembers={boardMembers} users={users} />
+      modalTypeToOpen = (
+        <InviteModal
+          boardId={boardId}
+          boardMembers={boardMembers}
+          users={users}
+        />
+      );
+      break;
+    case "AI Assistant":
+      modalTypeToOpen = (
+        <Test
+          onCloseModal={onCloseModal}
+          boardId={boardId}
+          groupId={groupId}
+          task={task}
+          groupTitle={groupTitle}
+        />
+      );
+      break;
   }
 
   return (
@@ -123,17 +144,17 @@ export const DynamicModalCmp = ({
       style={
         modalTitle === "Menu"
           ? {
-            top: bottom,
-            right: 0, // when menu open
-            // right: -340, //when closed
-            // height:`calc(100vh - 80px)`,
-            width: width || "304px",
-          }
+              top: bottom,
+              right: 0, // when menu open
+              // right: -340, //when closed
+              // height:`calc(100vh - 80px)`,
+              width: width || "304px",
+            }
           : {
-            top: bottom,
-            left,
-            width: width || "304px",
-          }
+              top: bottom,
+              left,
+              width: width || "304px",
+            }
       }
     >
       <div className="modal-header-wrapper">

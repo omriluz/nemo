@@ -46,7 +46,6 @@ async function remove(boardId) {
 }
 async function save(board) {
     if (board._id) {
-        console.log(board);
         const savedBoard = await httpService.put(BOARD_BASE_ENDPOINT, board)
         boardChannel.postMessage(getActionUpdateBoard(savedBoard))
         return savedBoard

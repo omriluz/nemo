@@ -4,14 +4,11 @@ import { userService } from '../../services/user.service.js'
 
 let initialState = {}
 
-setTimeout(() => {
-    initialState = {
-        users: [],
-        user: userService.getLoggedinUser(),
-        watchedUser: null
-    }
-
-}, 1000);
+initialState = {
+    users: [],
+    user: null,
+    watchedUser: null
+}
 
 
 // const initialState = {
@@ -26,9 +23,6 @@ export function userReducer(state = initialState, action) {
     switch (action.type) {
         case 'SET_USER':
             newState = { ...state, user: action.user }
-            break;
-        case 'SET_WATCHED_USER':
-            newState = { ...state, watchedUser: action.user }
             break;
         case 'REMOVE_USER':
             newState = {

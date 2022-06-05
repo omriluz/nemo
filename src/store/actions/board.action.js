@@ -182,3 +182,50 @@ export function onRemoveBoardOptimistic(boardId) {
             })
     }
 }
+
+
+export function handleDrag(
+    board,
+    droppableIdStart,
+    droppableIdEnd,
+    droppableIndexStart,
+    droppableIndexEnd,
+    type
+) {
+    return async dispatch => {
+        if (type === 'group') {
+            // take out group from old index
+            const group = board.groups.splice(droppableIndexStart, 1);
+            // insert group to new index
+            board.groups.splice(droppableIndexEnd, 0, ...group);
+        } else {
+            // Moving task in the same group
+            if (droppableIdStart === droppableIdEnd) {
+                const group = board.groups.find(group => group.id === droppableIdStart);
+                const task = group.tasks.splice(droppableIndexStart, 1);
+                group.tasks.splice(droppableIndexEnd, 0, ...task);
+            } else {
+                // Moving task between differents groups // CR: also refactor name
+                // if (droppableIdStart !== droppableIdEnd) {
+                // Find the group where drag happened
+                const groupStart = board.groups.find(group => group.id === droppableIdStart);
+
+                // Pull out task from this group
+                const task = groupStart.tasks.splice(droppableIndexStart, 1);
+
+                // Find the group where drag ended
+                const groupEnd = board.groups.find(group => group.id === droppableIdEnd);
+
+                // Put the task in the new group
+                groupEnd.tasks.splice(droppableIndexEnd, 0, ...task);
+            }
+            // }
+        }
+        const savedBoard = await boardService.save(board);
+
+        dispatch({
+            type: 'SAVE_BOARD',
+            board: savedBoard,
+        });
+    };
+}
