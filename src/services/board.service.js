@@ -45,11 +45,9 @@ async function remove(boardId) {
     boardChannel.postMessage(getActionRemoveBoard(boardId))
 }
 async function save(board) {
-    // var savedBoard
     if (board._id) {
-        // savedBoard = await storageService.put(STORAGE_KEY, board)
+        console.log(board);
         const savedBoard = await httpService.put(BOARD_BASE_ENDPOINT, board)
-        // is this necessary? ask shneor if he needs it
         boardChannel.postMessage(getActionUpdateBoard(savedBoard))
         return savedBoard
     } else {
@@ -67,13 +65,6 @@ async function save(board) {
     }
     // return savedBoard
 }
-
-
-// function getEmptyBoard() {
-//     return {
-
-//     }
-// }
 
 function subscribe(listener) {
     boardChannel.addEventListener('message', listener)

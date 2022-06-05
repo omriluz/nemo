@@ -20,7 +20,7 @@ export const TaskDetails = () => {
   const { board } = useSelector((storeState) => storeState.boardModule)
   // might need use effect for users as well
   const { users } = useSelector((storeState) => storeState.userModule)
-
+  
   useEffect(() => {
     const currGroup = board?.groups.find(group => group.id === groupId);
     const currTask = currGroup?.tasks?.find(task => task.id === taskId);
@@ -90,6 +90,7 @@ export const TaskDetails = () => {
               groupId={groupId}
               taskId={taskId}
               labels={board.labels}
+              boardMembers={board.members}
               task={task}
               users={users}
             />

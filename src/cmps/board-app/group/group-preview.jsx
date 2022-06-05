@@ -20,7 +20,7 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
 
   const addTaskRef = useRef();
   function handleBackClick() {
-    addTaskRef.current.scrollIntoView()
+    if(addTaskRef.current) addTaskRef.current.scrollIntoView()
   }
 
   useEffect(() => {
@@ -51,22 +51,21 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
 
   const onSaveTask = (ev = null) => {
     if (ev) ev.preventDefault();
-    handleBackClick()
     if (newTask.title) {
       const activity = {
         txt: "added this card to " + group.title,
         byMember: userService.getLoggedinUser(),
       };
-      console.log(activity);
       dispatch(saveTask(newTask, boardId, group.id, activity));
       setNewTask({ title: "" });
     }
+    handleBackClick()
   };
 
   const tasksToShow = () => {
 
     let taskToShow = group.tasks.filter(task => task.title.toLowerCase().includes(filterBy.txt.toLowerCase()))
-    taskToShow = group.task.labels.filter(label => label.id === filterBy.labels.forEach(element => element.id))
+    // taskToShow = group.task.labels.filter(label => label.id === filterBy.labels.forEach(element => element.id))
     return taskToShow
 
   }
@@ -80,7 +79,7 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
 
   return (
     <div className="group-preview-wrapper">
-      <Draggable draggableId={group.id} index={index}>
+      <Draggable key={index} draggableId={group.id} index={index}>
         {(provided) => (
           <section
             className="group-preview"

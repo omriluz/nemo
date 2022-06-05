@@ -1,16 +1,17 @@
+import {FiCheck} from "react-icons/fi"
 import { useDispatch } from "react-redux";
-import { toggleMember } from "../../store/actions/member.action";
-import { FiCheck } from "react-icons/fi";
+import { addUserToBoard } from "../../store/actions/board.action";
+export const InviteModal = ({boardId, users, boardMembers }) => {
+    console.log('fdijsafjdsaiojfodsa',boardId);
+    const dispatch = useDispatch()
+    const boardMemberIds = boardMembers.map(boardMember => boardMember = boardMember._id)
+    const usersToInvite = users.filter(user => !boardMemberIds.includes(user._id) )
 
-export const MemberModal = ({ boardMembers, boardId, groupId, task }) => {
-  const dispatch = useDispatch();
-  const memberIds = task.members.map((member) => member._id);
+    const onAddUserToBoard = (user) => {
+        dispatch(addUserToBoard(boardId, user))
+    }
 
-  const toggleUser = (user) => {
-    dispatch(toggleMember(boardId, groupId, task.id, user));
-  };
-
-  return (
+    return (
     <div className="member-modal">
       <input
         type="text"
@@ -18,13 +19,13 @@ export const MemberModal = ({ boardMembers, boardId, groupId, task }) => {
         placeholder="Search Members"
       />
       <div className="member-section">
-        <h4 className="modal-small-title">Board members</h4>
-        {boardMembers.map((user) => {
+        <h4 className="modal-small-title">Workspace members</h4>
+        {usersToInvite.map((user) => {
           return (
             <div
               key={user._id}
-              onClick={() => toggleUser(user)}
               className="modal-member-item-container"
+              onClick={() => onAddUserToBoard(user)}
             >
               <div className="modal-member-item">
                 <div
@@ -35,11 +36,6 @@ export const MemberModal = ({ boardMembers, boardId, groupId, task }) => {
                   className="user-avatar"
                 ></div>
                 {user.username} ({user.fullname})
-                {memberIds.includes(user._id) && (
-                  <div className="modal-member-check-icon">
-                    <FiCheck />
-                  </div>
-                )}
               </div>
             </div>
           );

@@ -25,7 +25,9 @@ export const WorkSpace = () => {
   }
 
   const getStarredBoards = () => {
-    return boards?.filter(board => board.isStar)
+    const starredBoards = boards.filter(board => board && board.isStar)
+    // return boards.filter(board => board.isStar)
+    return starredBoards
   }
 
   const onToggleStar = (ev, boardId) => {

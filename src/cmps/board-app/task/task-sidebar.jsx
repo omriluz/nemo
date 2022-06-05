@@ -5,8 +5,11 @@ import { MdOutlineScreenShare } from "react-icons/md";
 import { BsPerson } from "react-icons/bs";
 import { useEffect, useRef, useState } from "react";
 import { DynamicModalCmp } from "../../general/dynamic-modal-cmp";
+import { userService } from "../../../services/user.service";
+import { useDispatch } from "react-redux";
+import { joinTask } from "../../../store/actions/member.action";
 
-export const TaskSidebar = ({ boardId, groupId, task, labels, users }) => {
+export const TaskSidebar = ({ boardMembers, boardId, groupId, task, labels }) => {
   const buttons = [
     { txt: "Members", icon: <BsPerson /> },
     { txt: "Labels", icon: <TiTag /> },
@@ -16,10 +19,18 @@ export const TaskSidebar = ({ boardId, groupId, task, labels, users }) => {
     { txt: "Cover", icon: <MdOutlineScreenShare /> },
   ];
 
+  const user = userService.getLoggedinUser()
+  console.log(user);
+  const dispatch = useDispatch()
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalDetails = useRef();
   const modalTitle = useRef();
 
+
+  const onJoinTask = () => {
+      dispatch(joinTask(boardId, groupId, task.id, user))
+  }
 
   const onCloseModal = () => {
     setIsModalOpen(false);
@@ -33,6 +44,7 @@ export const TaskSidebar = ({ boardId, groupId, task, labels, users }) => {
     modalDetails.current = ev.target.getBoundingClientRect();
     setIsModalOpen(true);
   };
+
   return (
     <div className="task-details-sidebar-container">
       {isModalOpen && (
@@ -44,17 +56,17 @@ export const TaskSidebar = ({ boardId, groupId, task, labels, users }) => {
           task={task}
           type={modalTitle}
           labels={labels}
-          users={users}
+          boardMembers={boardMembers}
           attachments={task.attachments}
           onCloseModal={onCloseModal}
         />
       )}
       <div className="task-details-sidebar-button-container">
-      <h3 className="task-details-sidebar-section-title">Suggested</h3>
-        <button className="task-details-sidebar-btn">
+      {(!user || !!task.members.filter(member => member._id === user._id).length) || <><h3 className="task-details-sidebar-section-title">Suggested</h3>
+        <button onClick={onJoinTask} className="task-details-sidebar-btn join-btn">
         <BsPersonPlus/>
         <span className="task-details-sidebar-btn-text">Join</span>
-        </button>
+        </button></>}
       <h3 className="task-details-sidebar-section-title">Add to card</h3>
         {buttons.map((button) => {
           return (

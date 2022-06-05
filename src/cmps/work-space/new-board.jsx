@@ -16,7 +16,6 @@ export function CreateNewBoard() {
   };
 
   const onOpenModal = (ev, txt) => {
-    console.log(ev.target.getBoundingClientRect().bottom)
 
     if (isModalOpen) {
       setIsModalOpen(false);

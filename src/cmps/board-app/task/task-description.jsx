@@ -35,6 +35,7 @@ export const Description = ({ task, boardId, groupId }) => {
         <form onSubmit={onSaveTask}>
             <textarea onClick={() => setIsDescOpen(true)}
                 name="title"
+                spellCheck={false}
                 className="text-desc"
                 placeholder="Add a more detailed description..."
                 value={descTitle.title}

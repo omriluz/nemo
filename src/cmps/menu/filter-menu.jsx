@@ -13,7 +13,6 @@ export const FilterMenu = ({ isFilterModalOpen, board }) => {
 
     useEffect(() => {
         onSetFilter()
-        console.log('hhh');
     }, [currFilter])
 
 

@@ -8,6 +8,7 @@ import { AttachmentModal } from "../board-app/task/attachment/attachment-modal";
 import { AddBoard } from "../work-space/add-board";
 import { MemberModal } from "../modals/member-modal.jsx";
 import { Menu } from "./menu";
+import {InviteModal} from "../modals/invite-modal.jsx"
 
 export const DynamicModalCmp = ({
   modalDetails: { bottom, right, left },
@@ -20,8 +21,9 @@ export const DynamicModalCmp = ({
   task,
   labels,
   users,
+  boardMembers,
   modalClasses,
-  activities
+  activities,
 }) => {
   let modalTypeToOpen;
   switch (modalTitle) {
@@ -34,7 +36,7 @@ export const DynamicModalCmp = ({
           groupId={groupId}
           task={task}
           onCloseModal={onCloseModal}
-          users={users}
+          boardMembers={boardMembers}
         />
       );
       break;
@@ -104,6 +106,10 @@ export const DynamicModalCmp = ({
       break;
     case "Menu":
       modalTypeToOpen = <Menu activities={activities} boardId={boardId} />
+      break;
+      case "Invite to board":
+        console.log(boardId);
+        modalTypeToOpen = <InviteModal boardId={boardId} boardMembers={boardMembers} users={users}/>
   }
 
   return (
