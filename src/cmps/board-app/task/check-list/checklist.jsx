@@ -2,7 +2,7 @@ import { ChecklistPreview } from './checklist-preview'
 import { useDispatch } from 'react-redux';
 import { removeChecklist } from '../../../../store/actions/checklist.action'
 
-export const Checklists = ({ task, boardId, groupId }) => {
+export const Checklists = ({ task, boardId, groupId, groupTitle }) => {
     const dispatch = useDispatch()
 
     const onRemoveChecklist = (checklistId) => {
@@ -20,6 +20,7 @@ export const Checklists = ({ task, boardId, groupId }) => {
                     task={task}
                     boardId={boardId}
                     groupId={groupId}
+                    groupTitle={groupTitle}
 
                 />)}
         </section>

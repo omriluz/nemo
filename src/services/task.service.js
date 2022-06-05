@@ -17,7 +17,6 @@ async function saveTask(task, boardId, groupId, activity) {
         const taskIdx = board.groups[groupIdx].tasks.findIndex(currTask => currTask.id === task.id)
         board.groups[groupIdx].tasks[taskIdx] = task
         if (activity) board.activities.unshift(activity)
-        console.log('board', board)
         board = await boardService.save(board)
         return board
     } else {

@@ -20,11 +20,11 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
 
   const addTaskRef = useRef();
   function handleBackClick() {
-    addTaskRef.current.scrollIntoView()
+    if (addTaskRef.current) addTaskRef.current.scrollIntoView()
   }
 
   useEffect(() => {
-    // tasksToShow()
+
   }, [filterBy]);
 
   const onRemoveGroup = () => {
@@ -55,22 +55,24 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
     if (newTask.title) {
       const activity = {
         txt: "added this card to " + group.title,
+        boardTxt: "added " + newTask.title + " to " + group.title,
         byMember: userService.getLoggedinUser(),
       };
-      console.log(activity);
       dispatch(saveTask(newTask, boardId, group.id, activity));
       setNewTask({ title: "" });
     }
   };
 
   const tasksToShow = () => {
-
-    let taskToShow = group.tasks.filter(task => task.title.toLowerCase().includes(filterBy.txt.toLowerCase()))
-    taskToShow = group.task.labels.filter(label => label.id === filterBy.labels.forEach(element => element.id))
+    var taskToShow = group.tasks
+    if (filterBy.txt) {
+      taskToShow = group.tasks.filter(task => task.title.toLowerCase().includes(filterBy.txt.toLowerCase()))
+    }
+    if (filterBy.labelIds.length > 0) {
+      filterBy.labelIds.forEach(id => taskToShow = taskToShow.filter(task => task.labelIds.includes(id)))
+    }
     return taskToShow
-
   }
-
   // const handleMouse = (ev) => {
   // ev.preventDefault()
   // console.log('ev',ev);

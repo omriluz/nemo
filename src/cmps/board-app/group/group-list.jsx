@@ -5,6 +5,7 @@ import { IoAdd } from "react-icons/io5";
 import { saveGroup, setGroups } from "../../../store/actions/group.action.js";
 import { IoMdClose } from "react-icons/io";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { userService } from "../../../services/user.service.js";
 
 export const GroupList = ({ groups, boardId, activities, labelOpenState }) => {
   const dispatch = useDispatch();
@@ -19,15 +20,20 @@ export const GroupList = ({ groups, boardId, activities, labelOpenState }) => {
 
   const onAddGroup = (ev = null) => {
     ev.preventDefault();
+    var groupId
     if (!groupTitle.title) return;
+    const activity = {
+      boardTxt: 'added ' + groupTitle.title + ' to this board',
+      byMember: userService.getLoggedinUser()
+    }
     dispatch(saveGroup(groupTitle, boardId));
     setIsAddGroup(false);
     setGroupTitle({ title: "" });
   };
 
   const handleOnDragEnd = (result) => {
-    if (!result.destination) return 
-    
+    if (!result.destination) return
+
     const [reorderedItem] = groups.splice(result.source.index, 1);
     groups.splice(result.destination.index, 0, reorderedItem);
     dispatch(setGroups(boardId, groups));
@@ -59,13 +65,13 @@ export const GroupList = ({ groups, boardId, activities, labelOpenState }) => {
                 })}
 
               {!isAddGroup && (
-                    <div className="group-preview-wrapper">
-                <div
-                  className="add-group flex"
-                  onClick={() => setIsAddGroup(true)}
-                >
-                  <IoAdd /> <p>Add another list</p>
-                </div>
+                <div className="group-preview-wrapper">
+                  <div
+                    className="add-group flex"
+                    onClick={() => setIsAddGroup(true)}
+                  >
+                    <IoAdd /> <p>Add another list</p>
+                  </div>
                 </div>
               )}
               {isAddGroup && (

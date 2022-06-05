@@ -65,6 +65,7 @@ export const ChecklistPreview = ({ checklist, onRemoveChecklist, task, boardId, 
                 taskId={task.id}
                 boardId={boardId}
                 groupId={groupId}
+                taskTitle={task.title}
             />
         </section>
     )

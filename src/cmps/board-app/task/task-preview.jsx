@@ -115,11 +115,11 @@ export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState }) =
                 </div>
               )}
             </div>
-              <div className="task-members-preview">
-                  {task?.members.map(member => {
-                    return <div style={{background: `url(${member.imgUrl}) center center / cover ` }} className="user-avatar"></div>  
-                  })}
-              </div>
+            <div className="task-members-preview">
+              {task?.members.map(member => {
+                return <div key={member._id} style={{ background: `url(${member.imgUrl}) center center / cover ` }} className="user-avatar"></div>
+              })}
+            </div>
           </div>
         </div>
       )}

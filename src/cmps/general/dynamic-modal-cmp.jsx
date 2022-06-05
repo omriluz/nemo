@@ -21,7 +21,8 @@ export const DynamicModalCmp = ({
   labels,
   users,
   modalClasses,
-  activities
+  activities,
+  groupTitle
 }) => {
   let modalTypeToOpen;
   switch (modalTitle) {
@@ -59,6 +60,8 @@ export const DynamicModalCmp = ({
           boardId={boardId}
           groupId={groupId}
           taskId={task.id}
+          groupTitle={groupTitle}
+          taskTitle={task.title}
         />
       );
       break;

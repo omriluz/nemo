@@ -21,9 +21,11 @@ async function saveGroup(group, boardId, groupId) {
         // Later, owner is set by the backend
         group.id = utilService.makeId()
         group.tasks = []
-        console.log('lalalal');
+        // activity.id = utilService.makeId()
+        // activity.createdAt = Date.now()
         const board = await boardService.getById(boardId)
         board.groups.push(group)
+        // if (activity) board.activities.unshift(activity)
         boardService.save(board)
         // boardChannel.postMessage(getActionAddBoard(savedBoard))
         return board
@@ -50,6 +52,6 @@ async function setGroups(boardId, groups) {
         boardService.save(board)
         return board
     } catch (err) {
-        console.log('err',err);
+        console.log('err', err);
     }
 }

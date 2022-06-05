@@ -8,12 +8,13 @@ import { saveLabel } from "../../store/actions/label.action";
 
 export const FilterMenu = ({ isFilterModalOpen, board }) => {
     const dispatch = useDispatch()
-    const [currFilter, setCurrFilter] = useState({ txt: '', labels: board.labels })
+    const [currFilter, setCurrFilter] = useState({ txt: '', labelIds: [], userIds: [] })
+    const { users } = useSelector((storeState) => storeState.userModule)
+
     // const [filterLabels, setFilterLabels] = useState(null)
 
     useEffect(() => {
         onSetFilter()
-        console.log('hhh');
     }, [currFilter])
 
 
@@ -21,7 +22,6 @@ export const FilterMenu = ({ isFilterModalOpen, board }) => {
     const onHandleChange = ({ target }) => {
         const field = target.name;
         const value = target.value;
-        console.log(field, value);
         setCurrFilter(() => ({ ...currFilter, [field]: value }))
 
     }
@@ -37,10 +37,22 @@ export const FilterMenu = ({ isFilterModalOpen, board }) => {
         const labelIdx = board.labels.findIndex(label => labelId === label.id)
         board.labels[labelIdx] = currLabel
         const labels = board.labels
-        setCurrFilter(() => ({ ...currFilter, labels }))
-        console.log(currFilter);
+        const labelsToShow = labels.filter(label => label.checked)
+        const labelIds = labelsToShow.map(label => label.id)
+        setCurrFilter(() => ({ ...currFilter, labelIds }))
         dispatch(setFilter(currFilter))
-        dispatch(saveLabel(board._id, labels))
+    }
+
+    const setMemberChecked = (userId) => {
+        const [currUser] = users.filter(user => user._id === userId)
+        if (!currUser.checked) currUser.checked = true
+        else currUser.checked = false
+        const userIdx = users.findIndex((user => userId === user._id))
+        users[userIdx] = currUser
+        const usersToShow = users.filter(user => user.checked)
+        const userIds = usersToShow.map(user => user._id)
+        setCurrFilter(() => ({ ...currFilter, userIds }))
+        dispatch(setFilter(currFilter))
     }
 
     return <section className="filter-container" style={{ display: isFilterModalOpen }}>
@@ -60,13 +72,24 @@ export const FilterMenu = ({ isFilterModalOpen, board }) => {
             <p className="sub-title">Members</p>
         </div>
         <ul className="clean-list">
-            {/* {board.members.map((member) => {
-                    return (
-                       <li >
-                        1 
-                       </li>
-                    )
-                })} */}
+            {users && users.map((member) => {
+                return (
+                    <li key={member._id}>
+                        <div className="user-preview-conainer">
+                            {!member.checked && < MdCheckBoxOutlineBlank className="check-box-blank" onClick={() => setMemberChecked(member._id)} />}
+                            {member.checked && < MdCheckBox className="check-box-full" onClick={() => setMemberChecked(member._id)} />}
+                            <div className="user-info">
+                                <div className="user-img-container ">
+                                    <img src={member.imgUrl} />
+                                </div>
+                                <span className="user-name">{member.fullname}</span>
+
+                            </div>
+                        </div>
+
+                    </li>
+                )
+            })}
         </ul>
         <hr />
         <div>

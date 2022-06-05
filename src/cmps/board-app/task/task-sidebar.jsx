@@ -1,12 +1,12 @@
 import { TiTag } from "react-icons/ti";
-import { BsCheck2Square, BsClock,BsPersonPlus } from "react-icons/bs";
+import { BsCheck2Square, BsClock, BsPersonPlus } from "react-icons/bs";
 import { FiPaperclip } from "react-icons/fi";
 import { MdOutlineScreenShare } from "react-icons/md";
 import { BsPerson } from "react-icons/bs";
 import { useEffect, useRef, useState } from "react";
 import { DynamicModalCmp } from "../../general/dynamic-modal-cmp";
 
-export const TaskSidebar = ({ boardId, groupId, task, labels, users }) => {
+export const TaskSidebar = ({ boardId, groupId, task, labels, users, groupTitle }) => {
   const buttons = [
     { txt: "Members", icon: <BsPerson /> },
     { txt: "Labels", icon: <TiTag /> },
@@ -47,15 +47,16 @@ export const TaskSidebar = ({ boardId, groupId, task, labels, users }) => {
           users={users}
           attachments={task.attachments}
           onCloseModal={onCloseModal}
+          groupTitle={groupTitle}
         />
       )}
       <div className="task-details-sidebar-button-container">
-      <h3 className="task-details-sidebar-section-title">Suggested</h3>
+        <h3 className="task-details-sidebar-section-title">Suggested</h3>
         <button className="task-details-sidebar-btn">
-        <BsPersonPlus/>
-        <span className="task-details-sidebar-btn-text">Join</span>
+          <BsPersonPlus />
+          <span className="task-details-sidebar-btn-text">Join</span>
         </button>
-      <h3 className="task-details-sidebar-section-title">Add to card</h3>
+        <h3 className="task-details-sidebar-section-title">Add to card</h3>
         {buttons.map((button) => {
           return (
             <button

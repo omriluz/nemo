@@ -8,7 +8,7 @@ import { DynamicModalCmp } from "../../../general/dynamic-modal-cmp";
 import { userService } from "../../../../services/user.service.js";
 
 
-export const TodoPreview = ({ todo, checklistId, taskId, boardId, groupId }) => {
+export const TodoPreview = ({ todo, checklistId, taskId, boardId, groupId, taskTitle }) => {
     const [isEditOpen, setIsEditOpen] = useState(false)
     const [isAddOpen, setIsAddOpen] = useState(false)
     const [todoTitle, setTodoTitle] = useState({ title: todo.title });
@@ -51,7 +51,11 @@ export const TodoPreview = ({ todo, checklistId, taskId, boardId, groupId }) => 
 
     const onIsDone = () => {
         todo.isDone = !todo.isDone
-        const activity = { txt: `${todo.isDone ? 'completed' : 'marked'}  ` + todo.title + `${todo.isDone ? '' : ' incomplete'}` + ' on this card', byMember: userService.getLoggedinUser() }
+        const activity = {
+            txt: `${todo.isDone ? 'completed' : 'marked'}  ` + todo.title + `${todo.isDone ? '' : ' incomplete'}` + ' on this card',
+            boardTxt: `${todo.isDone ? 'completed' : 'marked'}  ` + todo.title + `${todo.isDone ? '' : ' incomplete'}` + ' on ' + taskTitle,
+            byMember: userService.getLoggedinUser()
+        }
         dispatch(saveTodo(todo, checklistId, boardId, groupId, taskId, activity))
     }
 

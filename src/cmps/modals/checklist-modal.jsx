@@ -5,7 +5,7 @@ import { utilService } from '../../services/util.service';
 import { userService } from '../../services/user.service';
 
 
-export const ChecklistModal = ({ boardId, groupId, taskId, onCloseModal }) => {
+export const ChecklistModal = ({ boardId, groupId, taskId, onCloseModal, taskTitle }) => {
     const [checklistTitle, setChecklistTitle] = useState({ title: 'Checklist' });
     const dispatch = useDispatch()
     const handleChange = (ev) => {
@@ -19,7 +19,11 @@ export const ChecklistModal = ({ boardId, groupId, taskId, onCloseModal }) => {
         const checklist = checklistTitle
         checklist.id = utilService.makeId()
         checklist.todos = []
-        const activity = { txt: 'added Checklist to this card', byMember: userService.getLoggedinUser() }
+        const activity = {
+            txt: 'added Checklist to this card',
+            boardTxt: 'added Checklist to ' + taskTitle,
+            byMember: userService.getLoggedinUser()
+        }
         dispatch(saveChecklist(checklist, boardId, groupId, taskId, activity));
         setChecklistTitle({ title: 'Checklist' });
         onCloseModal()

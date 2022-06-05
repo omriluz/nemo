@@ -4,7 +4,7 @@ import { TodoPreview } from "./todos-preview.jsx";
 import { saveTodo } from "../../../../store/actions/checklist.action.js";
 import { useDispatch } from "react-redux";
 
-export const TodosList = ({ todos, checklistId, taskId, boardId, groupId }) => {
+export const TodosList = ({ todos, checklistId, taskId, boardId, groupId, taskTitle }) => {
   const [isAddOpen, setIsAddOpen] = useState();
   const [todoTitle, setTodoTitle] = useState({ title: "" });
   const dispatch = useDispatch();
@@ -44,6 +44,8 @@ export const TodosList = ({ todos, checklistId, taskId, boardId, groupId }) => {
           taskId={taskId}
           boardId={boardId}
           groupId={groupId}
+          taskTitle={taskTitle}
+
         />
       ))}
       {isAddOpen && (

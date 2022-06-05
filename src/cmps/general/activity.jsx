@@ -19,7 +19,8 @@ export const Activity = ({ activities, taskId, boardId }) => {
 
     const loadActivities = () => {
         if (!activities) return
-        const currActivities = activities.filter(activity => activity.task.id === taskId)
+
+        const currActivities = activities.filter(activity => activity?.task?.id === taskId)
         setTaskActivities(currActivities)
     }
 
@@ -94,12 +95,12 @@ export const Activity = ({ activities, taskId, boardId }) => {
                 );
             }) : activities.map((activity) => {
                 return (
-                    activity.txt ? <div key={activity.id} className='activity-preview'>
+                    activity.boardTxt ? <div key={activity.id} className='activity-preview'>
                         <div className="avatar-member"
                             style={{ background: `url(${activity.byMember?.imgUrl}) center center / cover ` }}>
                         </div>
                         <div className='activity-info'>
-                            <h2 > <span>{activity.byMember?.fullname}</span> {activity.txt} </h2>
+                            <h2 > <span>{activity.byMember?.fullname}</span> {activity.boardTxt} </h2>
                             <p>{utilService.timeSince(activity.createdAt)}</p>
                         </div>
                     </div> : <div key={activity.id} className='activity-preview'>

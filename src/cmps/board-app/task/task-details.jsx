@@ -62,9 +62,9 @@ export const TaskDetails = () => {
         <div className="task-details" onClick={(ev) => ev.stopPropagation()}>
           {task?.style?.backgroundColor &&
             <div className="cover-color" style={{ backgroundColor: task.style.backgroundColor }}>
-          <div className="task-details-back-btn" onClick={() => navigate(-1)}><GrClose /> </div>
+              <div className="task-details-back-btn" onClick={() => navigate(-1)}><GrClose /> </div>
             </div>}
-          {!!task?.style?.backgroundColor ||<div className="task-details-back-btn" onClick={() => navigate(-1)}><GrClose /> </div>}
+          {!!task?.style?.backgroundColor || <div className="task-details-back-btn" onClick={() => navigate(-1)}><GrClose /> </div>}
 
           <div className="task-details-header">
             <span className="header-icon"> <AiOutlineCreditCard /></span>
