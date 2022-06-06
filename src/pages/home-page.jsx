@@ -1,15 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import imgHero from "../assets/img/hero.png";
-import { Test } from "../cmps/general/test";
 
 export const HomePage = () => {
-
-
-  // aiService.getAiTextCompletion('mongodb')
-    // .then(res => )
-  // console.log(res);
-
   return (
     <section className="homepage-container">
       <section className="homepage-wrapper">
@@ -31,7 +24,6 @@ export const HomePage = () => {
             <img className="hero-img" src={imgHero} alt="" />
           </div>
         </section>
-        <Test/>
       </section>
     </section>
   );

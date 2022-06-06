@@ -8,7 +8,7 @@ import { saveChecklist, saveTodo } from "../../store/actions/checklist.action";
 import { useDispatch } from "react-redux";
 import { utilService } from "../../services/util.service";
 
-export function Test({ task, boardId, groupId }) {
+export function AiModal({ task, boardId, groupId }) {
   const dispatch = useDispatch();
 
   const onCreateAiChecklist = ({ checklistTitle, todoTitles }) => {

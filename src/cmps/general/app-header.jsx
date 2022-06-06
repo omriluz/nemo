@@ -54,10 +54,14 @@ export const AppHeader = () => {
 
     {pathname !== "/" && (
       <nav className="nav-bar">
-        <button onClick={onUserLogout}>logout</button>
+        {/* <button onClick={onUserLogout}>logout</button> */}
+        <div className="trello-logo-after-login-container" >
+        <svg class="trello-logo-after-login" stroke="currentColor" fill="currentColor" stroke-width="0" version="1.1" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 0h-13c-0.825 0-1.5 0.675-1.5 1.5v13c0 0.825 0.675 1.5 1.5 1.5h13c0.825 0 1.5-0.675 1.5-1.5v-13c0-0.825-0.675-1.5-1.5-1.5zM7 12c0 0.55-0.45 1-1 1h-2c-0.55 0-1-0.45-1-1v-8c0-0.55 0.45-1 1-1h2c0.55 0 1 0.45 1 1v8zM13 9c0 0.55-0.45 1-1 1h-2c-0.55 0-1-0.45-1-1v-5c0-0.55 0.45-1 1-1h2c0.55 0 1 0.45 1 1v5z"></path></svg>
+        <h1 className="trello-logo-after-login-title">Nemo</h1>
+        </div>
         {/* <span>hello {user?.username || 'guest'}</span> */}
         {/* implement guest feature if no user logged in */}
-        <div style={{ float: 'right', background: `url(${user?.imgUrl}) center center / cover ` }} className="user-avatar"></div>
+        <div style={{background: `url(${user?.imgUrl}) center center / cover ` }} className="user-avatar"></div>
       </nav>
 
     )}

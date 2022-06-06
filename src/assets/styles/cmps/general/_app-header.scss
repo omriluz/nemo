@@ -485,16 +485,19 @@
 
   &-workspace {
     background-color: $clr2;
-    min-height: 42px;
-    max-height: 42px;
+    // min-height: 42px;
+    // max-height: 42px;
+    height: 44px;
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1;
 
     & nav {
+      display: flex;
+      justify-content: space-between;
       // width: 95%;
-      max-height: 44px;
+      height: 100%;
       padding: 6px 4px;
       // display: flex;
       // justify-content: space-between;
@@ -548,3 +551,22 @@
   // justify-content: space-between;
   // align-items: center;
 // }
+
+
+.trello-logo-after-login {
+  color: #f5f5f5;
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.trello-logo-after-login-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logo-after-login-title {
+  font-size: 30px;
+  margin: 0;
+  color: #f5f5f5;
+}
