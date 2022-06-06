@@ -18,7 +18,7 @@ export const TaskSidebar = ({ boardMembers, boardId, groupId, task, labels, grou
     { txt: "Dates", icon: <BsClock /> },
     { txt: "Attachment", icon: <FiPaperclip /> },
     { txt: "Cover", icon: <MdOutlineScreenShare /> },
-    { txt: "AI Assistant", icon: <GiRobotAntennas /> },
+    { txt: "AI Clara", icon: <GiRobotAntennas /> },
   ];
 
   const user = userService.getLoggedinUser()

@@ -1,39 +1,19 @@
-// // import SpeechRecognition, {useSpeechRecognition} from "react-speech-recognition";
-// import { Configuration, OpenAIApi } from "openai";
-// import { useEffect, useState } from "react";
-// export const ttsService = {stt}
+// import {aiService} from './ai.service'
 
-// export function stt() {
-
-//   const {
-// //     transcript,
-//     listening,
-// //     resetTranscript,
-// //     browserSupportsSpeechRecognition,
-//   } = useSpeechRecognition();
-
-//   const commands = [
-//     {
-//       command: 'how to connect my project to *',
-//       callback: (food) => console.log(`Your order is for: ${food}`)
-//     }
-//   ]
-
-
-// //   if (!browserSupportsSpeechRecognition) {
-// //     return null
-// //   }
-
-
-// //   if (!browserSupportsSpeechRecognition) {
-// //     return <span>Browser doesn't support speech recognition.</span>;
-// //   }
-
-
-//   let { transcript, resetTranscript } = useSpeechRecognition({ commands })
-
-// }
+// export const commands = [
+//   {
+//     command: "build a to-do list for *",
+//     callback: async (library) => {
+//       try {
+//         const response = await aiService.getAiTextCompletion(library)
+//         onCreateAiChecklist(response) 
+//       } catch (err) {
+//         console.log('could not get response from stt : ', err)
+//       }
+//     },
+//   },
+// ];
 
 
 
-
+// // let { transcript, resetTranscript } = useSpeechRecognition({ commands });

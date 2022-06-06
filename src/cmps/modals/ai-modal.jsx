@@ -1,10 +1,6 @@
-import SpeechRecognition, {
-  useSpeechRecognition,
-} from "react-speech-recognition";
-import { Configuration, OpenAIApi } from "openai";
-import { useEffect, useState } from "react";
+import SpeechRecognition, {useSpeechRecognition} from "react-speech-recognition";
 import { aiService } from "../../services/ai.service";
-import { saveChecklist, saveTodo } from "../../store/actions/checklist.action";
+import { saveChecklist } from "../../store/actions/checklist.action";
 import { useDispatch } from "react-redux";
 import { utilService } from "../../services/util.service";
 
@@ -23,46 +19,27 @@ export function AiModal({ task, boardId, groupId }) {
         title,
       });
     });
-
     dispatch(saveChecklist(checklist, boardId, groupId, task.id));
-
-    // aiTodos.map(todo => {
-    // checklist.todos.push()
-    // })
-    // dispatch(saveChecklist(checklist, boardId, groupId, task.id))
   };
 
-  const {
-    //     transcript,
-    listening,
-
-    //     resetTranscript,
-    //     browserSupportsSpeechRecognition,
-  } = useSpeechRecognition();
-
+  
   const commands = [
-    {
+      {
       command: "build a to-do list for *",
-      callback: (library) => {
-        console.log(library);
-        aiService.getAiTextCompletion(library).then((res) => {
-          onCreateAiChecklist(res);
-        });
-        // console.log(aiService.getAiTextCompletion(library))
+      callback: async (library) => {
+        try {
+          const response = await aiService.getAiTextCompletion(library)
+          onCreateAiChecklist(response) 
+        } catch (err) {
+            console.log('could not get response from stt : ', err)
+        }
       },
     },
-  ];
+  ]
 
-  //   if (!browserSupportsSpeechRecognition) {
-  //     return null
-  //   }
-
-  //   if (!browserSupportsSpeechRecognition) {
-  //     return <span>Browser doesn't support speech recognition.</span>;
-  //   }
-
+  const {listening} = useSpeechRecognition();
   let { transcript, resetTranscript } = useSpeechRecognition({ commands });
-
+  
   return (
     <div>
       <p>Microphone: {listening ? "on" : "off"}</p>

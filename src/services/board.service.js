@@ -47,12 +47,15 @@ async function remove(boardId) {
 }
 async function save(board) {
     if (board._id) {
+        console.log('@@@@ trying to update board');
+
         const savedBoard = await httpService.put(BOARD_BASE_ENDPOINT, board)
         boardChannel.postMessage(getActionUpdateBoard(savedBoard))
         socketService.emit('board-change', savedBoard);
         return savedBoard
     } else {
         try {
+            console.log('@@@@ trying to create board');
             // Later, owner is set by the backend
             // board.owner = userService.getLoggedinUser()
             // savedBoard = await storageService.post(STORAGE_KEY, board)
