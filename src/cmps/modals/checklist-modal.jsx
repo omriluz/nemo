@@ -33,7 +33,7 @@ export const ChecklistModal = ({ boardId, groupId, taskId, onCloseModal, taskTit
 
         <form onSubmit={onSaveTask} className=" flex column">
             {/* make a label modal helper class and change classname */}
-            <label className='modal-small-title' htmlFor='title'>Title</label>
+            <label className='modal-small-title check-title' htmlFor='title'>Title</label>
 
             <input type="text"
                 name='title'
