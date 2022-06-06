@@ -12,6 +12,6 @@ export const TaskDetailsMainCmps = ({ task, boardId, groupId, activities, groupT
         {<TaskAttachment task={task} boardId={boardId} groupId={groupId} />}
         <Checklists task={task} boardId={boardId} groupId={groupId} groupTitle={groupTitle} />
         {/* <Attachment/> */}
-        <Activity activities={activities} taskId={task.id} boardId={boardId} />
+        {/* <Activity activities={activities} taskId={task.id} boardId={boardId} /> */}
     </>
 }

@@ -30,7 +30,7 @@ export const MainMenu = ({ isMainMenuOpen, activities, boardId, onOpenColors, on
 
             </div>
         </section>
-        <Activity activities={activities} boardId={boardId} />
+        {/* <Activity activities={activities} boardId={boardId} /> */}
     </section>
 
 }
