@@ -7,13 +7,6 @@ import { utilService } from "../../../services/util.service";
 export const TaskList = ({ tasks, groupId, boardId,labelOpenState }) => {
   const dispatch = useDispatch();
 
-  const handleOnDragEnd = (result) => {
-    console.log(result?.destination?.droppableId);
-    const [reorderedItem] = tasks.splice(result.source.index, 1);
-    tasks.splice(result.destination.index, 0, reorderedItem);
-    dispatch(setTasks(boardId, groupId, tasks));
-  };
-
   return (
       <Droppable droppableId={groupId}  >
         {(provided) => (

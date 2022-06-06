@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { toggleMember } from "../../store/actions/member.action";
 import { FiCheck } from "react-icons/fi";
 
-export const MemberModal = ({ boardMembers, boardId, groupId, task }) => {
+export const MemberModal = ({ boardMembers, boardId, groupId, task, users }) => {
   const dispatch = useDispatch();
   const memberIds = task.members.map((member) => member._id);
 

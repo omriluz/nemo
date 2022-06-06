@@ -9,7 +9,7 @@ import { AddBoard } from "../work-space/add-board";
 import { MemberModal } from "../modals/member-modal.jsx";
 import { Menu } from "./menu";
 import { InviteModal } from "../modals/invite-modal.jsx";
-import { Test } from "./test";
+import { AiModal } from "../modals/ai-modal";
 
 export const DynamicModalCmp = ({
   modalDetails: { bottom, right, left },
@@ -125,7 +125,7 @@ export const DynamicModalCmp = ({
       break;
     case "AI Assistant":
       modalTypeToOpen = (
-        <Test
+        <AiModal
           onCloseModal={onCloseModal}
           boardId={boardId}
           groupId={groupId}
