@@ -1,18 +1,10 @@
 import { Configuration, OpenAIApi } from "openai";
 
-const OPENAI_API_KEY = "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"
-const OPENAI_API_KEY2 = "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"
-
-
-
-
+const OPENAI_API_KEY = "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"
 const configuration = new Configuration({
     apiKey: OPENAI_API_KEY,
 });
-
 async function getAiTextCompletion(library) {
-
-
     const openai = new OpenAIApi(configuration);
     try {
         const response = await openai
@@ -25,9 +17,8 @@ async function getAiTextCompletion(library) {
                 presence_penalty: 0,
             })
 
-        var splittingPattern = /[A-Za-z ]+/g
+        var splittingPattern = /[A-Za-z ']+/g
         var filteredResponse = response.data.choices[0].text.match(splittingPattern)
-        console.log(filteredResponse);
         return {
             checklistTitle: library,
             todoTitles: filteredResponse
@@ -36,10 +27,7 @@ async function getAiTextCompletion(library) {
     } catch (err) {
         console.log('could not get a response from GPT-3', err)
     }
-
 }
-
-
 export const aiService = {
     getAiTextCompletion
 }
