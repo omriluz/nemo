@@ -1,10 +1,6 @@
 import { Configuration, OpenAIApi } from 'openai';
 import secret from '../.secret/keys.json'
 
-// const OPENAI_API_KEY = "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"
-
-
-
 
 const configuration = new Configuration({
     apiKey: secret.OPENAI_API_KEY,

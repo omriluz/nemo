@@ -3,7 +3,7 @@
 }
 
 .clara-img-container {
-    width: 57%;
+    width: 27%;
     // height: 100%;
 }
 
@@ -30,14 +30,13 @@
 
 
 .avatar {
-	width: 150px;
-	height: 150px;
+	width: 100px;
+	aspect-ratio: 1;
 	// box-sizing: border-box;
 	border: 5px white solid;
-	border-radius: 50%;
-    background-color: red;
+	// border-radius: 50%;
 	overflow: hidden;
-	box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+	// box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
 	transform: translatey(0px);
 	animation: float 6s ease-in-out infinite;
 }
@@ -45,15 +44,50 @@
 
 @keyframes float {
 	0% {
-		box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+		// box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
 		transform: translatey(0px);
 	}
 	50% {
-		box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);
+		// box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);
 		transform: translatey(-20px);
 	}
 	100% {
-		box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+		// box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
 		transform: translatey(0px);
+	}
+}
+
+
+.rec-btn {
+	width: 35px;
+	height: 35px;
+	font-size: 0;
+	background-color: red;
+	border: 0;
+	border-radius: 35px;
+	margin: 18px;
+	outline: none;
+}
+
+.not-recording{
+	background-color: darkred;
+}
+
+.recording {
+	animation-name: pulse;
+	animation-duration: 1.5s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+
+@keyframes pulse{
+	0%{
+		box-shadow: 0px 0px 5px 0px rgba(173,0,0,.3);
+	}
+	65%{
+		box-shadow: 0px 0px 5px 13px rgba(173,0,0,.3);
+	}
+	90%{
+		box-shadow: 0px 0px 5px 13px rgba(173,0,0,0);
 	}
 }

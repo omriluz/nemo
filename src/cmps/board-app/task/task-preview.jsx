@@ -114,7 +114,9 @@ export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState }) =
                     color: 'white', borderRadius: '3px'
                   } : {}} className="badge checklist-badge">
                   <FiCheckSquare />
+                  <div className="sum-todos-badge-title">
                   {sumTodosDone}/{sumTodos}
+                  </div>
                 </div>
               )}
             </div>
