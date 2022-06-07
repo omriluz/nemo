@@ -30,7 +30,7 @@ export const DynamicModalCmp = ({
   let modalTypeToOpen;
   switch (modalTitle) {
     case "Members":
-      if (bottom >= 200) bottom -= 70;
+      if (bottom >= 200 && bottom < 240) bottom -= 70;
       if (bottom >= 240) bottom -= 150;
       modalTypeToOpen = (
         <MemberModal
@@ -123,7 +123,12 @@ export const DynamicModalCmp = ({
         />
       );
       break;
-    case "AI Assistant":
+    case "AI Clara":
+      if (bottom >= 400 && bottom < 500) bottom -= 30;
+      if (bottom >= 500 && bottom < 600) bottom -= 60;
+      if (bottom >= 600 && bottom < 700) bottom -= 90;
+      // if (bottom >= 230 && bottom < 260) bottom -= 100;
+      // if (bottom >= 260 && bottom < 300) bottom -= 140;
       modalTypeToOpen = (
         <AiModal
           onCloseModal={onCloseModal}

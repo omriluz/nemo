@@ -1,30 +1,24 @@
-import SpeechRecognition, {
-  useSpeechRecognition,
-} from "react-speech-recognition";
+import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 import { aiService } from "../../services/ai.service";
-import { saveChecklist, saveTodo } from "../../store/actions/checklist.action";
+import { saveChecklist } from "../../store/actions/checklist.action";
 import { useDispatch } from "react-redux";
 import { utilService } from "../../services/util.service";
-
 export function AiModal({ task, boardId, groupId }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const onCreateAiChecklist = ({ checklistTitle, todoTitles }) => {
-    const checklist = { title: checklistTitle }
-    checklist.id = utilService.makeId()
-    checklist.todos = []
+    console.log(todoTitles);
+    const checklist = { title: checklistTitle };
+    checklist.id = utilService.makeId();
+    checklist.todos = [];
     todoTitles.map((title) => {
       checklist.todos.push({
         id: utilService.makeId(),
         isDone: false,
         title,
-      })
-    })
-
-    dispatch(saveChecklist(checklist, boardId, groupId, task.id))
-  }
-  const {
-    listening,
-  } = useSpeechRecognition()
+      });
+    });
+    dispatch(saveChecklist(checklist, boardId, groupId, task.id));
+  };
   const commands = [
     {
       command: "build a to-do list for *",
@@ -38,7 +32,7 @@ export function AiModal({ task, boardId, groupId }) {
       },
     },
   ]
-
+  const { listening } = useSpeechRecognition();
   let { transcript, resetTranscript } = useSpeechRecognition({ commands });
   return (
     <div>
@@ -48,5 +42,5 @@ export function AiModal({ task, boardId, groupId }) {
       <button onClick={resetTranscript}>Reset</button>
       <p>{transcript}</p>
     </div>
-  )
+  );
 }

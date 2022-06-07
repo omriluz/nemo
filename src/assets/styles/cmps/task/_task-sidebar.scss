@@ -29,7 +29,8 @@
   display: flex;
   justify-self: flex-start;
   align-items: center;
-  
+  color: #172b4d;
+
   &-text {
     margin-left: 5px;
     //delete if working without span
@@ -55,4 +56,8 @@
 
 .join-btn {
   margin-bottom: 16px;
+}
+
+.none {
+  display: none;
 }

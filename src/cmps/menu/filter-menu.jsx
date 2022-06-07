@@ -51,7 +51,7 @@ export const FilterMenu = ({ isFilterModalOpen, board }) => {
         board.members[memberIdx] = currMember
         const membersToShow = board.members.filter(member => member.checked)
         const memberIds = membersToShow.map(member => member._id)
-        setCurrFilter(() => ({ ...currFilter, memberIds: memberIds }))
+        setCurrFilter(() => ({ ...currFilter, members: memberIds }))
         dispatch(setFilter(currFilter))
     }
 
@@ -106,9 +106,11 @@ export const FilterMenu = ({ isFilterModalOpen, board }) => {
                             {label.checked && < MdCheckBox className="check-box-full" />}
                         </div>
                         <div className="label-preview-bg"
+                            onClick={() => setLabelChecked(label.id)}
                             style={{ backgroundColor: label.color }}>
-                            <span className="label-text">{label?.txt}</span>
-
+                            {label.title && (
+                                <span className="label-txt">{label.title}</span>
+                            )}
                         </div>
                     </li>
                 )

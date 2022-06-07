@@ -10,20 +10,19 @@ import { Draggable } from "react-beautiful-dnd";
 import { userService } from "../../../services/user.service.js";
 
 export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
-  // console.log('rendered group');
   let { filterBy } = useSelector((storeState) => storeState.boardModule);
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddTask, setIsAddTask] = useState(false);
   const [groupTitle, setGroupTitle] = useState({ title: group.title });
-  const [newTask, setNewTask] = useState({ title: "" });
+  const [newTask, setNewTask] = useState({ title: "" })
 
-  const addTaskRef = useRef();
+  const addTaskRef = useRef()
   function handleBackClick() {
     if (addTaskRef.current) addTaskRef.current.scrollIntoView();
   }
 
-  useEffect(() => { }, [filterBy]);
+  useEffect(() => { }, [filterBy])
 
   const onRemoveGroup = () => {
     dispatch(removeGroup(group.id, boardId));
@@ -66,30 +65,28 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
   };
 
   const tasksToShow = () => {
-    var taskToShow = group.tasks
+    let taskToShow = group.tasks
     if (filterBy.txt) {
       taskToShow = group.tasks.filter((task) =>
         task.title.toLowerCase().includes(filterBy.txt.toLowerCase())
-      );
+      )
     }
+
     if (filterBy.labelIds.length > 0) {
       filterBy.labelIds.forEach(
         (id) =>
           (taskToShow = taskToShow.filter((task) => task.labelIds.includes(id)))
-      );
+      )
     }
 
-    // if (filterBy.memberIds.length > 0) {
-    //   filterBy.memberIds.forEach(id => taskToShow = taskToShow.filter(task => task.members = task.members.filter(member => member._id.includes(id))))
-    // }
+    if (filterBy.members?.length) {
+      taskToShow = taskToShow.filter(task => task.members.some(member => filterBy.members.includes(member._id)))
+
+    }
+
     return taskToShow
   }
-  // const handleMouse = (ev) => {
-  // ev.preventDefault()
-  // console.log('ev',ev);
-  // console.log('ev',ev.target);
-  // ev.target.unbind()
-  // }
+
 
   return (
     <>

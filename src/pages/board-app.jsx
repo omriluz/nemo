@@ -67,7 +67,7 @@ export const BoardApp = () => {
     );
   };
 
-  if (!board) return <h1>Loading...</h1>;
+  if (!board) return <p>.</p>;
   return (
     <>
       <DragDropContext onDragEnd={onDragEnd}>

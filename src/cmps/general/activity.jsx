@@ -17,6 +17,7 @@ export const Activity = ({ activities, taskId, boardId }) => {
     }, [activities]);
 
 
+
     const loadActivities = () => {
         if (!activities) return
 

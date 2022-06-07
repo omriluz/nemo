@@ -41,7 +41,7 @@ export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState }) =
   useEffect(() => {
     onSetLabels();
     onSetBadges();
-  }, [task]);
+  }, []);
 
   const onSetBadges = () => { };
 
@@ -75,11 +75,11 @@ export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState }) =
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          {/* <div style={{backgroundImage: "url(https://i.picsum.photos/id/373/500/500.jpg?hmac=VqMSKR_Y5zUJm4IEBUjpK6NI7ZdiT7ePMwevp_MDgeQ)"}} className="task-preview-image"></div> */}
+          {task.attachments.length > 0 && <div style={{ backgroundImage: `url(${task.attachments[0].url})` }} className="task-preview-image"></div>}
           {task?.style?.backgroundColor && task.coverSize === "uncover" && (
             <div style={task.style} className="task-preview-color-top"></div>
           )}
-
+          {/* <button onClick={onRemoveTask}>fdjisa</button> */}
           {/* {task?.style?.backgroundColor && task.coverSize === "cover" && <div style={task.style} className="task-preview-cover-container">} */}
           <div
             style={task.coverSize === "cover" ? task.style : {}}

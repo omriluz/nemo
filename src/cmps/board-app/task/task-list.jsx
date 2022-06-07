@@ -4,31 +4,30 @@ import { memo, useEffect, useState } from "react";
 import { setTasks } from "../../../store/actions/task.action";
 import { useDispatch } from "react-redux";
 import { utilService } from "../../../services/util.service";
-export const TaskList = ({ tasks, groupId, boardId,labelOpenState }) => {
+export const TaskList = ({ tasks, groupId, boardId, labelOpenState }) => {
   const dispatch = useDispatch();
-
   return (
-      <Droppable droppableId={groupId}  >
-        {(provided) => (
-          <section
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-            className="task-list"
-          >
-            {tasks.map((task, index) => {
-              return (
-                <TaskPreview
-                  key={task.id}
-                  task={task}
-                  boardId={boardId}
-                  index={index}
-                  groupId={groupId}
-                  labelOpenState={labelOpenState}
-                />
-              );
-            })}
-          </section>
-        )}
-      </Droppable>
+    <Droppable droppableId={groupId}  >
+      {(provided) => (
+        <section
+          ref={provided.innerRef}
+          {...provided.droppableProps}
+          className="task-list"
+        >
+          {tasks.map((task, index) => {
+            return (
+              <TaskPreview
+                key={task.id}
+                task={task}
+                boardId={boardId}
+                index={index}
+                groupId={groupId}
+                labelOpenState={labelOpenState}
+              />
+            );
+          })}
+        </section>
+      )}
+    </Droppable>
   );
 }

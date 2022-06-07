@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { toggleMember } from "../../store/actions/member.action";
 import { FiCheck } from "react-icons/fi";
+import { saveTask } from "../../store/actions/task.action";
 
 export const MemberModal = ({ boardMembers, boardId, groupId, task, users }) => {
   const dispatch = useDispatch();
@@ -8,7 +9,7 @@ export const MemberModal = ({ boardMembers, boardId, groupId, task, users }) => 
 
   const toggleUser = (user) => {
     dispatch(toggleMember(boardId, groupId, task.id, user));
-  };
+  }
 
   return (
     <div className="member-modal">

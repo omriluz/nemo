@@ -39,7 +39,6 @@ export const CoverModal = ({ boardId, groupId, task }) => {
         taskAfterCopy.style.backgroundColor = color
         if (!size) taskAfterCopy.coverSize = selectedSize
         else taskAfterCopy.coverSize = size
-        console.log(taskAfterCopy);
         dispatch(saveTask(taskAfterCopy, boardId, groupId))
     }
 

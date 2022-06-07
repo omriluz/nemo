@@ -215,10 +215,12 @@
             cursor: pointer;
             flex-shrink: 0;
             height: 16px;
-            left: 0;
+            left: 0px;
             margin: 6px;
             display: inline-block;
             width: 16px;
+            margin-right: -3px;
+            margin-left: 9px;
         }
 
         .todo-check-box-checked {
@@ -232,8 +234,8 @@
             color: #0079bf;
             font-size: 19px;
             margin-top: 4px;
-            margin-inline-start: 5px;
-
+            margin-inline-start: 8px;
+            margin-right: -1px;
         }
 
         .todo-title {

@@ -7,11 +7,8 @@ import { FiChevronLeft } from "react-icons/fi";
 
 export const Menu = ({ isMenuOpen, onCloseMenu, activities, board }) => {
   const [isColorModalOpen, setIsColorModalOpen] = useState('none');
-  // const [isArchiveModalOpen, setIsArchiveModalOpen] = useState('none');
   const [isFilterModalOpen, setIsFilterModalOpen] = useState('none');
-  // const [isUniqeModalOpen, setIsUniqeModalOpen] = useState('block');
   const [isMainMenuOpen, setIsMainMenuOpen] = useState('block');
-  // const menuStyle = { display: "none" };
 
 
 
@@ -47,7 +44,7 @@ export const Menu = ({ isMenuOpen, onCloseMenu, activities, board }) => {
             style={{ display: isMainMenuOpen === 'none' ? 'inline-block' : 'none' }}
             className="back-menu">
             <FiChevronLeft size={25} /></span>
-          <span style={{top:'7px'}} onClick={onCloseMenu} className="modal-close-btn">
+          <span style={{ top: '7px' }} onClick={onCloseMenu} className="modal-close-btn">
             <IoMdClose size={25} />
           </span>
         </div>
@@ -64,8 +61,8 @@ export const Menu = ({ isMenuOpen, onCloseMenu, activities, board }) => {
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
 
 

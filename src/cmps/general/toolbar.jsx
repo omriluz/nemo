@@ -64,11 +64,11 @@ export const ToolBar = ({ boardId, board, users }) => {
       </div>
       <div className="toolbar-right">
         <div>
-          <span className="toolbar-btn filter-btn"><MdOutlineFilterList /> Filter</span>
+          <span className="toolbar-btn filter-btn"><MdOutlineFilterList /> <span className="tool-title">Filter</span> </span>
           <span className="toolbar-divider"></span>
 
           <span onClick={onOpenMenu} className="toolbar-btn toolbar-menu-btn">
-            <FaEllipsisH /> <span>Show menu</span>
+            <FaEllipsisH /> <span className="tool-title">Show menu</span>
           </span>
         </div>
       </div>
