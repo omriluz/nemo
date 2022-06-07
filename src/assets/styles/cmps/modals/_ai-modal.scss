@@ -1,0 +1,59 @@
+.ai-modal-container {
+    height: 300px;
+}
+
+.clara-img-container {
+    width: 57%;
+    // height: 100%;
+}
+
+
+// .float {
+//   -webkit-animation-name: Floating;
+//   -webkit-animation-duration: 6s;
+//   -webkit-animation-iteration-count: infinite;
+//   -webkit-animation-timing-function: ease-in-out;
+// }
+
+// @-webkit-keyframes Floating {
+//   from {
+//     -webkit-transform: translate(0, 0px);
+//   }
+//   65% {
+//     -webkit-transform: translate(0, 200px);
+//   }
+//   to {
+//     -webkit-transform: translate(0, -0px);
+//   }
+// }
+
+
+
+.avatar {
+	width: 150px;
+	height: 150px;
+	// box-sizing: border-box;
+	border: 5px white solid;
+	border-radius: 50%;
+    background-color: red;
+	overflow: hidden;
+	box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+	transform: translatey(0px);
+	animation: float 6s ease-in-out infinite;
+}
+
+
+@keyframes float {
+	0% {
+		box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+		transform: translatey(0px);
+	}
+	50% {
+		box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);
+		transform: translatey(-20px);
+	}
+	100% {
+		box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+		transform: translatey(0px);
+	}
+}

@@ -3,6 +3,7 @@ import { aiService } from "../../services/ai.service";
 import { saveChecklist } from "../../store/actions/checklist.action";
 import { useDispatch } from "react-redux";
 import { utilService } from "../../services/util.service";
+import clara from '../../assets/img/clara.jpg'
 
 export function AiModal({ task, boardId, groupId }) {
   const dispatch = useDispatch();
@@ -26,9 +27,9 @@ export function AiModal({ task, boardId, groupId }) {
   const commands = [
       {
       command: "build a to-do list for *",
-      callback: async (library) => {
+      callback: async (sttInput) => {
         try {
-          const response = await aiService.getAiTextCompletion(library)
+          const response = await aiService.getAiTextCompletion(sttInput)
           onCreateAiChecklist(response) 
         } catch (err) {
             console.log('could not get response from stt : ', err)
@@ -41,7 +42,12 @@ export function AiModal({ task, boardId, groupId }) {
   let { transcript, resetTranscript } = useSpeechRecognition({ commands });
   
   return (
-    <div>
+    <div className="ai-modal-container">
+      <h1>Hi Im Clara Your AI powered assistant</h1>
+      <div className="clara-img-container avatar">
+      <img src={clara} alt="" />
+      </div>
+        <p>i was built with the <a href="https://openai.com/blog/openai-api/">GPT-3 engine from OpenAI</a></p>
       <p>Microphone: {listening ? "on" : "off"}</p>
       <button onClick={() => SpeechRecognition.startListening({language: "en-US"})}>Start </button>
       <button onClick={SpeechRecognition.stopListening}>Stop</button>

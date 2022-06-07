@@ -17,6 +17,7 @@ export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState }) =
   const navigate = useNavigate();
   const [labels, setLabels] = useState([]);
   const user = userService.getLoggedinUser()
+  const {board} = useSelector((storeState) => storeState.boardModule)
 
   let sumTodos;
   let sumTodosDone;
@@ -40,13 +41,11 @@ export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState }) =
 
   useEffect(() => {
     onSetLabels();
-    onSetBadges();
   }, [task]);
 
-  const onSetBadges = () => { };
 
-  const onSetLabels = async () => {
-    const newLabels = await labelService.getLabelsById(boardId, task);
+  const onSetLabels = () => {
+    const newLabels = labelService.getLabelsById(board, task);
     setLabels(newLabels);
   };
 

@@ -29,8 +29,8 @@ async function toggleLabel(boardId, groupId, taskId, labelId) {
 
 //async function getLabelsById(boardId, groupId, task) {
 
-async function getLabelsById(boardId, task) {
-    const board = await boardService.getById(boardId)
+function getLabelsById(board, task) {
+    // const board = await boardService.getById(boardId)
     const labels = board.labels.filter(label => task.labelIds.includes(label.id))
     return labels
 }

@@ -1,6 +1,8 @@
 import { boardService } from "../../services/board.service.js";
+import { socketService } from "../../services/socket.service.js";
 import { userService } from "../../services/user.service.js";
-import { showSuccessMsg, showErrorMsg } from '../../services/event-bus.service.js'
+
+// socketService.setup()
 
 // Action Creators:
 export function getActionRemoveBoard(boardId) {
@@ -28,28 +30,37 @@ export function getActionSetBoard(board) {
     }
 }
 
-var subscriber
+// var subscriber
 
 export function loadBoard(boardId) {
-    return (dispatch) => {
-        boardService.getById(boardId)
-            .then(board => {
-                dispatch({
-                    type: 'SET_BOARD',
-                    board
-                })
-            })
-            .catch(err => {
-                showErrorMsg('Cannot load boards')
-                console.log('Cannot load boards', err)
-            })
+    return async (dispatch) => {
+        try {
 
-        if (subscriber) boardService.unsubscribe(subscriber)
-        subscriber = (ev) => {
-            console.log('Got notified', ev.data)
-            dispatch(ev.data)
+            const boardFromDb = await boardService.getById(boardId)
+            dispatch(getActionSetBoard(boardFromDb))
+
+            // socketService.off('update-board')
+            // console.log('turned socket off');
+            // socketService.on('update-board', async (boardFromSocket) => {
+                // if (!boardFromSocket) {
+                //     console.log('no board from socket');
+                //     const boardFromDb = await boardService.getById(boardId)
+                //     console.log('boardFromDB', boardFromDb);
+                //     dispatch(getActionSetBoard(boardFromDb))
+                // } 
+                // console.log('board from socket', boardFromSocket);
+                // dispatch(getActionSetBoard(boardFromSocket))
+            // })
+        } catch (err) {
+            console.log('Cannot load boards', err)
         }
-        boardService.subscribe(subscriber)
+
+        // if (subscriber) boardService.unsubscribe(subscriber)
+        // subscriber = (ev) => {
+        //     console.log('Got notified', ev.data)
+        //     dispatch(ev.data)
+        // }
+        // boardService.subscribe(subscriber)
     }
 }
 
@@ -63,15 +74,14 @@ export function loadBoards() {
                 })
             })
             .catch(err => {
-                showErrorMsg('Cannot load boards')
                 console.log('Cannot load boards', err)
             })
 
-        if (subscriber) boardService.unsubscribe(subscriber)
-        subscriber = (ev) => {
-            dispatch(ev.data)
-        }
-        boardService.subscribe(subscriber)
+        // if (subscriber) boardService.unsubscribe(subscriber)
+        // subscriber = (ev) => {
+        //     dispatch(ev.data)
+        // }
+        // boardService.subscribe(subscriber)
     }
 }
 
@@ -80,9 +90,7 @@ export function removeBoard(boardId) {
         try {
             await boardService.remove(boardId)
             dispatch(getActionRemoveBoard(boardId))
-            showSuccessMsg('Board removed')
         } catch (err) {
-            showErrorMsg('Cannot remove board')
             console.log('Cannot remove board', err)
         }
     }
@@ -140,7 +148,7 @@ export function setFilter(filterBy) {
 
 
 export function addUserToBoard(boardId, user) {
-    console.log('boardId',boardId);
+    console.log('boardId', boardId);
     return async (dispatch) => {
         try {
             const board = await boardService.getById(boardId)
@@ -148,7 +156,7 @@ export function addUserToBoard(boardId, user) {
             board.members.push(user)
             const savedBoard = await boardService.save(board)
             dispatch(getActionSetBoard(savedBoard))
-        } catch(err) {
+        } catch (err) {
             console.log('err adding user to board members: ', err);
         }
 
@@ -167,14 +175,12 @@ export function onRemoveBoardOptimistic(boardId) {
             type: 'REMOVE_BOARD',
             boardId
         })
-        showSuccessMsg('Board removed')
 
         boardService.remove(boardId)
             .then(() => {
                 console.log('Server Reported - Deleted Succesfully');
             })
             .catch(err => {
-                showErrorMsg('Cannot remove board')
                 console.log('Cannot load boards', err)
                 dispatch({
                     type: 'UNDO_REMOVE_BOARD',
@@ -192,6 +198,7 @@ export function handleDrag(
     droppableIndexEnd,
     type
 ) {
+    console.log('board start',board._id);
     return async dispatch => {
         if (type === 'group') {
             // take out group from old index
@@ -221,6 +228,7 @@ export function handleDrag(
             }
             // }
         }
+        console.log(board._id);
         const savedBoard = await boardService.save(board);
 
         dispatch({

@@ -55,16 +55,23 @@ export const TaskDetails = () => {
       <section
         tabIndex={"0"}
         onKeyDown={handleKeyEvent}
-        onClick={() => navigate(-1)}
+        // onClick={() => navigate(-1)}
+        onClick={() => navigate(`/board/${boardId}`)}
         className="task-details-wrapper"
       >
 
         <div className="task-details" onClick={(ev) => ev.stopPropagation()}>
           {task?.style?.backgroundColor &&
             <div className="cover-color" style={{ backgroundColor: task.style.backgroundColor }}>
-              <div className="task-details-back-btn" onClick={() => navigate(-1)}><GrClose /> </div>
+              <div className="task-details-back-btn" 
+              onClick={() => navigate(`/board/${boardId}`)}
+              // onClick={() => navigate(-1)}
+              ><GrClose /> </div>
             </div>}
-          {!!task?.style?.backgroundColor || <div className="task-details-back-btn" onClick={() => navigate(-1)}><GrClose /> </div>}
+          {!!task?.style?.backgroundColor || <div className="task-details-back-btn"
+          //  onClick={() => navigate(-1)}
+           onClick={() => navigate(`/board/${boardId}`)}
+           ><GrClose /> </div>}
 
           <div className="task-details-header">
             <span className="header-icon"> <AiOutlineCreditCard /></span>

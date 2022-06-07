@@ -5,7 +5,7 @@ import { getActionRemoveBoard, getActionAddBoard, getActionUpdateBoard } from '.
 import { utilService } from './util.service.js'
 import { httpService } from './http.service.js'
 import { socketService } from './socket.service.js'
-const boardChannel = new BroadcastChannel('boardChannel')
+// const boardChannel = new BroadcastChannel('boardChannel')
 // const listeners = []
 
 export const boardService = {
@@ -14,8 +14,8 @@ export const boardService = {
     getById,
     remove,
     // getEmptyBoard,
-    subscribe,
-    unsubscribe,
+    // subscribe,
+    // unsubscribe,
 }
 window.cs = boardService;
 
@@ -30,6 +30,7 @@ async function query() {
 }
 
 async function getById(boardId) {
+    console.log('get by id called');
     // return await storageService.get(STORAGE_KEY, boardId)
     // return axios.get(`/api/board/${boardId}`)
     const boardFromDB = await httpService.get(`${BOARD_BASE_ENDPOINT}/${boardId}`)
@@ -43,17 +44,17 @@ async function remove(boardId) {
     // })
     // return Promise.reject('Not now!');
     await storageService.remove(STORAGE_KEY, boardId)
-    boardChannel.postMessage(getActionRemoveBoard(boardId))
+    // boardChannel.postMessage(getActionRemoveBoard(boardId))
 }
 async function save(board) {
     if (board._id) {
-        console.log('@@@@ trying to update board');
-
+        
         const savedBoard = await httpService.put(BOARD_BASE_ENDPOINT, board)
-        boardChannel.postMessage(getActionUpdateBoard(savedBoard))
+        // boardChannel.postMessage(getActionUpdateBoard(savedBoard))
         socketService.emit('board-change', savedBoard);
         return savedBoard
     } else {
+        debugger
         try {
             console.log('@@@@ trying to create board');
             // Later, owner is set by the backend
@@ -61,7 +62,7 @@ async function save(board) {
             // savedBoard = await storageService.post(STORAGE_KEY, board)
             const savedBoard = await httpService.post(BOARD_BASE_ENDPOINT, board)
             // console.log('board',savedBoard);
-            boardChannel.postMessage(getActionAddBoard(savedBoard))
+            // boardChannel.postMessage(getActionAddBoard(savedBoard))
             return savedBoard
         } catch (err) {
             console.log(err)
@@ -70,12 +71,12 @@ async function save(board) {
     // return savedBoard
 }
 
-function subscribe(listener) {
-    boardChannel.addEventListener('message', listener)
-}
-function unsubscribe(listener) {
-    boardChannel.removeEventListener('message', listener)
-}
+// function subscribe(listener) {
+//     boardChannel.addEventListener('message', listener)
+// }
+// function unsubscribe(listener) {
+//     boardChannel.removeEventListener('message', listener)
+// }
 
 const ourBoard = {
     "_id": utilService.makeId(),//mongoID
