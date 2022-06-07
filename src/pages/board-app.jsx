@@ -13,28 +13,33 @@ export const BoardApp = () => {
   const { boardId } = useParams();
   const { board } = useSelector((storeState) => storeState.boardModule);
   const { users } = useSelector((storeState) => storeState.userModule);
+  let socketBoard;
   // const { users } = useSelector((storeState) => storeState.userModule);
   const dispatch = useDispatch();
-
   useEffect(() => {
     setSocket()
     socketService.emit('join board', boardId)
-
     onLoadBoard();
     onLoadUsers();
+    socketService.off('update-board')
+    socketService.on('update-board', async (boardFromSocket) => {
+      onLoadBoard(boardFromSocket._id)
+    })
   }, []);
+
+// useEffect(() => {
+//   console.log('turned socket off');
+// }, [board])
 
   const setSocket = () => {
     try {
-      // socketService.setup();
       // add to all sockets board id
       socketService.emit('join-board', boardId);
       // get updated board from backend
-      socketService.off('updated-board');
-      socketService.on('updated-board', async updatedBoard => {
-        await dispatch(getActionSetBoard(updatedBoard));
-      });
-      onLoadBoard();
+      // socketService.off('updated-board');
+      // socketService.on('updated-board', async updatedBoard => {
+        // await dispatch(getActionSetBoard(updatedBoard));
+      // });
     } catch (err) {
       console.log('Cannot load board', err)
     }
@@ -67,6 +72,7 @@ export const BoardApp = () => {
     );
   };
 
+  console.log(board);
   if (!board) return <p>.</p>;
   return (
     <>
