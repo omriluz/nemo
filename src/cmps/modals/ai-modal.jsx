@@ -53,7 +53,7 @@ export function AiModal({ task, boardId, groupId }) {
       <div className="clara-img-container avatar">
         <img src={clara} alt="" />
       </div>
-      <h1 style={{margin:'0', marginBottom:'10px'}}>Hi, I'm Clara, your AI powered assistant</h1>
+      <h1 className="ai-modal-title" style={{margin:'0', marginBottom:'10px'}}>Hi, I'm Clara, your AI powered assistant</h1>
       <p>I was built with the <a href="https://openai.com/blog/openai-api/">GPT-3 engine from OpenAI</a></p>
       
       <div style={{marginTop:'10px',marginBottom:'15px',borderRadius:'50%', width:'20px', aspectRatio:1, backgroundColor:`${listening ? '#eb258eb4' : '#091e4235'}`}}></div>
