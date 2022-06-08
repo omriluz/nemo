@@ -27,9 +27,9 @@ export const BoardApp = () => {
     })
   }, []);
 
-// useEffect(() => {
-//   console.log('turned socket off');
-// }, [board])
+  // useEffect(() => {
+  //   console.log('turned socket off');
+  // }, [board])
 
   const setSocket = () => {
     try {
@@ -38,7 +38,7 @@ export const BoardApp = () => {
       // get updated board from backend
       // socketService.off('updated-board');
       // socketService.on('updated-board', async updatedBoard => {
-        // await dispatch(getActionSetBoard(updatedBoard));
+      // await dispatch(getActionSetBoard(updatedBoard));
       // });
     } catch (err) {
       console.log('Cannot load board', err)

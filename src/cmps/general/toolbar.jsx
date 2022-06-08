@@ -12,6 +12,8 @@ export const ToolBar = ({ boardId, board, users }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalDetails = useRef();
+  const modalTitle = useRef();
+
 
   const user = userService.getLoggedinUser()
 
@@ -22,11 +24,12 @@ export const ToolBar = ({ boardId, board, users }) => {
     setIsMenuOpen(false);
   };
 
-  const onOpenModal = (ev) => {
+  const onOpenModal = (ev, txt) => {
     if (isModalOpen) {
       setIsModalOpen(false);
     }
     modalDetails.current = ev.target.getBoundingClientRect();
+    modalTitle.current = txt;
     setIsModalOpen(true);
   }
 
@@ -40,11 +43,12 @@ export const ToolBar = ({ boardId, board, users }) => {
       {isModalOpen && (
         <DynamicModalCmp
           modalDetails={modalDetails.current}
-          modalTitle="Invite to board"
+          modalTitle={modalTitle.current}
           users={users}
           boardMembers={board.members}
           onCloseModal={onCloseModal}
           boardId={boardId}
+          board={board}
         />
       )}
 
@@ -60,11 +64,13 @@ export const ToolBar = ({ boardId, board, users }) => {
             return <div key={member._id} style={{ background: `url(${member?.imgUrl}) center center / cover ` }} className="user-avatar"></div>
           })}
         </div>
-        <button onClick={(ev) => onOpenModal(ev)} className="share-btn"><BsPersonPlus /> Share</button>
+        <button onClick={(ev) => onOpenModal(ev, "Invite to board")} className="share-btn"><BsPersonPlus /> Share</button>
       </div>
       <div className="toolbar-right">
         <div>
-          <span className="toolbar-btn filter-btn"><MdOutlineFilterList /> <span className="tool-title">Filter</span> </span>
+          <span className="toolbar-btn filter-btn" onClick={(ev) => onOpenModal(ev, "Filter")}>
+            <MdOutlineFilterList /> <span className="tool-title">Filter</span>
+          </span>
           <span className="toolbar-divider"></span>
 
           <span onClick={onOpenMenu} className="toolbar-btn toolbar-menu-btn">

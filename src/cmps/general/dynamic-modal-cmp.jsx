@@ -10,6 +10,7 @@ import { MemberModal } from "../modals/member-modal.jsx";
 import { Menu } from "./menu";
 import { InviteModal } from "../modals/invite-modal.jsx";
 import { AiModal } from "../modals/ai-modal";
+import { FilterMenu } from "../menu/filter-menu";
 
 export const DynamicModalCmp = ({
   modalDetails: { bottom, right, left },
@@ -26,6 +27,7 @@ export const DynamicModalCmp = ({
   modalClasses,
   activities,
   groupTitle,
+  board
 }) => {
   let modalTypeToOpen;
   switch (modalTitle) {
@@ -143,6 +145,13 @@ export const DynamicModalCmp = ({
         />
       );
       break;
+    case "Filter":
+      console.log(left);
+      left = 1091.8
+      modalTypeToOpen = (
+        <FilterMenu board={board} />
+      )
+      break;
   }
 
   return (
@@ -153,17 +162,17 @@ export const DynamicModalCmp = ({
       style={
         modalTitle === "Menu"
           ? {
-              top: bottom,
-              right: 0, // when menu open
-              // right: -340, //when closed
-              // height:`calc(100vh - 80px)`,
-              width: width || "304px",
-            }
+            top: bottom,
+            right: 0, // when menu open
+            // right: -340, //when closed
+            // height:`calc(100vh - 80px)`,
+            width: width || "304px",
+          }
           : {
-              top: bottom,
-              left,
-              width: width || "304px",
-            }
+            top: bottom,
+            left,
+            width: width || "304px",
+          }
       }
     >
       <div className="modal-header-wrapper">

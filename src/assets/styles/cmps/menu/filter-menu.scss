@@ -5,7 +5,7 @@
         font-weight: 600;
         line-height: 16px;
         margin-bottom: 8px;
-        margin-top: 16px;
+        margin-top: 4px;
     }
 
     input {
@@ -75,11 +75,7 @@
         position: relative;
         width: 80%;
 
-        .label-text {
-            color: #f5f5f5;
-            font-size: 14px;
-            font-weight: 700
-        }
+
     }
 
     hr {
@@ -153,4 +149,10 @@
         }
 
     }
+}
+
+.label-txt {
+    color: #f5f5f5;
+    font-size: 14px;
+    font-weight: 700
 }

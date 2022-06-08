@@ -55,6 +55,8 @@ export const FilterMenu = ({ isFilterModalOpen, board }) => {
         dispatch(setFilter(currFilter))
     }
 
+    board.labels[3].title = 'Important'
+
     return <section className="filter-container" style={{ display: isFilterModalOpen }}>
         <p className="sub-title">Keyword</p>
         <div className="search-container">
@@ -75,7 +77,7 @@ export const FilterMenu = ({ isFilterModalOpen, board }) => {
             {board.members && board.members.map((member) => {
                 return (
                     <li key={member._id}>
-                        <div className="user-preview-conainer">
+                        <div className="user-preview-conainer" onClick={() => setMemberChecked(member._id)}>
                             {!member.checked && < MdCheckBoxOutlineBlank className="check-box-blank" onClick={() => setMemberChecked(member._id)} />}
                             {member.checked && < MdCheckBox className="check-box-full" onClick={() => setMemberChecked(member._id)} />}
                             <div className="user-info">
