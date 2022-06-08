@@ -35,7 +35,8 @@ export const AppHeader = () => {
 
   return (
     // <header style={(pathname.includes("board") && board.style.backgroundColor) ? {...board?.style, filter:'brightness(0.9)'} : {}} className={`app-header${routeClass}`}>
-    <header style={(pathname.includes("board") && board?.style?.backgroundColor) ? {...board?.style, filter:'brightness(0.9)'} : {}} className={`app-header${routeClass}`}>
+    <header style={(pathname.includes("board")) ? {backgroundColor:'#0d295886'} : {}} className={`app-header${routeClass}`}>
+    {/* <header style={(pathname.includes("board") && board?.style?.backgroundColor) ? {...board?.style, filter:'brightness(0.9)'} : {}} className={`app-header${routeClass}`}> */}
     {pathname === "/" && (
       <nav className="nav-bar flex justify-between align-center">
         <div className="logo-container">

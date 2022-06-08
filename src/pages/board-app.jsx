@@ -27,19 +27,11 @@ export const BoardApp = () => {
     })
   }, []);
 
-  // useEffect(() => {
-  //   console.log('turned socket off');
-  // }, [board])
+
 
   const setSocket = () => {
     try {
-      // add to all sockets board id
       socketService.emit('join-board', boardId);
-      // get updated board from backend
-      // socketService.off('updated-board');
-      // socketService.on('updated-board', async updatedBoard => {
-      // await dispatch(getActionSetBoard(updatedBoard));
-      // });
     } catch (err) {
       console.log('Cannot load board', err)
     }
@@ -57,9 +49,7 @@ export const BoardApp = () => {
   };
 
   const onDragEnd = (result) => {
-    console.log(result);
     const { source, destination, type } = result;
-    // console.log(source, dxestination, type);
     dispatch(
       handleDrag(
         board,
@@ -72,7 +62,6 @@ export const BoardApp = () => {
     );
   };
 
-  console.log(board);
   if (!board) return <p>.</p>;
   return (
     <>

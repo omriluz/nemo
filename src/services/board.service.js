@@ -1,7 +1,5 @@
 
 import { storageService } from './async-storage.service.js'
-import { userService } from './user.service.js'
-import { getActionRemoveBoard, getActionAddBoard, getActionUpdateBoard } from '../store/actions/board.action.js'
 import { utilService } from './util.service.js'
 import { httpService } from './http.service.js'
 import { socketService } from './socket.service.js'
@@ -12,10 +10,8 @@ export const boardService = {
     save,
     query,
     getById,
-    remove,
-    // getEmptyBoard,
-    // subscribe,
-    // unsubscribe,
+    remove
+
 }
 window.cs = boardService;
 
@@ -24,59 +20,39 @@ const BOARD_BASE_ENDPOINT = 'board'
 
 
 async function query() {
-    // return storageService.query(STORAGE_KEY)
     const boardsFromDB = await httpService.get(BOARD_BASE_ENDPOINT)
     return boardsFromDB
 }
 
 async function getById(boardId) {
-    console.log('get by id called');
-    // return await storageService.get(STORAGE_KEY, boardId)
-    // return axios.get(`/api/board/${boardId}`)
     const boardFromDB = await httpService.get(`${BOARD_BASE_ENDPOINT}/${boardId}`)
     return boardFromDB
 
 }
 
 async function remove(boardId) {
-    // return new Promise((resolve, reject) => {
-    //     setTimeout(reject, 2000)
-    // })
-    // return Promise.reject('Not now!');
     await storageService.remove(STORAGE_KEY, boardId)
-    // boardChannel.postMessage(getActionRemoveBoard(boardId))
 }
 async function save(board) {
     if (board._id) {
-        
+
         const savedBoard = await httpService.put(BOARD_BASE_ENDPOINT, board)
-        // boardChannel.postMessage(getActionUpdateBoard(savedBoard))
         socketService.emit('board-change', savedBoard);
         return savedBoard
     } else {
         debugger
         try {
-            console.log('@@@@ trying to create board');
-            // Later, owner is set by the backend
-            // board.owner = userService.getLoggedinUser()
-            // savedBoard = await storageService.post(STORAGE_KEY, board)
+
             const savedBoard = await httpService.post(BOARD_BASE_ENDPOINT, board)
-            // console.log('board',savedBoard);
-            // boardChannel.postMessage(getActionAddBoard(savedBoard))
+
             return savedBoard
         } catch (err) {
             console.log(err)
         }
     }
-    // return savedBoard
 }
 
-// function subscribe(listener) {
-//     boardChannel.addEventListener('message', listener)
-// }
-// function unsubscribe(listener) {
-//     boardChannel.removeEventListener('message', listener)
-// }
+
 
 const ourBoard = {
     "_id": utilService.makeId(),//mongoID

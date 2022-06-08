@@ -21,11 +21,8 @@ export const ChecklistPreview = ({ checklist, onRemoveChecklist, task, boardId, 
     }
 
     const onSaveTask = () => {
-        console.log(checklistTitle);
         checklist.title = checklistTitle.title
         dispatch(saveChecklist(checklist, boardId, groupId, task.id));
-        // setIsEditOpen(false)
-        // setChecklistTitle({ title: task.description ? task.description : "" });
     }
 
     return (

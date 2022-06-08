@@ -37,7 +37,6 @@ export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState }) =
       0
     );
   }
-  // console.log(sumTodosDone);
 
   useEffect(() => {
     onSetLabels();
@@ -114,6 +113,7 @@ export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState }) =
                     color: 'white', borderRadius: '3px'
                   } : {}} className="badge checklist-badge">
                   <FiCheckSquare />
+                  {/* <FiCheckSquare style={{paddingTop:'2px'}} /> */}
                   <div className="sum-todos-badge-title">
                     {sumTodosDone}/{sumTodos}
                   </div>

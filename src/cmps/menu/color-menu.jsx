@@ -3,11 +3,9 @@ import { useDispatch } from "react-redux";
 import { saveBg } from "../../store/actions/board.action";
 
 export const ColorMenuModal = ({ board, isColorModalOpen }) => {
-    // const [selectedColor, setSelectedColor] = useState(board.style.backgroundColor)
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // changeBg()
     }, [board]);
 
 
@@ -25,20 +23,11 @@ export const ColorMenuModal = ({ board, isColorModalOpen }) => {
     ]
 
     const chooseBg = (color) => {
-        console.log(color, '$$$$$$');
-        // setSelectedColor(color)
         changeBg(color)
     }
 
 
     const changeBg = (color) => {
-        // console.log(color);
-        // console.log(board.style);
-        // console.log(selectedColor);
-
-        // let boardAfterCopy = JSON.parse(JSON.stringify(board));
-
-        // boardAfterCopy.style.backgroundColor = color
         dispatch(saveBg(board._id, color));
     }
 

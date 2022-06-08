@@ -29,78 +29,71 @@ export const GroupList = ({ groups, boardId, activities, labelOpenState }) => {
     dispatch(saveGroup(groupTitle, boardId));
     setIsAddGroup(false);
     setGroupTitle({ title: "" });
-  };
+  }
 
-  const handleOnDragEnd = (result) => {
-    if (!result.destination) return
-    // console.log(result);
 
-    const [reorderedItem] = groups.splice(result.source.index, 1);
-    groups.splice(result.destination.index, 0, reorderedItem);
-    dispatch(setGroups(boardId, groups));
-  };
 
   return (
     <>
-        <Droppable droppableId="all-groups" type="group" direction="horizontal">
-          {(provided) => (
-            <div
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-              className="group-list-container flex"
-            >
-              {groups &&
-                groups.map((group, index) => {
-                  return (
-                    <GroupPreview
-                      groupTitle={groupTitle}
-                      key={group.id}
-                      group={group}
-                      boardId={boardId}
-                      index={index}
-                      labelOpenState={labelOpenState}
-                      activities={activities}
-                    />
-                  );
-                })}
+      <Droppable droppableId="all-groups" type="group" direction="horizontal">
+        {(provided) => (
+          <div
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            className="group-list-container flex"
+          >
+            {groups &&
+              groups.map((group, index) => {
+                return (
+                  <GroupPreview
+                    groupTitle={groupTitle}
+                    key={group.id}
+                    group={group}
+                    boardId={boardId}
+                    index={index}
+                    labelOpenState={labelOpenState}
+                    activities={activities}
+                  />
+                );
+              })}
 
-              {!isAddGroup && (
-                <div className="group-preview-wrapper">
-                  <div
-                    className="add-group flex"
-                    onClick={() => setIsAddGroup(true)}
-                  >
-                    <IoAdd /> <p>Add another list</p>
-                  </div>
+            {!isAddGroup && (
+              <div className="group-preview-wrapper">
+                <div
+                  className="add-group flex"
+                  onClick={() => setIsAddGroup(true)}
+                >
+                  <IoAdd /> <p>Add another list</p>
                 </div>
-              )}
-              {isAddGroup && (
-                <div className="group-preview-wrapper">
-                  <div className="add-group-open">
-                    <form onSubmit={(ev) => onAddGroup(ev)}>
-                      <input
-                        type="text"
-                        name="title"
-                        placeholder="Enter list title..."
-                        value={groupTitle.title}
-                        onChange={handleChange}
-                      />
-                      <div className="add-group-btn group-btn flex align-center">
-                        <button className="save-group ">Add list</button>
-                        <button
-                          className="close-group group-btn"
-                          onClick={() => setIsAddGroup(false)}
-                        >
-                          <IoMdClose />
-                        </button>
-                      </div>
-                    </form>
-                  </div>
+              </div>
+            )}
+            {isAddGroup && (
+              <div className="group-preview-wrapper">
+                <div className="add-group-open">
+                  <form onSubmit={(ev) => onAddGroup(ev)}>
+                    <input
+                      type="text"
+                      name="title"
+                      placeholder="Enter list title..."
+                      value={groupTitle.title}
+                      onChange={handleChange}
+                    />
+                    <div className="add-group-btn group-btn flex align-center">
+                      <button className="save-group ">Add list</button>
+                      <button
+                        className="close-group group-btn"
+                        onClick={() => setIsAddGroup(false)}
+                      >
+                        <IoMdClose />
+                      </button>
+                    </div>
+                  </form>
                 </div>
-              )}
-            </div>
-          )}
-        </Droppable>
+              </div>
+            )}
+          </div>
+        )}
+      </Droppable>
     </>
   );
 };

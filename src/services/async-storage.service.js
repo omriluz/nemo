@@ -12,7 +12,7 @@ function query(entityType) {
     var entities = JSON.parse(localStorage.getItem(entityType)) || []
 
     return new Promise((resolve, reject) => {
-            resolve(entities)
+        resolve(entities)
     })
     // return Promise.resolve(entities)
 }
@@ -22,20 +22,8 @@ function get(entityType, entityId) {
         .then(entities => entities.find(entity => entity._id === entityId))
 }
 
-// function post(entityType, newEntity) {
-//     newEntity._id = _makeId()
-//     return query(entityType)
-//         .then(entities => {
-//             entities.push(newEntity)
-//             _save(entityType, entities)
-//             return newEntity
-//         })
-// }
-
-// async post func
 async function post(entityType, newEntity) {
     try {
-        // id already generated for dummy data
         newEntity._id = _makeId()
         const entities = await query(entityType)
         entities.push(newEntity)
