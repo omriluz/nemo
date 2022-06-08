@@ -1,17 +1,15 @@
-import {FiCheck} from "react-icons/fi"
 import { useDispatch } from "react-redux";
 import { addUserToBoard } from "../../store/actions/board.action";
-export const InviteModal = ({boardId, users, boardMembers }) => {
-    console.log('fdijsafjdsaiojfodsa',boardId);
-    const dispatch = useDispatch()
-    const boardMemberIds = boardMembers.map(boardMember => boardMember = boardMember._id)
-    const usersToInvite = users.filter(user => !boardMemberIds.includes(user._id) )
+export const InviteModal = ({ boardId, users, boardMembers }) => {
+  const dispatch = useDispatch()
+  const boardMemberIds = boardMembers.map(boardMember => boardMember = boardMember._id)
+  const usersToInvite = users.filter(user => !boardMemberIds.includes(user._id))
 
-    const onAddUserToBoard = (user) => {
-        dispatch(addUserToBoard(boardId, user))
-    }
+  const onAddUserToBoard = (user) => {
+    dispatch(addUserToBoard(boardId, user))
+  }
 
-    return (
+  return (
     <div className="member-modal">
       <input
         type="text"

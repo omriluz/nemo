@@ -12,6 +12,8 @@ export const ToolBar = ({ boardId, board, users }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalDetails = useRef();
+  const modalTitle = useRef();
+
 
   const user = userService.getLoggedinUser();
 
@@ -22,11 +24,12 @@ export const ToolBar = ({ boardId, board, users }) => {
     setIsMenuOpen(false);
   };
 
-  const onOpenModal = (ev) => {
+  const onOpenModal = (ev, txt) => {
     if (isModalOpen) {
       setIsModalOpen(false);
     }
     modalDetails.current = ev.target.getBoundingClientRect();
+    modalTitle.current = txt;
     setIsModalOpen(true);
   };
 
@@ -39,11 +42,12 @@ export const ToolBar = ({ boardId, board, users }) => {
       {isModalOpen && (
         <DynamicModalCmp
           modalDetails={modalDetails.current}
-          modalTitle="Invite to board"
+          modalTitle={modalTitle.current}
           users={users}
           boardMembers={board.members}
           onCloseModal={onCloseModal}
           boardId={boardId}
+          board={board}
         />
       )}
 

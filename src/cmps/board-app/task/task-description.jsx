@@ -11,9 +11,7 @@ export const Description = ({ task, boardId, groupId }) => {
     const [descTitle, setDescTitle] = useState({ title: task.description ? task.description : "" });
     const dispatch = useDispatch()
 
-    // useEffect(() => {
-    //     console.log(isDescOpen);
-    // }, [isDescOpen])
+
 
     const handleChange = (ev) => {
         const field = ev.target.name;

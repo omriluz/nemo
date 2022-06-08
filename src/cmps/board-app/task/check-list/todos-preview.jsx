@@ -18,16 +18,12 @@ export const TodoPreview = ({ todo, checklistId, taskId, boardId, groupId, taskT
     const modalDetails = useRef();
     const modalTitle = useRef();
 
-    // useEffect(() => {}, [isModalOpen]);
 
     const onCloseModal = () => {
         setIsModalOpen(false);
     };
 
     const onOpenModal = (ev, txt) => {
-        console.log("fdsafdas", isModalOpen);
-        // check if i need this
-        // ev.stopPropagation();
         if (isModalOpen) {
 
             setIsModalOpen(false);
@@ -83,7 +79,7 @@ export const TodoPreview = ({ todo, checklistId, taskId, boardId, groupId, taskT
                 <form >
 
                     <textarea onClick={() => setIsEditOpen(true)}
-                    spellCheck={false}
+                        spellCheck={false}
                         name="title"
                         className={`todo-title ${todo.isDone ? 'checked' : ''}`}
                         value={todoTitle.title}

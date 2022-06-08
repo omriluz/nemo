@@ -37,7 +37,6 @@ export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState }) =
       0
     );
   }
-  // console.log(sumTodosDone);
 
   useEffect(() => {
     onSetLabels();

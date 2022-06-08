@@ -6,7 +6,6 @@ export const Checklists = ({ task, boardId, groupId, groupTitle }) => {
     const dispatch = useDispatch()
 
     const onRemoveChecklist = (checklistId) => {
-        console.log(checklistId, task.checklists);
         dispatch(removeChecklist(boardId, groupId, task.id, checklistId))
     }
 

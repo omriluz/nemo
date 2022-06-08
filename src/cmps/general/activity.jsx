@@ -38,7 +38,6 @@ export const Activity = ({ activities, taskId, boardId }) => {
         const activity = activityComment
         activity.task = {}
         activity.task.id = taskId
-        console.log(activity);
         dispatch(saveActivity(activity, boardId))
         setActivityComment({ comment: '' })
     }

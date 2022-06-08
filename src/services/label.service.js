@@ -4,9 +4,7 @@ import { taskService } from "./task.service";
 export const labelService = {
     toggleLabel,
     getLabelsById,
-    // getLabelById,
-    // addNewLabel
-    // editLabel
+
 }
 
 
