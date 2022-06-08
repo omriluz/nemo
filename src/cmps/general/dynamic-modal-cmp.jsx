@@ -125,12 +125,12 @@ export const DynamicModalCmp = ({
       break;
     case "AI Clara":
       console.log(bottom);
-      if (bottom >= 200 && bottom < 300) bottom -= 120;
-      if (bottom >= 300 && bottom < 400) bottom -= 200;
-      if (bottom >= 400 && bottom < 500) bottom -= 250;
-      if (bottom >= 500 && bottom < 600) bottom -= 290;
-      if (bottom >= 600 && bottom < 700) bottom -= 350;
-      if (bottom >= 700) bottom -= 390;
+      if (bottom >= 200 && bottom < 300) bottom -= 200;
+      if (bottom >= 300 && bottom < 400) bottom -= 300;
+      if (bottom >= 400 && bottom < 500) bottom -= 350;
+      if (bottom >= 500 && bottom < 600) bottom -= 400;
+      if (bottom >= 600 && bottom < 700) bottom -= 450;
+      if (bottom >= 700) bottom -= 460;
       // if (bottom >= 230 && bottom < 260) bottom -= 100;
       // if (bottom >= 260 && bottom < 300) bottom -= 140;
       modalTypeToOpen = (
