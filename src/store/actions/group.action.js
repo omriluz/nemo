@@ -1,11 +1,11 @@
 import { groupService } from "../../services/group.service.js";
 import { getActionSetBoard } from "./board.action.js";
 
-export function saveGroup(group, boardId, groupId) {
+export function saveGroup(groupTitle, boardId, groupId) {
     return async (dispatch) => {
         try {
 
-            const board = await groupService.saveGroup(group, boardId, groupId)
+            const board = await groupService.saveGroup(groupTitle, boardId, groupId)
             dispatch(getActionSetBoard(board))
 
 

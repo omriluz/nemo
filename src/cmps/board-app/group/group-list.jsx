@@ -11,7 +11,7 @@ export const GroupList = ({ groups, boardId, activities, labelOpenState }) => {
   const dispatch = useDispatch();
   const [isAddGroup, setIsAddGroup] = useState(false);
   const [newGroup, handleChange, clearFields] = useForm({ title: "" });
-
+  
   const onAddGroup = (ev = null) => {
     ev.preventDefault();
     if (!newGroup.title) return;
@@ -24,7 +24,6 @@ export const GroupList = ({ groups, boardId, activities, labelOpenState }) => {
     clearFields();
   };
 
-  console.log(newGroup);
   return (
     <>
       <Droppable droppableId="all-groups" type="group" direction="horizontal">

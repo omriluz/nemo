@@ -11,11 +11,12 @@ import { userService } from "../../../services/user.service.js";
 import { useForm } from "../../../hooks/useForm.js";
 
 export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
+  console.log(group);
   let { filterBy } = useSelector((storeState) => storeState.boardModule);
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddTask, setIsAddTask] = useState(false);
-  const [fields, handleChange, clearFields] = useForm({newTaskTitle:'', groupTitle:''})
+  const [fields, handleChange, clearFields] = useForm({newTaskTitle:'', groupTitle:group.title})
 
   const addTaskRef = useRef()
   function handleBackClick() {
@@ -29,8 +30,7 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
   };
 
   const onSaveGroup = (ev = null) => {
-    if (ev) ev.preventDefault();
-    dispatch(saveGroup(groupTitle, boardId, group.id));
+    dispatch(saveGroup(fields.groupTitle, boardId, group.id));
   };
 
   const onHandleKeySubmit = (ev) => {
@@ -54,7 +54,6 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
       };
       const taskToAdd = {title : fields.newTaskTitle}
       dispatch(saveTask(taskToAdd, boardId, group.id, activity));
-      // setNewTask({ title: "" });
       clearFields('newTaskTitle');
     }
     handleBackClick();
@@ -99,10 +98,10 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
                 <input
                   className="group-preview-title"
                   type="text"
-                  name="title"
+                  name="groupTitle"
                   onBlur={onSaveGroup}
-                  value={groupTitle.title}
-                  onChange={(ev) => handleChange(ev, setGroupTitle)}
+                  value={fields.groupTitle}
+                  onChange={handleChange}
                 />
                 <div className="add-action">
                   <MdMoreHoriz />
@@ -124,7 +123,7 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
                           name="newTaskTitle"
                           placeholder="Enter a title for this card..."
                           value={fields.newTaskTitle}
-                          onChange={(ev) => handleChange(ev, setNewTask)}
+                          onChange={handleChange}
                           onKeyDown={onHandleKeySubmit}
                         ></textarea>
                         <div ref={addTaskRef} className="btn-add-task ">

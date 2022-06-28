@@ -25,7 +25,6 @@ export const AppHeader = () => {
     navigate('/login')
   }
 
-  console.log(board);
   return (
    <header style={(pathname.includes("board") && board?.style?.backgroundColor) ? {...board?.style, filter:'brightness(0.9)'} : {}} className={`app-header${routeClass}`}>
     {pathname === "/" && (
