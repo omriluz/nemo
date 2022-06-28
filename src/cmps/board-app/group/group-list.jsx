@@ -1,38 +1,30 @@
 import { GroupPreview } from "./group-preview.jsx";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { IoAdd } from "react-icons/io5";
-import { saveGroup, setGroups } from "../../../store/actions/group.action.js";
 import { IoMdClose } from "react-icons/io";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { userService } from "../../../services/user.service.js";
+import { saveGroup } from "../../../store/actions/group.action.js";
+import { Droppable } from "react-beautiful-dnd";
+import { useForm } from "../../../hooks/useForm.js";
 
 export const GroupList = ({ groups, boardId, activities, labelOpenState }) => {
   const dispatch = useDispatch();
   const [isAddGroup, setIsAddGroup] = useState(false);
-  const [groupTitle, setGroupTitle] = useState({ title: "" });
-
-  const handleChange = (ev) => {
-    const field = ev.target.name;
-    const value = ev.target.value;
-    setGroupTitle({ [field]: value });
-  };
+  const [newGroup, handleChange, clearFields] = useForm({ title: "" });
 
   const onAddGroup = (ev = null) => {
     ev.preventDefault();
-    var groupId
-    if (!groupTitle.title) return;
-    const activity = {
-      boardTxt: 'added ' + groupTitle.title + ' to this board',
-      byMember: userService.getLoggedinUser()
-    }
-    dispatch(saveGroup(groupTitle, boardId));
+    if (!newGroup.title) return;
+    // const activity = {
+    //   boardTxt: 'added ' + groupTitle.title + ' to this board',
+    //   byMember: userService.getLoggedinUser()
+    // }
+    dispatch(saveGroup(newGroup, boardId));
     setIsAddGroup(false);
-    setGroupTitle({ title: "" });
-  }
+    clearFields();
+  };
 
-
-
+  console.log(newGroup);
   return (
     <>
       <Droppable droppableId="all-groups" type="group" direction="horizontal">
@@ -46,7 +38,6 @@ export const GroupList = ({ groups, boardId, activities, labelOpenState }) => {
               groups.map((group, index) => {
                 return (
                   <GroupPreview
-                    groupTitle={groupTitle}
                     key={group.id}
                     group={group}
                     boardId={boardId}
@@ -75,7 +66,7 @@ export const GroupList = ({ groups, boardId, activities, labelOpenState }) => {
                       type="text"
                       name="title"
                       placeholder="Enter list title..."
-                      value={groupTitle.title}
+                      value={newGroup.title}
                       onChange={handleChange}
                     />
                     <div className="add-group-btn group-btn flex align-center">

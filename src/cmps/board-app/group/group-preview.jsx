@@ -2,20 +2,20 @@ import { TaskList } from "../task/task-list.jsx";
 import { MdMoreHoriz } from "react-icons/md";
 import { IoAdd } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
-import { useState, memo, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { removeGroup, saveGroup } from "../../../store/actions/group.action.js";
 import { saveTask } from "../../../store/actions/task.action.js";
 import { useDispatch, useSelector } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
 import { userService } from "../../../services/user.service.js";
+import { useForm } from "../../../hooks/useForm.js";
 
 export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
   let { filterBy } = useSelector((storeState) => storeState.boardModule);
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddTask, setIsAddTask] = useState(false);
-  const [groupTitle, setGroupTitle] = useState({ title: group.title });
-  const [newTask, setNewTask] = useState({ title: "" })
+  const [fields, handleChange, clearFields] = useForm({newTaskTitle:'', groupTitle:''})
 
   const addTaskRef = useRef()
   function handleBackClick() {
@@ -26,12 +26,6 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
 
   const onRemoveGroup = () => {
     dispatch(removeGroup(group.id, boardId));
-  };
-
-  const handleChange = (ev, setStateFunc) => {
-    const field = ev.target.name;
-    const value = ev.target.value;
-    setStateFunc({ [field]: value });
   };
 
   const onSaveGroup = (ev = null) => {
@@ -48,18 +42,20 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
 
   const onSaveTask = (ev = null) => {
     if (ev) ev.preventDefault();
-    if (newTask.title) {
+    if (fields.newTaskTitle) {
       const activity = {
         txt: "added this card to " + group.title,
-        boardTxt: "added " + newTask.title + " to " + group.title,
+        boardTxt: "added " + fields.newTaskTitle + " to " + group.title,
         byMember: userService.getLoggedinUser() || {
           username: "guest",
           fullname: "guest",
           imgUrl: "https://www.computerhope.com/jargon/g/guest-user.jpg",
         },
       };
-      dispatch(saveTask(newTask, boardId, group.id, activity));
-      setNewTask({ title: "" });
+      const taskToAdd = {title : fields.newTaskTitle}
+      dispatch(saveTask(taskToAdd, boardId, group.id, activity));
+      // setNewTask({ title: "" });
+      clearFields('newTaskTitle');
     }
     handleBackClick();
   };
@@ -125,9 +121,9 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
                       <form onSubmit={onSaveTask}>
                         <textarea
                           className="task-txt"
-                          name="title"
+                          name="newTaskTitle"
                           placeholder="Enter a title for this card..."
-                          value={newTask.title}
+                          value={fields.newTaskTitle}
                           onChange={(ev) => handleChange(ev, setNewTask)}
                           onKeyDown={onHandleKeySubmit}
                         ></textarea>

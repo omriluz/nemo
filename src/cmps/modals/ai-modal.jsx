@@ -14,8 +14,10 @@ import { useState } from "react"
 
 
 export function AiModal({ task, boardId, groupId }) {
+
   const [isExpanded, setIsExpanded] = useState(false)
   const dispatch = useDispatch()
+  
   const onCreateAiChecklist = ({ checklistTitle, todoTitles }) => {
     const checklist = { title: checklistTitle }
     checklist.id = utilService.makeId()
@@ -29,6 +31,7 @@ export function AiModal({ task, boardId, groupId }) {
     })
     dispatch(saveChecklist(checklist, boardId, groupId, task.id))
   }
+  
   const commands = [
     {
       command: "build a to-do list for *",

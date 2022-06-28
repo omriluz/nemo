@@ -8,40 +8,32 @@ import { useDispatch } from "react-redux";
 import { login, signup } from "../store/actions/user.actions";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
+import { useForm } from "../hooks/useForm";
 
 
 export const LoginSignup = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
   const { pathname } = useLocation();
   const {user} = useSelector((storeState) => storeState.userModule)
-
-
-  const [credentials, setCredentials] = useState({
+  
+  const [isSignup, setIsSignup] = useState(false);
+  const [credentials, handleChange, clearFields] = useForm({
     username: "",
     password: "",
     fullname: "",
   });
-  const [isSignup, setIsSignup] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     onIsSignup();
-    clearState();
+    clearFields()
   }, [pathname]);
 
-  const clearState = () => {
-    setCredentials({ username: "", password: "", fullname: "" });
-  };
 
   const onIsSignup = () => {
     if (pathname === "/signup") setIsSignup(true);
     else setIsSignup(false);
-  };
-
-  const handleChange = (ev) => {
-    const field = ev.target.name;
-    const value = ev.target.value;
-    setCredentials({ ...credentials, [field]: value });
   };
 
   const onSignUp = (ev = null) => {
@@ -49,7 +41,7 @@ export const LoginSignup = () => {
     if (!credentials.username || !credentials.password || !credentials.fullname)
       return;
     dispatch(signup(credentials));
-    clearState();
+    clearFields();
     // figure out flow,
     // navigate('/workspace')
   };
@@ -58,7 +50,6 @@ export const LoginSignup = () => {
     if (ev) ev.preventDefault();
     if (!credentials.username) return;
     dispatch(login(credentials));
-    clearState();
     navigate("/workspace");
   };
 

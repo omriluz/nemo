@@ -21,7 +21,7 @@ export const HomePage = () => {
             </Link>
           </div>
           <div className="homepage-hero">
-            <img className="hero-img" src={imgHero} alt="" />
+            <img src={imgHero} alt="" />
           </div>
         </section>
       </section>

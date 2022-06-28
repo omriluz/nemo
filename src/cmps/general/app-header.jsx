@@ -8,35 +8,26 @@ import { useNavigate } from "react-router";
 
 export const AppHeader = () => {
   const { pathname } = useLocation();
-  // might need to come from store
   const {user} = useSelector((storeState) => storeState.userModule)
-  // const user = userService.getLoggedinUser()
   const {board} = useSelector((storeState) => storeState.boardModule)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   let routeClass = "";
 
-  // customized transparent
   if (pathname === "/") routeClass = "-home";
-  if (pathname === "/login" || pathname === "/signup")
-    routeClass = "-login-signup";
+  if (pathname === "/login" || pathname === "/signup") routeClass = "-login-signup";
   if (pathname === "/workspace") routeClass = "-workspace";
-  // later will come dynamically with api
   if (pathname.includes("/board")) routeClass = "-workspace";
-  
-  // if (pathname.includes("/board") && pathname.split("/").length >= 4)
-  // routeClass = "-task-details";
 
   const onUserLogout = () => {
     dispatch(onLogout())
     navigate('/login')
   }
 
+  console.log(board);
   return (
-    // <header style={(pathname.includes("board") && board.style.backgroundColor) ? {...board?.style, filter:'brightness(0.9)'} : {}} className={`app-header${routeClass}`}>
-    <header style={(pathname.includes("board")) ? {backgroundColor:'#0d295886'} : {}} className={`app-header${routeClass}`}>
-    {/* <header style={(pathname.includes("board") && board?.style?.backgroundColor) ? {...board?.style, filter:'brightness(0.9)'} : {}} className={`app-header${routeClass}`}> */}
+   <header style={(pathname.includes("board") && board?.style?.backgroundColor) ? {...board?.style, filter:'brightness(0.9)'} : {}} className={`app-header${routeClass}`}>
     {pathname === "/" && (
       <nav className="nav-bar flex justify-between align-center">
         <div className="logo-container">

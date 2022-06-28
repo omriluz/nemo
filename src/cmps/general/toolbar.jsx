@@ -7,13 +7,16 @@ import { userService } from "../../services/user.service";
 import { MdOutlineFilterList } from "react-icons/md";
 import { BsPersonPlus } from "react-icons/bs";
 import { DynamicModalCmp } from "./dynamic-modal-cmp";
+import { useDispatch } from "react-redux";
+import { updateBoard } from "../../store/actions/board.action";
+
 
 export const ToolBar = ({ boardId, board, users }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalDetails = useRef();
   const modalTitle = useRef();
-
+  const dispatch = useDispatch()
 
   const user = userService.getLoggedinUser();
 
@@ -36,6 +39,12 @@ export const ToolBar = ({ boardId, board, users }) => {
   const onCloseModal = () => {
     setIsModalOpen(false);
   };
+
+
+  const onToggleStar = () => {
+    board.isStar = !board.isStar
+    dispatch(updateBoard(board))
+  }
 
   return (
     <div className="toolbar">
@@ -61,7 +70,7 @@ export const ToolBar = ({ boardId, board, users }) => {
         <span className="board-toolbar-title-container">
           <h1 className="board-toolbar-title">{board.title}</h1>
         </span>
-        <span className="toolbar-btn star-btn">
+        <span onClick={onToggleStar} className="toolbar-btn star-btn">
           {board.isStar ? (
             <AiFillStar color={"gold"} size={17} />
           ) : (

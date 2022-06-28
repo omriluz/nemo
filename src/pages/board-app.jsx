@@ -14,12 +14,10 @@ export const BoardApp = () => {
   const { boardId } = useParams();
   const { board } = useSelector((storeState) => storeState.boardModule);
   const { users } = useSelector((storeState) => storeState.userModule);
-  let socketBoard;
   // const { users } = useSelector((storeState) => storeState.userModule);
   const dispatch = useDispatch();
   useEffect(() => {
     setSocket()
-    socketService.emit('join board', boardId)
     onLoadBoard();
     onLoadUsers();
     socketService.off('update-board')
@@ -62,6 +60,7 @@ export const BoardApp = () => {
       )
     );
   };
+
 
   if (!board) return <Loader/>;
   return (

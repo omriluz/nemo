@@ -27,7 +27,7 @@ export const DynamicModalCmp = ({
   modalClasses,
   activities,
   groupTitle,
-  board
+  board,
 }) => {
   let modalTypeToOpen;
   switch (modalTitle) {
@@ -144,10 +144,8 @@ export const DynamicModalCmp = ({
       );
       break;
     case "Filter":
-      left = 1091.8
-      modalTypeToOpen = (
-        <FilterMenu board={board} />
-      )
+      left = 1091.8;
+      modalTypeToOpen = <FilterMenu board={board} />;
       break;
   }
 
@@ -159,17 +157,17 @@ export const DynamicModalCmp = ({
       style={
         modalTitle === "Menu"
           ? {
-            top: bottom,
-            right: 0, // when menu open
-            // right: -340, //when closed
-            // height:`calc(100vh - 80px)`,
-            width: width || "304px",
-          }
+              top: bottom,
+              right: 0, // when menu open
+              // right: -340, //when closed
+              // height:`calc(100vh - 80px)`,
+              width: width || "304px",
+            }
           : {
-            top: bottom,
-            left,
-            width: width || "304px",
-          }
+              top: bottom,
+              left,
+              width: width || "304px",
+            }
       }
     >
       <div className="modal-header-wrapper">

@@ -1,7 +1,6 @@
 import React from "react";
 import { AppHeader } from "./cmps/general/app-header.jsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import routes from "./routes.js";
 import { HomePage } from "./pages/home-page.jsx";
 import { LoginSignup } from "./pages/login-signup.jsx";
 import { WorkSpace } from "./pages/work-space.jsx";
