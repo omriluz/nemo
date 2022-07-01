@@ -48,15 +48,6 @@ export function AiModal({ task, boardId, groupId }) {
   const { listening } = useSpeechRecognition()
   let { transcript, resetTranscript } = useSpeechRecognition({ commands })
 
-
-
-
-
-  
-
-
-
-
   return (
     <div className="ai-modal-container">
       <div className="clara-img-container avatar">

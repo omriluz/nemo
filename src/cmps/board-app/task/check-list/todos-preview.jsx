@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { IoCheckbox } from "react-icons/io5";
 import { IoMdClose } from "react-icons/io";
 import { saveTodo, removeTodo } from '../../../../store/actions/checklist.action.js';
@@ -6,17 +6,21 @@ import { useDispatch } from "react-redux";
 import { MdMoreHoriz } from "react-icons/md";
 import { DynamicModalCmp } from "../../../general/dynamic-modal-cmp";
 import { userService } from "../../../../services/user.service.js";
+import { useForm } from "../../../../hooks/useForm.js";
 
 
 export const TodoPreview = ({ todo, checklistId, taskId, boardId, groupId, taskTitle }) => {
-    const [isEditOpen, setIsEditOpen] = useState(false)
-    const [isAddOpen, setIsAddOpen] = useState(false)
-    const [todoTitle, setTodoTitle] = useState({ title: todo.title });
     const dispatch = useDispatch()
 
+    const [isEditOpen, setIsEditOpen] = useState(false)
+    const [isAddOpen, setIsAddOpen] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false);
+    
+    const [fields, handleChange] = useForm({ title: todo.title });
+
     const modalDetails = useRef();
     const modalTitle = useRef();
+
 
 
     const onCloseModal = () => {
@@ -25,7 +29,6 @@ export const TodoPreview = ({ todo, checklistId, taskId, boardId, groupId, taskT
 
     const onOpenModal = (ev, txt) => {
         if (isModalOpen) {
-
             setIsModalOpen(false);
         }
         modalTitle.current = txt
@@ -33,14 +36,9 @@ export const TodoPreview = ({ todo, checklistId, taskId, boardId, groupId, taskT
         setIsModalOpen(true);
     };
 
-    const handleChange = (ev) => {
-        const field = ev.target.name;
-        const value = ev.target.value;
-        setTodoTitle({ [field]: value });
-    }
-
     const onSaveTask = () => {
-        todo.title = todoTitle.title
+        const todo = {}
+        todo.title = fields.title
         dispatch(saveTodo(todo, checklistId, boardId, groupId, taskId))
         setIsEditOpen(false)
     }
@@ -82,7 +80,7 @@ export const TodoPreview = ({ todo, checklistId, taskId, boardId, groupId, taskT
                         spellCheck={false}
                         name="title"
                         className={`todo-title ${todo.isDone ? 'checked' : ''}`}
-                        value={todoTitle.title}
+                        value={fields.title}
                         onChange={handleChange}
                         onBlur={() => setIsEditOpen(false)}
                     >

@@ -11,6 +11,10 @@ export const LabelModal = ({ boardId, groupId, task, labels }) => {
   };
 
 
+  const onEditLabel = () => {
+      
+  }
+
   return (
     <div className="label-modal-container">
       <input

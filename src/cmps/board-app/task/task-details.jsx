@@ -7,6 +7,7 @@ import { GrClose } from 'react-icons/gr'
 import { saveTask } from "../../../store/actions/task.action";
 import { AiOutlineCreditCard } from "react-icons/ai";
 import { useDispatch } from "react-redux";
+import { useForm } from "../../../hooks/useForm";
 
 export const TaskDetails = () => {
   const navigate = useNavigate();
@@ -20,36 +21,28 @@ export const TaskDetails = () => {
   const { board } = useSelector((storeState) => storeState.boardModule)
   // might need use effect for users as well
   const { users } = useSelector((storeState) => storeState.userModule)
-  // const [fields, handleChange] = useForm({title: })
+  const [fields, handleChange, _, setFields] = useForm({title: ''})
 
-
+  let kaka;
+  console.log(kaka);
   useEffect(() => {
     const currGroup = board?.groups.find(group => group.id === groupId);
     const currTask = currGroup?.tasks?.find(task => task.id === taskId);
     setTask(currTask)
     setGroup(currGroup)
-    setTaskTitle({ title: currTask.title })
+    setFields({ title: currTask.title })
+    kaka = 3
   }, [board]);
-
-
-
 
 
   const handleKeyEvent = (e) => {
     if (e.key === "Escape") navigate(-1);
   };
 
-  const handleChange = (ev) => {
-    const field = ev.target.name;
-    const value = ev.target.value;
-    setTaskTitle({ [field]: value });
-  };
-
   const onSaveTask = (ev = null) => {
     if (ev) ev.preventDefault();
-    task.title = taskTitle.title
+    task.title = fields.title
     dispatch(saveTask(task, boardId, groupId));
-    setTaskTitle({ title: taskTitle.title });
   };
 
   if (task) {
@@ -84,7 +77,7 @@ export const TaskDetails = () => {
                 type="text"
                 name="title"
                 onBlur={onSaveTask}
-                value={taskTitle.title}
+                value={fields.title}
                 onChange={handleChange}
               />
             </form>

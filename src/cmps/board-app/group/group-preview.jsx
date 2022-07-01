@@ -11,19 +11,23 @@ import { userService } from "../../../services/user.service.js";
 import { useForm } from "../../../hooks/useForm.js";
 
 export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
-  console.log(group);
   let { filterBy } = useSelector((storeState) => storeState.boardModule);
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAddTask, setIsAddTask] = useState(false);
-  const [fields, handleChange, clearFields] = useForm({newTaskTitle:'', groupTitle:group.title})
+  const [fields, handleChange, clearFields] = useForm({
+    newTaskTitle: "",
+    groupTitle: group.title,
+  });
 
-  const addTaskRef = useRef()
+  const addTaskRef = useRef();
   function handleBackClick() {
+    console.log("hi");
+    addTaskRef.current?.focus();
     if (addTaskRef.current) addTaskRef.current.scrollIntoView();
   }
 
-  useEffect(() => { }, [filterBy])
+  useEffect(() => {}, [filterBy]);
 
   const onRemoveGroup = () => {
     dispatch(removeGroup(group.id, boardId));
@@ -52,48 +56,48 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
           imgUrl: "https://www.computerhope.com/jargon/g/guest-user.jpg",
         },
       };
-      const taskToAdd = {title : fields.newTaskTitle}
+      const taskToAdd = { title: fields.newTaskTitle };
       dispatch(saveTask(taskToAdd, boardId, group.id, activity));
-      clearFields('newTaskTitle');
+      clearFields("newTaskTitle");
     }
     handleBackClick();
   };
 
   const tasksToShow = () => {
-    let taskToShow = group.tasks
+    let taskToShow = group.tasks;
     if (filterBy.txt) {
       taskToShow = group.tasks.filter((task) =>
         task.title.toLowerCase().includes(filterBy.txt.toLowerCase())
-      )
+      );
     }
 
     if (filterBy.labelIds.length > 0) {
       filterBy.labelIds.forEach(
         (id) =>
           (taskToShow = taskToShow.filter((task) => task.labelIds.includes(id)))
-      )
+      );
     }
 
     if (filterBy.members?.length) {
-      taskToShow = taskToShow.filter(task => task.members.some(member => filterBy.members.includes(member._id)))
-
+      taskToShow = taskToShow.filter((task) =>
+        task.members.some((member) => filterBy.members.includes(member._id))
+      );
     }
 
-    return taskToShow
-  }
-
+    return taskToShow;
+  };
 
   return (
     <>
-      <Draggable draggableId={group.id} index={index}>
-        {(provided) => (
-          <div
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-            ref={provided.innerRef}
-            className="group-preview-wrapper"
-          >
-            <section className="group-preview">
+      <div className="group-preview-wrapper">
+        <Draggable draggableId={group.id} index={index}>
+          {(provided) => (
+            <section
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
+              ref={provided.innerRef}
+              className="group-preview"
+            >
               <div className="group-preview-header">
                 <input
                   className="group-preview-title"
@@ -125,6 +129,8 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
                           value={fields.newTaskTitle}
                           onChange={handleChange}
                           onKeyDown={onHandleKeySubmit}
+                          autoFocus
+                          onBlur={() => setIsAddTask(false)}
                         ></textarea>
                         <div ref={addTaskRef} className="btn-add-task ">
                           <button>Add card</button>
@@ -152,9 +158,9 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
                 )}
               </div>
             </section>
-          </div>
-        )}
-      </Draggable>
+          )}
+        </Draggable>
+      </div>
     </>
   );
 };

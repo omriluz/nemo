@@ -3,7 +3,6 @@ import { useState } from "react"
 export const useForm = (initialFields) => {
     const [fields, setFields] = useState(initialFields)
 
-
     const handleChange = ({target}) => {
         const field = target.name
         const value = target.type === 'number' ? (+target.value || '') : target.value
@@ -19,7 +18,6 @@ export const useForm = (initialFields) => {
             for (const i in prevFields) {
                 newObj[i] = ''
              }
-             console.log(newObj)
              return newObj
             })
     }
@@ -29,6 +27,7 @@ export const useForm = (initialFields) => {
     return [
         fields,
         handleChange,
-        clearFields
+        clearFields,
+        setFields
     ]
 }
