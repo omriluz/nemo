@@ -46,6 +46,7 @@ export const TodosList = ({ todos, checklistId, taskId, boardId, groupId, taskTi
       {isAddOpen && (
         <form className="todo-form">
           <textarea
+          autoFocus
             name="title"
             className="add-todo-title"
             value={fields.title}

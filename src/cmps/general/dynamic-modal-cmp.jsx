@@ -30,6 +30,7 @@ export const DynamicModalCmp = ({
   board,
 }) => {
   let modalTypeToOpen;
+  console.log(modalTitle);
   switch (modalTitle) {
     case "Members":
       if (bottom >= 200 && bottom < 240) bottom -= 70;

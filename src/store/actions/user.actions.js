@@ -1,5 +1,4 @@
 import { userService } from '../../services/user.service.js';
-import { showErrorMsg } from '../../services/event-bus.service.js'
 import {taskService} from '../../services/task.service'
 
 export function loadUsers() {
@@ -38,7 +37,6 @@ export function login(credentials) {
                 user
             })
         } catch (err) {
-            showErrorMsg('Cannot login')
             console.log('Cannot login', err)
         }
     }
@@ -54,7 +52,6 @@ export function signup(credentials) {
                 user
             })
         } catch (err) {
-            showErrorMsg('Cannot signup')
             console.log('Cannot signup', err)
         }
 
@@ -70,7 +67,6 @@ export function onLogout() {
                 user: null
             })
         } catch (err) {
-            showErrorMsg('Cannot logout')
             console.log('Cannot logout', err)
         }
     }
@@ -82,7 +78,6 @@ export function loadUser(userId) {
             const user = await userService.getById(userId);
             dispatch({ type: 'SET_WATCHED_USER', user })
         } catch (err) {
-            showErrorMsg('Cannot load user')
             console.log('Cannot load user', err)
         }
     }

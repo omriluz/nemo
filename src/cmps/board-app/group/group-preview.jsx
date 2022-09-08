@@ -130,7 +130,6 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
                           onChange={handleChange}
                           onKeyDown={onHandleKeySubmit}
                           autoFocus
-                          onBlur={() => setIsAddTask(false)}
                         ></textarea>
                         <div ref={addTaskRef} className="btn-add-task ">
                           <button>Add card</button>

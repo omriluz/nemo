@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 import { Menu } from "./menu";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 import { FaEllipsisH } from "react-icons/fa";
-import { useSelector } from "react-redux";
 import { userService } from "../../services/user.service";
 import { MdOutlineFilterList } from "react-icons/md";
 import { BsPersonPlus } from "react-icons/bs";
@@ -14,8 +13,10 @@ import { updateBoard } from "../../store/actions/board.action";
 export const ToolBar = ({ boardId, board, users }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalTitle, setModalTitle] = useState(null)
   const modalDetails = useRef();
-  const modalTitle = useRef();
+  // const modalTitle = useRef();
+  // let modalTitle;
   const dispatch = useDispatch()
 
   const user = userService.getLoggedinUser();
@@ -32,7 +33,8 @@ export const ToolBar = ({ boardId, board, users }) => {
       setIsModalOpen(false);
     }
     modalDetails.current = ev.target.getBoundingClientRect();
-    modalTitle.current = txt;
+    // modalTitle = txt;
+    setModalTitle(txt)
     setIsModalOpen(true);
   };
 
@@ -51,7 +53,7 @@ export const ToolBar = ({ boardId, board, users }) => {
       {isModalOpen && (
         <DynamicModalCmp
           modalDetails={modalDetails.current}
-          modalTitle={modalTitle.current}
+          modalTitle={modalTitle}
           users={users}
           boardMembers={board.members}
           onCloseModal={onCloseModal}
@@ -91,13 +93,13 @@ export const ToolBar = ({ boardId, board, users }) => {
             );
           })}
         </div>
-        <button onClick={(ev) => onOpenModal(ev)} className="share-btn">
+        <button onClick={(ev) => onOpenModal(ev, 'Invite to board')} className="share-btn">
           <BsPersonPlus /> Share
         </button>
       </div>
       <div className="toolbar-right">
         <div>
-          <span className="toolbar-btn filter-btn">
+          <span onClick={(ev) => onOpenModal(ev, 'Filter')} className="toolbar-btn filter-btn">
             <MdOutlineFilterList /> <span className="tool-title">Filter</span>{" "}
           </span>
           <span className="toolbar-divider"></span>

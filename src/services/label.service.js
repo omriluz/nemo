@@ -7,7 +7,6 @@ export const labelService = {
 
 }
 
-
 async function toggleLabel(boardId, groupId, taskId, labelId) {
     try {
         let task = await taskService.getTaskById(boardId, groupId, taskId)
@@ -25,10 +24,8 @@ async function toggleLabel(boardId, groupId, taskId, labelId) {
 
 
 
-//async function getLabelsById(boardId, groupId, task) {
 
 function getLabelsById(board, task) {
-    // const board = await boardService.getById(boardId)
     const labels = board.labels.filter(label => task.labelIds.includes(label.id))
     return labels
 }

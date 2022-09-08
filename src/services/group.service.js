@@ -9,16 +9,13 @@ export const groupService = {
 
 
 async function saveGroup(groupTitle, boardId, groupId) {
-    // var savedBoard
     if (groupId) {
         let board = await boardService.getById(boardId)
         const idx = board.groups.findIndex(group => groupId === group.id)
         board.groups[idx].title = groupTitle
         boardService.save(board)
-        //     boardChannel.postMessage(getActionUpdateBoard(savedBoard))
         return board
     } else {
-        // Later, owner is set by the backend
         const group = {...groupTitle}
         group.id = utilService.makeId()
         group.tasks = []
@@ -28,20 +25,14 @@ async function saveGroup(groupTitle, boardId, groupId) {
         board.groups.push(group)
         // if (activity) board.activities.unshift(activity)
         boardService.save(board)
-        // boardChannel.postMessage(getActionAddBoard(savedBoard))
         return board
     }
 }
 
 async function removeGroup(groupId, boardId) {
-    // return new Promise((resolve, reject) => {
-    //     setTimeout(reject, 2000)
-    // })
-    // return Promise.reject('Not now!');
     const board = await boardService.getById(boardId)
     const idx = board.groups.findIndex(group => group.id === groupId)
     board.groups.splice(idx, 1)
-    // boardChannel.postMessage(getActionRemoveBoard(boardId))
     boardService.save(board)
     return board
 }

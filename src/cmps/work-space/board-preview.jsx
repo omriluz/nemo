@@ -4,7 +4,6 @@ import { TiStarFullOutline, TiStarOutline } from "react-icons/ti";
 
 
 export function BoardPreview({ board, onToggleStar }) {
-  console.log(board.style);
   return (
     <div>
       <Link to={`/board/${board._id}`}>
