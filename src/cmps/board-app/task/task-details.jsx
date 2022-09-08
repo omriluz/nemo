@@ -21,17 +21,14 @@ export const TaskDetails = () => {
   const { board } = useSelector((storeState) => storeState.boardModule)
   // might need use effect for users as well
   const { users } = useSelector((storeState) => storeState.userModule)
-  const [fields, handleChange, _, setFields] = useForm({ title: '' })
+  const [fields, handleChange, _, setFields] = useForm(null)
 
-  let kaka;
-  console.log(kaka);
   useEffect(() => {
     const currGroup = board?.groups.find(group => group.id === groupId);
     const currTask = currGroup?.tasks?.find(task => task.id === taskId);
     setTask(currTask)
     setGroup(currGroup)
     setFields({ title: currTask.title })
-    kaka = 3
   }, [board]);
 
 

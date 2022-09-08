@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { addUserToBoard } from "../../store/actions/board.action";
 export const InviteModal = ({ boardId, users, boardMembers }) => {
+  console.log(users);
   const dispatch = useDispatch()
   const boardMemberIds = boardMembers.map(boardMember => boardMember = boardMember._id)
   const usersToInvite = users.filter(user => !boardMemberIds.includes(user._id))

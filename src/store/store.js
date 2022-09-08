@@ -2,24 +2,14 @@
 // const thunk = ReduxThunk.default
 
 import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
-
-
-
-
 import thunk from 'redux-thunk'
-
-
 import { boardReducer } from './reducers/board.reducer.js'
 import { userReducer } from './reducers/user.reducer.js'
-// import { reviewReducer } from './reducers/review.reducer'
-// import { systemReducer } from './system.reducer'
 
 
 const rootReducer = combineReducers({
     boardModule: boardReducer,
     userModule: userReducer,
-    // systemModule: systemReducer,
-    // reviewModule: reviewReducer,
 })
 
 
