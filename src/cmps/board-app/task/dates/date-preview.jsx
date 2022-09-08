@@ -7,6 +7,7 @@ import { MdCheckBoxOutlineBlank } from 'react-icons/md';
 import { utilService } from '../../../../services/util.service'
 // Store
 import { saveTask } from '../../../../store/actions/task.action'
+import { DynamicModalCmp } from '../../../general/dynamic-modal-cmp';
 
 import { TaskDateModal } from './task-date-modal'
 
@@ -28,13 +29,18 @@ export function DatePreview({ task, boardId, groupId }) {
 
     return (
         <div className='date-preview-container'>
+            <DynamicModalCmp
+                task={task}
+                boardId={boardId}
+                groupId={groupId}
+            />
             {(task.isDone) ?
                 <IoCheckbox className='checkbox-checked' onClick={toggleIsDone} />
                 : <MdCheckBoxOutlineBlank className='checkbox-blank' onClick={toggleIsDone} />
             }
-            
 
-            <button type='button'>
+
+            <button type='button' >
                 <span> {utilService.getDateByTimestamp(task.dueDate)}</span>
                 {getDueStatus() && <span className={getDueStatus().className}>{getDueStatus().txt}</span>}
                 <span className='drop-down-container' role='img' aria-label='DownIcon'>

@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import { useForm } from "../../../hooks/useForm";
 
 export const TaskDetails = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const { boardId, groupId, taskId } = useParams();
@@ -21,7 +21,7 @@ export const TaskDetails = () => {
   const { board } = useSelector((storeState) => storeState.boardModule)
   // might need use effect for users as well
   const { users } = useSelector((storeState) => storeState.userModule)
-  const [fields, handleChange, _, setFields] = useForm({title: ''})
+  const [fields, handleChange, _, setFields] = useForm({ title: '' })
 
   let kaka;
   console.log(kaka);
@@ -58,15 +58,15 @@ export const TaskDetails = () => {
         <div className="task-details" onClick={(ev) => ev.stopPropagation()}>
           {task?.style?.backgroundColor &&
             <div className="cover-color" style={{ backgroundColor: task.style.backgroundColor }}>
-              <div className="task-details-back-btn" 
-              onClick={() => navigate(`/board/${boardId}`)}
+              <div className="task-details-back-btn"
+                onClick={() => navigate(`/board/${boardId}`)}
               // onClick={() => navigate(-1)}
               ><GrClose /> </div>
             </div>}
           {!!task?.style?.backgroundColor || <div className="task-details-back-btn"
-          //  onClick={() => navigate(-1)}
-           onClick={() => navigate(`/board/${boardId}`)}
-           ><GrClose /> </div>}
+            //  onClick={() => navigate(-1)}
+            onClick={() => navigate(`/board/${boardId}`)}
+          ><GrClose /> </div>}
 
           <div className="task-details-header">
             <span className="header-icon"> <AiOutlineCreditCard /></span>

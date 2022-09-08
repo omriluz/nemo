@@ -97,8 +97,8 @@ export const ToolBar = ({ boardId, board, users }) => {
       </div>
       <div className="toolbar-right">
         <div>
-          <span className="toolbar-btn filter-btn">
-            <MdOutlineFilterList /> <span className="tool-title" onClick={(ev) => onOpenModal(ev, 'Filter')} >Filter</span>
+          <span className="toolbar-btn filter-btn" onClick={(ev) => onOpenModal(ev, 'Filter')}>
+            <MdOutlineFilterList /> <span className="tool-title"  >Filter</span>
           </span>
           <span className="toolbar-divider"></span>
 

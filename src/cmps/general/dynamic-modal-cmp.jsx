@@ -77,7 +77,7 @@ export const DynamicModalCmp = ({
       if (bottom >= 200 && bottom < 270) bottom -= 100;
       if (bottom >= 270 && bottom < 330) bottom -= 160;
       if (bottom >= 330) bottom -= 200;
-
+      width = '343px'
       modalTypeToOpen = (
         <TaskDateModal boardId={boardId} groupId={groupId} task={task} />
       );
