@@ -29,7 +29,7 @@ export const DynamicModalCmp = ({
   modalClasses,
   activities,
   groupTitle,
-  board
+  board,
 }) => {
   let modalTypeToOpen;
   switch (modalTitle) {
@@ -146,10 +146,8 @@ export const DynamicModalCmp = ({
       );
       break;
     case "Filter":
-      left = 1091.8
-      modalTypeToOpen = (
-        <FilterMenu board={board} />
-      )
+      left = 1091.8;
+      modalTypeToOpen = <FilterMenu board={board} />;
       break;
   }
 

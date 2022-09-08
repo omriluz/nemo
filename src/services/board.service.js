@@ -35,16 +35,12 @@ async function remove(boardId) {
 }
 async function save(board) {
     if (board._id) {
-
         const savedBoard = await httpService.put(BOARD_BASE_ENDPOINT, board)
         socketService.emit('board-change', savedBoard);
         return savedBoard
     } else {
-        debugger
         try {
-
             const savedBoard = await httpService.post(BOARD_BASE_ENDPOINT, board)
-
             return savedBoard
         } catch (err) {
             console.log(err)

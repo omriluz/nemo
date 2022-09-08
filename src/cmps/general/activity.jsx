@@ -3,12 +3,13 @@ import { IoListOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { utilService } from "../../services/util.service";
 import { saveActivity } from "../../store/actions/activity.action";
-
+import {useForm} from '../../hooks/useForm'
 
 export const Activity = ({ activities, taskId, boardId }) => {
     const [taskActivities, setTaskActivities] = useState(null)
     const [toggleShow, setToggleShow] = useState(true)
-    const [activityComment, setActivityComment] = useState({ comment: '' })
+    // const [activityComment, setActivityComment] = useState({ comment: '' })
+    const [fields, handleChange, clearFields] = useForm({ comment: '' })
     const [isEditOpen, setIsEditOpen] = useState(false)
     const dispatch = useDispatch()
 
@@ -25,21 +26,13 @@ export const Activity = ({ activities, taskId, boardId }) => {
         setTaskActivities(currActivities)
     }
 
-    const handleChange = (ev) => {
-        const field = ev.target.name;
-        const value = ev.target.value;
-        setActivityComment({ [field]: value });
-    }
-
-
-
     const onSaveActivity = () => {
-
-        const activity = activityComment
+        const activity = {}
+        activity.comment = fields.comment
         activity.task = {}
         activity.task.id = taskId
         dispatch(saveActivity(activity, boardId))
-        setActivityComment({ comment: '' })
+        clearFields()
     }
 
 
@@ -58,14 +51,14 @@ export const Activity = ({ activities, taskId, boardId }) => {
                 name='comment'
                 className="activity-input"
                 placeholder="Write a comment..."
-                value={activityComment.comment}
+                value={fields.comment}
                 onChange={handleChange}
                 onBlur={() => setIsEditOpen(false)}
             >
 
             </textarea>
             {isEditOpen &&
-                <button className={`save-activity ${activityComment.comment ? 'active' : ''} `}
+                <button className={`save-activity ${fields.comment ? 'active' : ''} `}
                     onMouseDown={onSaveActivity}>Save</button>
             }
         </div>}
@@ -122,6 +115,4 @@ export const Activity = ({ activities, taskId, boardId }) => {
     </section >
 }
 
-// taskId ? taskActivities : activities.map((activity)
 
-// taskId ? taskActivities :

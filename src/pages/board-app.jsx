@@ -8,17 +8,16 @@ import { loadUsers } from "../store/actions/user.actions.js";
 import { socketService } from "../services/socket.service.js";
 import { getActionSetBoard } from "../store/actions/board.action";
 import { DragDropContext } from "react-beautiful-dnd";
+import { Loader } from "../cmps/general/loader.jsx";
 
 export const BoardApp = () => {
   const { boardId } = useParams();
   const { board } = useSelector((storeState) => storeState.boardModule);
   const { users } = useSelector((storeState) => storeState.userModule);
-  let socketBoard;
   // const { users } = useSelector((storeState) => storeState.userModule);
   const dispatch = useDispatch();
   useEffect(() => {
     setSocket()
-    socketService.emit('join board', boardId)
     onLoadBoard();
     onLoadUsers();
     socketService.off('update-board')
@@ -58,7 +57,8 @@ export const BoardApp = () => {
     );
   };
 
-  if (!board) return <p>.</p>;
+
+  if (!board) return <Loader/>;
   return (
     <>
       <DragDropContext onDragEnd={onDragEnd}>

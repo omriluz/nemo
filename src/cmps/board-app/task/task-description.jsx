@@ -2,28 +2,20 @@ import { useEffect, useState } from "react";
 import { GrTextAlignFull } from "react-icons/gr";
 
 import { useDispatch } from "react-redux";
+import { useForm } from "../../../hooks/useForm.js";
 import { saveTask } from "../../../store/actions/task.action.js";
 
 
 
 export const Description = ({ task, boardId, groupId }) => {
     const [isDescOpen, setIsDescOpen] = useState(false)
-    const [descTitle, setDescTitle] = useState({ title: task.description ? task.description : "" });
     const dispatch = useDispatch()
-
-
-
-    const handleChange = (ev) => {
-        const field = ev.target.name;
-        const value = ev.target.value;
-        setDescTitle({ [field]: value });
-    };
+    const [fields, handleChange] = useForm({description: task.description})
 
     const onSaveTask = () => {
-        task.description = descTitle.title
+        task.description = fields.description
         dispatch(saveTask(task, boardId, groupId));
         setIsDescOpen(false)
-        setDescTitle({ title: task.description ? task.description : "" });
     }
 
     return <section className="task-description flex column " onBlur={() => setIsDescOpen(false)}>
@@ -32,11 +24,11 @@ export const Description = ({ task, boardId, groupId }) => {
         </div>
         <form onSubmit={onSaveTask}>
             <textarea onClick={() => setIsDescOpen(true)}
-                name="title"
+                name="description"
                 spellCheck={false}
                 className="text-desc"
                 placeholder="Add a more detailed description..."
-                value={descTitle.title}
+                value={fields.description}
                 onChange={handleChange}
 
             >

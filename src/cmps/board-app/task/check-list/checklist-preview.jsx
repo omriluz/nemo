@@ -5,23 +5,19 @@ import { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { saveChecklist } from '../../../../store/actions/checklist.action.js';
 import { ChecklistProgressBar } from './checklist-progress.jsx'
+import { useForm } from '../../../../hooks/useForm.js';
 
 
 
 export const ChecklistPreview = ({ checklist, onRemoveChecklist, task, boardId, groupId }) => {
     const [isEditOpen, setIsEditOpen] = useState(false)
-    const [checklistTitle, setChecklistTitle] = useState({ title: checklist.title });
+    const [fields, handleChange] = useForm({ title: checklist.title });
 
     const dispatch = useDispatch()
 
-    const handleChange = (ev) => {
-        const field = ev.target.name;
-        const value = ev.target.value;
-        setChecklistTitle({ [field]: value });
-    }
 
     const onSaveTask = () => {
-        checklist.title = checklistTitle.title
+        checklist.title = fields.title
         dispatch(saveChecklist(checklist, boardId, groupId, task.id));
     }
 
@@ -33,7 +29,7 @@ export const ChecklistPreview = ({ checklist, onRemoveChecklist, task, boardId, 
                         <textarea onClick={() => setIsEditOpen(true)}
                             name="title"
                             className="check-title"
-                            value={checklistTitle.title}
+                            value={fields.title}
                             onChange={handleChange}
                             onBlur={() => setIsEditOpen(false)}
                         >

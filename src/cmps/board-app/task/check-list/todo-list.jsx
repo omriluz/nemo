@@ -3,28 +3,23 @@ import { utilService } from "../../../../services/util.service.js";
 import { TodoPreview } from "./todos-preview.jsx";
 import { saveTodo } from "../../../../store/actions/checklist.action.js";
 import { useDispatch } from "react-redux";
+import { useForm } from "../../../../hooks/useForm.js";
 
 export const TodosList = ({ todos, checklistId, taskId, boardId, groupId, taskTitle }) => {
+  console.log(todos);
   const [isAddOpen, setIsAddOpen] = useState();
-  const [todoTitle, setTodoTitle] = useState({ title: "" });
+  const [fields, handleChange, clearFields] = useForm({ title: "" });
   const dispatch = useDispatch();
 
-  const handleChange = (ev) => {
-    const field = ev.target.name;
-    const value = ev.target.value;
-    setTodoTitle({ [field]: value });
-  };
-
   const onAddTodo = () => {
-    const updateTodo = {
-      ...todoTitle,
-      id: utilService.makeId(),
-      isDone: false,
-    };
+    const updatedTodo = {}
+    updatedTodo.title = fields.title
+    updatedTodo.id = utilService.makeId()
+    updatedTodo.isDone = false
+
     // todos.push(updateTodo)
-    dispatch(saveTodo(updateTodo, checklistId, boardId, groupId, taskId));
-    // setIsAddOpen(false);
-    setTodoTitle({ title: "" });
+    dispatch(saveTodo(updatedTodo, checklistId, boardId, groupId, taskId));
+    clearFields()
   };
 
   const onHandleKeySubmit = (ev) => {
@@ -53,7 +48,7 @@ export const TodosList = ({ todos, checklistId, taskId, boardId, groupId, taskTi
           <textarea
             name="title"
             className="add-todo-title"
-            value={todoTitle.title}
+            value={fields.title}
             onChange={handleChange}
             onKeyDown={onHandleKeySubmit}
             onBlur={() => setIsAddOpen(false)}

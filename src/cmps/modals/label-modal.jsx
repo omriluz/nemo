@@ -4,11 +4,16 @@ import { BsPencil } from "react-icons/bs";
 import { FiCheck } from "react-icons/fi";
 
 export const LabelModal = ({ boardId, groupId, task, labels }) => {
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
   const onToggleLabel = (labelId) => {
     dispatch(toggleLabel(boardId, groupId, task.id, labelId));
   };
+
+
+  const onEditLabel = () => {
+      
+  }
 
   return (
     <div className="label-modal-container">
@@ -19,7 +24,7 @@ export const LabelModal = ({ boardId, groupId, task, labels }) => {
       />
       <h4 className="modal-small-title">Labels</h4>
       <div className="edit-modal-labels">
-        <div>
+        <div className="label-list-modal">
           {labels.map((label) => {
             return (
               <div key={label.id} className="edit-label-container">
@@ -27,7 +32,8 @@ export const LabelModal = ({ boardId, groupId, task, labels }) => {
                   <BsPencil />
                 </button>
                 <div
-                  style={{ backgroundColor: label.color }}
+                  // style={{ backgroundColor: label.color, '--i': 'blue'}}
+                  style={{  '--label-color': label.color}}
                   className="task-label"
                   onClick={() => onToggleLabel(label.id)}
                 >
@@ -44,6 +50,7 @@ export const LabelModal = ({ boardId, groupId, task, labels }) => {
             );
           })}
         </div>
+          <button className="create-label-btn">Create a new Label</button>
       </div>
     </div>
   );
