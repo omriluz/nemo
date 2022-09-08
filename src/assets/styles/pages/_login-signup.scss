@@ -78,6 +78,7 @@
         padding: 0.6em 1.3em;
         position: relative;
         cursor: pointer;
+
         &.login {
             background-color: #5aac44;
         }
@@ -155,6 +156,16 @@
         position: absolute;
         right: 0;
         width: 400px;
+    }
+
+    @media screen and (max-width: 980px) {
+        .left-hero {
+            display: none;
+        }
+
+        .right-hero {
+            display: none;
+        }
     }
 
     .dif-choice {

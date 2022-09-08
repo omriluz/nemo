@@ -4,15 +4,8 @@ import { getActionSetBoard } from "./board.action.js";
 export function saveGroup(group, boardId, groupId) {
     return async (dispatch) => {
         try {
-
             const board = await groupService.saveGroup(group, boardId, groupId)
             dispatch(getActionSetBoard(board))
-
-
-
-
-            //  console.log('board', board)
-            // dispatch(getActionSetBoard(board))
         } catch (err) {
             console.log('err in saving task')
         }

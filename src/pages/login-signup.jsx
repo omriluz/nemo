@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 export const LoginSignup = () => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const {user} = useSelector((storeState) => storeState.userModule)
+  const { user } = useSelector((storeState) => storeState.userModule)
 
 
   const [credentials, setCredentials] = useState({
@@ -71,7 +71,6 @@ export const LoginSignup = () => {
         <form className="flex column " onSubmit={isSignup ? onSignUp : onLogin}>
           {isSignup ? (
             <>
-              {" "}
               <h1>Sign up for your account</h1>
               <input
                 type="text"
@@ -109,11 +108,11 @@ export const LoginSignup = () => {
           <span>OR</span>
           <button>
             <img src={guest} className="guest-icon" />
-            <p>Continue as Guest</p>{" "}
+            <p>Continue as Guest</p>
           </button>
           <button>
             <img src={google} className="google-icon" />
-            <p className="google-txtx">Continue with Google</p>{" "}
+            <p className="google-txtx">Continue with Google</p>
           </button>
         </div>
         <hr />

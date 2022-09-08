@@ -15,9 +15,11 @@ import { FilterMenu } from "../menu/filter-menu";
 export const DynamicModalCmp = ({
   modalDetails: { bottom, right, left },
   width,
+  height,
   onCloseModal,
   modalTitle,
   onRemoveTodo,
+  onRemoveGroup,
   boardId,
   groupId,
   task,
@@ -103,7 +105,7 @@ export const DynamicModalCmp = ({
       );
       break;
     case "Actions":
-      modalTypeToOpen = <ActionModal onRemoveTodo={onRemoveTodo} />;
+      modalTypeToOpen = <ActionModal onRemoveTodo={onRemoveTodo} onRemoveGroup={onRemoveGroup} />;
       break;
     case "Create Board":
       if (bottom >= 170 && bottom < 230) bottom -= 60;
@@ -151,6 +153,8 @@ export const DynamicModalCmp = ({
       break;
   }
 
+
+
   return (
     <div
       // tabIndex={"0"}
@@ -169,6 +173,7 @@ export const DynamicModalCmp = ({
             top: bottom,
             left,
             width: width || "304px",
+            height: height || ""
           }
       }
     >

@@ -27,8 +27,6 @@ export const BoardApp = () => {
     })
   }, []);
 
-
-
   const setSocket = () => {
     try {
       socketService.emit('join-board', boardId);
@@ -37,8 +35,6 @@ export const BoardApp = () => {
     }
 
   }
-
-
 
   const onLoadUsers = () => {
     dispatch(loadUsers());
