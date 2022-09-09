@@ -7,11 +7,11 @@ import { saveGroup } from "../../../store/actions/group.action.js";
 import { Droppable } from "react-beautiful-dnd";
 import { useForm } from "../../../hooks/useForm.js";
 
-export const GroupList = ({ groups, boardId, activities, labelOpenState }) => {
+export const GroupList = ({ groups, boardId, activities, labelOpenState, labels, boardMembers }) => {
   const dispatch = useDispatch();
   const [isAddGroup, setIsAddGroup] = useState(false);
   const [newGroup, handleChange, clearFields] = useForm({ title: "" });
-  
+
   const onAddGroup = (ev = null) => {
     ev.preventDefault();
     if (!newGroup.title) return;
@@ -43,6 +43,8 @@ export const GroupList = ({ groups, boardId, activities, labelOpenState }) => {
                     index={index}
                     labelOpenState={labelOpenState}
                     activities={activities}
+                    labels={labels}
+                    boardMembers={boardMembers}
                   />
                 );
               })}

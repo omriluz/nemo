@@ -29,11 +29,11 @@ export function DatePreview({ task, boardId, groupId }) {
 
     return (
         <div className='date-preview-container'>
-            <DynamicModalCmp
+            {/* <DynamicModalCmp
                 task={task}
                 boardId={boardId}
                 groupId={groupId}
-            />
+            /> */}
             {(task.isDone) ?
                 <IoCheckbox className='checkbox-checked' onClick={toggleIsDone} />
                 : <MdCheckBoxOutlineBlank className='checkbox-blank' onClick={toggleIsDone} />

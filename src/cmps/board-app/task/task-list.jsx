@@ -4,7 +4,7 @@ import { memo, useEffect, useState } from "react";
 import { setTasks } from "../../../store/actions/task.action";
 import { useDispatch } from "react-redux";
 import { utilService } from "../../../services/util.service";
-export const TaskList = ({ tasks, groupId, boardId, labelOpenState }) => {
+export const TaskList = ({ tasks, groupId, boardId, labelOpenState, labels, boardMembers }) => {
   const dispatch = useDispatch();
   return (
     <Droppable droppableId={groupId}  >
@@ -23,6 +23,8 @@ export const TaskList = ({ tasks, groupId, boardId, labelOpenState }) => {
                 index={index}
                 groupId={groupId}
                 labelOpenState={labelOpenState}
+                labelsTo={labels}
+                boardMembers={boardMembers}
               />
             );
           })}

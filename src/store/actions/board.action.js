@@ -42,14 +42,14 @@ export function loadBoard(boardId) {
             // socketService.off('update-board')
             // console.log('turned socket off');
             // socketService.on('update-board', async (boardFromSocket) => {
-                // if (!boardFromSocket) {
-                //     console.log('no board from socket');
-                //     const boardFromDb = await boardService.getById(boardId)
-                //     console.log('boardFromDB', boardFromDb);
-                //     dispatch(getActionSetBoard(boardFromDb))
-                // } 
-                // console.log('board from socket', boardFromSocket);
-                // dispatch(getActionSetBoard(boardFromSocket))
+            // if (!boardFromSocket) {
+            //     console.log('no board from socket');
+            //     const boardFromDb = await boardService.getById(boardId)
+            //     console.log('boardFromDB', boardFromDb);
+            //     dispatch(getActionSetBoard(boardFromDb))
+            // } 
+            // console.log('board from socket', boardFromSocket);
+            // dispatch(getActionSetBoard(boardFromSocket))
             // })
         } catch (err) {
             console.log('Cannot load boards', err)
@@ -127,7 +127,7 @@ export function saveBg(boardId, color) {
     return async (dispatch) => {
         try {
             const savedBoard = await boardService.getById(boardId)
-            savedBoard.style.backgroundColor = color
+            savedBoard.style.background = color
             boardService.save(savedBoard)
             dispatch(getActionSetBoard(savedBoard))
         } catch (err) {
@@ -198,7 +198,7 @@ export function handleDrag(
     droppableIndexEnd,
     type
 ) {
-    console.log('board start',board._id);
+    console.log('board start', board._id);
     return async dispatch => {
         if (type === 'group') {
             // take out group from old index

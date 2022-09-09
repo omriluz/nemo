@@ -58,7 +58,7 @@ export const BoardApp = () => {
   };
 
 
-  if (!board) return <Loader/>;
+  if (!board) return <Loader />;
   return (
     <>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -71,6 +71,8 @@ export const BoardApp = () => {
                 labelOpenState={board.labelOpenState}
                 groups={board.groups}
                 boardId={boardId}
+                labels={board.labels}
+                boardMembers={board.members}
               />
             )}
           </div>

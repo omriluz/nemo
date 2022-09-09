@@ -11,13 +11,15 @@ import { GrTextAlignFull } from "react-icons/gr"
 import { toggleLabelPreview } from '../../../store/actions/label.action'
 import { userService } from "../../../services/user.service";
 import { HiOutlineEye } from "react-icons/hi"
+import { EditPreview } from "./task-edit";
 
-export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState }) => {
+export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState, labelsTo, boardMembers }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [labels, setLabels] = useState([]);
   const user = userService.getLoggedinUser()
   const { board } = useSelector((storeState) => storeState.boardModule)
+  const [isEdit, setIsEdit] = useState(false)
 
   let sumTodos;
   let sumTodosDone;
@@ -49,11 +51,13 @@ export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState }) =
   };
 
   const onOpenTaskDetails = () => {
+    setIsEdit(false)
     navigate(`/board/${boardId}/${groupId}/${task.id}`);
   };
 
   const onRemoveTask = (ev) => {
     ev.stopPropagation();
+    setIsEdit(false)
     dispatch(removeTask(boardId, groupId, task.id));
   };
 
@@ -62,9 +66,29 @@ export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState }) =
     dispatch(toggleLabelPreview(boardId))
   };
 
+  const openQuickEdit = (ev) => {
+    ev.stopPropagation();
+    setIsEdit(!isEdit)
+  }
+
+  const onCloseQuickEdit = () => {
+    setIsEdit(!isEdit)
+  }
+
 
   return (
-    <Draggable draggableId={task.id} index={index}>
+    <>{isEdit ? <EditPreview
+      onRemoveTask={onRemoveTask}
+      closeQuickEdit={openQuickEdit}
+      onOpenTaskDetails={onOpenTaskDetails}
+      task={task}
+      boardId={boardId}
+      groupId={groupId}
+      labelsTo={labelsTo}
+      boardMembers={boardMembers}
+      onCloseQuickEdit={onCloseQuickEdit}
+
+    /> : <Draggable draggableId={task.id} index={index}>
       {(provided) => (
         <div
           onClick={onOpenTaskDetails}
@@ -83,7 +107,7 @@ export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState }) =
             style={task.coverSize === "cover" ? task.style : {}}
             className="task-preview-container"
           >
-            <div className="task-preview-edit-icon">
+            <div className="task-preview-edit-icon" onClick={openQuickEdit}>
               <BsPencil />
             </div>
             {!!labels?.length && (
@@ -101,6 +125,7 @@ export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState }) =
               </div>
             )}
             <span className="task-preview-title">{task.title}</span>
+
             <div className="badges">
               {user && !!task.members.filter(member => member._id === user._id).length && <span className="badge"><HiOutlineEye /></span>}
               {/* todo: add date badge here  */}
@@ -128,6 +153,6 @@ export const TaskPreview = ({ boardId, groupId, task, index, labelOpenState }) =
           </div>
         </div>
       )}
-    </Draggable>
+    </Draggable>}</>
   );
 };

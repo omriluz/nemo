@@ -11,7 +11,7 @@ import { userService } from "../../../services/user.service.js";
 import { DynamicModalCmp } from "../../general/dynamic-modal-cmp.jsx";
 import { useForm } from "../../../hooks/useForm.js";
 
-export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
+export const GroupPreview = ({ group, boardId, index, labelOpenState, labels, boardMembers }) => {
   let { filterBy } = useSelector((storeState) => storeState.boardModule);
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -158,6 +158,9 @@ export const GroupPreview = ({ group, boardId, index, labelOpenState }) => {
                     groupId={group.id}
                     boardId={boardId}
                     labelOpenState={labelOpenState}
+                    labels={labels}
+                    boardMembers={boardMembers}
+
                   />
                   {isAddTask && (
                     <div className="add-task-open">
